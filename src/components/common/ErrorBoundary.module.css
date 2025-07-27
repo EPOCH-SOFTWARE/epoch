@@ -1,0 +1,84 @@
+/**
+ * @fileoverview Error boundary component styles
+ * @author Epoch Development Team
+ */
+
+.errorBoundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.errorBoundaryContent {
+  max-width: 600px;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.errorBoundaryContent h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.errorBoundaryContent p {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.errorBoundaryDetails {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.errorBoundaryDetails summary {
+  cursor: pointer;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.errorBoundaryDetails pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  color: #ff6b6b;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.errorBoundaryResetButton {
+  background: linear-gradient(135deg, #9bc136 0%, #7a9c2d 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.errorBoundaryResetButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(155, 193, 54, 0.25);
+}
+
+.errorBoundaryResetButton:active {
+  transform: translateY(0);
+}

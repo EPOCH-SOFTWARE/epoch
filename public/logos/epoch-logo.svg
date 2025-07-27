@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 589.57 190.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="589.57" height="190.3"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="32.49" y1="246.58" x2="557.07" y2="-56.28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".13" stop-color="#030401"/>
+      <stop offset=".27" stop-color="#0d1004"/>
+      <stop offset=".42" stop-color="#1e250a"/>
+      <stop offset=".56" stop-color="#354212"/>
+      <stop offset=".7" stop-color="#53671c"/>
+      <stop offset=".85" stop-color="#789529"/>
+      <stop offset=".99" stop-color="#a3ca38"/>
+      <stop offset="1" stop-color="#a6ce39"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer_1">
+    <g class="cls-4">
+      <rect class="cls-2" width="589.57" height="190.3"/>
+    </g>
+    <g>
+      <path class="cls-3" d="M42.89,69.42v9.42h65.22v18.12H42.89v19.13c0,5.07,4.2,9.28,9.28,9.28h74.07v18.12H52.17c-15.07,0-27.25-12.32-27.25-27.39v-46.67c0-15.07,12.17-27.39,27.25-27.39h74.07v18.12H52.17c-5.07,0-9.28,4.2-9.28,9.28Z"/>
+      <path class="cls-3" d="M224.21,50.29c4.93,4.93,7.97,11.74,7.97,19.28,0,11.02-6.52,20.58-15.94,24.93-2.46,1.16-5.07,1.88-7.83,2.17h-.87v.14h-48.56v46.67h-18.12V42.03h63.92c7.54,0,14.35,3.04,19.28,7.97l.14.29ZM208.7,77.97c3.33-1.45,5.51-4.78,5.51-8.41,0-3.33-1.74-5.65-2.75-6.67-1.16-1.16-3.33-2.61-6.52-2.61h-45.95v18.7h45.95c1.3,0,2.61-.29,3.77-.87v-.15Z"/>
+      <path class="cls-3" d="M337.98,92.76c0,27.97-22.76,50.73-50.73,50.73s-50.73-22.76-50.73-50.73,22.76-50.73,50.73-50.73,50.73,22.76,50.73,50.73ZM319.86,92.76c0-17.97-14.64-32.61-32.61-32.61s-32.61,14.64-32.61,32.61,14.64,32.61,32.61,32.61,32.61-14.64,32.61-32.61Z"/>
+      <path class="cls-3" d="M365.52,92.76c0,17.97,14.64,32.61,32.61,32.61h50.73v18.12h-50.73c-27.97,0-50.73-22.76-50.73-50.73s22.76-50.73,50.73-50.73h50.73v18.12h-50.73c-17.97,0-32.61,14.64-32.61,32.61Z"/>
+      <path class="cls-3" d="M564.81,42.03v101.46h-18.12v-46.53h-65.22v46.53h-18.12V42.03h18.12v36.82h65.22v-36.82h18.12Z"/>
+    </g>
+  </g>
+</svg>

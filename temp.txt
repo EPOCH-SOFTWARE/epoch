@@ -1,0 +1,594 @@
+import React, { useEffect, useRef, useState } from 'react';
+
+const EpochHomepage = () => {
+  const cursorRef = useRef(null);
+  const cursorDotRef = useRef(null);
+  const cursorRingRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Cursor animation
+  useEffect(() => {
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    const handleMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    const animateCursor = () => {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      
+      cursorX += dx * 0.1;
+      cursorY += dy * 0.1;
+      
+      if (cursorRef.current) {
+        cursorRef.current.style.left = cursorX + 'px';
+        cursorRef.current.style.top = cursorY + 'px';
+      }
+      
+      requestAnimationFrame(animateCursor);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    animateCursor();
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  // Scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Hover handlers
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const expertiseItems = [
+    {
+      number: '01',
+      title: 'Machine Intelligence',
+      description: 'Neural architectures that learn, adapt, and evolve. We design AI systems that understand context and nuance.'
+    },
+    {
+      number: '02',
+      title: 'Data Architecture',
+      description: 'Transforming raw information into strategic assets. Our pipelines are built for scale and reliability.'
+    },
+    {
+      number: '03',
+      title: 'System Design',
+      description: 'Engineering solutions that stand the test of time. Every component carefully considered, nothing superfluous.'
+    }
+  ];
+
+  return (
+    <>
+      <style jsx global>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        :root {
+          --night: #060F01;
+          --dark-moss-green: #455422;
+          --reseda-green: #878A73;
+          --yellow-green: #9BC136;
+          --white: #FEFEFE;
+          --cubic: cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        ::selection {
+          background: var(--yellow-green);
+          color: var(--night);
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+          background: var(--white);
+          color: var(--night);
+          overflow-x: hidden;
+          cursor: none;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        .cursor {
+          position: fixed;
+          width: 32px;
+          height: 32px;
+          pointer-events: none;
+          z-index: 10000;
+          transform: translate(-50%, -50%);
+          transition: transform 0.2s var(--cubic);
+        }
+
+        .cursor-dot {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: var(--night);
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.15s var(--cubic);
+        }
+
+        .cursor-ring {
+          position: absolute;
+          width: 32px;
+          height: 32px;
+          border: 1px solid var(--reseda-green);
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.3s var(--cubic);
+        }
+
+        .cursor-hover .cursor-ring {
+          width: 48px;
+          height: 48px;
+          border-color: var(--yellow-green);
+          opacity: 0.5;
+        }
+
+        .cursor-hover .cursor-dot {
+          background: var(--yellow-green);
+          transform: translate(-50%, -50%) scale(0.75);
+        }
+
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 32px 0;
+          transition: all 0.6s var(--cubic);
+        }
+
+        header.scrolled {
+          padding: 20px 0;
+          background: rgba(254, 254, 254, 0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+
+        .header-inner {
+          max-width: 1440px;
+          margin: 0 auto;
+          padding: 0 80px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          font-size: 20px;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+          color: var(--night);
+        }
+
+        nav ul {
+          display: flex;
+          gap: 48px;
+          list-style: none;
+        }
+
+        nav a {
+          color: var(--dark-moss-green);
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+          transition: color 0.3s var(--cubic);
+          position: relative;
+        }
+
+        nav a:hover {
+          color: var(--night);
+        }
+
+        nav a::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: var(--yellow-green);
+          transition: width 0.3s var(--cubic);
+        }
+
+        nav a:hover::after {
+          width: 100%;
+        }
+
+        .hero {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          position: relative;
+          padding: 0 80px;
+        }
+
+        .hero-inner {
+          max-width: 1440px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .hero-content {
+          max-width: 880px;
+        }
+
+        h1 {
+          font-size: clamp(48px, 6vw, 88px);
+          font-weight: 300;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+          margin-bottom: 32px;
+        }
+
+        .hero-text {
+          overflow: hidden;
+        }
+
+        .hero-text span {
+          display: block;
+          transform: translateY(110%);
+          animation: revealText 1.2s var(--cubic) forwards;
+          animation-delay: var(--delay);
+        }
+
+        @keyframes revealText {
+          to {
+            transform: translateY(0);
+          }
+        }
+
+        .hero-subtitle {
+          font-size: 20px;
+          line-height: 1.6;
+          color: var(--dark-moss-green);
+          margin-bottom: 48px;
+          opacity: 0;
+          animation: fadeInUp 1s var(--cubic) 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px 32px;
+          background: var(--night);
+          color: var(--white);
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+          border-radius: 32px;
+          transition: all 0.4s var(--cubic);
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 1s var(--cubic) 1s forwards;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cta::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: var(--yellow-green);
+          transform: translateX(-100%);
+          transition: transform 0.4s var(--cubic);
+        }
+
+        .cta:hover::before {
+          transform: translateX(0);
+        }
+
+        .cta span {
+          position: relative;
+          z-index: 1;
+          transition: color 0.4s var(--cubic);
+        }
+
+        .cta:hover span {
+          color: var(--night);
+        }
+
+        .cta-arrow {
+          width: 16px;
+          height: 16px;
+          position: relative;
+          z-index: 1;
+          transition: transform 0.4s var(--cubic);
+        }
+
+        .cta:hover .cta-arrow {
+          transform: translateX(4px);
+        }
+
+        .floating-accent {
+          position: absolute;
+          width: 600px;
+          height: 600px;
+          border-radius: 50%;
+          background: radial-gradient(circle at center, var(--yellow-green), transparent);
+          opacity: 0.08;
+          filter: blur(100px);
+          pointer-events: none;
+          animation: float 20s infinite ease-in-out;
+        }
+
+        .accent-1 {
+          top: -300px;
+          right: -300px;
+        }
+
+        .accent-2 {
+          bottom: -300px;
+          left: -300px;
+          animation-delay: -10s;
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(30px, -30px) scale(1.05);
+          }
+          66% {
+            transform: translate(-30px, 30px) scale(0.95);
+          }
+        }
+
+        .expertise {
+          padding: 160px 80px;
+          background: var(--white);
+        }
+
+        .expertise-inner {
+          max-width: 1440px;
+          margin: 0 auto;
+        }
+
+        .section-label {
+          font-size: 14px;
+          color: var(--reseda-green);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
+        }
+
+        .expertise-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1px;
+          background: var(--reseda-green);
+          margin-top: 80px;
+          opacity: 0.2;
+          transition: opacity 0.3s var(--cubic);
+        }
+
+        .expertise-grid:hover {
+          opacity: 0.15;
+        }
+
+        .expertise-item {
+          background: var(--white);
+          padding: 48px;
+          transition: all 0.5s var(--cubic);
+          cursor: none;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .expertise-item::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, transparent, rgba(155, 193, 54, 0.03));
+          opacity: 0;
+          transition: opacity 0.5s var(--cubic);
+        }
+
+        .expertise-item:hover::before {
+          opacity: 1;
+        }
+
+        .expertise-item:hover {
+          transform: translateY(-2px);
+        }
+
+        .expertise-number {
+          font-size: 14px;
+          color: var(--yellow-green);
+          margin-bottom: 24px;
+          font-weight: 300;
+        }
+
+        .expertise-title {
+          font-size: 24px;
+          font-weight: 400;
+          margin-bottom: 16px;
+          letter-spacing: -0.01em;
+        }
+
+        .expertise-description {
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--dark-moss-green);
+        }
+
+        .scroll-indicator {
+          position: absolute;
+          bottom: 48px;
+          left: 50%;
+          transform: translateX(-50%);
+          opacity: 0;
+          animation: fadeInUp 1s var(--cubic) 1.5s forwards, pulse 2s infinite 2.5s;
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: translateX(-50%) translateY(0);
+          }
+          50% {
+            transform: translateX(-50%) translateY(8px);
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .header-inner,
+          .hero,
+          .expertise {
+            padding-left: 40px;
+            padding-right: 40px;
+          }
+
+          .expertise-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 768px) {
+          nav ul {
+            display: none;
+          }
+
+          h1 {
+            font-size: clamp(36px, 8vw, 48px);
+          }
+
+          .hero-subtitle {
+            font-size: 18px;
+          }
+
+          .expertise {
+            padding: 80px 20px;
+          }
+
+          .expertise-item {
+            padding: 32px;
+          }
+        }
+      `}</style>
+
+      {/* Custom Cursor */}
+      <div className={`cursor ${isHovered ? 'cursor-hover' : ''}`} ref={cursorRef}>
+        <div className="cursor-dot" ref={cursorDotRef}></div>
+        <div className="cursor-ring" ref={cursorRingRef}></div>
+      </div>
+
+      {/* Header */}
+      <header className={scrolled ? 'scrolled' : ''}>
+        <div className="header-inner">
+          <div className="logo">epoch</div>
+          <nav>
+            <ul>
+              <li><a href="#expertise" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Expertise</a></li>
+              <li><a href="#process" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Process</a></li>
+              <li><a href="#contact" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="hero">
+        <div className="floating-accent accent-1"></div>
+        <div className="floating-accent accent-2"></div>
+        
+        <div className="hero-inner">
+          <div className="hero-content">
+            <h1>
+              <div className="hero-text">
+                <span style={{'--delay': '0.1s'}}>Crafting software</span>
+              </div>
+              <div className="hero-text">
+                <span style={{'--delay': '0.3s'}}>with the precision</span>
+              </div>
+              <div className="hero-text">
+                <span style={{'--delay': '0.5s'}}>of Swiss watchmakers</span>
+              </div>
+            </h1>
+            <p className="hero-subtitle">
+              We build intelligent systems that transform complexity into elegance, 
+              where every line of code serves a purpose.
+            </p>
+            <a href="#expertise" className="cta" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+              <span>Explore our craft</span>
+              <div className="cta-arrow">
+                <svg viewBox="0 0 16 16" width="16" height="16">
+                  <path d="M1 8h14m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div className="scroll-indicator">
+          <svg viewBox="0 0 20 32" width="20" height="32">
+            <rect x="8" y="6" width="4" height="8" rx="2" stroke="var(--reseda-green)" strokeWidth="1" fill="none"/>
+            <rect x="1" y="1" width="18" height="30" rx="9" stroke="var(--reseda-green)" strokeWidth="1" fill="none"/>
+          </svg>
+        </div>
+      </section>
+
+      {/* Expertise */}
+      <section className="expertise" id="expertise">
+        <div className="expertise-inner">
+          <p className="section-label">What we do</p>
+          <div className="expertise-grid">
+            {expertiseItems.map((item, index) => (
+              <div 
+                key={index} 
+                className="expertise-item"
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="expertise-number">{item.number}</div>
+                <h3 className="expertise-title">{item.title}</h3>
+                <p className="expertise-description">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default EpochHomepage;
