@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { EXPERTISE_ITEMS, PORTFOLIO_ITEMS, CASE_STUDIES } from '@/src/shared/constants/content';
-import { ExpertiseItem, PortfolioItem, CaseStudy } from '@/src/shared/types';
+import { ExpertiseItem } from '@/src/shared/types';
 import styles from '@/styles/EpochHomepage.module.css';
 
 const EpochHomepage: React.FC = () => {
@@ -458,9 +458,9 @@ const EpochHomepage: React.FC = () => {
                   precision of Swiss watchmakers.
                 </p>
                 <p className={styles.aboutParagraph}>
-                  At Epoch, we don't just build software; we architect digital experiences that 
+                  At Epoch, we don&apos;t just build software; we architect digital experiences that 
                   stand the test of time. Each project is an opportunity to push the boundaries 
-                  of what's possible while maintaining the reliability and elegance that define 
+                  of what&apos;s possible while maintaining the reliability and elegance that define 
                   truly exceptional systems.
                 </p>
               </div>
@@ -638,7 +638,7 @@ const EpochHomepage: React.FC = () => {
           <div className={styles.portfolioInner}>
             <div className={styles.sectionHeader}>
               <p className={styles.sectionLabel} id="portfolio-heading">Our work</p>
-              <h2 className={styles.sectionTitle}>Digital phenomena we've birthed</h2>
+              <h2 className={styles.sectionTitle}>Digital phenomena we&apos;ve birthed</h2>
             </div>
             
             <div className={styles.portfolioGrid}>
@@ -767,7 +767,7 @@ const EpochHomepage: React.FC = () => {
                       {study.testimonial && (
                         <div className={styles.caseStudyTestimonial}>
                           <blockquote className={styles.testimonialQuote}>
-                            "{study.testimonial.quote}"
+                            &ldquo;{study.testimonial.quote}&rdquo;
                           </blockquote>
                           <div className={styles.testimonialAuthor}>
                             <div className={styles.authorName}>{study.testimonial.author}</div>

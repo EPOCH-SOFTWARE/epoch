@@ -122,7 +122,7 @@ export function useWormhole({ mousePosition }: UseWormholeProps) {
         particlePoolRef.current?.release(particle);
       });
     };
-  }, [mousePosition]);
+  }, []);
 
   // Update mouse position ref when prop changes
   useEffect(() => {
@@ -169,7 +169,7 @@ export function useWormhole({ mousePosition }: UseWormholeProps) {
       }
       cleanup?.();
     };
-  }, []); // Remove dependencies to prevent re-initialization
+  }, [resizeCanvas, initializeAnimation]); // Add missing dependencies
 
   return { canvasRef };
 }

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+Claude.md
+.specstory
+.cursor
+.Claude
+temp.txt

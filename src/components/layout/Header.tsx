@@ -31,7 +31,7 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled, className 
       <div className={styles.headerInner}>
         <div className={styles.logo}>
           <Image
-            src="/epoch-logo.svg"
+            src="/logos/epoch-logo.svg"
             alt="Epoch"
             width={150}
             height={48}
