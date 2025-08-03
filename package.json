@@ -16,7 +16,7 @@
     "test:coverage": "jest --coverage",
     "analyze": "cross-env ANALYZE=true next build",
     "clean": "rm -rf .next out dist",
-    "prepare": "husky",
+    "postinstall": "test \"$NODE_ENV\" != \"production\" && husky install || exit 0",
     "pre-commit": "npm run lint && npm run type-check",
     "validate": "npm run lint && npm run type-check && npm run format:check"
   },
