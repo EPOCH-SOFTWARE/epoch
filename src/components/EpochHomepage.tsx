@@ -10,7 +10,7 @@ import { Header } from './layout/Header';
 import { HeroSection } from './sections/HeroSection';
 import { ClientsSection } from './sections/ClientsSection';
 import { useCursor } from '../hooks/useCursor';
-import { PORTFOLIO_ITEMS, CASE_STUDIES, CLIENT_LOGOS } from '../shared/constants/content';
+import { PORTFOLIO_ITEMS, CASE_STUDIES } from '../shared/constants/content';
 import { logger } from '../shared/utils/logger';
 import styles from '../../styles/EpochHomepage.module.css';
 

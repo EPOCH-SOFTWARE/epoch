@@ -6,6 +6,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import { useCursor } from '../hooks/useCursor';
@@ -101,7 +102,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <div className={styles.clientLogo}>
-              <img src={clientData.logo} alt={`${clientData.name} logo`} />
+              <Image src={clientData.logo} alt={`${clientData.name} logo`} width={120} height={60} priority />
             </div>
             <h1 className={styles.heroTitle}>{clientData.heroTitle}</h1>
             <p className={styles.heroSubtitle}>{clientData.heroSubtitle}</p>
@@ -116,7 +117,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
           </div>
           {clientData.heroImage && (
             <div className={styles.heroMedia}>
-              <img src={clientData.heroImage} alt="Project showcase" />
+              <Image src={clientData.heroImage} alt="Project showcase" width={600} height={400} />
             </div>
           )}
           {clientData.heroVideo && (
@@ -318,14 +319,16 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
           <div className={styles.testimonialCard}>
             <div className={styles.testimonialContent}>
               <blockquote className={styles.testimonialQuote}>
-                "{clientData.testimonial.quote}"
+                &ldquo;{clientData.testimonial.quote}&rdquo;
               </blockquote>
               <div className={styles.testimonialAuthor}>
                 {clientData.testimonial.avatar && (
-                  <img 
+                  <Image 
                     src={clientData.testimonial.avatar} 
                     alt={clientData.testimonial.author}
                     className={styles.authorAvatar}
+                    width={60}
+                    height={60}
                   />
                 )}
                 <div className={styles.authorInfo}>
@@ -355,7 +358,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
         <div className={styles.sectionInner}>
           <h2 className={styles.ctaTitle}>Ready to Collaborate?</h2>
           <p className={styles.ctaDescription}>
-            Let's discuss how our team can help transform your next project into a success story.
+            Let&apos;s discuss how our team can help transform your next project into a success story.
           </p>
           <div className={styles.ctaButtons}>
             <a href="#contact" className={styles.primaryCta}>Contact EPOCH Today</a>

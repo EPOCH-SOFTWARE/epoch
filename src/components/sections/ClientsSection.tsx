@@ -5,8 +5,9 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { CLIENT_LOGOS, type ClientLogoProps } from '../../shared/constants/content';
 import styles from '../../../styles/ClientsSection.module.css';
 
@@ -26,7 +27,7 @@ interface ClientPreviewData extends ClientLogoProps {
 // Enhanced client data with preview information
 const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
   {
-    ...CLIENT_LOGOS[0], // HUB International
+    ...CLIENT_LOGOS[0]!, // HUB International
     industry: 'Insurance',
     projectType: 'Digital Transformation',
     yearWorked: '2023',
@@ -34,7 +35,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '60% faster claim processing'
   },
   {
-    ...CLIENT_LOGOS[1], // Inspira Financial
+    ...CLIENT_LOGOS[1]!, // Inspira Financial
     industry: 'Financial Services',
     projectType: 'Platform Modernization',
     yearWorked: '2023',
@@ -42,7 +43,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '99.9% uptime achieved'
   },
   {
-    ...CLIENT_LOGOS[2], // Shift4
+    ...CLIENT_LOGOS[2]!, // Shift4
     industry: 'Payment Processing',
     projectType: 'Performance Optimization',
     yearWorked: '2022',
@@ -50,7 +51,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '85% faster transactions'
   },
   {
-    ...CLIENT_LOGOS[3], // Cardinal Health
+    ...CLIENT_LOGOS[3]!, // Cardinal Health
     industry: 'Healthcare',
     projectType: 'AI Integration',
     yearWorked: '2022',
@@ -58,7 +59,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '40% cost reduction'
   },
   {
-    ...CLIENT_LOGOS[4], // IDrive
+    ...CLIENT_LOGOS[4]!, // IDrive
     industry: 'Cloud Storage',
     projectType: 'Infrastructure Scaling',
     yearWorked: '2023',
@@ -66,7 +67,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '300% storage efficiency'
   },
   {
-    ...CLIENT_LOGOS[5], // BlueSky Commerce
+    ...CLIENT_LOGOS[5]!, // BlueSky Commerce
     industry: 'E-commerce',
     projectType: 'Platform Development',
     yearWorked: '2022',
@@ -74,7 +75,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '200% conversion increase'
   },
   {
-    ...CLIENT_LOGOS[6], // Rural King
+    ...CLIENT_LOGOS[6]!, // Rural King
     industry: 'Retail',
     projectType: 'Omnichannel Solution',
     yearWorked: '2023',
@@ -82,7 +83,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '150% online growth'
   },
   {
-    ...CLIENT_LOGOS[7], // Skeps
+    ...CLIENT_LOGOS[7]!, // Skeps
     industry: 'Fintech',
     projectType: 'API Development',
     yearWorked: '2022',
@@ -90,7 +91,7 @@ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
     keyResult: '99.99% API reliability'
   },
   {
-    ...CLIENT_LOGOS[8], // Destify
+    ...CLIENT_LOGOS[8]!, // Destify
     industry: 'Travel Technology',
     projectType: 'Mobile Platform',
     yearWorked: '2023',
@@ -178,11 +179,12 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
                 
                 <div className={styles.logoSection}>
                   <div className={styles.logoContainer}>
-                    <img 
+                    <Image 
                       src={client.logo} 
                       alt={client.alt} 
                       className={styles.clientLogo}
-                      loading="lazy"
+                      width={160}
+                      height={50}
                     />
                   </div>
                   {isStandalone && (
@@ -233,7 +235,7 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
           <div className={styles.ctaSection}>
             <h3 className={styles.ctaTitle}>Ready to join our success stories?</h3>
             <p className={styles.ctaDescription}>
-              Let's discuss how our collaborative approach can transform your next project.
+              Let&apos;s discuss how our collaborative approach can transform your next project.
             </p>
             <a href="#contact" className={styles.ctaButton}>
               <span>Start Your Story</span>

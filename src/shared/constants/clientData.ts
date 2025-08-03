@@ -10,7 +10,7 @@ export const HUB_INTERNATIONAL_DATA: ClientDetailData = {
   id: 'hub-international',
   name: 'HUB International',
   logo: '/logos/HUB-international.png',
-  heroTitle: 'Transforming Innovation: EPOCH\'s Partnership with HUB International',
+  heroTitle: 'Transforming Innovation: EPOCH&apos;s Partnership with HUB International',
   heroSubtitle: 'How our team collaborated to deliver AI-driven efficiency gains and revolutionize insurance workflows.',
   heroImage: '/clients/hub-international/hero-project.jpg',
   
@@ -73,7 +73,7 @@ export const HUB_INTERNATIONAL_DATA: ClientDetailData = {
     'Automated compliance reporting system'
   ],
   technicalHighlights: [
-    'Leveraged EPOCH\'s proprietary PSI (Predictive Systems Intelligence) framework for seamless data processing',
+    'Leveraged EPOCH&apos;s proprietary PSI (Predictive Systems Intelligence) framework for seamless data processing',
     'Implemented machine learning models trained on 10+ years of historical claims data',
     'Built fault-tolerant microservices architecture with 99.9% uptime guarantee',
     'Created real-time data synchronization across distributed systems',
@@ -134,7 +134,7 @@ export const HUB_INTERNATIONAL_DATA: ClientDetailData = {
   
   // Testimonial
   testimonial: {
-    quote: 'EPOCH\'s collaborative spirit and technical excellence made this transformation a resounding success. Their AI-powered solution didn\'t just solve our immediate challenges—it positioned us for the future of insurance technology. The 60% improvement in claim processing time has revolutionized our customer experience.',
+    quote: 'EPOCH&apos;s collaborative spirit and technical excellence made this transformation a resounding success. Their AI-powered solution didn&apos;t just solve our immediate challenges—it positioned us for the future of insurance technology. The 60% improvement in claim processing time has revolutionized our customer experience.',
     author: 'Sarah Mitchell',
     position: 'Chief Technology Officer, HUB International',
     avatar: '/clients/hub-international/sarah-mitchell.jpg',
@@ -172,7 +172,7 @@ export const HUB_INTERNATIONAL_DATA: ClientDetailData = {
   
   // SEO
   metaTitle: 'HUB International Case Study | EPOCH Collaboration Success Story',
-  metaDescription: 'Discover how EPOCH transformed HUB International\'s insurance workflows with AI-powered solutions, achieving 60% faster claim processing and $1.2M annual savings through collaborative innovation.'
+  metaDescription: 'Discover how EPOCH transformed HUB International&apos;s insurance workflows with AI-powered solutions, achieving 60% faster claim processing and $1.2M annual savings through collaborative innovation.'
 };
 
 // Export all client data as needed
