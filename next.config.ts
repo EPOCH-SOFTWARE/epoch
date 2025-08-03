@@ -11,12 +11,17 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  
+  tracing: {
+    traceFile: false,
+  },
+  
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
