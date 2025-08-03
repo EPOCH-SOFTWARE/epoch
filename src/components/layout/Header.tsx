@@ -5,12 +5,13 @@
 
 'use client';
 
-import React, { memo } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../../../styles/EpochHomepage.module.css';
 
 interface HeaderProps {
-  isScrolled: boolean;
+  isScrolled?: boolean;
   className?: string;
 }
 
@@ -22,14 +23,30 @@ const navigation = [
   { href: '#contact', label: 'Contact', ariaLabel: 'Go to contact section' },
 ] as const;
 
-export const Header = memo<HeaderProps>(function Header({ isScrolled, className }) {
+export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScrolled, className }) {
+  const [isScrolled, setIsScrolled] = useState(propIsScrolled || false);
+
+  useEffect(() => {
+    if (propIsScrolled !== undefined) {
+      setIsScrolled(propIsScrolled);
+      return;
+    }
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [propIsScrolled]);
+
   return (
     <header
       className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''} ${className || ''}`}
       role="banner"
     >
       <div className={styles.headerInner}>
-        <div className={styles.logo}>
+        <Link href="/" className={styles.logo} aria-label="Go to homepage">
           <Image
             src="/logos/epoch-logo.svg"
             alt="Epoch"
@@ -38,7 +55,7 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled, className 
             priority
             style={{ objectFit: 'contain' }}
           />
-        </div>
+        </Link>
         
         <nav className={styles.nav} role="navigation" aria-label="Main navigation">
           <ul>

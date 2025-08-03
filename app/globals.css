@@ -6,6 +6,16 @@
   --white: #FEFEFE;
   --flint: #666666;
   --cubic: cubic-bezier(0.23, 1, 0.320, 1);
+  
+  /* Additional color variables for client components */
+  --gunmetal: #2C2C2C;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  
+  /* Header height variables */
+  --header-height: 112px; /* 32px padding * 2 + 48px content */
+  --header-height-scrolled: 88px; /* 20px padding * 2 + 48px content */
 }
 
 * {

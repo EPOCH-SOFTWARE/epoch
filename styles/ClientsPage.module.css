@@ -1,0 +1,7 @@
+/* Clients Hub Page Styles */
+
+.clientsPageMain {
+  min-height: 100vh;
+  background: var(--white);
+  padding-top: var(--header-height, 112px); /* Use CSS variable with fallback */
+}

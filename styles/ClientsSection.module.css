@@ -1,0 +1,584 @@
+/* Enhanced Clients Section Styles */
+
+.clients {
+  padding: 120px 80px 160px 80px;
+  margin-top: 60px;
+  background: linear-gradient(
+    135deg,
+    var(--white) 0%,
+    rgba(254, 254, 254, 0.95) 25%,
+    rgba(155, 193, 54, 0.02) 50%,
+    rgba(254, 254, 254, 0.95) 75%,
+    var(--white) 100%
+  );
+  position: relative;
+  overflow: visible;
+  border-top: 1px solid rgba(135, 138, 115, 0.08);
+}
+
+.clients.standalone {
+  padding: 160px 80px 200px 80px;
+  margin-top: 0;
+  background: linear-gradient(
+    135deg,
+    var(--white) 0%,
+    rgba(254, 254, 254, 0.98) 20%,
+    rgba(155, 193, 54, 0.03) 40%,
+    rgba(69, 84, 34, 0.02) 60%,
+    rgba(254, 254, 254, 0.98) 80%,
+    var(--white) 100%
+  );
+}
+
+.clients::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(155, 193, 54, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(69, 84, 34, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.clientsInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+}
+
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--reseda-green);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.sectionTitle {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--gunmetal);
+  margin: 0 0 24px 0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.sectionDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray-600);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+/* Industry Filter */
+.industryFilter {
+  margin-bottom: 60px;
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(135, 138, 115, 0.2);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.filterButton:hover {
+  background: rgba(155, 193, 54, 0.1);
+  border-color: var(--reseda-green);
+  transform: translateY(-2px);
+}
+
+.filterButton.active {
+  background: var(--reseda-green);
+  color: var(--white);
+  border-color: var(--reseda-green);
+  box-shadow: 0 4px 20px rgba(155, 193, 54, 0.3);
+}
+
+/* Client Showcase */
+.clientShowcase {
+  margin-top: 80px;
+}
+
+/* Client Grid */
+.clientGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.clientGrid.enhanced {
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+}
+
+/* Client Cards */
+.clientCard {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(135, 138, 115, 0.1);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: cardFadeIn 0.8s ease-out forwards;
+  animation-delay: var(--card-delay);
+}
+
+.clientCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(155, 193, 54, 0.1);
+  border-color: rgba(155, 193, 54, 0.3);
+}
+
+.cardGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(155, 193, 54, 0.05) 0%,
+    transparent 50%,
+    rgba(69, 84, 34, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.clientCard:hover .cardGlow {
+  opacity: 1;
+}
+
+/* Logo Section */
+.logoSection {
+  padding: 40px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoContainer {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(135, 138, 115, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .logoContainer {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(155, 193, 54, 0.2);
+  transform: scale(1.05);
+}
+
+.clientLogo {
+  max-height: 40px;
+  max-width: 140px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .clientLogo {
+  filter: grayscale(0);
+}
+
+.clientMeta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.industry {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--reseda-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.year {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 0 32px 32px 32px;
+  border-top: 1px solid rgba(135, 138, 115, 0.1);
+}
+
+.projectType {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gunmetal);
+  margin: 24px 0 16px 0;
+  line-height: 1.3;
+}
+
+.previewDescription {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--gray-600);
+  margin-bottom: 20px;
+}
+
+.keyResult {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  background: rgba(155, 193, 54, 0.1);
+  border-left: 3px solid var(--reseda-green);
+  border-radius: 0 8px 8px 0;
+}
+
+.resultIcon {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--reseda-green);
+}
+
+.resultText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gunmetal);
+}
+
+.cardCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--reseda-green);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .cardCta {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.cardCta svg {
+  transition: transform 0.3s ease;
+}
+
+.clientCard:hover .cardCta svg {
+  transform: translateX(4px);
+}
+
+/* Client Metrics */  
+.clientMetrics {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 80px;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(135, 138, 115, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+}
+
+.metricItem {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: metricFadeIn 0.8s ease-out forwards;
+}
+
+.metricItem:nth-child(1) { animation-delay: 0.8s; }
+.metricItem:nth-child(2) { animation-delay: 1.0s; }
+.metricItem:nth-child(3) { animation-delay: 1.2s; }
+
+.metricNumber {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--reseda-green);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.metricLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* CTA Section */
+.ctaSection {
+  margin-top: 120px;
+  text-align: center;
+  padding: 80px 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(155, 193, 54, 0.05) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(69, 84, 34, 0.05) 100%
+  );
+  border-radius: 24px;
+  border: 1px solid rgba(135, 138, 115, 0.1);
+}
+
+.ctaTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gunmetal);
+  margin-bottom: 16px;
+}
+
+.ctaDescription {
+  font-size: 18px;
+  color: var(--gray-600);
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: var(--reseda-green);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(155, 193, 54, 0.4);
+}
+
+.ctaButton .ctaGlow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.ctaButton:hover .ctaGlow {
+  left: 100%;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes metricFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .clients {
+    padding: 100px 40px;
+  }
+  
+  .clients.standalone {
+    padding: 120px 40px 160px 40px;
+  }
+
+  .clientGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .clientGrid.enhanced {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+  }
+
+  .clientMetrics {
+    gap: 40px;
+    padding: 40px 24px;
+  }
+
+  .metricNumber {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clients {
+    padding: 80px 20px;
+  }
+  
+  .clients.standalone {
+    padding: 100px 20px 120px 20px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 60px;
+  }
+
+  .industryFilter {
+    margin-bottom: 40px;
+  }
+
+  .filterButtons {
+    gap: 8px;
+  }
+
+  .filterButton {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .clientGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .clientGrid.enhanced {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .logoSection {
+    padding: 32px 24px 20px 24px;
+  }
+
+  .logoContainer {
+    height: 60px;
+    padding: 16px;
+  }
+
+  .clientLogo {
+    max-height: 28px;
+    max-width: 120px;
+  }
+
+  .cardContent {
+    padding: 0 24px 24px 24px;
+  }
+
+  .projectType {
+    font-size: 18px;
+    margin: 20px 0 12px 0;
+  }
+
+  .previewDescription {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .keyResult {
+    padding: 10px 12px;
+    margin-bottom: 20px;
+  }
+  
+  .resultText {
+    font-size: 13px;
+  }
+
+  .clientMetrics {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 20px;
+  }
+
+  .metricNumber {
+    font-size: 24px;
+  }
+
+  .ctaSection {
+    margin-top: 80px;
+    padding: 60px 24px;
+  }
+
+  .ctaTitle {
+    font-size: 24px;
+  }
+
+  .ctaDescription {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .ctaButton {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
