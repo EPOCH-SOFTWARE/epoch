@@ -7,10 +7,10 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Header } from './layout/Header';
-import { Footer } from './layout/Footer';
-import { useCursor } from '../hooks/useCursor';
-import styles from '../../styles/ClientDetailPage.module.css';
+import { Header } from '../../layout/Header';
+import { Footer } from '../../layout/Footer';
+import { useCursor } from '../../../hooks/useCursor';
+import styles from '../../../../styles/ClientDetailPage.module.css';
 
 export interface ClientDetailData {
   id: string;

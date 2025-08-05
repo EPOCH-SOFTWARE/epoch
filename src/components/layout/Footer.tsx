@@ -6,7 +6,7 @@
 'use client';
 
 import React from 'react';
-import styles from '../../../styles/EpochHomepage.module.css';
+import styles from '../../../styles/Footer.module.css';
 
 export function Footer() {
   return (

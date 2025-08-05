@@ -6,8 +6,8 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 
-// Lazy load the new modular homepage component
-const EpochHomepage = dynamic(() => import('@/src/components/EpochHomepage'), {
+// Lazy load the homepage component
+const HomePage = dynamic(() => import('@/src/components/pages/home'), {
   ssr: true,
   loading: () => (
     <div className="loading-container">
@@ -21,6 +21,6 @@ export const metadata: Metadata = {
   description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
 };
 
-export default function HomePage() {
-  return <EpochHomepage />;
+export default function Home() {
+  return <HomePage />;
 }

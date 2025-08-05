@@ -13,10 +13,6 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
   },
   
-  tracing: {
-    traceFile: false,
-  },
-  
   turbopack: {
     rules: {
       '*.svg': {

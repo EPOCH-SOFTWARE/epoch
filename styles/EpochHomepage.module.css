@@ -500,7 +500,7 @@
 
 .sectionTitle {
   font-size: clamp(32px, 4vw, 48px);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.02em;
   margin-top: 16px;
   background: linear-gradient(135deg, var(--night), var(--dark-moss-green));

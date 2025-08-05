@@ -1,24 +1,34 @@
+/**
+ * @fileoverview Main homepage component with optimized architecture
+ * @author Epoch Development Team
+ */
+
 'use client';
 
-import React, { useMemo, useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { EXPERTISE_ITEMS, PORTFOLIO_ITEMS, CASE_STUDIES } from '@/src/shared/constants/content';
-import { ExpertiseItem } from '@/src/shared/types';
-import styles from '@/styles/EpochHomepage.module.css';
+import React, { useRef, useState, useEffect } from 'react';
+import { Header } from '../../layout/Header';
+import { Footer } from '../../layout/Footer';
+import { HeroSection } from '../../sections/HeroSection';
+import { ClientsSection } from '../../sections/ClientsSection';
+import { useCursor } from '../../../hooks/useCursor';
+import { PORTFOLIO_ITEMS, CASE_STUDIES } from '../../../shared/constants/content';
+import { logger } from '../../../shared/utils/logger';
+import styles from '../../../../styles/EpochHomepage.module.css';
 
-const EpochHomepage: React.FC = () => {
+export default function EpochHomepage() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  useCursor({});
+  
   const [hoveredPortfolio, setHoveredPortfolio] = useState<string | null>(null);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<number>(0);
+  
   const heroRef = useRef<HTMLElement>(null);
   const expertiseRef = useRef<HTMLElement>(null);
   const portfolioRef = useRef<HTMLElement>(null);
   const caseStudiesRef = useRef<HTMLElement>(null);
-  const wormholeCanvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>(0);
 
+  // Scroll tracking effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -42,426 +52,47 @@ const EpochHomepage: React.FC = () => {
     };
   }, []);
 
-  // Mouse tracking for parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Wormhole animation
-  useEffect(() => {
-    if (!wormholeCanvasRef.current) return;
-
-    const canvas = wormholeCanvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      if (typeof window !== 'undefined') {
-        // Always use desktop size on mobile for consistency
-        const size = window.innerWidth <= 768 ? 450 : Math.min(window.innerWidth * 0.35, 450);
-        canvas.width = size;
-        canvas.height = size;
-      }
-    };
-    resizeCanvas();
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', resizeCanvas);
-    }
-
-    // Wormhole parameters
-    let time = 0;
-    const particles: Array<{
-      angle: number;
-      radius: number;
-      speed: number;
-      size: number;
-      color: string;
-      depth: number;
-    }> = [];
-
-    // Create particles - reduced count for performance
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-    const particleCount = isMobile ? 50 : 100; // Reduced from 200
-    
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        angle: Math.random() * Math.PI * 2,
-        radius: Math.random() * 250,
-        speed: 0.5 + Math.random() * 2,
-        size: Math.random() * 3 + 1,
-        color: `hsl(${140 + Math.random() * 60}, 70%, ${50 + Math.random() * 30}%)`,
-        depth: Math.random()
-      });
-    }
-
-    let frameCount = 0;
-    const targetFPS = 30; // Reduced from 60fps
-    const frameInterval = 1000 / targetFPS;
-    let lastFrameTime = 0;
-
-    const drawWormhole = (currentTime: number = 0) => {
-      // Throttle to target FPS
-      if (currentTime - lastFrameTime < frameInterval) {
-        animationFrameRef.current = requestAnimationFrame(drawWormhole);
-        return;
-      }
-      lastFrameTime = currentTime;
-      frameCount++;
-
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      
-      // Clear canvas with dark background
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Add soft edge transition
-      const edgeGradient = ctx.createRadialGradient(
-        centerX, centerY, canvas.width * 0.3,
-        centerX, centerY, canvas.width * 0.5
-      );
-      edgeGradient.addColorStop(0, 'transparent');
-      edgeGradient.addColorStop(0.8, 'transparent');
-      edgeGradient.addColorStop(1, 'rgba(155, 193, 54, 0.05)');
-      
-      ctx.fillStyle = edgeGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Draw wormhole tunnel effect - reduced complexity
-      const tunnelLayers = isMobile ? 10 : 15; // Reduced from 20
-      for (let i = tunnelLayers; i > 0; i--) {
-        const radius = (i / tunnelLayers) * (canvas.width * 0.4);
-        const opacity = 1 - (i / tunnelLayers);
-        
-        // Create gradient for depth
-        const gradient = ctx.createRadialGradient(
-          centerX + (mousePos.x - (typeof window !== 'undefined' ? window.innerWidth / 2 : 400)) * 0.02 * i,
-          centerY + (mousePos.y - (typeof window !== 'undefined' ? window.innerHeight / 2 : 400)) * 0.02 * i,
-          0,
-          centerX,
-          centerY,
-          radius
-        );
-        
-        gradient.addColorStop(0, `rgba(0, 0, 0, ${opacity})`);
-        gradient.addColorStop(0.5, `rgba(30, 10, 60, ${opacity * 0.5})`);
-        gradient.addColorStop(0.7, `rgba(60, 20, 100, ${opacity * 0.3})`);
-        gradient.addColorStop(1, `rgba(155, 193, 54, ${opacity * 0.1})`);
-        
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Draw swirling effect - reduced on mobile
-      if (!isMobile || frameCount % 2 === 0) { // Skip every other frame on mobile
-        ctx.save();
-        ctx.translate(centerX, centerY);
-        
-        const spiralCount = isMobile ? 3 : 5; // Reduced spirals on mobile
-        for (let i = 0; i < spiralCount; i++) {
-          ctx.rotate(time * 0.001 * (i % 2 ? 1 : -1));
-        
-        const spiralGradient = ctx.createLinearGradient(-200, 0, 200, 0);
-        spiralGradient.addColorStop(0, 'rgba(155, 193, 54, 0)');
-        spiralGradient.addColorStop(0.5, `rgba(155, 193, 54, ${0.1 - i * 0.02})`);
-        spiralGradient.addColorStop(1, 'rgba(155, 193, 54, 0)');
-        
-        ctx.strokeStyle = spiralGradient;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        
-        for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
-          const r = 50 + angle * 20 - i * 10;
-          const x = Math.cos(angle + time * 0.002) * r;
-          const y = Math.sin(angle + time * 0.002) * r;
-          
-          if (angle === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        
-        ctx.stroke();
-        }
-        
-        ctx.restore();
-      }
-
-      // Draw particles
-      particles.forEach((particle) => {
-        particle.angle += particle.speed * 0.01;
-        particle.radius -= particle.speed;
-        
-        if (particle.radius < 10) {
-          particle.radius = 250;
-          particle.depth = 1;
-        }
-        
-        const x = centerX + Math.cos(particle.angle + time * 0.001) * particle.radius;
-        const y = centerY + Math.sin(particle.angle + time * 0.001) * particle.radius;
-        
-        // Gravitational lensing effect
-        const distFromCenter = Math.sqrt(
-          Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
-        );
-        const lensStrength = Math.max(0, 1 - distFromCenter / 200);
-        const lensX = x + (centerX - x) * lensStrength * 0.3;
-        const lensY = y + (centerY - y) * lensStrength * 0.3;
-        
-        // Draw particle
-        ctx.globalAlpha = (1 - particle.radius / 250) * particle.depth;
-        ctx.fillStyle = particle.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = particle.color;
-        ctx.beginPath();
-        ctx.arc(lensX, lensY, particle.size * (1 - particle.radius / 250), 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-
-      // Draw event horizon
-      ctx.globalAlpha = 1;
-      const eventGradient = ctx.createRadialGradient(
-        centerX,
-        centerY,
-        0,
-        centerX,
-        centerY,
-        80
-      );
-      eventGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
-      eventGradient.addColorStop(0.7, 'rgba(0, 0, 0, 0.8)');
-      eventGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      
-      ctx.fillStyle = eventGradient;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Draw accretion disk glow
-      const glowGradient = ctx.createRadialGradient(
-        centerX,
-        centerY,
-        80,
-        centerX,
-        centerY,
-        200
-      );
-      glowGradient.addColorStop(0, 'rgba(155, 193, 54, 0.3)');
-      glowGradient.addColorStop(0.5, 'rgba(155, 193, 54, 0.1)');
-      glowGradient.addColorStop(1, 'rgba(155, 193, 54, 0)');
-      
-      ctx.fillStyle = glowGradient;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 200, 0, Math.PI * 2);
-      ctx.fill();
-
-      time += frameInterval;
-      animationFrameRef.current = requestAnimationFrame(drawWormhole);
-    };
-
-    drawWormhole();
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', resizeCanvas);
-      }
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [mousePos]);
-
-
-  const heroTextLines = useMemo(() => [
-    { text: 'Crafting software', delay: '0.1s' },
-    { text: 'with the precision', delay: '0.3s' },
-    { text: 'of Swiss watchmakers', delay: '0.5s' }
-  ], []);
-
-  const renderExpertiseItems = useMemo(() => 
-    EXPERTISE_ITEMS.map((item: ExpertiseItem, index: number) => (
-      <div 
-        key={`${item.number}-${index}`}
-        className={styles.expertiseItem}
-      >
-        <div className={styles.expertiseNumber} aria-hidden="true">
-          {item.number}
-        </div>
-        <h3 className={styles.expertiseTitle}>{item.title}</h3>
-        <p className={styles.expertiseDescription}>{item.description}</p>
-      </div>
-    )), []
-  );
+  logger.performance('EpochHomepage render', () => {
+    logger.debug('Rendering EpochHomepage component', {
+      scrolled,
+      activeSection,
+    });
+  });
 
   return (
     <>
-
-      <header 
-        className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}
-        role="banner"
-      >
-        <div className={styles.headerInner}>
-          <div className={styles.logo}>
-            <Image 
-              src="/epoch-logo.svg" 
-              alt="Epoch" 
-              width={150} 
-              height={48}
-              priority
-              style={{ objectFit: 'contain' }}
-            />
-          </div>
-          <nav className={styles.nav} role="navigation" aria-label="Main navigation">
-            <ul>
-              <li>
-                <a 
-                  href="#services" 
-                  aria-label="Go to services section"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#portfolio" 
-                  aria-label="Go to portfolio section"
-                >
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#case-studies" 
-                  aria-label="Go to case studies section"
-                >
-                  Case Studies
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#expertise" 
-                  aria-label="Go to expertise section"
-                >
-                  Expertise
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#contact" 
-                  aria-label="Go to contact section"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+      <Header isScrolled={scrolled} />
 
       <main>
-        <section className={styles.hero} role="banner" ref={heroRef}>
-          {/* Animated gradient mesh background */}
-          <div className={styles.gradientMesh} aria-hidden="true">
-            <div className={styles.gradientOrb1}></div>
-            <div className={styles.gradientOrb2}></div>
-            <div className={styles.gradientOrb3}></div>
-          </div>
-          
-          
-          
-          <div className={styles.heroInner}>
-            <div className={styles.heroLayout}>
-              <div className={styles.heroContent}>
-                <h1 className={styles.heroTitle}>
-                {heroTextLines.map((line, index) => (
-                  <div key={index} className={styles.heroText}>
-                    <span 
-                      className={styles.heroTextSpan}
-                      style={{ '--delay': line.delay } as React.CSSProperties}
-                    >
-                      {line.text.split('').map((char, charIndex) => (
-                        <span 
-                          key={charIndex} 
-                          className={styles.heroChar}
-                          style={{ '--char-delay': `${charIndex * 0.02}s` } as React.CSSProperties}
-                        >
-                          {char === ' ' ? '\u00A0' : char}
-                        </span>
-                      ))}
-                    </span>
-                  </div>
-                ))}
-              </h1>
-              <p className={styles.heroSubtitle}>
-                We build intelligent systems that transform complexity into elegance, 
-                where every line of code serves a purpose.
-              </p>
-              <div className={styles.ctaWrapper}>
-                <a 
-                  href="#expertise" 
-                  className={styles.cta} 
-                  aria-label="Explore our craft and expertise"
-                >
-                  <div className={styles.ctaGlow}></div>
-                  <span className={styles.ctaText}>Explore our craft</span>
-                  <div className={styles.ctaArrow} aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Arrow pointing right">
-                      <path d="M1 8h14m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                    </svg>
-                  </div>
-                </a>
-                <div className={styles.ctaShimmer}></div>
-              </div>
-            </div>
-            
-            {/* Wormhole Animation */}
-            <div className={styles.wormholeContainer}>
-              <canvas 
-                ref={wormholeCanvasRef}
-                className={styles.wormholeCanvas}
-                aria-hidden="true"
-              />
-              <div className={styles.wormholeGlow}></div>
-            </div>
-          </div>
-          </div>
-
-        </section>
+        <HeroSection ref={heroRef} />
 
         <section className={styles.about} id="about" aria-labelledby="about-heading">
           <div className={styles.aboutInner}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionLabel} id="about-heading">About us</p>
+              <p className={styles.sectionLabel} id="about-heading">
+                About us
+              </p>
               <h2 className={styles.sectionTitle}>About Epoch</h2>
             </div>
             <div className={styles.aboutContent}>
               <div className={styles.aboutText}>
                 <p className={styles.aboutParagraph}>
-                  Founded on the principle that exceptional software emerges from the intersection 
-                  of deep technical expertise and relentless attention to detail, Epoch represents 
+                  Founded on the principle that exceptional software emerges from the intersection
+                  of deep technical expertise and relentless attention to detail, Epoch represents
                   a new paradigm in software development.
                 </p>
                 <p className={styles.aboutParagraph}>
-                  We believe that every line of code tells a story—one of intention, precision, 
-                  and purpose. Our team combines decades of collective experience across cutting-edge 
-                  technologies with an unwavering commitment to craftsmanship that mirrors the 
+                  We believe that every line of code tells a story—one of intention, precision, and
+                  purpose. Our team combines decades of collective experience across cutting-edge
+                  technologies with an unwavering commitment to craftsmanship that mirrors the
                   precision of Swiss watchmakers.
                 </p>
                 <p className={styles.aboutParagraph}>
-                  At Epoch, we don&apos;t just build software; we architect digital experiences that 
-                  stand the test of time. Each project is an opportunity to push the boundaries 
-                  of what&apos;s possible while maintaining the reliability and elegance that define 
-                  truly exceptional systems.
+                  At Epoch, we don&apos;t just build software; we architect digital experiences that
+                  stand the test of time. Each project is an opportunity to push the boundaries of
+                  what&apos;s possible while maintaining the reliability and elegance that define truly
+                  exceptional systems.
                 </p>
               </div>
               <div className={styles.aboutStats}>
@@ -767,7 +398,7 @@ const EpochHomepage: React.FC = () => {
                       {study.testimonial && (
                         <div className={styles.caseStudyTestimonial}>
                           <blockquote className={styles.testimonialQuote}>
-                            &ldquo;{study.testimonial.quote}&rdquo;
+                            &quot;{study.testimonial.quote}&quot;
                           </blockquote>
                           <div className={styles.testimonialAuthor}>
                             <div className={styles.authorName}>{study.testimonial.author}</div>
@@ -783,25 +414,82 @@ const EpochHomepage: React.FC = () => {
           </div>
         </section>
 
-        <section 
-          className={`${styles.expertise} ${activeSection >= 1 ? styles.expertiseVisible : ''}`} 
-          id="expertise" 
-          aria-labelledby="expertise-heading"
-          ref={expertiseRef}
-        >
-          <div className={styles.expertiseInner}>
+        <ClientsSection />
+
+        <section className={styles.contact} id="contact" aria-labelledby="contact-heading">
+          <div className={styles.contactInner}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionLabel} id="expertise-heading">What we do</p>
-              <h2 className={styles.sectionTitle}>Expertise that drives innovation</h2>
+              <p className={styles.sectionLabel} id="contact-heading">Get in touch</p>
+              <h2 className={styles.sectionTitle}>Ready to build something extraordinary?</h2>
             </div>
-            <div className={styles.expertiseGrid} role="list">
-              {renderExpertiseItems}
+            
+            <div className={styles.contactContent}>
+              <div className={styles.contactInfo}>
+                <p className={styles.contactDescription}>
+                  Let&apos;s discuss how we can transform your vision into reality. 
+                  Our team is ready to tackle complex challenges and deliver 
+                  exceptional solutions that drive real results.
+                </p>
+                
+                <div className={styles.contactMethods}>
+                  <div className={styles.contactMethod}>
+                    <div className={styles.contactIcon}>
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="2"/>
+                        <polyline points="22,6 12,13 2,6" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className={styles.contactDetails}>
+                      <span className={styles.contactLabel}>Email</span>
+                      <a href="mailto:hello@epoch.dev" className={styles.contactLink}>hello@epoch.dev</a>
+                    </div>
+                  </div>
+                  
+                  <div className={styles.contactMethod}>
+                    <div className={styles.contactIcon}>
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className={styles.contactDetails}>
+                      <span className={styles.contactLabel}>Phone</span>
+                      <a href="tel:+1234567890" className={styles.contactLink}>+1 (234) 567-890</a>
+                    </div>
+                  </div>
+                  
+                  <div className={styles.contactMethod}>
+                    <div className={styles.contactIcon}>
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className={styles.contactDetails}>
+                      <span className={styles.contactLabel}>Location</span>
+                      <span className={styles.contactValue}>San Francisco, CA</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className={styles.contactCTA}>
+                <a href="mailto:hello@epoch.dev" className={styles.contactButton}>
+                  <span className={styles.contactButtonText}>Start a Project</span>
+                  <div className={styles.contactButtonIcon}>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                      <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M7 7h10v10" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </div>
+                  <div className={styles.contactButtonGlow}></div>
+                </a>
+              </div>
             </div>
           </div>
         </section>
+
+        <Footer />
       </main>
     </>
   );
-};
-
-export default EpochHomepage;
+}

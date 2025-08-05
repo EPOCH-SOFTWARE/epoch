@@ -3,7 +3,7 @@
  * @author Epoch Development Team
  */
 
-import ClientsPageWrapper from '@/src/components/ClientsPageWrapper';
+import ClientsPage from '@/src/components/pages/clients';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,6 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ClientsPage() {
-  return <ClientsPageWrapper />;
+export default function ClientsPageRoute() {
+  return <ClientsPage />;
 }

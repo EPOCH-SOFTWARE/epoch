@@ -4,7 +4,7 @@
  */
 
 import { notFound } from 'next/navigation';
-import { ClientDetailPage } from '@/src/components/ClientDetailPage';
+import { ClientDetailPage } from '@/src/components/pages/clients/detail';
 import { CLIENT_DETAIL_DATA } from '@/src/shared/constants/clientData';
 import type { Metadata } from 'next';
 

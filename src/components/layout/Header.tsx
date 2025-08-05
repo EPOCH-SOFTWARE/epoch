@@ -8,7 +8,7 @@
 import React, { memo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../../../styles/EpochHomepage.module.css';
+import styles from '../../../styles/Header.module.css';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -25,6 +25,7 @@ const navigation = [
 
 export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScrolled, className }) {
   const [isScrolled, setIsScrolled] = useState(propIsScrolled || false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (propIsScrolled !== undefined) {
@@ -39,6 +40,14 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [propIsScrolled]);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -68,6 +77,46 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
             ))}
           </ul>
         </nav>
+
+        {/* Hamburger Menu Button */}
+        <button
+          className={`${styles.hamburger} ${mobileMenuOpen ? styles.hamburgerOpen : ''}`}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle mobile menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          <div className={styles.hamburgerIcon}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+
+        {/* Mobile Navigation */}
+        <nav
+          className={`${styles.mobileNav} ${mobileMenuOpen ? styles.mobileNavOpen : ''}`}
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <ul>
+            {navigation.map(({ href, label, ariaLabel }) => (
+              <li key={href}>
+                <a href={href} aria-label={ariaLabel} onClick={closeMobileMenu}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Overlay */}
+        {mobileMenuOpen && (
+          <div
+            className={`${styles.overlay} ${mobileMenuOpen ? styles.overlayVisible : ''}`}
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+        )}
       </div>
     </header>
   );

@@ -1,0 +1,475 @@
+/* Footer Component Styles */
+
+.footer {
+  position: relative;
+  padding: 80px 0 0;
+  background: var(--night);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--yellow-green) 10%,
+    var(--yellow-green) 90%,
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.footerConstellation {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.constellationStar {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--yellow-green);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.constellationStar:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.constellationStar:nth-child(2) { top: 30%; left: 80%; animation-delay: 0.5s; }
+.constellationStar:nth-child(3) { top: 50%; left: 10%; animation-delay: 1s; }
+.constellationStar:nth-child(4) { top: 70%; left: 60%; animation-delay: 1.5s; }
+.constellationStar:nth-child(5) { top: 20%; left: 50%; animation-delay: 2s; }
+.constellationStar:nth-child(6) { top: 80%; left: 30%; animation-delay: 2.5s; }
+.constellationStar:nth-child(7) { top: 60%; left: 90%; animation-delay: 3s; }
+.constellationStar:nth-child(8) { top: 40%; left: 40%; animation-delay: 3.5s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.5); }
+}
+
+.footerInner {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px 40px;
+  z-index: 10;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Footer Brand Section */
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.logoSymbol {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.logoOrbit {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--yellow-green);
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+}
+
+.logoCore {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: var(--yellow-green);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px var(--yellow-green);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logoText {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.footerMission {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--reseda-green);
+  max-width: 400px;
+}
+
+.footerCoordinates {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  color: var(--dark-moss-green);
+  font-family: var(--font-geist-mono);
+}
+
+.coordinate {
+  position: relative;
+  padding-left: 16px;
+}
+
+.coordinate::before {
+  content: '◎';
+  position: absolute;
+  left: 0;
+  color: var(--yellow-green);
+}
+
+/* Footer Navigation */
+.footerTitle {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--yellow-green);
+  margin-bottom: 8px;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  color: var(--reseda-green);
+  text-decoration: none;
+  font-size: 15px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.footerLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--yellow-green);
+  transition: width 0.3s ease;
+}
+
+.footerLink:hover {
+  color: var(--white);
+}
+
+.footerLink:hover::before {
+  width: 100%;
+}
+
+.footerItem {
+  color: var(--reseda-green);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Footer Contact */
+.footerContact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.footerContactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--reseda-green);
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.footerContactItem:hover {
+  color: var(--white);
+}
+
+.contactIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--dark-moss-green);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.footerContactItem:hover .contactIcon {
+  border-color: var(--yellow-green);
+  background: rgba(155, 193, 54, 0.1);
+}
+
+/* Footer Social */
+.footerSocial {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--dark-moss-green);
+  border-radius: 50%;
+  color: var(--reseda-green);
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  border-color: var(--yellow-green);
+  color: var(--yellow-green);
+  background: rgba(155, 193, 54, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Footer Divider */
+.footerDivider {
+  position: relative;
+  height: 40px;
+  margin: 40px 0;
+}
+
+.dividerLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--dark-moss-green) 20%,
+    var(--dark-moss-green) 80%,
+    transparent
+  );
+  transform: translateY(-50%);
+}
+
+.dividerParticles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.dividerParticle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: var(--yellow-green);
+  top: 50%;
+  animation: particleMove 10s linear infinite;
+  animation-delay: calc(var(--particle-index, 0) * 0.8s);
+}
+
+@keyframes particleMove {
+  from {
+    left: -10px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Footer Bottom */
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footerBottomLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerCopyright {
+  font-size: 14px;
+  color: var(--dark-moss-green);
+}
+
+.footerLegal {
+  display: flex;
+  gap: 24px;
+}
+
+.legalLink {
+  font-size: 13px;
+  color: var(--dark-moss-green);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legalLink:hover {
+  color: var(--reseda-green);
+}
+
+.footerBottomRight {
+  display: flex;
+  align-items: center;
+}
+
+.footerMetadata {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  font-family: var(--font-geist-mono);
+}
+
+.metadata {
+  display: flex;
+  gap: 6px;
+  color: var(--dark-moss-green);
+}
+
+.metadataLabel {
+  opacity: 0.6;
+}
+
+.metadataValue {
+  color: var(--yellow-green);
+}
+
+/* Footer Background */
+.footerBackground {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.footerGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--dark-moss-green) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dark-moss-green) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.05;
+}
+
+.footerWave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(155, 193, 54, 0.05)
+  );
+}
+
+/* Responsive Styles */
+@media (max-width: 1280px) {
+  .footerInner {
+    padding: 0 60px 40px;
+  }
+  
+  .footerContent {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 60px 0 0;
+  }
+  
+  .footerInner {
+    padding: 0 40px 30px;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .footerSection:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  
+  .footerInner {
+    padding: 0 24px 24px;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .footerLegal {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footerMetadata {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
