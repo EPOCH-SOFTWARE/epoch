@@ -362,7 +362,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
           </p>
           <div className={styles.ctaButtons}>
             <a href="#contact" className={styles.primaryCta}>Contact EPOCH Today</a>
-            <a href="/case-studies" className={styles.secondaryCta}>See More Case Studies</a>
+            <a href="/services" className={styles.secondaryCta}>Explore Our Services</a>
           </div>
         </div>
       </section>
@@ -370,27 +370,15 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
       {/* Related Content */}
       <section className={styles.relatedContent}>
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Related Services & Case Studies</h2>
+          <h2 className={styles.sectionTitle}>Related Services</h2>
           <div className={styles.relatedGrid}>
             <div className={styles.relatedServices}>
-              <h3>Related Services</h3>
+              <h3>Our Services</h3>
               <ul>
                 {clientData.relatedServices.map((service, index) => (
                   <li key={index}>
                     <a href={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}>
                       {service}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.relatedCases}>
-              <h3>Similar Case Studies</h3>
-              <ul>
-                {clientData.relatedCaseStudies.map((caseStudy, index) => (
-                  <li key={index}>
-                    <a href={`/clients/${caseStudy.toLowerCase().replace(/\s+/g, '-')}`}>
-                      {caseStudy}
                     </a>
                   </li>
                 ))}

@@ -11,7 +11,6 @@ import { Footer } from '../../layout/Footer';
 import { HeroSection } from '../../sections/HeroSection';
 import { ClientsSection } from '../../sections/ClientsSection';
 import { useCursor } from '../../../hooks/useCursor';
-import { PORTFOLIO_ITEMS, CASE_STUDIES } from '../../../shared/constants/content';
 import { logger } from '../../../shared/utils/logger';
 import styles from '../../../../styles/EpochHomepage.module.css';
 
@@ -20,13 +19,9 @@ export default function EpochHomepage() {
   const [activeSection, setActiveSection] = useState(0);
   useCursor({});
   
-  const [hoveredPortfolio, setHoveredPortfolio] = useState<string | null>(null);
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<number>(0);
   
   const heroRef = useRef<HTMLElement>(null);
   const expertiseRef = useRef<HTMLElement>(null);
-  const portfolioRef = useRef<HTMLElement>(null);
-  const caseStudiesRef = useRef<HTMLElement>(null);
 
   // Scroll tracking effect
   useEffect(() => {
@@ -265,154 +260,6 @@ export default function EpochHomepage() {
           </div>
         </section>
 
-        <section className={styles.portfolio} id="portfolio" aria-labelledby="portfolio-heading" ref={portfolioRef}>
-          <div className={styles.portfolioInner}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionLabel} id="portfolio-heading">Our work</p>
-              <h2 className={styles.sectionTitle}>Digital phenomena we{`'`}ve birthed</h2>
-            </div>
-            
-            <div className={styles.portfolioGrid}>
-              {PORTFOLIO_ITEMS.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`${styles.portfolioItem} ${hoveredPortfolio === item.id ? styles.portfolioItemHovered : ''}`}
-                  onMouseEnter={() => setHoveredPortfolio(item.id)}
-                  onMouseLeave={() => setHoveredPortfolio(null)}
-                  style={{
-                    '--portfolio-delay': `${index * 0.1}s`,
-                    '--portfolio-gradient': item.gradient
-                  } as React.CSSProperties}
-                >
-                  <div className={styles.portfolioItemInner}>
-                    <div className={styles.portfolioGradient}></div>
-                    <div className={styles.portfolioContent}>
-                      <div className={styles.portfolioCategory}>{item.category}</div>
-                      <h3 className={styles.portfolioTitle}>{item.title}</h3>
-                      <p className={styles.portfolioDescription}>{item.description}</p>
-                      
-                      <div className={styles.portfolioTags}>
-                        {item.tags.map((tag, tagIndex) => (
-                          <span key={tagIndex} className={styles.portfolioTag}>{tag}</span>
-                        ))}
-                      </div>
-                      
-                      <div className={styles.portfolioMetrics}>
-                        <div className={styles.metric}>
-                          <span className={styles.metricLabel}>Impact</span>
-                          <span className={styles.metricValue}>{item.metrics.impact}</span>
-                        </div>
-                        <div className={styles.metric}>
-                          <span className={styles.metricLabel}>Duration</span>
-                          <span className={styles.metricValue}>{item.metrics.duration}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.portfolioHoverEffect}>
-                      <div className={styles.portfolioParticles}>
-                        {[...Array(6)].map((_, i) => (
-                          <div key={i} className={styles.particle} style={{ '--particle-index': i } as React.CSSProperties}></div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.caseStudies} id="case-studies" aria-labelledby="case-studies-heading" ref={caseStudiesRef}>
-          <div className={styles.caseStudiesInner}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionLabel} id="case-studies-heading">Deep dives</p>
-              <h2 className={styles.sectionTitle}>Transformations that rewrote reality</h2>
-            </div>
-            
-            <div className={styles.caseStudiesContainer}>
-              <div className={styles.caseStudyTimeline}>
-                {CASE_STUDIES.map((study, index) => (
-                  <button
-                    key={study.id}
-                    className={`${styles.timelineItem} ${selectedCaseStudy === index ? styles.timelineItemActive : ''}`}
-                    onClick={() => setSelectedCaseStudy(index)}
-                    aria-label={`View ${study.title} case study`}
-                  >
-                    <div className={styles.timelineYear}>{study.year}</div>
-                    <div className={styles.timelineTitle}>{study.title}</div>
-                    <div className={styles.timelineProgress}></div>
-                  </button>
-                ))}
-              </div>
-              
-              <div className={styles.caseStudyContent}>
-                {CASE_STUDIES.map((study, index) => (
-                  <div
-                    key={study.id}
-                    className={`${styles.caseStudyDetail} ${selectedCaseStudy === index ? styles.caseStudyDetailActive : ''}`}
-                    style={{ '--case-gradient': study.gradient } as React.CSSProperties}
-                  >
-                    <div className={styles.caseStudyHeader}>
-                      <div className={styles.caseStudyIndustry}>{study.industry}</div>
-                      <h3 className={styles.caseStudyTitle}>{study.title}</h3>
-                      <p className={styles.caseStudySubtitle}>{study.subtitle}</p>
-                    </div>
-                    
-                    <div className={styles.caseStudyBody}>
-                      <div className={styles.caseStudySection}>
-                        <h4 className={styles.caseStudySectionTitle}>The Challenge</h4>
-                        <p className={styles.caseStudySectionText}>{study.challenge}</p>
-                      </div>
-                      
-                      <div className={styles.caseStudySection}>
-                        <h4 className={styles.caseStudySectionTitle}>Our Solution</h4>
-                        <p className={styles.caseStudySectionText}>{study.solution}</p>
-                      </div>
-                      
-                      <div className={styles.caseStudySection}>
-                        <h4 className={styles.caseStudySectionTitle}>The Results</h4>
-                        <div className={styles.caseStudyResults}>
-                          {study.results.map((result, resultIndex) => (
-                            <div key={resultIndex} className={styles.resultItem}>
-                              <div className={styles.resultIcon}>
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
-                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
-                                </svg>
-                              </div>
-                              <span className={styles.resultText}>{result}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className={styles.caseStudyTech}>
-                        <h4 className={styles.caseStudySectionTitle}>Technologies Used</h4>
-                        <div className={styles.techStack}>
-                          {study.technologies.map((tech, techIndex) => (
-                            <span key={techIndex} className={styles.techItem}>{tech}</span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      {study.testimonial && (
-                        <div className={styles.caseStudyTestimonial}>
-                          <blockquote className={styles.testimonialQuote}>
-                            &quot;{study.testimonial.quote}&quot;
-                          </blockquote>
-                          <div className={styles.testimonialAuthor}>
-                            <div className={styles.authorName}>{study.testimonial.author}</div>
-                            <div className={styles.authorPosition}>{study.testimonial.position}</div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         <ClientsSection />
 

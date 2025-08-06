@@ -18,8 +18,6 @@ interface HeaderProps {
 const navigation = [
   { href: '/about', label: 'About', ariaLabel: 'Go to about page' },
   { href: '/services', label: 'Services', ariaLabel: 'Go to services page' },
-  { href: '#portfolio', label: 'Portfolio', ariaLabel: 'Go to portfolio section' },
-  { href: '#case-studies', label: 'Case Studies', ariaLabel: 'Go to case studies section' },
   { href: '/clients', label: 'Clients', ariaLabel: 'Go to clients page' },
   { href: '/contact', label: 'Contact', ariaLabel: 'Go to contact page' },
 ] as const;

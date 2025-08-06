@@ -44,8 +44,6 @@ export function Footer() {
             <nav className={styles.footerNav}>
               <Link href="/about" className={styles.footerLink}>About</Link>
               <Link href="/services" className={styles.footerLink}>Services</Link>
-              <a href="#portfolio" className={styles.footerLink}>Portfolio</a>
-              <a href="#case-studies" className={styles.footerLink}>Case Studies</a>
               <Link href="/clients" className={styles.footerLink}>Clients</Link>
               <Link href="/contact" className={styles.footerLink}>Contact</Link>
             </nav>
