@@ -5,7 +5,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { CLIENT_LOGOS, type ClientLogoProps } from '../../shared/constants/content';
@@ -104,9 +104,75 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
   const router = useRouter();
   const [hoveredClient, setHoveredClient] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Get unique industries for filtering
   const industries = ['All', ...Array.from(new Set(CLIENT_PREVIEW_DATA.map(client => client.industry)))];
+
+  // Background animation for standalone page
+  useEffect(() => {
+    if (!isStandalone) return;
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      opacity: number;
+    }> = [];
+
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.1
+      });
+    }
+
+    const animate = () => {
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(154, 205, 50, ${particle.opacity})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isStandalone]);
 
   // Filter clients based on selected industry
   const filteredClients = selectedIndustry === 'All' 
@@ -123,24 +189,57 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
       id="clients" 
       aria-labelledby="clients-heading"
     >
+      {/* Canvas background for standalone page */}
+      {isStandalone && <canvas ref={canvasRef} className={styles.backgroundCanvas} />}
+
       <div className={styles.clientsInner}>
-        <div className={styles.sectionHeader}>
-          <p className={styles.sectionLabel} id="clients-heading">
-            {isStandalone ? 'Our Partnerships' : 'Trusted partnerships'}
-          </p>
-          <h2 className={styles.sectionTitle}>
-            {isStandalone 
-              ? 'Transforming businesses across industries'
-              : 'Industry leaders who chose Epoch'
-            }
-          </h2>
-          {isStandalone && (
-            <p className={styles.sectionDescription}>
-              Each collaboration tells a story of innovation, challenge, and breakthrough success. 
-              Explore how our team worked alongside industry leaders to deliver transformative solutions.
+        {/* Hero Section for standalone */}
+        {isStandalone && (
+          <div className={styles.hero}>
+            <div className={styles.heroContent}>
+              <span className={styles.heroLabel} id="clients-heading">Our Partnerships</span>
+              <h1 className={styles.heroTitle}>
+                <span className={styles.titleLine}>Transforming</span>
+                <span className={styles.titleLine}>
+                  <span className={styles.titleHighlight}>Business Futures</span>
+                </span>
+                <span className={styles.titleLine}>Together</span>
+              </h1>
+              <p className={styles.heroDescription}>
+                Each partnership tells a story of innovation, challenge, and breakthrough success. 
+                Discover how we{`'`}ve collaborated with industry leaders to deliver transformative solutions 
+                that drive measurable results and lasting impact.
+              </p>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>9+</span>
+                <span className={styles.statLabel}>Enterprise Partners</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>5</span>
+                <span className={styles.statLabel}>Industries Served</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>100%</span>
+                <span className={styles.statLabel}>Success Rate</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Regular section header for non-standalone */}
+        {!isStandalone && (
+          <div className={styles.sectionHeader}>
+            <p className={styles.sectionLabel} id="clients-heading">
+              Trusted partnerships
             </p>
-          )}
-        </div>
+            <h2 className={styles.sectionTitle}>
+              Industry leaders who chose Epoch
+            </h2>
+          </div>
+        )}
 
         {isStandalone && (
           <div className={styles.industryFilter}>
@@ -215,20 +314,6 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
             ))}
           </div>
 
-          <div className={styles.clientMetrics}>
-            <div className={styles.metricItem}>
-              <div className={styles.metricNumber}>9+</div>
-              <div className={styles.metricLabel}>Enterprise Clients</div>
-            </div>
-            <div className={styles.metricItem}>
-              <div className={styles.metricNumber}>5</div>
-              <div className={styles.metricLabel}>Industries Served</div>
-            </div>
-            <div className={styles.metricItem}>
-              <div className={styles.metricNumber}>100%</div>
-              <div className={styles.metricLabel}>Project Success Rate</div>
-            </div>
-          </div>
         </div>
 
         {isStandalone && (

@@ -45,7 +45,7 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
   useEffect(() => {
     const checkTextColor = () => {
       const pathname = window.location.pathname;
-      const darkPages = ['/about', '/contact', '/services'];
+      const darkPages = ['/about', '/contact', '/services', '/clients'];
       // Check if pathname starts with any dark page path
       const isOnDarkPage = darkPages.some(page => pathname.startsWith(page));
       
