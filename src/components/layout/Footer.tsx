@@ -6,6 +6,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import styles from '../../../styles/Footer.module.css';
 
 export function Footer() {
@@ -41,12 +42,12 @@ export function Footer() {
           <div className={styles.footerSection}>
             <h4 className={styles.footerTitle}>Navigation</h4>
             <nav className={styles.footerNav}>
-              <a href="#about" className={styles.footerLink}>About</a>
-              <a href="#services" className={styles.footerLink}>Services</a>
+              <Link href="/about" className={styles.footerLink}>About</Link>
+              <Link href="/services" className={styles.footerLink}>Services</Link>
               <a href="#portfolio" className={styles.footerLink}>Portfolio</a>
               <a href="#case-studies" className={styles.footerLink}>Case Studies</a>
-              <a href="#clients" className={styles.footerLink}>Clients</a>
-              <a href="#contact" className={styles.footerLink}>Contact</a>
+              <Link href="/clients" className={styles.footerLink}>Clients</Link>
+              <Link href="/contact" className={styles.footerLink}>Contact</Link>
             </nav>
           </div>
 

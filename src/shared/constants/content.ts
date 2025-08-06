@@ -127,7 +127,7 @@ export const CASE_STUDIES: ReadonlyArray<CaseStudy> = [
     ],
     technologies: ['Kubernetes', 'Apache Kafka', 'Redis', 'PostgreSQL', 'React', 'Go'],
     testimonial: {
-      quote: 'Epoch didn&apos;t just solve our technical challenges; they transformed how we think about digital banking. Their solution is a masterpiece of engineering.',
+      quote: "Epoch didn't just solve our technical challenges; they transformed how we think about digital banking. Their solution is a masterpiece of engineering.",
       author: 'Sarah Chen',
       position: 'CTO, Global Bank',
     },

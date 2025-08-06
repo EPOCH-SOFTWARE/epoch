@@ -14,7 +14,7 @@ export default function ClientNotFound() {
           Client Not Found
         </h2>
         <p className="text-gray-600 mb-8">
-          The client page you&apos;re looking for doesn&apos;t exist or may have been moved.
+          The client page you{`'`}re looking for doesn{`'`}t exist or may have been moved.
         </p>
         <div className="space-y-4">
           <Link

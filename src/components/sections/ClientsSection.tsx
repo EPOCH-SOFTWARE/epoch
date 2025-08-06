@@ -235,7 +235,7 @@ export function ClientsSection({ className, isStandalone = false }: ClientsSecti
           <div className={styles.ctaSection}>
             <h3 className={styles.ctaTitle}>Ready to join our success stories?</h3>
             <p className={styles.ctaDescription}>
-              Let&apos;s discuss how our collaborative approach can transform your next project.
+              Let{`'`}s discuss how our collaborative approach can transform your next project.
             </p>
             <a href="#contact" className={styles.ctaButton}>
               <span>Start Your Story</span>

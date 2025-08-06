@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 32px 0;
+  padding: 32px 80px;
   transition: all 0.3s var(--cubic);
   background: transparent;
 }
@@ -22,7 +22,6 @@
 .headerInner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,7 +60,6 @@
 }
 
 .nav a {
-  color: var(--dark-moss-green);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -72,10 +70,26 @@
   position: relative;
 }
 
-.nav a:hover {
+/* Default navigation - dark text */
+.header:not(.darkMode) .nav a {
+  color: var(--dark-moss-green);
+}
+
+.header:not(.darkMode) .nav a:hover {
   color: var(--night);
   background: rgba(155, 193, 54, 0.1);
 }
+
+/* Dark mode navigation - light text */
+.header.darkMode .nav a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.header.darkMode .nav a:hover {
+  color: #ffffff;
+  background: rgba(154, 205, 50, 0.15);
+}
+
 
 .nav a::after {
   content: '';
@@ -133,12 +147,21 @@
   position: absolute;
   height: 2px;
   width: 100%;
-  background: var(--dark-moss-green);
   border-radius: 2px;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
   transition: 0.25s ease-in-out;
+}
+
+/* Default hamburger - dark lines */
+.header:not(.darkMode) .hamburgerIcon span {
+  background: var(--dark-moss-green);
+}
+
+/* Dark mode hamburger - light lines */
+.header.darkMode .hamburgerIcon span {
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .hamburgerIcon span:nth-child(1) {
@@ -245,8 +268,9 @@
 
 /* Responsive Styles */
 @media (max-width: 1280px) {
-  .headerInner {
-    padding: 0 60px;
+  .header {
+    padding-left: 60px;
+    padding-right: 60px;
   }
   
   .nav ul {
@@ -263,8 +287,9 @@
     padding: 16px 0;
   }
   
-  .headerInner {
-    padding: 0 40px;
+  .header {
+    padding-left: 40px;
+    padding-right: 40px;
   }
   
   .nav ul {
@@ -286,8 +311,9 @@
     padding: 16px 0;
   }
   
-  .headerInner {
-    padding: 0 24px;
+  .header {
+    padding-left: 24px;
+    padding-right: 24px;
   }
   
   /* Hide desktop navigation */
@@ -313,8 +339,9 @@
 }
 
 @media (max-width: 480px) {
-  .headerInner {
-    padding: 0 16px;
+  .header {
+    padding-left: 16px;
+    padding-right: 16px;
   }
   
   /* Further reduce logo size on smaller screens */

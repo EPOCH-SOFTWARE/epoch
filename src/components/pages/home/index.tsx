@@ -89,9 +89,9 @@ export default function EpochHomepage() {
                   precision of Swiss watchmakers.
                 </p>
                 <p className={styles.aboutParagraph}>
-                  At Epoch, we don&apos;t just build software; we architect digital experiences that
+                  At Epoch, we don{`'`}t just build software; we architect digital experiences that
                   stand the test of time. Each project is an opportunity to push the boundaries of
-                  what&apos;s possible while maintaining the reliability and elegance that define truly
+                  what{`'`}s possible while maintaining the reliability and elegance that define truly
                   exceptional systems.
                 </p>
               </div>
@@ -269,7 +269,7 @@ export default function EpochHomepage() {
           <div className={styles.portfolioInner}>
             <div className={styles.sectionHeader}>
               <p className={styles.sectionLabel} id="portfolio-heading">Our work</p>
-              <h2 className={styles.sectionTitle}>Digital phenomena we&apos;ve birthed</h2>
+              <h2 className={styles.sectionTitle}>Digital phenomena we{`'`}ve birthed</h2>
             </div>
             
             <div className={styles.portfolioGrid}>
@@ -426,7 +426,7 @@ export default function EpochHomepage() {
             <div className={styles.contactContent}>
               <div className={styles.contactInfo}>
                 <p className={styles.contactDescription}>
-                  Let&apos;s discuss how we can transform your vision into reality. 
+                  Let{`'`}s discuss how we can transform your vision into reality. 
                   Our team is ready to tackle complex challenges and deliver 
                   exceptional solutions that drive real results.
                 </p>

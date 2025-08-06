@@ -358,7 +358,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
         <div className={styles.sectionInner}>
           <h2 className={styles.ctaTitle}>Ready to Collaborate?</h2>
           <p className={styles.ctaDescription}>
-            Let&apos;s discuss how our team can help transform your next project into a success story.
+            Let{`'`}s discuss how our team can help transform your next project into a success story.
           </p>
           <div className={styles.ctaButtons}>
             <a href="#contact" className={styles.primaryCta}>Contact EPOCH Today</a>

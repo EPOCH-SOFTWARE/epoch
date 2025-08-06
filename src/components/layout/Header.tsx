@@ -16,16 +16,18 @@ interface HeaderProps {
 }
 
 const navigation = [
-  { href: '#services', label: 'Services', ariaLabel: 'Go to services section' },
+  { href: '/about', label: 'About', ariaLabel: 'Go to about page' },
+  { href: '/services', label: 'Services', ariaLabel: 'Go to services page' },
   { href: '#portfolio', label: 'Portfolio', ariaLabel: 'Go to portfolio section' },
   { href: '#case-studies', label: 'Case Studies', ariaLabel: 'Go to case studies section' },
-  { href: '#expertise', label: 'Expertise', ariaLabel: 'Go to expertise section' },
-  { href: '#contact', label: 'Contact', ariaLabel: 'Go to contact section' },
+  { href: '/clients', label: 'Clients', ariaLabel: 'Go to clients page' },
+  { href: '/contact', label: 'Contact', ariaLabel: 'Go to contact page' },
 ] as const;
 
 export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScrolled, className }) {
   const [isScrolled, setIsScrolled] = useState(propIsScrolled || false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkPage, setIsDarkPage] = useState(false);
 
   useEffect(() => {
     if (propIsScrolled !== undefined) {
@@ -41,6 +43,31 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
     return () => window.removeEventListener('scroll', handleScroll);
   }, [propIsScrolled]);
 
+  // Detect if we need light text (dark background)
+  useEffect(() => {
+    const checkTextColor = () => {
+      const pathname = window.location.pathname;
+      const darkPages = ['/about', '/contact', '/services'];
+      // Check if pathname starts with any dark page path
+      const isOnDarkPage = darkPages.some(page => pathname.startsWith(page));
+      
+      // Show light text only when:
+      // 1. On dark page AND header is not scrolled (transparent/dark background)
+      // 2. Never show light text when header is scrolled (white background)
+      const shouldUseLightText = isOnDarkPage && !isScrolled;
+      console.log('Header debug:', { pathname, isOnDarkPage, isScrolled, shouldUseLightText });
+      setIsDarkPage(shouldUseLightText);
+    };
+
+    checkTextColor();
+    
+    // Listen for navigation changes
+    const handlePopState = () => checkTextColor();
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isScrolled]); // Add isScrolled as dependency
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -51,7 +78,7 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
 
   return (
     <header
-      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''} ${className || ''}`}
+      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''} ${isDarkPage ? styles.darkMode : ''} ${className || ''}`}
       role="banner"
     >
       <div className={styles.headerInner}>
