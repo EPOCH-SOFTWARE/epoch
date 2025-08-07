@@ -23,7 +23,7 @@
 .footerInner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
   position: relative;
   z-index: 1;
 }
@@ -32,8 +32,8 @@
 .footerContent {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  padding: 4rem 0 3rem;
+  gap: 6rem;
+  padding: 6rem 0 4rem;
 }
 
 /* Brand Section */
@@ -87,7 +87,7 @@
 .footerContact {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .contactItem {
@@ -115,7 +115,7 @@
 .footerColumns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .footerColumn {
@@ -145,7 +145,7 @@
 .columnNav {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .navLink {
@@ -266,7 +266,8 @@
 /* Footer Bottom */
 .footerBottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem 0;
+  padding: 3rem 0;
+  margin-top: 2rem;
 }
 
 .footerBottomContent {
@@ -332,23 +333,29 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
   .footerInner {
-    padding: 0 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  .footerContent {
+    padding: 5rem 0 3rem;
+    gap: 5rem;
   }
   
   .footerColumns {
-    gap: 1.5rem;
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 1024px) {
   .footerContent {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 4rem;
+    padding: 4rem 0 3rem;
   }
   
   .footerColumns {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 3rem;
   }
 }
 

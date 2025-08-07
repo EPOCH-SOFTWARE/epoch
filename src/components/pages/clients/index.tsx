@@ -5,12 +5,13 @@
 
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { CLIENT_LOGOS, type ClientLogoProps } from '../../../shared/constants/content';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
+import { Button } from '../../ui/Button';
 import styles from '../../../../styles/ClientsPage.module.css';
 
 interface ClientPreviewData extends ClientLogoProps {
@@ -101,7 +102,7 @@ export default function ClientsPage() {
   const router = useRouter();
   const [hoveredClient, setHoveredClient] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Get unique industries for filtering
   const industries = ['All', ...Array.from(new Set(CLIENT_PREVIEW_DATA.map(client => client.industry)))];
@@ -163,14 +164,15 @@ export default function ClientsPage() {
             <div className={styles.industryFilter}>
               <div className={styles.filterButtons}>
                 {industries.map((industry) => (
-                  <button
+                  <Button
                     key={industry}
-                    className={`${styles.filterButton} ${selectedIndustry === industry ? styles.active : ''}`}
                     onClick={() => setSelectedIndustry(industry)}
-                    aria-pressed={selectedIndustry === industry}
+                    variant={selectedIndustry === industry ? "primary" : "secondary"}
+                    size="small"
+                    className={selectedIndustry === industry ? styles.active : undefined}
                   >
                     {industry}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
@@ -238,10 +240,19 @@ export default function ClientsPage() {
             <p className={styles.ctaDescription}>
               Let{`'`}s discuss how our collaborative approach can transform your next project.
             </p>
-            <a href="#contact" className={styles.ctaButton}>
-              <span>Start Your Story</span>
-              <div className={styles.ctaGlow} />
-            </a>
+            <Button 
+              href="/contact" 
+              variant="primary"
+              size="large"
+              icon={
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12,5 19,12 12,19"/>
+                </svg>
+              }
+            >
+              Start Your Story
+            </Button>
           </div>
         </section>
       </main>

@@ -8,6 +8,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
+import { Button } from '../../ui/Button';
 import { useCursor } from '../../../hooks/useCursor';
 import styles from '../../../../styles/AboutPage.module.css';
 
@@ -17,7 +18,7 @@ export default function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLElement>(null);
   const teamRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize cursor tracking
   useCursor({});
@@ -324,10 +325,19 @@ export default function AboutPage() {
             <p className={styles.ctaSubtitle}>
               Join the companies who trust EPOCH to transform their digital universe
             </p>
-            <a href="/contact" className={styles.ctaButton}>
-              <span className={styles.ctaButtonText}>Begin Your Journey</span>
-              <div className={styles.ctaButtonGlow}></div>
-            </a>
+            <Button 
+              href="/contact" 
+              variant="primary"
+              size="large"
+              icon={
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12,5 19,12 12,19"/>
+                </svg>
+              }
+            >
+              Begin Your Journey
+            </Button>
           </div>
         </section>
       </main>

@@ -45,15 +45,16 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
   useEffect(() => {
     const checkTextColor = () => {
       const pathname = window.location.pathname;
-      const darkPages = ['/about', '/contact', '/services', '/clients'];
-      // Check if pathname starts with any dark page path
-      const isOnDarkPage = darkPages.some(page => pathname.startsWith(page));
+      const darkPages = ['/', '/about', '/contact', '/services', '/clients'];
+      // Check if pathname starts with any dark page path or is exact match for home
+      const isOnDarkPage = darkPages.some(page => 
+        page === '/' ? pathname === '/' : pathname.startsWith(page)
+      );
       
       // Show light text only when:
       // 1. On dark page AND header is not scrolled (transparent/dark background)
-      // 2. Never show light text when header is scrolled (white background)
+      // 2. Never show light text when header is scrolled (glassmorphism background)
       const shouldUseLightText = isOnDarkPage && !isScrolled;
-      console.log('Header debug:', { pathname, isOnDarkPage, isScrolled, shouldUseLightText });
       setIsDarkPage(shouldUseLightText);
     };
 

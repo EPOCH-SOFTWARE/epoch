@@ -8,6 +8,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
+import { Button } from '../../ui/Button';
 import { useCursor } from '../../../hooks/useCursor';
 import styles from '../../../../styles/ContactPage.module.css';
 
@@ -27,7 +28,7 @@ export default function ContactPage() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const formRef = useRef<HTMLFormElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize cursor tracking
   useCursor({});
@@ -303,22 +304,21 @@ export default function ContactPage() {
                   <div className={styles.inputGlow}></div>
                 </div>
 
-                <button
+                <Button
                   type="submit"
-                  className={`${styles.submitButton} ${isSubmitting ? styles.submitting : ''}`}
+                  variant="primary"
+                  size="large"
                   disabled={isSubmitting}
-                >
-                  <span className={styles.buttonText}>
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </span>
-                  <div className={styles.buttonGlow}></div>
-                  {!isSubmitting && (
+                  loading={isSubmitting}
+                  icon={!isSubmitting ? (
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M22 2L11 13" />
                       <path d="M22 2L15 22L11 13L2 9L22 2Z" />
                     </svg>
-                  )}
-                </button>
+                  ) : undefined}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
 
                 {submitStatus === 'success' && (
                   <div className={styles.successMessage}>
@@ -410,14 +410,21 @@ export default function ContactPage() {
                 Charlotte, NC 28226<br />
                 United States
               </p>
-              <a href="https://maps.google.com/maps?q=11807+Park+Road+Charlotte+NC+28226" className={styles.directionsLink} target="_blank" rel="noopener noreferrer">
+              <Button
+                href="https://maps.google.com/maps?q=11807+Park+Road+Charlotte+NC+28226"
+                target="_blank"
+                variant="outline"
+                size="small"
+                icon={
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                }
+              >
                 Get Directions
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
+              </Button>
             </div>
             <div className={styles.mapPlaceholder}>
               {/* Map grid pattern */}

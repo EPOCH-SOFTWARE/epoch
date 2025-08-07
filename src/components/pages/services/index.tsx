@@ -5,10 +5,11 @@
 
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
+import { Button } from '../../ui/Button';
 import styles from '../../../../styles/ServicesPage.module.css';
 
 interface Service {
@@ -27,9 +28,8 @@ const services: Service[] = [
     title: 'AI and Machine Learning Development',
     description: 'Unlock the potential of intelligent systems with our custom AI and ML solutions. We build robust models that automate processes, predict outcomes, and enhance decision-making.',
     icon: (
-      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-        <circle cx="12" cy="12" r="2" fill="currentColor" />
       </svg>
     ),
     category: 'AI & Automation',
@@ -52,12 +52,11 @@ const services: Service[] = [
   },
   {
     id: 'cloud-computing',
-    title: 'Cloud Computing Services',
-    description: 'Optimize your infrastructure with seamless cloud migrations and management on AWS, Azure, and Google Cloud platforms.',
+    title: 'Cloud Computing',
+    description: 'Scale your infrastructure with enterprise-grade cloud solutions on AWS, Azure, and Google Cloud. Optimize performance, security, and cost-efficiency.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-        <path d="M12 14v6M9 17h6" />
       </svg>
     ),
     category: 'Infrastructure',
@@ -66,8 +65,8 @@ const services: Service[] = [
   },
   {
     id: 'cybersecurity',
-    title: 'Cybersecurity Solutions',
-    description: 'Protect your assets from evolving threats with advanced security frameworks and proactive measures.',
+    title: 'Cybersecurity',
+    description: 'Protect your digital assets with advanced security frameworks and proactive threat management. Comprehensive security solutions for enterprise environments.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -80,13 +79,12 @@ const services: Service[] = [
   },
   {
     id: 'custom-software',
-    title: 'Custom Software Development',
-    description: 'From concept to deployment, we craft bespoke software solutions using agile methodologies aligned with your business objectives.',
+    title: 'Custom Software',
+    description: 'Tailored solutions designed to meet your unique business requirements and growth objectives. From concept to deployment with agile methodologies.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
-        <line x1="12" y1="2" x2="12" y2="22" />
       </svg>
     ),
     category: 'Development',
@@ -95,16 +93,12 @@ const services: Service[] = [
   },
   {
     id: 'data-analytics',
-    title: 'Data Analytics and Big Data Services',
-    description: 'Turn data into actionable insights with our analytics platforms to fuel AI initiatives and informed strategies.',
+    title: 'Data Analytics',
+    description: 'Transform raw data into actionable business insights. Advanced analytics platforms and big data solutions for informed decision-making.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M3 3v18h18" />
         <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
-        <circle cx="18.7" cy="8" r="1.5" fill="currentColor" />
-        <circle cx="13.6" cy="13.2" r="1.5" fill="currentColor" />
-        <circle cx="10.8" cy="10.5" r="1.5" fill="currentColor" />
-        <circle cx="7" cy="14.3" r="1.5" fill="currentColor" />
       </svg>
     ),
     category: 'Data & Analytics',
@@ -113,12 +107,12 @@ const services: Service[] = [
   },
   {
     id: 'iot-development',
-    title: 'IoT Application Development',
-    description: 'Connect devices and ecosystems for smarter operations with real-time monitoring and automation.',
+    title: 'IoT Development',
+    description: 'Connect devices and ecosystems for smarter operations with real-time monitoring, automation, and intelligent data processing.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="2" />
-        <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49M20.07 16.93a10 10 0 0 1 0-9.86M3.93 7.07a10 10 0 0 1 0 9.86" />
+        <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49" />
       </svg>
     ),
     category: 'Emerging Tech',
@@ -127,15 +121,13 @@ const services: Service[] = [
   },
   {
     id: 'blockchain',
-    title: 'Blockchain Development',
-    description: 'Build secure, decentralized applications for transparent transactions and supply chain management.',
+    title: 'Blockchain Solutions',
+    description: 'Build secure, decentralized applications for transparent transactions, smart contracts, and supply chain management.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="3" y="3" width="6" height="6" rx="1" />
-        <rect x="15" y="3" width="6" height="6" rx="1" />
-        <rect x="3" y="15" width="6" height="6" rx="1" />
         <rect x="15" y="15" width="6" height="6" rx="1" />
-        <path d="M9 6h6M9 18h6M6 9v6M18 9v6" />
+        <path d="M9 6h6M6 9v6" />
       </svg>
     ),
     category: 'Emerging Tech',
@@ -144,12 +136,12 @@ const services: Service[] = [
   },
   {
     id: 'devops',
-    title: 'DevOps and Automation Services',
-    description: 'Accelerate your development lifecycle with automated pipelines and infrastructure as code.',
+    title: 'DevOps & Automation',
+    description: 'Accelerate your development lifecycle with automated CI/CD pipelines, infrastructure as code, and continuous monitoring.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24" />
+        <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24" />
       </svg>
     ),
     category: 'Infrastructure',
@@ -214,7 +206,7 @@ export default function ServicesPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Professional background effect (CSS-based)
 
@@ -310,10 +302,7 @@ export default function ServicesPage() {
                   '--card-color': service.color
                 } as React.CSSProperties}
               >
-                <div className={styles.cardHeader}>
-                  <span className={styles.cardIcon}>{service.icon}</span>
-                  <span className={styles.cardCategory}>{service.category}</span>
-                </div>
+                <div className={styles.cardIcon}>{service.icon}</div>
 
                 <h3 className={styles.cardTitle}>{service.title}</h3>
                 <p className={styles.cardDescription}>{service.description}</p>
@@ -346,9 +335,13 @@ export default function ServicesPage() {
           {filteredServices.length === 0 && (
             <div className={styles.noResults}>
               <p>No services found matching your criteria.</p>
-              <button onClick={() => {setSelectedCategory('All'); setSearchTerm('');}}>
+              <Button 
+                onClick={() => {setSelectedCategory('All'); setSearchTerm('');}}
+                variant="secondary"
+                size="small"
+              >
                 Clear Filters
-              </button>
+              </Button>
             </div>
           )}
         </section>
@@ -360,13 +353,19 @@ export default function ServicesPage() {
             <p className={styles.ctaDescription}>
               Contact EPOCH Software Services today for a free consultation and discover how our expertise can propel your business forward.
             </p>
-            <Link href="/contact" className={styles.ctaButton}>
+            <Button 
+              href="/contact" 
+              variant="primary"
+              size="large"
+              icon={
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              }
+            >
               Get Started
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
+            </Button>
           </div>
         </section>
       </main>
