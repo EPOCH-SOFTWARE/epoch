@@ -8,41 +8,45 @@
   color: #ffffff;
   position: relative;
   overflow-x: hidden;
+  padding-top: var(--header-height, 112px);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
-.backgroundCanvas {
+.backgroundEffect {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(154, 205, 50, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(154, 205, 50, 0.03) 0%, transparent 50%),
+    linear-gradient(135deg, transparent 0%, rgba(154, 205, 50, 0.02) 50%, transparent 100%);
 }
 
 /* Hero Section */
 .hero {
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8rem 2rem 4rem;
   position: relative;
   z-index: 2;
+  padding: 6rem 4rem 4rem;
+  text-align: center;
 }
 
 .heroContent {
-  max-width: 800px;
+  max-width: 900px;
+  margin: 0 auto;
   text-align: center;
   animation: fadeInUp 1s ease-out;
 }
 
 .heroTitle {
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 2rem;
+  color: #ffffff;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
@@ -65,12 +69,11 @@
 }
 
 .heroSubtitle {
-  font-size: 1.25rem;
-  line-height: 1.6;
+  font-size: 1.125rem;
+  line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.8s forwards;
+  max-width: 700px;
+  margin: 0 auto 3rem;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   font-weight: 400;
 }
@@ -79,8 +82,7 @@
   display: flex;
   justify-content: center;
   gap: 4rem;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 1s forwards;
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .stat {
@@ -89,15 +91,15 @@
 
 .statNumber {
   display: block;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: #9ACD32;
   margin-bottom: 0.5rem;
 }
 
 .statLabel {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -774,6 +776,16 @@
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .hero {
+    padding: 5rem 3rem 3rem;
+  }
+  
+  .heroStats {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .contactContainer {
     grid-template-columns: 1fr;
@@ -785,8 +797,7 @@
   }
   
   .heroStats {
-    flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
   }
   
   .mapOverlay {
@@ -799,8 +810,18 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 6rem 1rem 3rem;
-    min-height: auto;
+    padding: 4rem 2rem 3rem;
+  }
+  
+  .heroStats {
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .stat {
+    flex: 1;
+    min-width: 120px;
   }
   
   .contactSection {

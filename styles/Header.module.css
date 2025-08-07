@@ -13,10 +13,11 @@
 
 .headerScrolled {
   padding: 20px 0;
-  background: rgba(254, 254, 254, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(154, 205, 50, 0.15);
 }
 
 .headerInner {
@@ -70,14 +71,23 @@
   position: relative;
 }
 
-/* Default navigation - dark text */
-.header:not(.darkMode) .nav a {
+/* Default navigation - dark text when transparent, light text when scrolled */
+.header:not(.darkMode):not(.headerScrolled) .nav a {
   color: var(--dark-moss-green);
 }
 
-.header:not(.darkMode) .nav a:hover {
+.header:not(.darkMode):not(.headerScrolled) .nav a:hover {
   color: var(--night);
   background: rgba(155, 193, 54, 0.1);
+}
+
+.header.headerScrolled .nav a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.header.headerScrolled .nav a:hover {
+  color: #ffffff;
+  background: rgba(154, 205, 50, 0.15);
 }
 
 /* Dark mode navigation - light text */
@@ -154,9 +164,13 @@
   transition: 0.25s ease-in-out;
 }
 
-/* Default hamburger - dark lines */
-.header:not(.darkMode) .hamburgerIcon span {
+/* Default hamburger - dark lines when transparent, light lines when scrolled */
+.header:not(.darkMode):not(.headerScrolled) .hamburgerIcon span {
   background: var(--dark-moss-green);
+}
+
+.header.headerScrolled .hamburgerIcon span {
+  background: rgba(255, 255, 255, 0.9);
 }
 
 /* Dark mode hamburger - light lines */

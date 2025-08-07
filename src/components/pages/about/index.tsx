@@ -12,23 +12,21 @@ import { useCursor } from '../../../hooks/useCursor';
 import styles from '../../../../styles/AboutPage.module.css';
 
 export default function AboutPage() {
-  const [scrolled, setScrolled] = useState(false);
   const [, setActiveSection] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLElement>(null);
   const teamRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize cursor tracking
   useCursor({});
 
-  // Scroll tracking effect
+  // Professional background effect (CSS-based)
+
+  // Section scroll tracking
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setScrolled(scrollY > 100);
-      
-      // Update active section based on scroll
       const sections = [heroRef, storyRef, valuesRef, teamRef];
       sections.forEach((ref, index) => {
         if (ref.current) {
@@ -142,71 +140,42 @@ export default function AboutPage() {
 
   return (
     <>
-      <Header isScrolled={scrolled} />
+      <Header />
       
       <main className={styles.aboutMain}>
+        <div className={styles.backgroundEffect}></div>
+        
         {/* Hero Section */}
         <section ref={heroRef} className={styles.hero} id="about-hero">
-          <div className={styles.heroBackground}>
-            <div className={styles.particleField}>
-              {[...Array(50)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className={styles.particle} 
-                  style={{ 
-                    '--delay': `${i * 0.1}s`,
-                    '--particle-index': i
-                  } as React.CSSProperties}
-                />
-              ))}
-            </div>
-          </div>
-          
           <div className={styles.heroContent}>
-            <div className={styles.heroText}>
-              <h1 className={styles.heroTitle}>
-                <span className={styles.titleLine}>Crafting Digital</span>
-                <span className={styles.titleLine}>
-                  <span className={styles.titleHighlight}>Phenomena</span>
-                </span>
-                <span className={styles.titleLine}>with Scientific Precision</span>
-              </h1>
-              
-              <p className={styles.heroSubtitle}>
-                We are EPOCH—a collective of engineers, scientists, and visionaries 
-                united by the belief that exceptional software emerges from the 
-                intersection of rigorous methodology and boundless creativity.
-              </p>
-              
-              <div className={styles.heroStats}>
-                <div className={styles.stat}>
-                  <span className={styles.statNumber}>12+</span>
-                  <span className={styles.statLabel}>Years of Excellence</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statNumber}>500+</span>
-                  <span className={styles.statLabel}>Projects Delivered</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statNumber}>99.9%</span>
-                  <span className={styles.statLabel}>Client Satisfaction</span>
-                </div>
-              </div>
-            </div>
+            <span className={styles.heroLabel}>About EPOCH</span>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.titleLine}>Crafting Digital</span>
+              <span className={styles.titleLine}>
+                <span className={styles.titleHighlight}>Phenomena</span>
+              </span>
+              <span className={styles.titleLine}>with Scientific Precision</span>
+            </h1>
             
-            <div className={styles.heroVisualization}>
-              <div className={styles.atomicStructure}>
-                <div className={styles.nucleus}></div>
-                <div className={styles.orbit} style={{ '--orbit-delay': '0s' } as React.CSSProperties}>
-                  <div className={styles.electron}></div>
-                </div>
-                <div className={styles.orbit} style={{ '--orbit-delay': '0.5s' } as React.CSSProperties}>
-                  <div className={styles.electron}></div>
-                </div>
-                <div className={styles.orbit} style={{ '--orbit-delay': '1s' } as React.CSSProperties}>
-                  <div className={styles.electron}></div>
-                </div>
-              </div>
+            <p className={styles.heroDescription}>
+              We are EPOCH—a collective of engineers, scientists, and visionaries 
+              united by the belief that exceptional software emerges from the 
+              intersection of rigorous methodology and boundless creativity.
+            </p>
+          </div>
+
+          <div className={styles.heroStats}>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>12+</span>
+              <span className={styles.statLabel}>Years of Excellence</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>500+</span>
+              <span className={styles.statLabel}>Projects Delivered</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>99.9%</span>
+              <span className={styles.statLabel}>Client Satisfaction</span>
             </div>
           </div>
         </section>
