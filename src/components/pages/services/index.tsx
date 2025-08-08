@@ -106,8 +106,8 @@ const services: Service[] = [
     color: '#FF8C00'
   },
   {
-    id: 'iot-development',
-    title: 'IoT Development',
+    id: 'iot',
+    title: 'IoT Application Development',
     description: 'Connect devices and ecosystems for smarter operations with real-time monitoring, automation, and intelligent data processing.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -121,7 +121,7 @@ const services: Service[] = [
   },
   {
     id: 'blockchain',
-    title: 'Blockchain Solutions',
+    title: 'Blockchain Development',
     description: 'Build secure, decentralized applications for transparent transactions, smart contracts, and supply chain management.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -149,7 +149,7 @@ const services: Service[] = [
     color: '#32CD32'
   },
   {
-    id: 'mobile-app',
+    id: 'mobile',
     title: 'Mobile Application Development',
     description: 'Create intuitive, cross-platform mobile apps that drive engagement with AI and cloud integration.',
     icon: (
@@ -181,7 +181,7 @@ const services: Service[] = [
     color: '#8B4513'
   },
   {
-    id: 'ar-vr-spatial',
+    id: 'arvr',
     title: 'AR/VR/Spatial Computing Solutions',
     description: 'Immerse your teams in virtual environments for training, collaboration, and visualization.',
     icon: (

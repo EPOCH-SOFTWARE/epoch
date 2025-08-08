@@ -90,6 +90,32 @@ export function ServiceDetailPage({ serviceData }: ServiceDetailPageProps) {
                   if (index === 0) return <span key={index} className={styles.titleLine}>Data Analytics &</span>;
                   if (index === 2) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Business Intelligence</span></span>;
                   return null;
+                } else if (serviceData.id === 'iot') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>IoT Application</span></span>;
+                  if (index === 2) return <span key={index} className={styles.titleLine}>Development</span>;
+                  return null;
+                } else if (serviceData.id === 'blockchain') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Blockchain</span></span>;
+                  if (index === 1) return <span key={index} className={styles.titleLine}>Development</span>;
+                  return null;
+                } else if (serviceData.id === 'devops') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>DevOps and</span></span>;
+                  if (index === 2) return <span key={index} className={styles.titleLine}>Automation</span>;
+                  if (index === 3) return <span key={index} className={styles.titleLine}>Services</span>;
+                  return null;
+                } else if (serviceData.id === 'mobile') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Mobile Application</span></span>;
+                  if (index === 2) return <span key={index} className={styles.titleLine}>Development</span>;
+                  return null;
+                } else if (serviceData.id === 'digital-transformation') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Digital Transformation</span></span>;
+                  if (index === 2) return <span key={index} className={styles.titleLine}>Consulting</span>;
+                  return null;
+                } else if (serviceData.id === 'arvr') {
+                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>AR VR</span></span>;
+                  if (index === 2) return <span key={index} className={styles.titleLine}>Spatial Computing</span>;
+                  if (index === 4) return <span key={index} className={styles.titleLine}>Solutions</span>;
+                  return null;
                 }
                 return null;
               })}
@@ -202,7 +228,6 @@ export function ServiceDetailPage({ serviceData }: ServiceDetailPageProps) {
         <section id="overview" className={styles.section}>
           <div className={styles.sectionContent}>
             <div className={styles.overviewHeader}>
-              <span className={styles.sectionLabel}>Overview</span>
               <h2 className={styles.sectionTitle}>{serviceData.overview.title}</h2>
             </div>
             
