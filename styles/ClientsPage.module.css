@@ -82,7 +82,9 @@
 
 .titleLine {
   display: block;
-  overflow: hidden;
+  overflow: visible;
+  margin-bottom: 0;
+  padding-bottom: 0.1rem;
 }
 
 .titleHighlight {

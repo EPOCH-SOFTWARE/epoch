@@ -15,9 +15,30 @@ interface HeaderProps {
   className?: string;
 }
 
-const navigation = [
+type NavItem = {
+  href: string;
+  label: string;
+  ariaLabel: string;
+  hasSubmenu?: boolean;
+  submenu?: Array<{ href: string; label: string }>;
+};
+
+const navigation: readonly NavItem[] = [
   { href: '/about', label: 'About', ariaLabel: 'Go to about page' },
-  { href: '/services', label: 'Services', ariaLabel: 'Go to services page' },
+  { 
+    href: '/services', 
+    label: 'Services', 
+    ariaLabel: 'Go to services page',
+    hasSubmenu: true,
+    submenu: [
+      { href: '/services/ai-ml', label: 'AI & Machine Learning' },
+      { href: '/services/generative-ai', label: 'Generative AI' },
+      { href: '/services/cloud-computing', label: 'Cloud Computing' },
+      { href: '/services/cybersecurity', label: 'Cybersecurity' },
+      { href: '/services/custom-software', label: 'Custom Software' },
+      { href: '/services/data-analytics', label: 'Data Analytics' },
+    ]
+  },
   { href: '/clients', label: 'Clients', ariaLabel: 'Go to clients page' },
   { href: '/contact', label: 'Contact', ariaLabel: 'Go to contact page' },
 ] as const;
@@ -26,6 +47,7 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
   const [isScrolled, setIsScrolled] = useState(propIsScrolled || false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkPage, setIsDarkPage] = useState(false);
+  const [servicesSubmenuOpen, setServicesSubmenuOpen] = useState(false);
 
   useEffect(() => {
     if (propIsScrolled !== undefined) {
@@ -73,6 +95,11 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+    setServicesSubmenuOpen(false);
+  };
+
+  const toggleServicesSubmenu = () => {
+    setServicesSubmenuOpen(!servicesSubmenuOpen);
   };
 
   return (
@@ -124,14 +151,67 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <ul>
-            {navigation.map(({ href, label, ariaLabel }) => (
-              <li key={href}>
-                <a href={href} aria-label={ariaLabel} onClick={closeMobileMenu}>
-                  {label}
-                </a>
+          <ul className={styles.mobileNavList}>
+            <li className={styles.mobileNavLogo}>
+              <Link href="/" onClick={closeMobileMenu}>
+                <Image
+                  src="/logos/epoch-logo.svg"
+                  alt="Epoch"
+                  width={80}
+                  height={26}
+                  priority
+                />
+              </Link>
+            </li>
+            {navigation.map((item) => (
+              <li key={item.href} className={styles.mobileNavItem}>
+                {item.hasSubmenu ? (
+                  <>
+                    <div className={styles.mobileNavItemWithSubmenu}>
+                      <a href={item.href} aria-label={item.ariaLabel} onClick={closeMobileMenu}>
+                        {item.label}
+                      </a>
+                      <button 
+                        className={`${styles.submenuToggle} ${servicesSubmenuOpen ? styles.submenuToggleOpen : ''}`}
+                        onClick={toggleServicesSubmenu}
+                        aria-label="Toggle services submenu"
+                      >
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </button>
+                    </div>
+                    {servicesSubmenuOpen && (
+                      <ul className={styles.mobileSubmenu}>
+                        {item.submenu?.map((subItem) => (
+                          <li key={subItem.href}>
+                            <a href={subItem.href} onClick={closeMobileMenu}>
+                              <span className={styles.submenuIcon}>→</span>
+                              {subItem.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <a href={item.href} aria-label={item.ariaLabel} onClick={closeMobileMenu}>
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
+            <li className={styles.mobileNavCTA}>
+              <a 
+                href="/contact" 
+                className={styles.ctaButton}
+                onClick={closeMobileMenu}
+                aria-label="Start your project with Epoch"
+              >
+                Start Your Project
+                <span className={styles.ctaArrow}>→</span>
+              </a>
+            </li>
           </ul>
         </nav>
 
