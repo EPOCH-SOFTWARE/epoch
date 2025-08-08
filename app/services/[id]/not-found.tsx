@@ -3,6 +3,8 @@
  * @author Epoch Development Team
  */
 
+'use client';
+
 import Link from 'next/link';
 
 export default function ServiceNotFound() {
