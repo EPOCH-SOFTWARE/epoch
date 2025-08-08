@@ -6,6 +6,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
@@ -362,7 +363,7 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
           </p>
           <div className={styles.ctaButtons}>
             <a href="#contact" className={styles.primaryCta}>Contact EPOCH Today</a>
-            <a href="/services" className={styles.secondaryCta}>Explore Our Services</a>
+            <Link href="/services" className={styles.secondaryCta}>Explore Our Services</Link>
           </div>
         </div>
       </section>
