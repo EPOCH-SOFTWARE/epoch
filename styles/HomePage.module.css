@@ -946,55 +946,258 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Enhanced Tablet Styles */
+@media (max-width: 1024px) {
   .hero {
-    padding: 4rem 2rem 5rem;
-    min-height: 80vh;
+    padding: 4rem 3rem 5rem;
+    min-height: 90vh;
   }
   
   .heroTitle {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    line-height: 1.2;
   }
   
   .heroDescription {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .heroActions {
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .heroStats {
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  
+  .servicesPreview,
+  .aboutSection,
+  .clientsSection,
+  .ctaSection,
+  .whyChooseSection {
+    padding: 4rem 3rem;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .serviceCard {
+    padding: 2rem;
+  }
+  
+  .featuredClients {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Fix Why Partner With Us section for tablet */
+  .splitLayout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .contentSide {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .statsContainer {
+    padding: 2.5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .statCard {
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+  
+  .statNumber {
+    font-size: 1.8rem;
+  }
+  
+  .statLabel {
+    font-size: 0.9rem;
+  }
+  
+  .statDetail {
+    font-size: 0.8rem;
+  }
+  
+  .valuePropositions {
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .valueItem {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1.5rem 4rem;
+    min-height: 85vh;
+    text-align: center;
+  }
+  
+  .heroContent {
+    max-width: 100%;
+  }
+  
+  .heroLabel {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  
+  .heroTitle {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  
+  .titleLine {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  
+  .heroDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .heroActions {
     flex-direction: column;
     width: 100%;
+    gap: 1rem;
+    align-items: stretch;
   }
   
   .primaryButton,
   .secondaryButton {
     width: 100%;
     justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1rem;
   }
   
   .heroStats {
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2.5rem;
+    padding: 0 1rem;
   }
   
   .stat {
     flex: 1;
-    min-width: 120px;
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .statNumber {
+    font-size: 1.8rem;
+  }
+  
+  .statLabel {
+    font-size: 0.85rem;
   }
   
   .servicesPreview,
   .aboutSection,
   .clientsSection,
-  .ctaSection {
-    padding: 4rem 2rem;
+  .ctaSection,
+  .whyChooseSection {
+    padding: 3rem 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+  
+  .sectionDescription {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
   }
   
   .servicesGrid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .serviceCard {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .serviceIcon {
+    margin: 0 auto 1rem;
+  }
+  
+  .serviceTitle {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .serviceDescription {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
   }
   
   .splitLayout {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
+  }
+  
+  .whyChooseTitle {
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+  
+  .valuePropositions {
+    gap: 1.5rem;
+  }
+  
+  .valueItem {
+    text-align: left;
+  }
+  
+  .valueTitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .valueDescription {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .whyChooseAction {
+    margin-top: 1.5rem;
   }
   
   .statsGrid {
@@ -1042,9 +1245,284 @@
     width: 100%;
   }
   
+  .featuredClients {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .clientsStats {
+    padding: 2rem 1.5rem;
+  }
+  
+  .statsRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .clientCard {
+    min-height: 100px;
+  }
+  
+  .clientCardInner {
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+  
+  .ctaContent {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  
+  .ctaActions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
   .ctaButton,
   .ctaSecondary {
     width: 100%;
     justify-content: center;
+    padding: 1rem 2rem;
+  }
+}
+
+/* Enhanced Small Mobile Styles */
+@media (max-width: 480px) {
+  .hero {
+    padding: 2.5rem 1rem 3.5rem;
+    min-height: 80vh;
+  }
+  
+  .heroLabel {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .heroTitle {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  
+  .titleHighlight {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  
+  .heroDescription {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+    max-width: 95%;
+  }
+  
+  .heroActions {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+    border-radius: 8px;
+  }
+  
+  .heroStats {
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  .stat {
+    min-width: 80px;
+    padding: 0.5rem;
+  }
+  
+  .statNumber {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  
+  .servicesPreview,
+  .aboutSection,
+  .clientsSection,
+  .ctaSection,
+  .whyChooseSection {
+    padding: 2.5rem 1rem;
+  }
+  
+  .sectionLabel {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  
+  .sectionDescription {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+  
+  .servicesGrid {
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  
+  .serviceCard {
+    padding: 1.25rem;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+  }
+  
+  
+  .serviceIcon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 0.75rem;
+  }
+  
+  .serviceTitle {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  
+  .serviceDescription {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+  }
+  
+  .serviceLink {
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .aboutContent,
+  .splitLayout {
+    gap: 2rem;
+  }
+  
+  .imageWrapper {
+    height: 250px;
+    border-radius: 12px;
+  }
+  
+  .featuredClients {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .clientCard {
+    min-height: 100px;
+  }
+  
+  .clientCardInner {
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+  
+  .clientLogo {
+    height: 40px;
+  }
+  
+  .statsContainer {
+    padding: 1.5rem 1rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .valuePropositions {
+    margin: 1.5rem 0;
+    gap: 1.25rem;
+  }
+  
+  .whyChooseTitle {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  
+  .valueTitle {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .valueDescription {
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .statCard {
+    padding: 1rem;
+  }
+  
+  .statNumber {
+    font-size: 1.5rem;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+  }
+  
+  .statDetail {
+    font-size: 0.7rem;
+  }
+  
+  .ctaContent {
+    padding: 2.5rem 1rem;
+  }
+  
+  .ctaTitle {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  
+  .ctaDescription {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ctaActions {
+    gap: 0.75rem;
+  }
+  
+  .ctaButton,
+  .ctaSecondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+    border-radius: 8px;
   }
 }

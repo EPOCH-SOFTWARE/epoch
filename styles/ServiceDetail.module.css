@@ -317,6 +317,231 @@
 }
 
 /* Overview Section */
+/* Overview Section Enhanced */
+.overviewHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionLabel {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(154, 205, 50, 0.1) 0%, rgba(154, 205, 50, 0.05) 100%);
+  border: 1px solid rgba(154, 205, 50, 0.2);
+  border-radius: 30px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--yellow-green);
+  margin-bottom: 1rem;
+}
+
+.overviewContainer {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.overviewMain {
+  flex: 1;
+}
+
+.lead {
+  font-size: 1.25rem !important;
+  line-height: 1.8 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin-bottom: 3rem !important;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.lead::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--yellow-green) 0%, transparent 100%);
+}
+
+.keyPointsGrid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.keyPointCard {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.keyPointCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--yellow-green) 0%, rgba(154, 205, 50, 0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.keyPointCard:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(154, 205, 50, 0.2);
+  transform: translateX(5px);
+}
+
+.keyPointCard:hover::before {
+  opacity: 1;
+}
+
+.keyPointNumber {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(154, 205, 50, 0.15) 0%, rgba(154, 205, 50, 0.05) 100%);
+  border: 1px solid rgba(154, 205, 50, 0.3);
+  border-radius: 12px;
+  position: relative;
+}
+
+.keyPointNumber span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--yellow-green);
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+}
+
+.keyPointContent p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Overview Sidebar */
+.overviewSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.overviewHighlight {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(154, 205, 50, 0.08) 0%, rgba(154, 205, 50, 0.02) 100%);
+  border: 1px solid rgba(154, 205, 50, 0.15);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.overviewHighlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(154, 205, 50, 0.1) 0%, transparent 70%);
+  animation: pulse 10s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(180deg); }
+}
+
+.highlightIcon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(154, 205, 50, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.highlightIcon svg {
+  color: var(--yellow-green);
+}
+
+.overviewHighlight h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.overviewHighlight ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.overviewHighlight li {
+  padding: 0.75rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.overviewHighlight li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--yellow-green);
+  font-weight: bold;
+}
+
+.overviewQuote {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--yellow-green);
+  border-radius: 8px;
+  position: relative;
+}
+
+.quoteIcon {
+  color: rgba(154, 205, 50, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.overviewQuote p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Legacy styles for backward compatibility */
 .overview {
   max-width: 900px;
   margin: 0 auto;
@@ -327,12 +552,6 @@
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 1.5rem;
-}
-
-.lead {
-  font-size: 1.2rem !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  margin-bottom: 2rem !important;
 }
 
 /* Expertise Grid */
@@ -777,6 +996,38 @@
 
   .whyChooseGrid {
     grid-template-columns: 1fr;
+  }
+
+  /* Overview Section Responsive */
+  .overviewContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .overviewSidebar {
+    position: static;
+  }
+
+  .keyPointCard {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .keyPointNumber {
+    width: 40px;
+    height: 40px;
+  }
+
+  .keyPointNumber span {
+    font-size: 1rem;
+  }
+
+  .overviewHighlight {
+    padding: 1.5rem;
+  }
+
+  .lead {
+    font-size: 1.1rem !important;
   }
 
   .ctaButtons {
