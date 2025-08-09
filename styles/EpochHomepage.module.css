@@ -3304,7 +3304,7 @@
   font-size: 32px;
   font-weight: 700;
   color: var(--white);
-  font-family: var(--font-geist-mono);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 .footerMission {
@@ -3323,7 +3323,7 @@
 .coordinate {
   font-size: 12px;
   color: var(--flint);
-  font-family: var(--font-geist-mono);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
   opacity: 0.7;
 }
 
@@ -3560,7 +3560,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  font-family: var(--font-geist-mono);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 .metadataLabel {

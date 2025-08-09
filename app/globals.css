@@ -16,6 +16,8 @@
   /* Header height variables */
   --header-height: 112px; /* 32px padding * 2 + 48px content */
   --header-height-scrolled: 88px; /* 20px padding * 2 + 48px content */
+  
+  /* Font family variables - removed CSS variable references that don't work */
 }
 
 * {
@@ -30,10 +32,13 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
   background: var(--white);
   color: var(--night);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1;
+  font-variant-ligatures: common-ligatures;
 }
+

@@ -9,7 +9,6 @@
   position: relative;
   overflow-x: hidden;
   padding-top: var(--header-height, 112px);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .backgroundEffect {
@@ -47,7 +46,6 @@
   line-height: 1.2;
   margin-bottom: 2rem;
   color: #ffffff;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .titleLine {
@@ -74,7 +72,6 @@
   color: rgba(255, 255, 255, 0.8);
   max-width: 700px;
   margin: 0 auto 3rem;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   font-weight: 400;
 }
 
@@ -130,7 +127,6 @@
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .formSection::before {
@@ -167,13 +163,11 @@
   font-size: 2.5rem;
   font-weight: 300;
   color: #ffffff;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .contactForm {
   position: relative;
   z-index: 1;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .formGrid {
@@ -193,7 +187,6 @@
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0.5rem;
   font-weight: 500;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
 .input,
@@ -206,7 +199,6 @@
   border-radius: 10px;
   color: #ffffff;
   font-size: 1rem;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   font-weight: 400;
   transition: all 0.3s ease;
   position: relative;
@@ -261,7 +253,6 @@
 .textarea {
   resize: vertical;
   min-height: 150px;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   margin-bottom: 2rem;
 }
 
@@ -313,7 +304,6 @@
   border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 600;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   cursor: pointer;
   position: relative;
   overflow: hidden;

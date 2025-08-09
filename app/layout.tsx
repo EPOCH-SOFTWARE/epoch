@@ -12,12 +12,16 @@ const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
   display: 'swap',
+  preload: true,
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
   display: 'swap',
+  preload: true,
+  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = {
@@ -72,7 +76,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.className} antialiased`}
         suppressHydrationWarning
       >
         <ErrorBoundary>

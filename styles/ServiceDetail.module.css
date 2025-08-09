@@ -424,7 +424,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--yellow-green);
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 .keyPointContent p {
