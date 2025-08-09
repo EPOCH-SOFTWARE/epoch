@@ -106,7 +106,7 @@ export default function ContactPage() {
         </svg>
       ),
       title: 'Visit Us',
-      detail: 'San Francisco, CA',
+      detail: 'Charlotte, NC 28226',
       action: '#location'
     }
   ];

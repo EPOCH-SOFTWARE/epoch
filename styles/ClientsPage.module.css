@@ -328,7 +328,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 160px;
+  max-width: 180px;
 }
 
 .clientCard:hover .industry {
@@ -650,6 +650,49 @@
   .clientsGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+  
+  .clientCard {
+    min-height: 450px;
+    padding: 2rem 1.5rem;
+  }
+  
+  .logoSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .logoWrapper {
+    width: 100%;
+  }
+  
+  .logoContainer {
+    max-width: 100%;
+    justify-content: center;
+  }
+  
+  .clientMeta {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .industry {
+    max-width: 140px;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .year {
+    font-size: 0.75rem;
+    flex-shrink: 0;
   }
   
   .ctaSection {

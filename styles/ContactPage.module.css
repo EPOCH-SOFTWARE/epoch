@@ -105,8 +105,9 @@
 .contactSection {
   position: relative;
   z-index: 2;
-  padding: 4rem 2rem 8rem;
+  padding: 4rem 2rem 6rem;
   background: linear-gradient(180deg, transparent 0%, rgba(20, 20, 20, 0.5) 50%, transparent 100%);
+  margin-bottom: 4rem;
 }
 
 .contactContainer {
@@ -120,24 +121,36 @@
 
 /* Form Section */
 .formSection {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 3rem;
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .formSection::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(154, 205, 50, 0.05) 0%, transparent 70%);
-  animation: rotate 20s linear infinite;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #9ACD32, transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.formSection:hover::before {
+  transform: translateX(0);
+}
+
+.formSection:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(154, 205, 50, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .sectionHeader {
@@ -194,8 +207,8 @@
 .textarea {
   width: 100%;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   color: #ffffff;
   font-size: 1rem;
@@ -265,24 +278,30 @@
 .select:focus,
 .textarea:focus {
   outline: none;
-  border-color: #9ACD32;
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(154, 205, 50, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 0 2px rgba(154, 205, 50, 0.1);
 }
 
 .input.focused,
 .select.focused,
 .textarea.focused {
-  border-color: #9ACD32;
+  border-color: rgba(154, 205, 50, 0.5);
 }
 
 .inputGlow {
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: 10px;
-  background: radial-gradient(circle at center, rgba(154, 205, 50, 0.2) 0%, transparent 70%);
+  background: linear-gradient(135deg, 
+    rgba(154, 205, 50, 0.05) 0%, 
+    transparent 50%,
+    rgba(154, 205, 50, 0.05) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  z-index: 1;
 }
 
 .input:focus ~ .inputGlow,
@@ -537,7 +556,7 @@
   position: relative;
   z-index: 2;
   height: 500px;
-  margin-top: -4rem;
+  margin-top: 2rem;
 }
 
 .mapContainer {
@@ -551,12 +570,13 @@
   top: 4rem;
   left: 4rem;
   z-index: 3;
-  background: rgba(10, 10, 10, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 2rem;
   max-width: 300px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .mapTitle {
@@ -592,43 +612,40 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #2a3b4c 0%, #3d4e5f 50%, #1f2937 100%);
-  border: 1px solid rgba(154, 205, 50, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
+  backdrop-filter: blur(10px);
 }
 
 .mapGrid {
   position: absolute;
   inset: 0;
-  opacity: 1;
+  opacity: 0.15;
 }
 
 .gridLine {
   position: absolute;
-  background: #9ACD32;
-  opacity: 0.5;
-  box-shadow: 0 0 10px rgba(154, 205, 50, 0.3);
+  opacity: 1;
 }
 
 .gridLine:nth-child(odd) {
   width: 1px;
   height: 100%;
-  left: calc(var(--index) * 5%);
-  animation: slideDown 10s linear infinite;
-  animation-delay: calc(var(--index) * 0.5s);
+  left: calc(var(--index) * 20%);
+  background: rgba(154, 205, 50, 0.1);
 }
 
 .gridLine:nth-child(even) {
   width: 100%;
   height: 1px;
-  top: calc(var(--index) * 5%);
-  animation: slideRight 10s linear infinite;
-  animation-delay: calc(var(--index) * 0.5s);
+  top: calc(var(--index) * 20%);
+  background: rgba(154, 205, 50, 0.1);
 }
 
 .mapPattern {
@@ -641,10 +658,9 @@
   position: absolute;
   width: 2px;
   height: 2px;
-  background: rgba(154, 205, 50, 0.6);
+  background: rgba(154, 205, 50, 0.3);
   border-radius: 50%;
-  animation: pulse 3s ease-in-out infinite;
-  animation-delay: calc(var(--dot-index) * 0.1s);
+  opacity: 0.6;
 }
 
 /* Distribute dots across the map in a grid-like pattern with offsets */
@@ -707,8 +723,8 @@
   position: relative;
   z-index: 2;
   color: #9ACD32;
-  animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(154, 205, 50, 0.5));
+  filter: drop-shadow(0 0 10px rgba(154, 205, 50, 0.3));
+  opacity: 0.9;
 }
 
 /* Animations */
@@ -734,11 +750,6 @@
   }
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 @keyframes slideDown {
   from { transform: translateY(-100%); }
   to { transform: translateY(100%); }
@@ -756,12 +767,12 @@
 
 @keyframes pulse {
   0%, 100% {
-    opacity: 0.3;
     transform: scale(1);
+    opacity: 1;
   }
   50% {
-    opacity: 1;
-    transform: scale(1.5);
+    transform: scale(1.2);
+    opacity: 0.8;
   }
 }
 
