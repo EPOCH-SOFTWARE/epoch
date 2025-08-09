@@ -7,14 +7,14 @@
   gap: 0.75rem;
   position: relative;
   border: none;
-  border-radius: 50px;
+  border-radius: 25px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
   font-family: inherit;
-  white-space: nowrap;
+  white-space: normal;
   user-select: none;
   outline: none;
 }
@@ -64,20 +64,68 @@
   gap: 1rem;
 }
 
+.filter {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.filter:hover:not(.disabled):not(.loading) {
+  border-color: #9ACD32;
+  color: #ffffff;
+  transform: translateY(-2px);
+  gap: 0.75rem;
+}
+
+.filter.active {
+  background: #9ACD32;
+  border-color: #9ACD32;
+  color: #0a0a0a;
+}
+
+.filter.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
 /* Button Sizes */
 .small {
+  padding: 0.875rem 1.75rem;
+  font-size: 0.95rem;
+  min-height: 44px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Override small size for filter variant */
+.small.filter {
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
+  min-height: auto;
 }
 
 .medium {
-  padding: 1rem 2rem;
+  padding: 1.125rem 2.25rem;
   font-size: 1.1rem;
+  min-height: 48px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .large {
   padding: 1.25rem 2.5rem;
   font-size: 1.2rem;
+  min-height: 52px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 /* Button States */
@@ -144,6 +192,15 @@
   }
 }
 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
 /* Button Glow Effect */
 .buttonGlow {
   position: absolute;
@@ -183,20 +240,33 @@
   transition: all 0.3s ease;
 }
 
+/* Filter Button Modifier - prevents flex compression and text wrapping */
+.filterButton {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.filterButton .buttonText {
+  line-height: 1.3;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .large {
     padding: 1rem 2rem;
     font-size: 1.1rem;
+    min-height: 48px;
   }
   
   .medium {
     padding: 0.875rem 1.75rem;
     font-size: 1rem;
+    min-height: 44px;
   }
   
   .small {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    min-height: 40px;
   }
 }

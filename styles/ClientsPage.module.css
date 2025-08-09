@@ -154,32 +154,44 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filterButton {
   padding: 0.75rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.875rem;
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: capitalize;
+  position: relative;
+  overflow: hidden;
 }
 
 .filterButton:hover {
-  background: rgba(154, 205, 50, 0.1);
   border-color: #9ACD32;
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .filterButton.active {
   background: #9ACD32;
-  color: #0a0a0a;
   border-color: #9ACD32;
+  color: #0a0a0a;
 }
+
+.filterButton.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Filter Button Styles - restored original working styles */
 
 /* Clients Section */
 .clientsSection {
@@ -192,127 +204,213 @@
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+.clientsGrid.filtering {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .clientCard {
+  position: relative;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  overflow: hidden;
+  padding: 2.5rem;
+  text-decoration: none;
+  color: inherit;
   transition: all 0.3s ease;
+  overflow: hidden;
   cursor: pointer;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
   animation-delay: var(--card-delay);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
 }
 
-.clientCard:hover {
-  transform: translateY(-5px);
-  border-color: #9ACD32;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(154, 205, 50, 0.1);
-}
-
-.cardGlow {
+.clientCard::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(154, 205, 50, 0.05), transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #9ACD32, transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 
-.clientCard:hover .cardGlow {
-  opacity: 1;
+.clientCard:hover::before {
+  transform: translateX(0);
 }
+
+.clientCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #9ACD32;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Card glow styles removed for cleaner design */
 
 .logoSection {
-  padding: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 1rem;
+}
+
+.logoWrapper {
+  flex: 1;
+  position: relative;
 }
 
 .logoContainer {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  max-width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .logoContainer {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 20px rgba(154, 205, 50, 0.15);
 }
 
 .clientLogo {
-  max-height: 50px;
+  max-height: 40px;
   width: auto;
-  max-width: 160px;
-  filter: brightness(0.9);
-  transition: filter 0.3s ease;
+  max-width: 140px;
+  filter: none;
+  opacity: 0.9;
+  transition: all 0.3s ease;
 }
 
 .clientCard:hover .clientLogo {
-  filter: brightness(1);
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .clientMeta {
-  text-align: right;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 .industry {
-  display: block;
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: rgba(154, 205, 50, 0.1);
+  border: 1px solid rgba(154, 205, 50, 0.2);
+  border-radius: 20px;
   color: #9ACD32;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.clientCard:hover .industry {
+  background: rgba(154, 205, 50, 0.2);
+  border-color: rgba(154, 205, 50, 0.4);
+  transform: translateX(-2px);
 }
 
 .year {
   display: block;
   color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .cardContent {
-  padding: 0 2rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .projectType {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #ffffff;
   margin-bottom: 1rem;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.clientCard:hover .projectType {
+  color: #9ACD32;
 }
 
 .previewDescription {
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.clientCard:hover .previewDescription {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .keyResult {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  padding: 0.75rem;
-  background: rgba(154, 205, 50, 0.1);
-  border: 1px solid rgba(154, 205, 50, 0.2);
-  border-radius: 10px;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  background: rgba(154, 205, 50, 0.08);
+  border: 1px solid rgba(154, 205, 50, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .keyResult {
+  background: rgba(154, 205, 50, 0.12);
+  border-color: rgba(154, 205, 50, 0.25);
+  transform: translateY(-2px);
 }
 
 .resultIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #9ACD32;
-  font-weight: bold;
+  flex-shrink: 0;
 }
 
 .resultText {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #9ACD32;
+  letter-spacing: 0.3px;
+}
+
+.cardFooter {
+  margin-top: auto;
 }
 
 .cardCta {
@@ -329,6 +427,30 @@
 .clientCard:hover .cardCta {
   background: rgba(154, 205, 50, 0.1);
   border-color: rgba(154, 205, 50, 0.3);
+}
+
+.ctaText {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+.clientCard:hover .ctaText {
+  color: #9ACD32;
+}
+
+.ctaIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.clientCard:hover .ctaIcon {
+  color: #9ACD32;
+  transform: translateX(4px);
 }
 
 .cardCta span {
@@ -351,16 +473,22 @@
   position: relative;
   z-index: 1;
   padding: 6rem 4rem;
+  background: linear-gradient(135deg, 
+    rgba(154, 205, 50, 0.05) 0%,
+    rgba(10, 10, 10, 0.8) 50%,
+    rgba(154, 205, 50, 0.05) 100%
+  );
+  border-top: 1px solid rgba(154, 205, 50, 0.1);
   text-align: center;
 }
 
 .ctaContent {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .ctaTitle {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem;
   font-weight: 300;
   color: #ffffff;
   margin-bottom: 1.5rem;
@@ -368,9 +496,9 @@
 
 .ctaDescription {
   font-size: 1.125rem;
-  line-height: 1.7;
+  line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .ctaButton {
@@ -416,6 +544,40 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* No Results State */
+.noResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 4rem 2rem;
+}
+
+.noResultsContent {
+  text-align: center;
+  max-width: 400px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.noResultsIcon {
+  color: rgba(154, 205, 50, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+.noResultsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.noResultsText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
 @keyframes glow {

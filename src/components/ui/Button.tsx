@@ -9,7 +9,7 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './Button.module.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'filter';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
 interface ButtonProps {
@@ -26,6 +26,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   target?: string;
   ariaLabel?: string;
+  active?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -42,6 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   target,
   ariaLabel,
+  active = false,
 }) => {
   const buttonClasses = [
     styles.button,
@@ -49,6 +51,7 @@ export const Button: React.FC<ButtonProps> = ({
     styles[size],
     loading && styles.loading,
     disabled && styles.disabled,
+    active && styles.active,
     className
   ].filter(Boolean).join(' ');
 

@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
+import { Button } from '../../ui/Button';
 import { useCursor } from '../../../hooks/useCursor';
 import styles from '../../../../styles/ClientDetailPage.module.css';
 
@@ -98,36 +99,40 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
     <>
       <Header />
       <main className={styles.clientDetailPage}>
-      {/* Hero Section */}
+        <div className={styles.backgroundEffect}></div>
+        
+        {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <div className={styles.clientLogo}>
-              <Image src={clientData.logo} alt={`${clientData.name} logo`} width={120} height={60} priority />
+              <Image src={clientData.logo} alt={`${clientData.name} logo`} width={180} height={60} priority />
             </div>
             <h1 className={styles.heroTitle}>{clientData.heroTitle}</h1>
             <p className={styles.heroSubtitle}>{clientData.heroSubtitle}</p>
             <div className={styles.heroCta}>
-              <a href="#contact" className={styles.ctaButton}>
+              <Button 
+                href="#contact" 
+                variant="primary"
+                size="large"
+                icon={
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                }
+              >
                 Get in Touch
-              </a>
-              <a href="#results" className={styles.ctaSecondary}>
+              </Button>
+              <Button 
+                href="#results" 
+                variant="outline"
+                size="large"
+              >
                 See Results
-              </a>
+              </Button>
             </div>
           </div>
-          {clientData.heroImage && (
-            <div className={styles.heroMedia}>
-              <Image src={clientData.heroImage} alt="Project showcase" width={600} height={400} />
-            </div>
-          )}
-          {clientData.heroVideo && (
-            <div className={styles.heroMedia}>
-              <video autoPlay muted loop>
-                <source src={clientData.heroVideo} type="video/mp4" />
-              </video>
-            </div>
-          )}
         </div>
       </section>
 
@@ -362,8 +367,26 @@ export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
             Let{`'`}s discuss how our team can help transform your next project into a success story.
           </p>
           <div className={styles.ctaButtons}>
-            <a href="#contact" className={styles.primaryCta}>Contact EPOCH Today</a>
-            <Link href="/services" className={styles.secondaryCta}>Explore Our Services</Link>
+            <Button 
+              href="/contact" 
+              variant="primary"
+              size="large"
+              icon={
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              }
+            >
+              Contact EPOCH Today
+            </Button>
+            <Button 
+              href="/services" 
+              variant="secondary"
+              size="large"
+            >
+              Explore Our Services
+            </Button>
           </div>
         </div>
       </section>

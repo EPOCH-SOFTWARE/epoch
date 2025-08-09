@@ -12,6 +12,7 @@ import { CLIENT_LOGOS, type ClientLogoProps } from '../../../shared/constants/co
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
 import { Button } from '../../ui/Button';
+import buttonStyles from '../../ui/Button.module.css';
 import styles from '../../../../styles/ClientsPage.module.css';
 
 interface ClientPreviewData extends ClientLogoProps {
@@ -102,6 +103,7 @@ export default function ClientsPage() {
   const router = useRouter();
   const [hoveredClient, setHoveredClient] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
+  const [isFiltering, setIsFiltering] = useState(false);
   // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Get unique industries for filtering
@@ -166,10 +168,14 @@ export default function ClientsPage() {
                 {industries.map((industry) => (
                   <Button
                     key={industry}
-                    onClick={() => setSelectedIndustry(industry)}
+                    onClick={() => {
+                      setIsFiltering(true);
+                      setSelectedIndustry(industry);
+                      setTimeout(() => setIsFiltering(false), 300);
+                    }}
                     variant={selectedIndustry === industry ? "primary" : "secondary"}
                     size="small"
-                    className={selectedIndustry === industry ? styles.active : undefined}
+                    className={buttonStyles.filterButton}
                   >
                     {industry}
                   </Button>
@@ -181,36 +187,61 @@ export default function ClientsPage() {
 
         {/* Clients Grid */}
         <section className={styles.clientsSection}>
-          <div className={styles.clientsGrid}>
-            {filteredClients.map((client, index) => (
-              <div
-                key={client.id}
-                className={`${styles.clientCard} ${hoveredClient === client.id ? styles.hovered : ''}`}
-                style={{
-                  '--card-delay': `${index * 0.1}s`
-                } as React.CSSProperties}
-                onMouseEnter={() => setHoveredClient(client.id)}
-                onMouseLeave={() => setHoveredClient(null)}
-                onClick={() => handleClientClick(client.id)}
-                role="button"
-                tabIndex={0}
-                aria-label={`View ${client.name} collaboration details`}
-              >
-                <div className={styles.cardGlow} />
+          {filteredClients.length > 0 ? (
+            <div className={`${styles.clientsGrid} ${isFiltering ? styles.filtering : ''}`}>
+              {filteredClients.map((client, index) => {
+                // Use original index for consistent animation
+                const originalIndex = CLIENT_PREVIEW_DATA.findIndex(c => c.id === client.id);
+                // Define colors for different industries
+                const industryColors = {
+                  'Technology': '#9ACD32',
+                  'Healthcare': '#4ECDC4',
+                  'Finance': '#45B7D1',
+                  'Fintech': '#45B7D1',
+                  'E-commerce': '#96CEB4',
+                  'Retail': '#96CEB4',
+                  'Cloud Storage': '#A8E6CF',
+                  'Travel Technology': '#FFB6C1'
+                };
+                const cardColor = industryColors[client.industry as keyof typeof industryColors] || '#9ACD32';
+                const rgbColor = cardColor === '#9ACD32' ? '154, 205, 50' : 
+                                cardColor === '#4ECDC4' ? '78, 205, 196' :
+                                cardColor === '#45B7D1' ? '69, 183, 209' :
+                                cardColor === '#96CEB4' ? '150, 206, 180' :
+                                cardColor === '#A8E6CF' ? '168, 230, 207' :
+                                cardColor === '#FFB6C1' ? '255, 182, 193' : '154, 205, 50';
                 
+                return (
+                  <div
+                    key={client.id}
+                    className={`${styles.clientCard} ${hoveredClient === client.id ? styles.hovered : ''}`}
+                    style={{
+                      '--card-delay': `${originalIndex * 0.05}s`,
+                      '--card-color': cardColor,
+                      '--card-color-rgb': rgbColor
+                    } as React.CSSProperties}
+                    onMouseEnter={() => setHoveredClient(client.id)}
+                    onMouseLeave={() => setHoveredClient(null)}
+                    onClick={() => handleClientClick(client.id)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${client.name} collaboration details`}
+                  >
                 <div className={styles.logoSection}>
-                  <div className={styles.logoContainer}>
-                    <Image 
-                      src={client.logo} 
-                      alt={client.alt} 
-                      className={styles.clientLogo}
-                      width={160}
-                      height={50}
-                    />
+                  <div className={styles.logoWrapper}>
+                    <div className={styles.logoContainer}>
+                      <Image 
+                        src={client.logo} 
+                        alt={client.alt} 
+                        className={styles.clientLogo}
+                        width={160}
+                        height={50}
+                      />
+                    </div>
                   </div>
                   <div className={styles.clientMeta}>
                     <span className={styles.industry}>{client.industry}</span>
-                    <span className={styles.year}>{client.yearWorked}</span>
+                    <span className={styles.year}>Since {client.yearWorked}</span>
                   </div>
                 </div>
 
@@ -218,19 +249,58 @@ export default function ClientsPage() {
                   <h3 className={styles.projectType}>{client.projectType}</h3>
                   <p className={styles.previewDescription}>{client.previewDescription}</p>
                   <div className={styles.keyResult}>
-                    <div className={styles.resultIcon}>→</div>
+                    <div className={styles.resultIcon}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                      </svg>
+                    </div>
                     <span className={styles.resultText}>{client.keyResult}</span>
                   </div>
-                  <div className={styles.cardCta}>
-                    <span>View Full Story</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M1 8h14m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
+                  <div className={styles.cardFooter}>
+                    <div className={styles.cardCta}>
+                      <span className={styles.ctaText}>View Case Study</span>
+                      <span className={styles.ctaIcon}>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
+          ) : (
+            <div className={styles.noResults}>
+              <div className={styles.noResultsContent}>
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" className={styles.noResultsIcon}>
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <h3 className={styles.noResultsTitle}>No clients found</h3>
+                <p className={styles.noResultsText}>No clients match the selected industry filter.</p>
+                <Button 
+                  onClick={() => {
+                    setIsFiltering(true);
+                    setSelectedIndustry('All');
+                    setTimeout(() => setIsFiltering(false), 300);
+                  }}
+                  variant="outline"
+                  size="medium"
+                  icon={
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  }
+                  iconPosition="left"
+                >
+                  Clear Filter
+                </Button>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* CTA Section */}

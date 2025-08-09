@@ -182,6 +182,7 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filterButton {
@@ -384,6 +385,9 @@
   margin-bottom: 2rem;
 }
 
+/* No results button styles removed - using Button component */
+/* Old .noResults button styles commented out for reference */
+/*
 .noResults button {
   padding: 0.75rem 2rem;
   background: #9ACD32;
@@ -399,6 +403,7 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(154, 205, 50, 0.3);
 }
+*/
 
 /* CTA Section */
 .ctaSection {
@@ -533,9 +538,10 @@
     padding-bottom: 0.5rem;
   }
   
-  .filterButton {
+  /* .filterButton styles removed - using Button component */
+  /* .filterButton {
     flex-shrink: 0;
-  }
+  } */
   
   .servicesSection {
     padding: 2rem;

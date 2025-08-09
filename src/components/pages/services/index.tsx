@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
 import { Button } from '../../ui/Button';
+import buttonStyles from '../../ui/Button.module.css';
 import styles from '../../../../styles/ServicesPage.module.css';
 
 interface Service {
@@ -275,13 +276,15 @@ export default function ServicesPage() {
 
             <div className={styles.categoryFilters}>
               {categories.map(category => (
-                <button
+                <Button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`${styles.filterButton} ${selectedCategory === category ? styles.active : ''}`}
+                  variant={selectedCategory === category ? "primary" : "secondary"}
+                  size="small"
+                  className={buttonStyles.filterButton}
                 >
                   {category}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -337,8 +340,9 @@ export default function ServicesPage() {
               <p>No services found matching your criteria.</p>
               <Button 
                 onClick={() => {setSelectedCategory('All'); setSearchTerm('');}}
-                variant="secondary"
-                size="small"
+                variant="primary"
+                size="medium"
+                iconPosition="left"
               >
                 Clear Filters
               </Button>
