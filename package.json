@@ -24,7 +24,8 @@
     "critters": "^0.0.23",
     "next": "15.4.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "resend": "^6.0.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.4.2",

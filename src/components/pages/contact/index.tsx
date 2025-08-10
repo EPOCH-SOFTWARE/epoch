@@ -52,25 +52,79 @@ export default function ContactPage() {
     });
   };
 
+  const validateForm = () => {
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email address');
+      return false;
+    }
+    
+    // Check required fields
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      alert('Please fill in all required fields');
+      return false;
+    }
+    
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    // Simulate form submission
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        timeline: '',
-        message: ''
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    } catch {
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Reset form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          message: ''
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus('idle');
+        }, 5000);
+      } else {
+        setSubmitStatus('error');
+        console.error('Form submission error:', data.error);
+        
+        // Reset error message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus('idle');
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Network error:', error);
       setSubmitStatus('error');
+      
+      // Reset error message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -85,8 +139,8 @@ export default function ContactPage() {
         </svg>
       ),
       title: 'Email Us',
-      detail: 'hello@epoch.dev',
-      action: 'mailto:hello@epoch.dev'
+      detail: 'operator@epoch.sh',
+      action: 'mailto:operator@epoch.sh'
     },
     {
       icon: (
@@ -95,8 +149,8 @@ export default function ContactPage() {
         </svg>
       ),
       title: 'Call Us',
-      detail: '+1 (415) 555-0123',
-      action: 'tel:+14155550123'
+      detail: '+1 (704) 314-5262',
+      action: 'tel:+17043145262'
     },
     {
       icon: (
@@ -327,6 +381,17 @@ export default function ContactPage() {
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                     <span>Thank you! We{`'`}ll be in touch within 24 hours.</span>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className={styles.errorMessage}>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="15" y1="9" x2="9" y2="15" />
+                      <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                    <span>Something went wrong. Please try again or contact us directly.</span>
                   </div>
                 )}
               </form>
