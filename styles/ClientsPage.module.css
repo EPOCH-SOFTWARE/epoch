@@ -614,7 +614,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 4rem 2rem 3rem;
+    padding: 4rem 1.5rem 3rem;
   }
   
   .heroStats {
@@ -629,7 +629,7 @@
   }
   
   .filterSection {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .filterButtons {
@@ -644,7 +644,7 @@
   }
   
   .clientsSection {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .clientsGrid {
@@ -654,7 +654,7 @@
   
   .clientCard {
     min-height: 450px;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
   
   .logoSection {
@@ -696,6 +696,6 @@
   }
   
   .ctaSection {
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
   }
 }

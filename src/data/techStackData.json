@@ -65,8 +65,44 @@
       ]
     },
     {
-      "category": "Development & Frameworks",
-      "description": "Modern development frameworks and programming languages",
+      "category": "Programming Languages",
+      "description": "Core programming languages for robust software development",
+      "technologies": [
+        {
+          "name": "Python",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "TypeScript",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "JavaScript",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Rust",
+          "iconSrc": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Go",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+          "expertise": "Advanced"
+        },
+        {
+          "name": "Java",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+          "expertise": "Expert"
+        }
+      ]
+    },
+    {
+      "category": "Development Frameworks",
+      "description": "Modern frameworks and runtime environments for scalable applications",
       "technologies": [
         {
           "name": "React/Next.js",
@@ -79,18 +115,54 @@
           "expertise": "Expert"
         },
         {
-          "name": "Python",
-          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+          "name": "Django",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
           "expertise": "Expert"
         },
         {
-          "name": "TypeScript",
-          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+          "name": "FastAPI",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
           "expertise": "Expert"
         },
         {
-          "name": "Rust",
-          "iconSrc": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg",
+          "name": "Express.js",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Spring Boot",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+          "expertise": "Advanced"
+        }
+      ]
+    },
+    {
+      "category": "Mobile Development",
+      "description": "Native and cross-platform mobile application development",
+      "technologies": [
+        {
+          "name": "React Native",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Flutter",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Swift",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
+          "expertise": "Advanced"
+        },
+        {
+          "name": "Kotlin",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+          "expertise": "Advanced"
+        },
+        {
+          "name": "Firebase",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
           "expertise": "Expert"
         }
       ]

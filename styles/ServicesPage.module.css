@@ -514,11 +514,15 @@
   .servicesGrid {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
+  
+  .serviceCard {
+    padding: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 4rem 2rem 3rem;
+    padding: 4rem 1.5rem 3rem;
   }
   
   .heroStats {
@@ -527,7 +531,7 @@
   }
   
   .filterSection {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .categoryFilters {
@@ -544,7 +548,7 @@
   } */
   
   .servicesSection {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .servicesGrid {
@@ -552,8 +556,12 @@
     gap: 1.5rem;
   }
   
+  .serviceCard {
+    padding: 2rem;
+  }
+  
   .ctaSection {
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
   }
   
   .ctaTitle {
