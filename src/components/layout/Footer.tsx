@@ -7,6 +7,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../../../styles/Footer.module.css';
 
 export function Footer() {
@@ -18,14 +19,13 @@ export function Footer() {
           {/* Brand Section */}
           <div className={styles.footerBrand}>
             <Link href="/" className={styles.footerLogo}>
-              <div className={styles.logoIcon}>
-                <svg viewBox="0 0 32 32" width="32" height="32" fill="none">
-                  <circle cx="16" cy="16" r="14" stroke="#9ACD32" strokeWidth="2"/>
-                  <circle cx="16" cy="16" r="6" fill="#9ACD32"/>
-                  <path d="M16 2v28M2 16h28" stroke="#9ACD32" strokeWidth="1" opacity="0.5"/>
-                </svg>
-              </div>
-              <span className={styles.logoText}>EPOCH</span>
+              <Image 
+                src="/logos/epoch-logo.svg" 
+                alt="EPOCH" 
+                width={120} 
+                height={40}
+                className={styles.logoImage}
+              />
             </Link>
             <p className={styles.footerDescription}>
               Transforming digital landscapes through innovative software solutions, 

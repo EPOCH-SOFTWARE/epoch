@@ -59,6 +59,9 @@ export const Header = memo<HeaderProps>(function Header({ isScrolled: propIsScro
       setIsScrolled(window.scrollY > 50);
     };
 
+    // Check initial scroll position on mount
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [propIsScrolled]);

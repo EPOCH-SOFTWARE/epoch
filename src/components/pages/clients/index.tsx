@@ -189,7 +189,7 @@ export default function ClientsPage() {
         <section className={styles.clientsSection}>
           {filteredClients.length > 0 ? (
             <div className={`${styles.clientsGrid} ${isFiltering ? styles.filtering : ''}`}>
-              {filteredClients.map((client, index) => {
+              {filteredClients.map((client) => {
                 // Use original index for consistent animation
                 const originalIndex = CLIENT_PREVIEW_DATA.findIndex(c => c.id === client.id);
                 // Define colors for different industries

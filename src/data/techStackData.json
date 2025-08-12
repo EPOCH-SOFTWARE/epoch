@@ -1,0 +1,131 @@
+{
+  "techStack": [
+    {
+      "category": "AI & Machine Learning",
+      "description": "Cutting-edge artificial intelligence and machine learning frameworks",
+      "technologies": [
+        {
+          "name": "TensorFlow",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "PyTorch",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "OpenAI GPT",
+          "iconSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png",
+          "expertise": "Expert",
+          "style": { "borderRadius": "4px" }
+        },
+        {
+          "name": "LangChain",
+          "iconSrc": "https://python.langchain.com/img/brand/wordmark.png",
+          "expertise": "Advanced",
+          "style": { "borderRadius": "4px" }
+        },
+        {
+          "name": "Hugging Face",
+          "iconSrc": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+          "expertise": "Expert"
+        }
+      ]
+    },
+    {
+      "category": "Cloud & Infrastructure",
+      "description": "Scalable cloud platforms and infrastructure solutions",
+      "technologies": [
+        {
+          "name": "AWS",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Google Cloud",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Azure",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+          "expertise": "Advanced"
+        },
+        {
+          "name": "Kubernetes",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Docker",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+          "expertise": "Expert"
+        }
+      ]
+    },
+    {
+      "category": "Development & Frameworks",
+      "description": "Modern development frameworks and programming languages",
+      "technologies": [
+        {
+          "name": "React/Next.js",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Node.js",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Python",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "TypeScript",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Rust",
+          "iconSrc": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg",
+          "expertise": "Expert"
+        }
+      ]
+    },
+    {
+      "category": "Data & Analytics",
+      "description": "Big data processing and analytics platforms",
+      "technologies": [
+        {
+          "name": "Apache Spark",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Snowflake",
+          "iconSrc": "https://companieslogo.com/img/orig/SNOW-35164165.png",
+          "expertise": "Advanced",
+          "style": { "borderRadius": "4px" }
+        },
+        {
+          "name": "PostgreSQL",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Redis",
+          "iconSrc": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+          "expertise": "Expert"
+        },
+        {
+          "name": "Elasticsearch",
+          "iconSrc": "https://static-www.elastic.co/v3/assets/bltefdd0b53724fa2ce/blt36f2da8d650732a0/5d0823c3d8ff351753cbc99f/logo-elasticsearch-32-color.svg",
+          "expertise": "Advanced"
+        }
+      ]
+    }
+  ]
+}

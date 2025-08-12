@@ -42,9 +42,7 @@
 }
 
 .footerLogo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  display: inline-block;
   margin-bottom: 1.5rem;
   text-decoration: none;
   transition: transform 0.3s ease;
@@ -54,27 +52,15 @@
   transform: translateY(-2px);
 }
 
-.logoIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(154, 205, 50, 0.1);
-  border-radius: 8px;
+.logoImage {
+  height: auto;
   transition: all 0.3s ease;
+  filter: brightness(1) contrast(1.1);
 }
 
-.footerLogo:hover .logoIcon {
-  background: rgba(154, 205, 50, 0.2);
-  transform: rotate(5deg);
-}
-
-.logoText {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.05em;
+.footerLogo:hover .logoImage {
+  transform: scale(1.02);
+  filter: brightness(1.1) contrast(1.2);
 }
 
 .footerDescription {

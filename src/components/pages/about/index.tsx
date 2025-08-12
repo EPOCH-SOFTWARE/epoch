@@ -5,30 +5,113 @@
 
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { Header } from '../../layout/Header';
 import { Footer } from '../../layout/Footer';
 import { Button } from '../../ui/Button';
+import { TechIcon } from '../../ui/TechIcon';
 import { useCursor } from '../../../hooks/useCursor';
 import styles from '../../../../styles/AboutPage.module.css';
+import techStackData from '../../../data/techStackData.json';
+
+// Type definitions
+interface ApproachItem {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+interface TimelineItem {
+  year: string;
+  event: string;
+  description: string;
+}
+
+interface TechnologyItem {
+  name: string;
+  iconSrc: string;
+  expertise: string;
+  style?: React.CSSProperties;
+}
+
+interface TechCategory {
+  category: string;
+  description: string;
+  technologies: TechnologyItem[];
+}
+
+// Approach methodology data
+const approachData: ApproachItem[] = [
+  {
+    title: 'Discovery & Analysis',
+    description: 'We begin every project with deep discovery sessions to understand your challenges, goals, and constraints. Like scientists studying a phenomenon, we gather data before forming hypotheses.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24" />
+      </svg>
+    )
+  },
+  {
+    title: 'Iterative Design',
+    description: 'Our solutions evolve through rapid prototyping and continuous feedback. We believe the best systems emerge from experimentation, not from rigid upfront specifications.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
+        <polygon points="12,8 18,11.5 18,16.5 12,20 6,16.5 6,11.5" />
+        <circle cx="12" cy="14" r="2" />
+      </svg>
+    )
+  },
+  {
+    title: 'Quality Assurance',
+    description: 'Every solution undergoes rigorous testing and validation. We apply the same standards of proof and verification that govern scientific research to ensure reliability and performance.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <circle cx="12" cy="12" r="3" />
+        <path d="M10.5 12l1.5 1.5L15 10.5" />
+      </svg>
+    )
+  },
+  {
+    title: 'Continuous Evolution',
+    description: 'Technology is never static, and neither are our solutions. We provide ongoing optimization and evolution to ensure your systems remain at the cutting edge of what\'s possible.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+        <path d="M21 12a9 9 0 1 1-9 9 9.75 9.75 0 0 1 6.74-2.74L21 16" />
+        <path d="M21 21v-5h-5" />
+      </svg>
+    )
+  }
+];
 
 export default function AboutPage() {
   const [, setActiveSection] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLElement>(null);
-  const teamRef = useRef<HTMLElement>(null);
-  // const canvasRef = useRef<HTMLCanvasElement>(null);
+  const techRef = useRef<HTMLElement>(null);
+  const approachRef = useRef<HTMLElement>(null);
 
   // Initialize cursor tracking
   useCursor({});
 
-  // Professional background effect (CSS-based)
+  // Memoize timeline data for performance
+  const timelineData = useMemo((): TimelineItem[] => [
+    { year: '2012', event: 'EPOCH Founded', description: 'Scientific approach to software' },
+    { year: '2015', event: 'First AI System', description: 'Breakthrough in machine learning' },
+    { year: '2018', event: 'Quantum Computing', description: 'Applied quantum algorithms' },
+    { year: '2021', event: 'Global Expansion', description: 'Worldwide innovation network' },
+    { year: '2024', event: 'Next Epoch', description: 'Pushing boundaries further' }
+  ], []);
 
   // Section scroll tracking
   useEffect(() => {
+    const sections = [heroRef, storyRef, valuesRef, techRef, approachRef];
     const handleScroll = () => {
-      const sections = [heroRef, storyRef, valuesRef, teamRef];
       sections.forEach((ref, index) => {
         if (ref.current) {
           const rect = ref.current.getBoundingClientRect();
@@ -43,54 +126,21 @@ export default function AboutPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const teamMembers = [
-    {
-      name: 'Dr. Alex Chen',
-      role: 'Founder & Chief Architect',
-      specialty: 'Quantum Computing & AI Systems',
-      bio: 'Former CERN researcher who discovered his passion for transforming theoretical physics into practical software solutions.',
-      image: '/team/alex-chen.jpg',
-      linkedin: 'https://linkedin.com/in/alex-chen-epoch',
-      github: 'https://github.com/alex-chen-epoch'
-    },
-    {
-      name: 'Sarah Martinez',
-      role: 'VP of Engineering',
-      specialty: 'Distributed Systems & Cloud Architecture',
-      bio: 'Ex-Google engineer with 15+ years building systems that handle billions of requests while maintaining Swiss precision.',
-      image: '/team/sarah-martinez.jpg',
-      linkedin: 'https://linkedin.com/in/sarah-martinez-epoch',
-      github: 'https://github.com/sarah-martinez-epoch'
-    },
-    {
-      name: 'Marcus Thompson',
-      role: 'Head of Design',
-      specialty: 'Human-Computer Interaction',
-      bio: 'Award-winning designer who believes interfaces should feel like natural phenomena rather than digital constructs.',
-      image: '/team/marcus-thompson.jpg',
-      linkedin: 'https://linkedin.com/in/marcus-thompson-epoch',
-      dribbble: 'https://dribbble.com/marcus-thompson-epoch'
-    },
-    {
-      name: 'Dr. Yuki Tanaka',
-      role: 'AI Research Director',
-      specialty: 'Machine Learning & Neural Networks',
-      bio: 'PhD in Cognitive Science, pioneering the intersection of human cognition and artificial intelligence.',
-      image: '/team/yuki-tanaka.jpg',
-      linkedin: 'https://linkedin.com/in/yuki-tanaka-epoch',
-      scholar: 'https://scholar.google.com/citations?user=yuki-tanaka'
-    }
-  ];
+  // Get tech stack data from JSON
+  const techStack: TechCategory[] = techStackData.techStack;
+
 
   const coreValues = [
     {
       title: 'Precision Engineering',
       description: 'Every line of code crafted with the exactitude of Swiss watchmakers',
       icon: (
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-          <path d="M2 17L12 22L22 17" />
-          <path d="M2 12L12 17L22 12" />
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M7 12h10" />
+          <path d="M12 7v10" />
+          <path d="M7.5 7.5l9 9" />
+          <path d="M16.5 7.5l-9 9" />
         </svg>
       ),
       details: "We approach software development like master craftsmen, where precision isn't just a goal—it's our fundamental nature."
@@ -99,13 +149,10 @@ export default function AboutPage() {
       title: 'Scientific Innovation',
       description: 'Applying rigorous scientific methods to solve complex problems',
       icon: (
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M9.5 2V8.5L7 11.5V16C7 19.3137 9.68629 22 13 22H11C14.3137 22 17 19.3137 17 16V11.5L14.5 8.5V2" />
-          <path d="M8 2H16" />
-          <path d="M7 16H17" />
-          <circle cx="12" cy="19" r="1" />
-          <circle cx="9" cy="17" r="0.5" />
-          <circle cx="15" cy="17" r="0.5" />
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M9 11H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2" />
+          <path d="M12 2v9" />
+          <circle cx="12" cy="6" r="3" />
         </svg>
       ),
       details: 'Our solutions are born from hypothesis, tested through experimentation, and refined through continuous observation.'
@@ -114,12 +161,10 @@ export default function AboutPage() {
       title: 'Elegant Complexity',
       description: 'Transforming intricate challenges into beautifully simple solutions',
       icon: (
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" />
-          <path d="M12 22V12" />
-          <path d="M22 7L12 12L2 7" />
-          <path d="M2 17L12 12" />
-          <path d="M22 17L12 12" />
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
+          <polygon points="12,8 18,11.5 18,16.5 12,20 6,16.5 6,11.5" />
+          <polygon points="12,14 15,15.5 15,18.5 12,20 9,18.5 9,15.5" />
         </svg>
       ),
       details: 'We believe true elegance emerges when complex systems operate with effortless simplicity.'
@@ -128,11 +173,11 @@ export default function AboutPage() {
       title: 'Continuous Evolution',
       description: 'Embracing change as the only constant in our digital universe',
       icon: (
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22" />
-          <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22" />
-          <path d="M12 8L16 12L12 16" />
-          <path d="M8 12H16" />
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+          <path d="M21 12a9 9 0 1 1-9 9 9.75 9.75 0 0 1 6.74-2.74L21 16" />
+          <path d="M21 21v-5h-5" />
         </svg>
       ),
       details: 'Like natural systems, our solutions adapt, evolve, and improve through iterative refinement.'
@@ -149,7 +194,9 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section ref={heroRef} className={styles.hero} id="about-hero">
           <div className={styles.heroContent}>
-            <span className={styles.heroLabel}>About EPOCH</span>
+            <div className={styles.heroHeader}>
+              <span className={styles.sectionLabel}>About EPOCH</span>
+            </div>
             <h1 className={styles.heroTitle}>
               <span className={styles.titleLine}>Crafting Digital</span>
               <span className={styles.titleLine}>
@@ -225,14 +272,8 @@ export default function AboutPage() {
               
               <div className={styles.timelineVisualization}>
                 <div className={styles.timeline}>
-                  {[
-                    { year: '2012', event: 'EPOCH Founded', description: 'Scientific approach to software' },
-                    { year: '2015', event: 'First AI System', description: 'Breakthrough in machine learning' },
-                    { year: '2018', event: 'Quantum Computing', description: 'Applied quantum algorithms' },
-                    { year: '2021', event: 'Global Expansion', description: 'Worldwide innovation network' },
-                    { year: '2024', event: 'Next Epoch', description: 'Pushing boundaries further' }
-                  ].map((milestone, index) => (
-                    <div key={index} className={styles.timelineItem}>
+                  {timelineData.map((milestone) => (
+                    <div key={milestone.year} className={styles.timelineItem}>
                       <div className={styles.timelineYear}>{milestone.year}</div>
                       <div className={styles.timelineContent}>
                         <h4 className={styles.timelineEvent}>{milestone.event}</h4>
@@ -247,76 +288,108 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Core Values Section */}
-        <section ref={valuesRef} className={styles.values} id="our-values">
-          <div className={styles.valuesInner}>
+        {/* Technology Stack Section */}
+        <section ref={techRef} className={styles.tech} id="technology-stack">
+          <div className={styles.techInner}>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel}>Core Values</span>
-              <h2 className={styles.sectionTitle}>The Principles That Guide Us</h2>
+              <span className={styles.sectionLabel}>Technology Stack</span>
+              <h2 className={styles.sectionTitle}>Cutting-Edge Tools & Expertise</h2>
+              <p className={styles.sectionSubtitle}>
+                We leverage the most advanced technologies to build systems that scale, 
+                perform, and evolve with your business needs.
+              </p>
             </div>
             
-            <div className={styles.valuesGrid}>
-              {coreValues.map((value, index) => (
-                <div key={index} className={styles.valueCard}>
-                  <div className={styles.valueIcon}>{value.icon}</div>
-                  <h3 className={styles.valueTitle}>{value.title}</h3>
-                  <p className={styles.valueDescription}>{value.description}</p>
-                  <div className={styles.valueDetails}>{value.details}</div>
-                  <div className={styles.valueGlow}></div>
+            <div className={styles.techGrid}>
+              {techStack.map((category, index) => (
+                <div key={index} className={styles.techCategory}>
+                  <div className={styles.categoryHeader}>
+                    <h3 className={styles.categoryTitle}>{category.category}</h3>
+                    <p className={styles.categoryDescription}>{category.description}</p>
+                  </div>
+                  
+                  <div className={styles.technologiesList}>
+                    {category.technologies.map((tech) => (
+                      <div key={tech.name} className={styles.techItem}>
+                        <div className={styles.techIcon}>
+                          <TechIcon
+                            src={tech.iconSrc}
+                            alt={tech.name}
+                            width={24}
+                            height={24}
+                            {...(tech.style && { style: tech.style })}
+                          />
+                        </div>
+                        <div className={styles.techInfo}>
+                          <span className={styles.techName}>{tech.name}</span>
+                          <span className={`${styles.techExpertise} ${styles[tech.expertise.toLowerCase()]}`}>
+                            {tech.expertise}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Team Section */}
-        <section ref={teamRef} className={styles.team} id="our-team">
-          <div className={styles.teamInner}>
+        {/* Core Values Section */}
+        <section ref={valuesRef} className={styles.values} id="our-values">
+          <div className={styles.valuesInner}>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel}>Our Team</span>
-              <h2 className={styles.sectionTitle}>Minds Behind the Magic</h2>
+              <span className={styles.sectionLabel}>Core Values</span>
+              <h2 className={styles.sectionTitle}>The Principles That Guide Us</h2>
+              <p className={styles.sectionSubtitle}>
+                These fundamental principles shape every decision, guide every project, 
+                and define who we are as a company.
+              </p>
             </div>
             
-            <div className={styles.teamGrid}>
-              {teamMembers.map((member, index) => (
-                <div key={index} className={styles.teamCard}>
-                  <div className={styles.memberImageContainer}>
-                    <div className={styles.memberImage}>
-                      <div className={styles.placeholder}>{member.name.split(' ').map(n => n[0]).join('')}</div>
-                    </div>
-                    <div className={styles.memberOrbit}>
-                      <div className={styles.orbitRing}></div>
-                    </div>
-                  </div>
-                  
-                  <div className={styles.memberInfo}>
-                    <h3 className={styles.memberName}>{member.name}</h3>
-                    <p className={styles.memberRole}>{member.role}</p>
-                    <p className={styles.memberSpecialty}>{member.specialty}</p>
-                    <p className={styles.memberBio}>{member.bio}</p>
-                    
-                    <div className={styles.memberLinks}>
-                      {member.linkedin && (
-                        <a href={member.linkedin} className={styles.memberLink} aria-label="LinkedIn">
-                          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                          </svg>
-                        </a>
-                      )}
-                      {member.github && (
-                        <a href={member.github} className={styles.memberLink} aria-label="GitHub">
-                          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                          </svg>
-                        </a>
-                      )}
-                    </div>
+            <div className={styles.valuesList}>
+              {coreValues.map((value) => (
+                <div key={value.title} className={styles.valueRow}>
+                  <div className={styles.valueIcon}>{value.icon}</div>
+                  <div className={styles.valueContent}>
+                    <h3 className={styles.valueTitle}>{value.title}</h3>
+                    <p className={styles.valueDescription}>{value.description}</p>
+                    <p className={styles.valueDetails}>{value.details}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Approach Section */}
+        <section ref={approachRef} className={styles.approach} id="our-approach">
+          <div className={styles.approachInner}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionLabel}>Our Approach</span>
+              <h2 className={styles.sectionTitle}>How We Work</h2>
+              <p className={styles.sectionSubtitle}>
+                Our methodology combines scientific rigor with creative innovation 
+                to deliver exceptional results for every client.
+              </p>
+            </div>
+            
+            <div className={styles.approachGrid}>
+              {approachData.map((approach) => (
+                <div key={approach.title} className={styles.approachItem}>
+                  <div className={styles.approachIcon}>
+                    {approach.icon}
+                  </div>
+                  <h3 className={styles.approachTitle}>{approach.title}</h3>
+                  <p className={styles.approachDescription}>
+                    {approach.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         {/* Call to Action */}
         <section className={styles.cta}>
