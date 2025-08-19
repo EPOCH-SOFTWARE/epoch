@@ -52,6 +52,35 @@ const services: Service[] = [
     color: '#8FBC8F'
   },
   {
+    id: 'custom-software',
+    title: 'Custom Software',
+    description: 'Tailored solutions designed to meet your unique business requirements and growth objectives. From concept to deployment with agile methodologies.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    category: 'Development',
+    highlights: ['Full-stack Development', 'Legacy Modernization', 'API Integrations'],
+    color: '#6A5ACD'
+  },
+  {
+    id: 'mobile',
+    title: 'Mobile Application Development',
+    description: 'Create intuitive, cross-platform mobile apps that drive engagement with AI and cloud integration.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+        <line x1="12" y1="18" x2="12.01" y2="18" />
+        <path d="M8 6h8M8 10h8M8 14h4" />
+      </svg>
+    ),
+    category: 'Development',
+    highlights: ['Native & Hybrid Apps', 'App Security', 'UX/UI Design'],
+    color: '#FF69B4'
+  },
+  {
     id: 'cloud-computing',
     title: 'Cloud Computing',
     description: 'Scale your infrastructure with enterprise-grade cloud solutions on AWS, Azure, and Google Cloud. Optimize performance, security, and cost-efficiency.',
@@ -77,20 +106,6 @@ const services: Service[] = [
     category: 'Security',
     highlights: ['Penetration Testing', 'Zero-trust Architecture', 'Post-quantum Cryptography'],
     color: '#DC143C'
-  },
-  {
-    id: 'custom-software',
-    title: 'Custom Software',
-    description: 'Tailored solutions designed to meet your unique business requirements and growth objectives. From concept to deployment with agile methodologies.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-    category: 'Development',
-    highlights: ['Full-stack Development', 'Legacy Modernization', 'API Integrations'],
-    color: '#6A5ACD'
   },
   {
     id: 'data-analytics',
@@ -148,21 +163,6 @@ const services: Service[] = [
     category: 'Infrastructure',
     highlights: ['CI/CD Pipelines', 'Monitoring Tools', 'Process Automation'],
     color: '#32CD32'
-  },
-  {
-    id: 'mobile',
-    title: 'Mobile Application Development',
-    description: 'Create intuitive, cross-platform mobile apps that drive engagement with AI and cloud integration.',
-    icon: (
-      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-        <line x1="12" y1="18" x2="12.01" y2="18" />
-        <path d="M8 6h8M8 10h8M8 14h4" />
-      </svg>
-    ),
-    category: 'Development',
-    highlights: ['Native & Hybrid Apps', 'App Security', 'UX/UI Design'],
-    color: '#FF69B4'
   },
   {
     id: 'digital-transformation',
