@@ -23,79 +23,79 @@ interface ClientPreviewData extends ClientLogoProps {
   keyResult: string;
 }
 
-// Enhanced client data with preview information
+// Enhanced client data with comprehensive case study information (Chronological order - newest first)
 const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
   {
-    ...CLIENT_LOGOS[0]!, // HUB International
-    industry: 'Insurance',
-    projectType: 'Digital Transformation',
-    yearWorked: '2023',
-    previewDescription: 'Revolutionized insurance workflows with AI-powered risk assessment and automated claim processing.',
-    keyResult: '60% faster claim processing'
-  },
-  {
-    ...CLIENT_LOGOS[1]!, // Inspira Financial
+    ...CLIENT_LOGOS[0]!, // Inspira Financial
     industry: 'Financial Services',
-    projectType: 'Platform Modernization',
-    yearWorked: '2023',
-    previewDescription: 'Built scalable fintech platform with real-time analytics and enhanced security infrastructure.',
-    keyResult: '99.9% uptime achieved'
+    projectType: 'Platform Modernization & Cloud Migration',
+    yearWorked: '2024',
+    previewDescription: 'Architected and deployed a next-generation fintech platform for Inspira Financial, migrating from legacy mainframe systems to cloud-native microservices architecture. Implemented real-time transaction processing, advanced security protocols including multi-factor authentication and encryption. Built comprehensive analytics dashboard for portfolio management and risk assessment. Developed API-first architecture enabling seamless third-party integrations and white-label solutions for partner institutions.',
+    keyResult: '99.9% uptime achieved, 70% faster transactions, 50% operational cost reduction'
   },
   {
-    ...CLIENT_LOGOS[2]!, // Shift4
-    industry: 'Payment Processing',
-    projectType: 'Performance Optimization',
+    ...CLIENT_LOGOS[1]!, // HUB International
+    industry: 'Insurance',
+    projectType: 'Digital Transformation & AI Integration',
+    yearWorked: '2023',
+    previewDescription: 'Transformed HUB International\'s legacy insurance operations through comprehensive digital modernization. Implemented AI-powered risk assessment algorithms, automated claim processing workflows, and real-time fraud detection systems. Developed custom policy management platform with seamless integration to existing enterprise systems. Created mobile-first customer portal enabling instant quotes, policy modifications, and claim submissions. Enhanced data analytics capabilities with predictive modeling for risk assessment and customer behavior analysis.',
+    keyResult: '60% faster claim processing, 40% reduction in fraud, 85% customer satisfaction increase'
+  },
+  {
+    ...CLIENT_LOGOS[2]!, // Destify
+    industry: 'Travel Technology',
+    projectType: 'Intelligent Mobile Platform & Booking Engine',
     yearWorked: '2022',
-    previewDescription: 'Optimized payment processing systems for high-volume transactions with advanced fraud detection.',
-    keyResult: '85% faster transactions'
+    previewDescription: 'Developed intelligent travel planning platform for Destify with real-time booking and personalized recommendations. Implemented AI-powered itinerary optimization considering user preferences, budget constraints, and seasonal factors. Created comprehensive booking engine integrating flights, hotels, activities, and transportation. Built social features enabling trip sharing and collaborative planning. Enhanced platform with predictive pricing, weather integration, and real-time travel alerts.',
+    keyResult: '180% user engagement, 120% booking conversion, 90% customer satisfaction'
   },
   {
     ...CLIENT_LOGOS[3]!, // Cardinal Health
     industry: 'Healthcare',
-    projectType: 'AI Integration',
-    yearWorked: '2022',
-    previewDescription: 'Implemented machine learning solutions for supply chain optimization and predictive inventory management.',
-    keyResult: '40% cost reduction'
+    projectType: 'AI-Powered Supply Chain Optimization',
+    yearWorked: '2021',
+    previewDescription: 'Revolutionized Cardinal Health\'s supply chain operations through AI and machine learning integration. Developed predictive analytics for inventory management, demand forecasting, and automated reordering systems. Implemented IoT sensors for real-time tracking of pharmaceutical products with temperature and humidity monitoring. Created HIPAA-compliant data platform for healthcare analytics and regulatory reporting. Built mobile applications for field representatives with offline capability and real-time synchronization.',
+    keyResult: '40% cost reduction, 60% inventory accuracy improvement, 99.5% regulatory compliance'
   },
   {
-    ...CLIENT_LOGOS[4]!, // IDrive
-    industry: 'Cloud Storage',
-    projectType: 'Infrastructure Scaling',
-    yearWorked: '2023',
-    previewDescription: 'Architected next-generation cloud storage platform with enhanced data protection and sync capabilities.',
-    keyResult: '300% storage efficiency'
+    ...CLIENT_LOGOS[4]!, // Rural King
+    industry: 'Retail',
+    projectType: 'Omnichannel Digital Transformation',
+    yearWorked: '2020',
+    previewDescription: 'Unified Rural King\'s online and in-store experiences through comprehensive omnichannel solution. Developed integrated inventory management system with real-time stock visibility across all locations. Implemented buy-online-pickup-in-store functionality with mobile app integration. Created customer analytics platform tracking behavior across all touchpoints. Built loyalty program with personalized offers and agricultural seasonal recommendations. Enhanced supply chain visibility with vendor portal and automated procurement.',
+    keyResult: '150% online growth, 90% inventory accuracy, 65% customer retention increase'
   },
   {
     ...CLIENT_LOGOS[5]!, // BlueSky Commerce
     industry: 'E-commerce',
-    projectType: 'Platform Development',
-    yearWorked: '2022',
-    previewDescription: 'Created innovative e-commerce platform with AR product visualization and intelligent recommendations.',
-    keyResult: '200% conversion increase'
+    projectType: 'Innovative Platform Development with AR/VR',
+    yearWorked: '2019',
+    previewDescription: 'Created cutting-edge e-commerce platform for BlueSky Commerce featuring augmented reality product visualization and AI-powered recommendations. Developed mobile-first progressive web application with offline shopping capabilities. Implemented intelligent inventory management with predictive analytics for demand forecasting. Built comprehensive seller portal with automated fulfillment, dynamic pricing algorithms, and integrated payment processing. Enhanced customer experience through personalized product discovery and virtual try-on features.',
+    keyResult: '200% conversion increase, 150% customer engagement, 80% return rate reduction'
   },
   {
-    ...CLIENT_LOGOS[6]!, // Rural King
-    industry: 'Retail',
-    projectType: 'Omnichannel Solution',
-    yearWorked: '2023',
-    previewDescription: 'Unified online and in-store experiences with integrated inventory management and customer analytics.',
-    keyResult: '150% online growth'
-  },
-  {
-    ...CLIENT_LOGOS[7]!, // Skeps
+    ...CLIENT_LOGOS[6]!, // Skeps
     industry: 'Fintech',
-    projectType: 'API Development',
-    yearWorked: '2022',
-    previewDescription: 'Built robust payment infrastructure with seamless integrations and compliance-first architecture.',
-    keyResult: '99.99% API reliability'
+    projectType: 'Robust Payment Infrastructure & API Development',
+    yearWorked: '2018',
+    previewDescription: 'Built enterprise-grade payment infrastructure for Skeps with seamless integrations and compliance-first architecture. Developed RESTful APIs supporting multiple payment methods, installment loans, and merchant financing solutions. Implemented real-time underwriting algorithms with machine learning risk assessment. Created comprehensive merchant onboarding platform with automated KYC/AML compliance. Enhanced fraud prevention through behavioral analytics and transaction pattern recognition.',
+    keyResult: '99.99% API reliability, 80% faster underwriting, 95% merchant satisfaction'
   },
   {
-    ...CLIENT_LOGOS[8]!, // Destify
-    industry: 'Travel Technology',
-    projectType: 'Mobile Platform',
-    yearWorked: '2023',
-    previewDescription: 'Developed intelligent travel planning platform with real-time booking and personalized recommendations.',
-    keyResult: '180% user engagement'
+    ...CLIENT_LOGOS[7]!, // Shift4
+    industry: 'Payment Processing',
+    projectType: 'Performance Optimization & Security Enhancement',
+    yearWorked: '2017',
+    previewDescription: 'Optimized Shift4\'s payment processing infrastructure to handle high-volume transactions with sub-second response times. Implemented advanced fraud detection using machine learning algorithms and real-time transaction monitoring. Enhanced PCI DSS compliance through secure tokenization and end-to-end encryption. Developed merchant dashboard with comprehensive analytics, chargeback management, and automated reconciliation. Created scalable API gateway supporting 10M+ daily transactions.',
+    keyResult: '85% faster transactions, 95% fraud reduction, zero security breaches'
+  },
+  {
+    ...CLIENT_LOGOS[8]!, // IDrive
+    industry: 'Cloud Storage',
+    projectType: 'Infrastructure Scaling & Platform Enhancement',
+    yearWorked: '2016',
+    previewDescription: 'Architected next-generation cloud storage platform for IDrive with enhanced data protection and sync capabilities. Implemented advanced deduplication algorithms reducing storage requirements by 70%. Developed cross-platform synchronization with conflict resolution and version control. Enhanced security through zero-knowledge encryption and multi-layered backup strategies. Created high-performance API supporting millions of concurrent users with global CDN integration for optimal performance.',
+    keyResult: '300% storage efficiency, 99.99% data durability, 90% sync speed improvement'
   }
 ];
 
@@ -104,6 +104,19 @@ export default function ClientsPage() {
   const [hoveredClient, setHoveredClient] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
   const [isFiltering, setIsFiltering] = useState(false);
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{[key: string]: boolean}>({});
+
+  const toggleDescription = (clientId: string) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [clientId]: !prev[clientId]
+    }));
+  };
+
+  const truncateText = (text: string, maxLength: number = 200) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength).trim();
+  };
   // const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Get unique industries for filtering
@@ -222,10 +235,10 @@ export default function ClientsPage() {
                     } as React.CSSProperties}
                     onMouseEnter={() => setHoveredClient(client.id)}
                     onMouseLeave={() => setHoveredClient(null)}
-                    onClick={() => handleClientClick(client.id)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`View ${client.name} collaboration details`}
+                    // onClick={() => handleClientClick(client.id)}
+                    // role="button"
+                    // tabIndex={0}
+                    // aria-label={`View ${client.name} collaboration details`}
                   >
                 <div className={styles.logoSection}>
                   <div className={styles.logoWrapper}>
@@ -241,22 +254,40 @@ export default function ClientsPage() {
                   </div>
                   <div className={styles.clientMeta}>
                     <span className={styles.industry}>{client.industry}</span>
-                    <span className={styles.year}>Since {client.yearWorked}</span>
+                    <span className={styles.year}>{client.yearWorked}</span>
                   </div>
                 </div>
 
                 <div className={styles.cardContent}>
                   <h3 className={styles.projectType}>{client.projectType}</h3>
-                  <p className={styles.previewDescription}>{client.previewDescription}</p>
-                  <div className={styles.keyResult}>
-                    <div className={styles.resultIcon}>
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                      </svg>
-                    </div>
-                    <span className={styles.resultText}>{client.keyResult}</span>
+                  <div className={styles.descriptionContainer}>
+                    <p className={`${styles.previewDescription} ${expandedDescriptions[client.id] ? styles.expanded : styles.truncated}`}>
+                      {expandedDescriptions[client.id] 
+                        ? client.previewDescription 
+                        : truncateText(client.previewDescription)}
+                      {!expandedDescriptions[client.id] && client.previewDescription.length > 200 && '...'}
+                    </p>
+                    {client.previewDescription.length > 200 && (
+                      <button 
+                        className={styles.readMoreBtn}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleDescription(client.id);
+                        }}
+                      >
+                        {expandedDescriptions[client.id] ? 'Read less' : 'Read more'}
+                      </button>
+                    )}
                   </div>
-                  <div className={styles.cardFooter}>
+                  <div className={styles.metricsSection}>
+                    {client.keyResult.split(',').map((metric, index) => (
+                      <div key={index} className={styles.metricItem}>
+                        <div className={styles.resultIcon}></div>
+                        <span className={styles.resultText}>{metric.trim()}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* <div className={styles.cardFooter}>
                     <div className={styles.cardCta}>
                       <span className={styles.ctaText}>View Case Study</span>
                       <span className={styles.ctaIcon}>
@@ -266,7 +297,7 @@ export default function ClientsPage() {
                         </svg>
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               );

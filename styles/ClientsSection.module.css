@@ -306,13 +306,13 @@
   border-radius: 20px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  cursor: pointer;
+  cursor: default;
   backdrop-filter: blur(10px);
   opacity: 0;
   transform: translateY(40px);
   animation: cardFadeIn 0.8s ease-out forwards;
   animation-delay: var(--card-delay);
-  min-height: 280px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -365,12 +365,15 @@
 
 /* Logo Section */
 .logoSection {
-  padding: 32px 32px 24px 32px;
+  padding: 2rem 2rem 1.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
   z-index: 2;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0;
 }
 
 .logoContainer {
@@ -422,61 +425,192 @@
 
 /* Card Content */
 .cardContent {
-  padding: 0 32px 32px 32px;
+  padding: 1.5rem 2rem 2rem 2rem;
   position: relative;
   z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.25rem;
 }
 
 .projectType {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #ffffff;
-  margin: 0 0 12px 0;
+  margin: 0;
   line-height: 1.3;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.descriptionContainer {
+  flex: 1;
+  padding: 0.5rem 0;
 }
 
 .previewDescription {
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 20px;
-  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0;
+  transition: all 0.4s ease;
+  text-align: justify;
+  hyphens: auto;
+  position: relative;
+}
+
+.previewDescription.truncated {
+  max-height: 5.6rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+}
+
+.previewDescription.expanded {
+  max-height: none;
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
+  animation: expandTextSmall 0.4s ease-out;
+}
+
+@keyframes expandTextSmall {
+  from {
+    max-height: 5.6rem;
+    opacity: 0.8;
+  }
+  to {
+    max-height: 15rem;
+    opacity: 1;
+  }
+}
+
+.readMoreBtn {
+  background: none;
+  border: none;
+  color: #9ACD32;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  margin-top: 0.4rem;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  align-self: flex-start;
+  display: inline-block;
+}
+
+.readMoreBtn:hover {
+  color: #ffffff;
+  background: rgba(154, 205, 50, 0.1);
+  transform: translateY(-1px);
+}
+
+.readMoreBtn:active {
+  transform: translateY(0);
 }
 
 /* Key Result */
-.keyResult {
+.metricsSection {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 8px 12px;
-  background: rgba(154, 205, 50, 0.1);
-  border: 1px solid rgba(154, 205, 50, 0.2);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.clientCard:hover .keyResult {
-  background: rgba(154, 205, 50, 0.15);
-  border-color: rgba(154, 205, 50, 0.3);
+.metricsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(154, 205, 50, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.clientCard:hover .metricsSection::before {
+  left: 100%;
+}
+
+.metricItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.clientCard:hover .resultIcon {
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(154, 205, 50, 0.5);
+}
+
+.clientCard:hover .resultIcon::before {
+  opacity: 1;
+}
+
+.clientCard:hover .resultText {
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateX(1px);
+}
+
+.metricItem:hover {
+  transform: translateX(1px);
+}
+
+.metricItem:hover .resultIcon {
+  transform: scale(1.4);
 }
 
 .resultIcon {
-  font-size: 14px;
-  color: #9ACD32;
-  font-weight: bold;
+  display: block;
+  width: 2px;
+  height: 2px;
+  background: #9ACD32;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.resultIcon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(154, 205, 50, 0.2), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .resultText {
-  font-size: 12px;
-  font-weight: 600;
-  color: #9ACD32;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+  flex: 1;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 /* Card CTA */

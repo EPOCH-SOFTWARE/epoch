@@ -148,9 +148,19 @@ export default function ContactPage() {
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
         </svg>
       ),
-      title: 'Call Us',
+      title: 'US Office',
       detail: '+1 (704) 314-5262',
       action: 'tel:+17043145262'
+    },
+    {
+      icon: (
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      ),
+      title: 'India Office',
+      detail: '+91 99098 14868',
+      action: 'tel:+919909814868'
     },
     {
       icon: (
@@ -159,8 +169,8 @@ export default function ContactPage() {
           <circle cx="12" cy="10" r="3" />
         </svg>
       ),
-      title: 'Visit Us',
-      detail: 'Charlotte, NC 28226',
+      title: 'Visit Our Offices',
+      detail: 'US & India Locations',
       action: '#location'
     }
   ];
@@ -468,55 +478,85 @@ export default function ContactPage() {
         {/* Map Section */}
         <section className={styles.mapSection} id="location">
           <div className={styles.mapContainer}>
-            <div className={styles.mapOverlay}>
-              <h3 className={styles.mapTitle}>Visit Our Office</h3>
-              <p className={styles.mapAddress}>
-                11807 Park Road<br />
-                Charlotte, NC 28226<br />
-                United States
-              </p>
-              <Button
-                href="https://maps.google.com/maps?q=11807+Park+Road+Charlotte+NC+28226"
-                target="_blank"
-                variant="outline"
-                size="small"
-                icon={
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                }
-              >
-                Get Directions
-              </Button>
-            </div>
-            <div className={styles.mapPlaceholder}>
-              {/* Map grid pattern */}
-              <div className={styles.mapGrid}>
-                {[...Array(20)].map((_, i) => (
-                  <div key={i} className={styles.gridLine} style={{ '--index': i } as React.CSSProperties} />
-                ))}
+            <div className={styles.officesGrid}>
+              {/* US Office */}
+              <div className={styles.officeCard}>
+                <div className={styles.officeHeader}>
+                  <div className={styles.officeFlag}>🇺🇸</div>
+                  <h3 className={styles.officeTitle}>United States</h3>
+                </div>
+                <div className={styles.officeContent}>
+                  <div className={styles.addressSection}>
+                    <p className={styles.officeAddress}>
+                      11807 Park Road<br />
+                      Charlotte, NC 28226<br />
+                      United States
+                    </p>
+                  </div>
+                  <div className={styles.officeActions}>
+                    <div className={styles.officeContact}>
+                      <a href="tel:+17043145262" className={styles.officePhone}>
+                        +1 (704) 314-5262
+                      </a>
+                    </div>
+                    <Button
+                      href="https://maps.google.com/maps?q=11807+Park+Road+Charlotte+NC+28226"
+                      target="_blank"
+                      variant="outline"
+                      size="small"
+                      icon={
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      }
+                    >
+                      Get Directions
+                    </Button>
+                  </div>
+                </div>
               </div>
-              
-              {/* Additional visual elements for better visibility */}
-              <div className={styles.mapPattern}>
-                {[...Array(50)].map((_, i) => (
-                  <div 
-                    key={`dot-${i}`} 
-                    className={styles.mapDot} 
-                    style={{ 
-                      '--dot-index': i
-                    } as React.CSSProperties} 
-                  />
-                ))}
-              </div>
-              
-              <div className={styles.mapPin}>
-                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="rgba(154, 205, 50, 0.2)" />
-                  <circle cx="12" cy="10" r="3" fill="rgba(154, 205, 50, 0.3)" />
-                </svg>
+
+              {/* India Office */}
+              <div className={styles.officeCard}>
+                <div className={styles.officeHeader}>
+                  <div className={styles.officeFlag}>🇮🇳</div>
+                  <h3 className={styles.officeTitle}>India</h3>
+                </div>
+                <div className={styles.officeContent}>
+                  <div className={styles.addressSection}>
+                    <p className={styles.officeAddress}>
+                      414, Maruti Plaza<br />
+                      Near Vijay Park Society<br />
+                      Behind Ankur International School<br />
+                      Krishnanagar, Ahmedabad<br />
+                      Gujarat - 382345, India
+                    </p>
+                  </div>
+                  <div className={styles.officeActions}>
+                    <div className={styles.officeContact}>
+                      <a href="tel:+919909814868" className={styles.officePhone}>
+                        +91 99098 14868
+                      </a>
+                    </div>
+                    <Button
+                      href="https://maps.google.com/maps?q=414+Maruti+Plaza+Krishnanagar+Ahmedabad+Gujarat+382345+India"
+                      target="_blank"
+                      variant="outline"
+                      size="small"
+                      icon={
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      }
+                    >
+                      Get Directions
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

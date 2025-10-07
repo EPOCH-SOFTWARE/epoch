@@ -107,12 +107,7 @@ export function Footer() {
         <div className={styles.footerBottom}>
           <div className={styles.footerBottomContent}>
             <div className={styles.copyright}>
-              <p>&copy; 2024 Epoch Software Services. All rights reserved.</p>
-            </div>
-            <div className={styles.legalLinks}>
-              <Link href="/privacy" className={styles.legalLink}>Privacy Policy</Link>
-              <Link href="/terms" className={styles.legalLink}>Terms of Service</Link>
-              <Link href="/cookies" className={styles.legalLink}>Cookie Policy</Link>
+              <p>&copy; 2025 Epoch Software Services. All rights reserved.</p>
             </div>
             <div className={styles.statusIndicator}>
               <div className={styles.statusDot}></div>

@@ -76,6 +76,12 @@
   gap: 1rem;
 }
 
+.phoneNumbers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .contactItem {
   display: flex;
   align-items: center;

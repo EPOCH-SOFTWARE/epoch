@@ -219,18 +219,18 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 2.5rem;
+  padding: 0;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
   overflow: hidden;
-  cursor: pointer;
+  cursor: default;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
   animation-delay: var(--card-delay);
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  min-height: 500px;
 }
 
 .clientCard::before {
@@ -262,10 +262,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 0;
+  padding: 2rem 2rem 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   gap: 1rem;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .logoWrapper {
@@ -348,65 +349,195 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem 2rem 2rem 2rem;
+  gap: 1.25rem;
 }
 
 .projectType {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 1rem;
-  line-height: 1.2;
+  margin-bottom: 0;
+  line-height: 1.3;
   transition: color 0.3s ease;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .clientCard:hover .projectType {
   color: #9ACD32;
 }
 
-.previewDescription {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1.5rem;
+.descriptionContainer {
   flex: 1;
-  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.previewDescription {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0;
+  transition: all 0.4s ease;
+  text-align: justify;
+  hyphens: auto;
+  position: relative;
+}
+
+.previewDescription.truncated {
+  max-height: 6.8rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.previewDescription.expanded {
+  max-height: none;
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
+  animation: expandText 0.4s ease-out;
+}
+
+@keyframes expandText {
+  from {
+    max-height: 6.8rem;
+    opacity: 0.8;
+  }
+  to {
+    max-height: 20rem;
+    opacity: 1;
+  }
+}
+
+.readMoreBtn {
+  background: none;
+  border: none;
+  color: #9ACD32;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  align-self: flex-start;
+  display: inline-block;
+}
+
+.readMoreBtn:hover {
+  color: #ffffff;
+  background: rgba(154, 205, 50, 0.1);
+  transform: translateY(-1px);
+}
+
+.readMoreBtn:active {
+  transform: translateY(0);
 }
 
 .clientCard:hover .previewDescription {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.keyResult {
+.metricsSection {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 2rem;
-  padding: 1rem 1.25rem;
-  background: rgba(154, 205, 50, 0.08);
-  border: 1px solid rgba(154, 205, 50, 0.15);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.clientCard:hover .keyResult {
-  background: rgba(154, 205, 50, 0.12);
-  border-color: rgba(154, 205, 50, 0.25);
-  transform: translateY(-2px);
+.metricsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(154, 205, 50, 0.6), transparent);
+  transition: left 0.6s ease;
+}
+
+.clientCard:hover .metricsSection::before {
+  left: 100%;
+}
+
+.metricItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.clientCard:hover .resultIcon {
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(154, 205, 50, 0.6);
+}
+
+.clientCard:hover .resultIcon::before {
+  opacity: 1;
+}
+
+.clientCard:hover .resultText {
+  color: rgba(255, 255, 255, 0.95);
+  transform: translateX(2px);
+}
+
+.metricItem:hover {
+  transform: translateX(2px);
+}
+
+.metricItem:hover .resultIcon {
+  transform: scale(1.5);
 }
 
 .resultIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9ACD32;
+  display: block;
+  width: 3px;
+  height: 3px;
+  background: #9ACD32;
+  border-radius: 50%;
+  margin-top: 0.5rem;
   flex-shrink: 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.resultIcon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(154, 205, 50, 0.3), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .resultText {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #9ACD32;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
   letter-spacing: 0.3px;
+  line-height: 1.4;
+  flex: 1;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 .cardFooter {
@@ -653,15 +784,14 @@
   }
   
   .clientCard {
-    min-height: 450px;
-    padding: 1.5rem;
+    min-height: auto;
   }
   
   .logoSection {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.5rem;
   }
   
   .logoWrapper {
@@ -678,6 +808,51 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+  
+  .cardContent {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    gap: 1rem;
+  }
+  
+  .projectType {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .previewDescription {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  
+  .previewDescription.truncated {
+    max-height: 5.4rem;
+    -webkit-line-clamp: 3;
+  }
+  
+  .readMoreBtn {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+    margin-left: 0.3rem;
+  }
+  
+  .metricsSection {
+    padding-top: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .metricItem {
+    padding: 0.375rem 0;
+    gap: 0.375rem;
+  }
+  
+  .resultText {
+    font-size: 0.75rem;
+  }
+  
+  .resultIcon {
+    margin-top: 0.375rem;
   }
   
   .industry {

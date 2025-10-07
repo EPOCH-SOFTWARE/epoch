@@ -183,22 +183,22 @@ export interface ClientLogoProps {
 
 export const CLIENT_LOGOS: ReadonlyArray<ClientLogoProps> = [
   {
-    id: 'hub-international',
-    name: 'HUB International',
-    logo: '/logos/HUB-international.png',
-    alt: 'HUB International logo',
-  },
-  {
     id: 'inspira-financial',
     name: 'Inspira Financial',
     logo: '/logos/inspira-financial.svg',
     alt: 'Inspira Financial logo',
   },
   {
-    id: 'shift4',
-    name: 'Shift4',
-    logo: '/logos/shift-4.svg',
-    alt: 'Shift4 logo',
+    id: 'hub-international',
+    name: 'HUB International',
+    logo: '/logos/HUB-international.png',
+    alt: 'HUB International logo',
+  },
+  {
+    id: 'destify',
+    name: 'Destify',
+    logo: '/logos/destify.svg',
+    alt: 'Destify logo',
   },
   {
     id: 'cardinal-health',
@@ -207,10 +207,10 @@ export const CLIENT_LOGOS: ReadonlyArray<ClientLogoProps> = [
     alt: 'Cardinal Health logo',
   },
   {
-    id: 'idrive',
-    name: 'IDrive',
-    logo: '/logos/idrive-logo.png',
-    alt: 'IDrive logo',
+    id: 'rural-king',
+    name: 'Rural King',
+    logo: '/logos/ruralking.webp',
+    alt: 'Rural King logo',
   },
   {
     id: 'bluesky',
@@ -219,21 +219,21 @@ export const CLIENT_LOGOS: ReadonlyArray<ClientLogoProps> = [
     alt: 'BlueSky Commerce logo',
   },
   {
-    id: 'rural-king',
-    name: 'Rural King',
-    logo: '/logos/ruralking.webp',
-    alt: 'Rural King logo',
-  },
-  {
     id: 'skeps',
     name: 'Skeps',
     logo: '/logos/skeps.svg',
     alt: 'Skeps logo',
   },
   {
-    id: 'destify',
-    name: 'Destify',
-    logo: '/logos/destify.svg',
-    alt: 'Destify logo',
+    id: 'shift4',
+    name: 'Shift4',
+    logo: '/logos/shift-4.svg',
+    alt: 'Shift4 logo',
+  },
+  {
+    id: 'idrive',
+    name: 'IDrive',
+    logo: '/logos/idrive-logo.png',
+    alt: 'IDrive logo',
   },
 ] as const;
