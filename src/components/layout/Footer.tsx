@@ -107,7 +107,7 @@ export function Footer() {
         <div className={styles.footerBottom}>
           <div className={styles.footerBottomContent}>
             <div className={styles.copyright}>
-              <p>&copy; 2025 Epoch Software Services. All rights reserved.</p>
+              <p>&copy; 2026 Epoch Software Services. All rights reserved.</p>
             </div>
             <div className={styles.statusIndicator}>
               <div className={styles.statusDot}></div>
