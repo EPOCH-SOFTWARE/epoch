@@ -1,54 +1,53 @@
 /**
- * @fileoverview Dynamic client detail page
+ * @fileoverview Case study route
  * @author Epoch Development Team
  */
 
 import { notFound } from 'next/navigation';
-import { ClientDetailPage } from '@/src/components/pages/clients/detail';
-import { CLIENT_DETAIL_DATA } from '@/src/shared/constants/clientData';
 import type { Metadata } from 'next';
+import { ClientDetailPage } from '@/src/components/pages/clients/detail';
+import { CASE_STUDIES, findCaseStudy } from '@/src/shared/constants/clientData';
 
 interface ClientPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
+}
+
+/** The root layout's title template already appends the brand. */
+function pageTitle(metaTitle: string): string {
+  return metaTitle.split(' | ')[0] ?? metaTitle;
 }
 
 export async function generateMetadata({ params }: ClientPageProps): Promise<Metadata> {
-  const clientData = CLIENT_DETAIL_DATA[params.id as keyof typeof CLIENT_DETAIL_DATA];
-  
-  if (!clientData) {
-    return {
-      title: 'Client Not Found - EPOCH',
-      description: 'The requested client page was not found.',
-    };
+  const { id } = await params;
+  const study = findCaseStudy(id);
+
+  if (!study) {
+    return { title: 'Case study not found' };
   }
 
+  const title = pageTitle(study.metaTitle);
   return {
-    title: clientData.metaTitle,
-    description: clientData.metaDescription,
+    title,
+    description: study.metaDescription,
     openGraph: {
-      title: clientData.metaTitle,
-      description: clientData.metaDescription,
+      title: `${title} — EPOCH`,
+      description: study.metaDescription,
       type: 'article',
-      images: clientData.heroImage ? [clientData.heroImage] : [],
     },
   };
 }
 
-export async function generateStaticParams() {
-  // Generate static params for all available clients
-  return Object.keys(CLIENT_DETAIL_DATA).map((id) => ({
-    id,
-  }));
+export function generateStaticParams() {
+  return CASE_STUDIES.map(study => ({ id: study.id }));
 }
 
-export default function ClientPage({ params }: ClientPageProps) {
-  const clientData = CLIENT_DETAIL_DATA[params.id as keyof typeof CLIENT_DETAIL_DATA];
-  
-  if (!clientData) {
+export default async function ClientPage({ params }: ClientPageProps) {
+  const { id } = await params;
+  const study = findCaseStudy(id);
+
+  if (!study) {
     notFound();
   }
 
-  return <ClientDetailPage clientData={clientData} />;
+  return <ClientDetailPage study={study} />;
 }

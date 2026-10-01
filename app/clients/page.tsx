@@ -1,17 +1,20 @@
 /**
- * @fileoverview Clients hub page
+ * @fileoverview Work page route
  * @author Epoch Development Team
  */
 
 import ClientsPage from '@/src/components/pages/clients';
 import type { Metadata } from 'next';
 
+const DESCRIPTION =
+  'Case studies and clients: AI automation for HUB International, a modern retirement platform for Inspira Financial, and production systems for OneSix AI, Cardinal Health, Shift4 and more.';
+
 export const metadata: Metadata = {
-  title: 'Our Clients - EPOCH Partnerships & Success Stories',
-  description: 'Explore our client collaborations and success stories with industry leaders. Discover how EPOCH transforms businesses through innovative technology solutions.',
+  title: 'Work',
+  description: DESCRIPTION,
   openGraph: {
-    title: 'Our Clients - EPOCH Partnerships & Success Stories',
-    description: 'Explore our client collaborations and success stories with industry leaders. Discover how EPOCH transforms businesses through innovative technology solutions.',
+    title: 'Work — EPOCH',
+    description: DESCRIPTION,
     type: 'website',
   },
 };
