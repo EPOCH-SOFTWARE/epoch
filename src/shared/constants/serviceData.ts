@@ -6,20 +6,28 @@
 export interface ServiceDetailData {
   id: string;
   name: string;
-  heroTitle: string;
+  heroTitle?: string;
+  heroTitleLines: Array<{ text: string; highlight?: boolean }>;
   heroSubtitle: string;
   heroDescription: string;
   metaTitle: string;
   metaDescription: string;
   heroImage?: string;
-  
+
+  // Problem Statement
+  problemStatement: {
+    title: string;
+    description: string;
+    painPoints: string[];
+  };
+
   // Overview Section
   overview: {
     title: string;
     description: string;
     keyPoints: string[];
   };
-  
+
   // Expertise Section
   expertise: {
     title: string;
@@ -30,27 +38,38 @@ export interface ServiceDetailData {
       icon?: string;
     }>;
   };
-  
+
+  // Process
+  process: {
+    title: string;
+    steps: Array<{
+      step: string;
+      title: string;
+      description: string;
+    }>;
+  };
+
   // Key Services
   keyServices: Array<{
     title: string;
     description: string;
     features: string[];
+    demand?: { badge: string; description: string };
   }>;
-  
+
   // Benefits
   benefits: Array<{
     title: string;
     description: string;
     icon?: string;
   }>;
-  
+
   // Industries
   industries: Array<{
     name: string;
     applications: string[];
   }>;
-  
+
   // Case Studies
   caseStudies?: Array<{
     title: string;
@@ -60,12 +79,21 @@ export interface ServiceDetailData {
     results: string[];
     link?: string;
   }>;
-  
+
+  // FAQs
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+
+  // Why Epoch
+  whyEpoch: string[];
+
   // CTA Section
   ctaTitle: string;
   ctaDescription: string;
   ctaButtonText: string;
-  
+
   // Stats
   stats?: Array<{
     value: string;
@@ -79,39 +107,81 @@ const AI_ML_DATA: ServiceDetailData = {
   id: 'ai-ml',
   name: 'AI & Machine Learning',
   heroTitle: 'AI and Machine Learning Development',
-  heroSubtitle: 'Transform your enterprise with intelligent systems',
-  heroDescription: 'Transform your enterprise with intelligent systems that learn, adapt, and deliver measurable results. We build AI solutions that turn data into competitive advantage.',
+  heroTitleLines: [
+    { text: 'AI and' },
+    { text: 'Machine Learning', highlight: true },
+    { text: 'Development' }
+  ],
+  heroSubtitle: 'Intelligent systems for enterprise operations',
+  heroDescription: 'We build AI and machine learning solutions that help enterprises make better use of their data — from predictive models to production-ready ML pipelines.',
   metaTitle: 'AI & Machine Learning Development - EPOCH',
-  metaDescription: 'Transform your business with custom AI and machine learning solutions. Expert development, implementation, and optimization for enterprise applications.',
-  
-  overview: {
-    title: 'Transforming Data Into Intelligence',
-    description: 'At EPOCH Software Services, we specialize in delivering transformative AI and Machine Learning solutions that empower US enterprises to innovate, optimize, and lead in a data-driven world.',
-    keyPoints: [
-      'As AI adoption accelerates—with 78% of organizations now using AI, up from 55% last year—our services help you integrate intelligent systems seamlessly into your operations. Whether you\'re building predictive models or deploying advanced algorithms, our team of experts ensures scalable, ethical, and high-impact results tailored to your business needs.',
-      'The global machine learning market is projected to reach $113.10 billion in 2025, highlighting the immense demand for robust AI capabilities. Partner with us to harness this growth and turn your data into a competitive advantage.'
+  metaDescription: 'Custom AI and machine learning solutions for enterprise applications. Development, implementation, and optimization across industries.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Most enterprises have data but lack the systems to act on it consistently and at scale.',
+    painPoints: [
+      'Your team spends more time cleaning and preparing data than extracting value from it',
+      'Existing models work in notebooks but fail when deployed to production environments',
+      'You lack in-house ML engineering talent to build and maintain pipelines end to end',
+      'Off-the-shelf AI tools do not fit your specific business logic or compliance requirements'
     ]
   },
-  
+
+  overview: {
+    title: 'Practical AI for Enterprise',
+    description: 'EPOCH Software Services delivers AI and Machine Learning solutions that help US enterprises integrate intelligent systems into their operations — whether that means building predictive models, deploying algorithms at scale, or improving existing data workflows.',
+    keyPoints: [
+      'We help you move from experimentation to production with ML systems designed for reliability, scalability, and measurable business impact.',
+      'Our approach focuses on practical applications — predictive models, NLP systems, and computer vision — built around your existing data infrastructure.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in AI and ML',
-    description: 'With years of experience serving US enterprises, EPOCH combines cutting-edge technology with industry-specific insights.',
+    description: 'Our team brings deep experience in machine learning engineering, NLP, and computer vision, with a focus on building production-ready systems for US enterprises.',
     skills: [
       {
-        name: 'Agile Development',
-        description: 'Rapid prototyping and iterative improvements with seamless integration'
+        name: 'Production ML Pipelines',
+        description: 'End-to-end pipeline design from data ingestion through model serving, using tools like MLflow, Kubeflow, and Airflow'
       },
       {
-        name: 'In-Demand Skills',
-        description: 'Machine learning engineering, NLP, and computer vision expertise'
+        name: 'NLP & Language Model Fine-Tuning',
+        description: 'Custom NLP models for entity extraction, classification, summarization, and domain-specific language understanding'
       },
       {
-        name: 'Real-World Solutions',
-        description: 'Addressing automation, personalization, and efficiency challenges'
+        name: 'Computer Vision Systems',
+        description: 'Object detection, image classification, and video analytics using PyTorch, TensorFlow, and OpenCV for real-world applications'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Data Assessment & Feasibility',
+        description: 'We evaluate your data quality, volume, and infrastructure to determine which ML approaches will deliver results.'
+      },
+      {
+        step: '02',
+        title: 'Model Development & Validation',
+        description: 'We build and rigorously test models using your data, iterating on performance metrics that matter to your business.'
+      },
+      {
+        step: '03',
+        title: 'Production Deployment',
+        description: 'We deploy models into your infrastructure with proper monitoring, versioning, and rollback capabilities.'
+      },
+      {
+        step: '04',
+        title: 'Monitoring & Retraining',
+        description: 'We set up drift detection and automated retraining pipelines so models stay accurate as your data evolves.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Predictive Analytics',
@@ -121,7 +191,8 @@ const AI_ML_DATA: ServiceDetailData = {
         'Supply chain optimization',
         'Customer behavior analysis',
         'Risk assessment'
-      ]
+      ],
+      demand: { badge: 'High Demand', description: 'Predictive capabilities are the most requested ML application across industries.' }
     },
     {
       title: 'Natural Language Processing',
@@ -131,7 +202,8 @@ const AI_ML_DATA: ServiceDetailData = {
         'Content moderation',
         'Legal document review',
         'CRM integration'
-      ]
+      ],
+      demand: { badge: 'Growing Fast', description: 'Enterprise NLP adoption is accelerating with advances in transformer architectures.' }
     },
     {
       title: 'Model Training & Deployment',
@@ -141,7 +213,8 @@ const AI_ML_DATA: ServiceDetailData = {
         'Recommendation engines',
         'Anomaly detection',
         'Custom ML solutions'
-      ]
+      ],
+      demand: { badge: 'Critical Skill', description: 'Bridging the gap between research models and production systems is a top enterprise challenge.' }
     },
     {
       title: 'Computer Vision',
@@ -149,9 +222,10 @@ const AI_ML_DATA: ServiceDetailData = {
       features: [
         'Quality control',
         'Autonomous systems',
-        'Surveillance',
-        'Manufacturing inspection'
-      ]
+        'Visual inspection',
+        'Manufacturing defect detection'
+      ],
+      demand: { badge: 'High Demand', description: 'Visual AI is transforming quality assurance and safety monitoring across manufacturing and logistics.' }
     },
     {
       title: 'AI Ethics & Governance',
@@ -161,37 +235,38 @@ const AI_ML_DATA: ServiceDetailData = {
         'Compliance audits',
         'Bias mitigation',
         'Responsible AI frameworks'
-      ]
+      ],
+      demand: { badge: 'Essential', description: 'Regulatory scrutiny of AI systems is intensifying, making governance a baseline requirement.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Increased Efficiency',
-      description: 'Automate repetitive tasks and streamline operations with intelligent systems'
+      description: 'Automate repetitive tasks and streamline operations with intelligent systems that handle work around the clock'
     },
     {
       title: 'Better Decision Making',
-      description: 'Make data-driven decisions with predictive insights and recommendations'
+      description: 'Replace guesswork with data-driven predictions and recommendations tailored to your business context'
     },
     {
       title: 'Enhanced Customer Experience',
-      description: 'Deliver personalized experiences and instant support with AI-powered solutions'
+      description: 'Deliver personalized experiences and instant support through AI-powered interactions'
     },
     {
       title: 'Competitive Advantage',
-      description: 'Stay ahead with cutting-edge AI technology tailored to your industry'
+      description: 'Apply AI technology tailored to your industry to stay ahead of competitors still relying on manual processes'
     },
     {
       title: 'Cost Reduction',
-      description: 'Reduce operational costs through automation and optimization'
+      description: 'Reduce operational costs through automation of manual review, classification, and decision processes'
     },
     {
       title: 'Scalable Growth',
-      description: 'Build systems that grow with your business and adapt to changing needs'
+      description: 'Build systems that handle increasing data volumes and complexity without proportional increases in headcount'
     }
   ],
-  
+
   industries: [
     {
       name: 'Healthcare',
@@ -214,41 +289,48 @@ const AI_ML_DATA: ServiceDetailData = {
       applications: ['User behavior analysis', 'Content moderation', 'Search optimization', 'Anomaly detection']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Predictive Maintenance for Manufacturing',
-      client: 'Global Manufacturing Corp',
-      challenge: 'High equipment downtime and maintenance costs',
-      solution: 'Developed ML models to predict equipment failures before they occur',
-      results: [
-        '45% reduction in unplanned downtime',
-        '30% decrease in maintenance costs',
-        'ROI achieved within 6 months'
-      ]
+      question: 'How long does it take to build and deploy a custom ML model?',
+      answer: 'A typical engagement runs 8-16 weeks from data assessment to production deployment, depending on data readiness and model complexity. We deliver working prototypes within the first 3-4 weeks.'
     },
     {
-      title: 'AI-Powered Customer Service',
-      client: 'Leading E-commerce Platform',
-      challenge: 'High volume of customer inquiries overwhelming support team',
-      solution: 'Implemented NLP-based chatbot with intelligent routing',
-      results: [
-        '70% of queries resolved automatically',
-        '50% reduction in response time',
-        '95% customer satisfaction rate'
-      ]
+      question: 'What data do we need to have ready before starting?',
+      answer: 'You need historical data relevant to the problem you want to solve. We help assess data quality and volume during our initial assessment phase and can assist with data cleaning and preparation.'
+    },
+    {
+      question: 'How do you handle model accuracy and performance over time?',
+      answer: 'We set up automated monitoring for model drift and performance degradation. When metrics drop below thresholds, retraining pipelines kick in using fresh data to keep predictions accurate.'
+    },
+    {
+      question: 'Can you integrate ML models with our existing systems?',
+      answer: 'Yes. We deploy models as APIs or embed them directly into your existing applications and data pipelines. We work with your engineering team to ensure seamless integration.'
+    },
+    {
+      question: 'What does ongoing maintenance look like after deployment?',
+      answer: 'We offer support tiers that include monitoring dashboards, periodic model retraining, performance reviews, and infrastructure management. Most clients transition to self-managed operations within 6 months.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with AI?',
-  ctaDescription: 'Let\'s discuss how our AI and machine learning solutions can drive innovation and growth for your organization.',
-  ctaButtonText: 'Start Your AI Journey',
-  
+
+  whyEpoch: [
+    'We build ML systems for production, not just proof-of-concept notebooks',
+    'Our engineers have deployed models across healthcare, finance, and manufacturing verticals',
+    'We set up monitoring and retraining pipelines so your models improve over time, not decay',
+    'We integrate with your existing data stack rather than requiring you to adopt new platforms'
+  ],
+
+  ctaTitle: 'Discuss Your AI & ML Needs',
+  ctaDescription: 'Tell us about your data challenges and goals. We\'ll outline how AI and machine learning can fit into your operations.',
+  ctaButtonText: 'Get in Touch',
+
   stats: [
-    { value: '500+', label: 'AI Models Deployed' },
-    { value: '95%', label: 'Accuracy Rate' },
-    { value: '3x', label: 'Average ROI' },
-    { value: '24/7', label: 'Model Monitoring' }
+    { value: '78%', label: 'Organizations Now Using AI' },
+    { value: 'Extensive', label: 'Model Deployment Experience' },
+    { value: 'High', label: 'Accuracy Standards' },
+    { value: 'Ongoing', label: 'Monitoring & Support' }
   ]
 };
 
@@ -257,39 +339,80 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
   id: 'generative-ai',
   name: 'Generative AI',
   heroTitle: 'Generative AI Implementation',
-  heroSubtitle: 'Revolutionize how you create, automate, and innovate',
-  heroDescription: 'Transform your enterprise with intelligent systems that learn, adapt, and deliver measurable results. We build AI solutions that turn data into competitive advantage.',
+  heroTitleLines: [
+    { text: 'Generative AI', highlight: true },
+    { text: 'Implementation' }
+  ],
+  heroSubtitle: 'Practical GenAI for enterprise workflows',
+  heroDescription: 'We help enterprises integrate generative AI into their operations — from custom chatbots and content generation to autonomous AI agents and governance frameworks.',
   metaTitle: 'Generative AI Implementation - EPOCH',
-  metaDescription: 'Unlock innovation with cutting-edge generative AI solutions. Custom LLMs, content generation, and intelligent automation for enterprise transformation.',
-  
-  overview: {
-    title: 'Generative AI Implementation',
-    description: 'At EPOCH Software Services, we excel in implementing generative AI solutions that revolutionize how US enterprises create, automate, and innovate.',
-    keyPoints: [
-      'With generative AI adoption surging—71% of organizations now regularly using it in at least one business function, up from 65% earlier in 2024—our services enable you to deploy ethical, scalable GenAI tools that drive productivity and creativity.',
-      'The global generative AI market is projected to reach $62.72 billion in 2025, underscoring the critical role of GenAI in enterprise strategies. Partner with us to integrate cutting-edge models like GPT and DALL-E variants, transforming your operations with responsible AI implementations.'
+  metaDescription: 'Generative AI solutions for enterprise. Custom LLMs, content generation, AI agents, and responsible implementation.',
+
+  problemStatement: {
+    title: 'Why This Matters',
+    description: 'Generative AI is moving fast, but most enterprises struggle to move beyond experimentation into real production use.',
+    painPoints: [
+      'Your team is experimenting with ChatGPT but has no clear path to enterprise-grade deployment',
+      'Generated content lacks accuracy, brand voice, or domain-specific knowledge',
+      'You have no governance framework for AI-generated outputs, creating compliance risk',
+      'Off-the-shelf GenAI tools cannot access your proprietary data or integrate with internal systems'
     ]
   },
-  
+
+  overview: {
+    title: 'Generative AI Implementation',
+    description: 'EPOCH Software Services implements generative AI solutions that help US enterprises automate content creation, streamline workflows, and build intelligent agent systems.',
+    keyPoints: [
+      'We help you move from pilot projects to production-ready GenAI systems with proper governance, security, and integration into your existing workflows.',
+      'Our team specializes in practical applications — custom chatbots, content automation, AI agents, and code generation tools — built on foundation models fine-tuned for your domain.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Generative AI',
-    description: 'Drawing on extensive experience with US enterprises, EPOCH delivers GenAI solutions focused on real-world impact.',
+    description: 'Our team delivers GenAI solutions grounded in practical enterprise needs, with a focus on governance, bias mitigation, and seamless integration with existing systems.',
     skills: [
       {
-        name: 'Agile Implementation',
-        description: 'We emphasize governance, bias mitigation, and seamless integration with existing systems, using agile methodologies for quick value realization'
+        name: 'LLM Fine-Tuning & RAG Architectures',
+        description: 'Custom fine-tuning of foundation models and retrieval-augmented generation for domain-specific accuracy'
       },
       {
-        name: 'High-Demand Specialization',
-        description: 'Our team specializes in high-demand areas such as content generation, automation, and agentic AI'
+        name: 'AI Agent Development',
+        description: 'Multi-step autonomous agents for workflow orchestration, data analysis, and decision support'
       },
       {
-        name: 'Enterprise-Ready Solutions',
-        description: 'Aligning with 2025 trends where 25% of enterprises plan to deploy AI agents'
+        name: 'GenAI Governance & Safety',
+        description: 'Guardrails, content filtering, bias audits, and compliance frameworks for responsible enterprise deployment'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Use Case Identification',
+        description: 'We map your workflows to identify high-impact GenAI opportunities and estimate ROI for each.'
+      },
+      {
+        step: '02',
+        title: 'Model Selection & Customization',
+        description: 'We select the right foundation model and fine-tune or configure RAG pipelines with your proprietary data.'
+      },
+      {
+        step: '03',
+        title: 'Integration & Governance Setup',
+        description: 'We embed GenAI into your systems with proper guardrails, access controls, and output monitoring.'
+      },
+      {
+        step: '04',
+        title: 'Optimization & Scaling',
+        description: 'We measure performance against business KPIs and expand successful implementations across the organization.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Chatbots and Conversational AI',
@@ -299,7 +422,8 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
         'HR support',
         'Sales assistance',
         'Domain customization'
-      ]
+      ],
+      demand: { badge: 'High Demand', description: 'Conversational AI is the most widely adopted GenAI application in enterprise.' }
     },
     {
       title: 'Automated Design and Content Creation',
@@ -309,7 +433,8 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
         'UI/UX design',
         'Content marketing',
         'Product prototypes'
-      ]
+      ],
+      demand: { badge: 'Growing Fast', description: 'Content generation is reducing production timelines from weeks to hours across marketing teams.' }
     },
     {
       title: 'AI Agents for Workflow Automation',
@@ -319,7 +444,8 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
         'R&D automation',
         'Operational efficiency',
         'Process orchestration'
-      ]
+      ],
+      demand: { badge: 'Emerging', description: 'Agentic AI is the next frontier, with enterprises beginning to deploy autonomous task completion systems.' }
     },
     {
       title: 'Code Generation and Software Assistance',
@@ -329,7 +455,8 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
         'App modernization',
         'DevOps automation',
         'Documentation generation'
-      ]
+      ],
+      demand: { badge: 'Critical Skill', description: 'AI-assisted development is becoming standard practice for engineering teams.' }
     },
     {
       title: 'GenAI Governance and Ethical Implementation',
@@ -339,89 +466,98 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
         'Compliance checks',
         'Bias audits',
         'Transparency tools'
-      ]
-    }
-  ],
-  
-  benefits: [
-    {
-      title: 'Boosted Productivity',
-      description: '47% of US executives believe GenAI enhances productivity, with potential cost savings up to 15.2%'
-    },
-    {
-      title: 'Innovation Acceleration',
-      description: 'Generate ideas and content faster, with ROI averaging $3.71 per $1 invested'
-    },
-    {
-      title: 'Scalable Solutions',
-      description: 'Hybrid models for tech talent and governance ensure enterprise-wide deployment'
-    },
-    {
-      title: 'Risk Mitigation',
-      description: 'Address challenges like inaccuracy and cybersecurity, noted by organizations as key risks'
-    },
-    {
-      title: 'Competitive Advantage',
-      description: 'Align with trends where 92% of Fortune 500 companies use OpenAI tech'
-    }
-  ],
-  
-  industries: [
-    {
-      name: 'Marketing and Sales',
-      applications: ['Personalized campaigns', 'lead generation']
-    },
-    {
-      name: 'Customer Service',
-      applications: ['AI-driven interactions', '95% of customer touchpoints potentially AI-powered by 2025']
-    },
-    {
-      name: 'Finance',
-      applications: ['Fraud detection', 'report generation']
-    },
-    {
-      name: 'Manufacturing',
-      applications: ['Design automation', 'predictive maintenance']
-    },
-    {
-      name: 'Healthcare',
-      applications: ['Personalized treatment plans', 'documentation']
-    }
-  ],
-  
-  caseStudies: [
-    {
-      title: 'Marketing Firm Enhances Campaigns with Automated Content',
-      client: 'US Marketing Agency',
-      challenge: 'Content creation bottlenecks slowing campaign delivery',
-      solution: 'A US marketing agency implemented our GenAI for image and text generation, reducing content creation time by 50% and increasing client satisfaction.',
-      results: [
-        '50% reduction in content creation time',
-        'Increased client satisfaction',
-        'Streamlined campaign delivery'
-      ]
-    },
-    {
-      title: 'Enterprise Automates Operations with AI Agents',
-      client: 'Logistics Company',
-      challenge: 'Manual workflows causing operational inefficiencies',
-      solution: 'We deployed AI agents for a logistics company, streamlining workflows and achieving 20% cost reductions through predictive automation.',
-      results: [
-        '20% cost reductions',
-        'Streamlined workflows',
-        'Predictive automation implementation'
-      ]
+      ],
+      demand: { badge: 'Essential', description: 'Enterprises deploying GenAI without governance frameworks face growing regulatory and reputational risk.' }
     }
   ],
 
-  ctaTitle: 'Ready to Transform Your Business with Generative AI?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our Generative AI Implementation services can unlock new efficiencies and innovations for your enterprise.',
-  ctaButtonText: 'Get Free Consultation',
-  
+  benefits: [
+    {
+      title: 'Boosted Productivity',
+      description: 'Reduce manual work by automating repetitive content generation, review, and summarization tasks'
+    },
+    {
+      title: 'Innovation Acceleration',
+      description: 'Generate ideas, drafts, and prototypes faster, cutting creative and development cycle times significantly'
+    },
+    {
+      title: 'Scalable Solutions',
+      description: 'Deploy GenAI across departments with consistent governance, from marketing to engineering to operations'
+    },
+    {
+      title: 'Risk Mitigation',
+      description: 'Implement guardrails that prevent hallucinations, bias, and data leakage in AI-generated outputs'
+    },
+    {
+      title: 'Competitive Advantage',
+      description: 'Move from experimentation to production faster than competitors still stuck in proof-of-concept mode'
+    }
+  ],
+
+  industries: [
+    {
+      name: 'Marketing and Sales',
+      applications: ['Personalized campaigns', 'Lead generation']
+    },
+    {
+      name: 'Customer Service',
+      applications: ['AI-driven interactions', 'Ticket resolution', 'Self-service portals']
+    },
+    {
+      name: 'Finance',
+      applications: ['Fraud detection', 'Report generation']
+    },
+    {
+      name: 'Manufacturing',
+      applications: ['Design automation', 'Predictive maintenance']
+    },
+    {
+      name: 'Healthcare',
+      applications: ['Personalized treatment plans', 'Clinical documentation']
+    }
+  ],
+
+  caseStudies: [],
+
+  faqs: [
+    {
+      question: 'Which foundation model should we use — GPT, Claude, Llama, or something else?',
+      answer: 'It depends on your use case, data sensitivity, and budget. We evaluate multiple models against your specific requirements and recommend the best fit, including open-source options for on-premise deployment.'
+    },
+    {
+      question: 'How do you prevent hallucinations and inaccurate outputs?',
+      answer: 'We use retrieval-augmented generation (RAG) to ground outputs in your actual data, combined with output validation layers and human-in-the-loop review for critical applications.'
+    },
+    {
+      question: 'What is the typical cost of a GenAI implementation?',
+      answer: 'Costs vary based on model choice, infrastructure, and scope. A focused chatbot project might run $50-150K, while enterprise-wide agent systems are larger investments. We provide detailed estimates after the use case assessment.'
+    },
+    {
+      question: 'Can we use GenAI with our proprietary data without exposing it?',
+      answer: 'Yes. We configure private deployments, on-premise models, or enterprise API agreements that keep your data within your security perimeter. RAG architectures let models access your data without retraining on it.'
+    },
+    {
+      question: 'How long before we see measurable results?',
+      answer: 'Most clients see initial results within 6-8 weeks for focused use cases. Enterprise-wide rollouts typically show significant ROI within 3-6 months of deployment.'
+    }
+  ],
+
+  whyEpoch: [
+    'We have hands-on experience deploying GenAI in regulated industries including healthcare and finance',
+    'We build RAG architectures that ground AI outputs in your actual data, not generic training sets',
+    'Our governance frameworks address compliance requirements before they become problems',
+    'We focus on measurable business outcomes, not impressive demos that never reach production'
+  ],
+
+  ctaTitle: 'Explore Generative AI for Your Team',
+  ctaDescription: 'Let\'s talk about where generative AI fits into your workflows. We\'ll help you identify high-impact use cases and a practical path forward.',
+  ctaButtonText: 'Start a Conversation',
+
   stats: [
-    { value: '71%', label: 'Organizations Using GenAI' },
-    { value: '$62.72B', label: 'Market Size by 2025' },
-    { value: '25%', label: 'Enterprises Deploy AI Agents' }
+    { value: '71%', label: 'Organizations Regularly Using GenAI' },
+    { value: 'Rapid', label: 'Time to First Deployment' },
+    { value: 'Proven', label: 'Enterprise Governance Frameworks' },
+    { value: 'Ongoing', label: 'Model Optimization & Support' }
   ]
 };
 
@@ -430,39 +566,81 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
   id: 'cloud-computing',
   name: 'Cloud Computing',
   heroTitle: 'Cloud Computing Solutions',
+  heroTitleLines: [
+    { text: 'Cloud', highlight: true },
+    { text: 'Computing' },
+    { text: 'Solutions' }
+  ],
   heroSubtitle: 'Scale without limits',
-  heroDescription: 'Modernize your infrastructure with cloud-native architectures that deliver scalability, reliability, and cost efficiency.',
+  heroDescription: 'We help enterprises modernize their infrastructure with cloud-native architectures that deliver scalability, reliability, and cost efficiency across AWS, Azure, and Google Cloud.',
   metaTitle: 'Cloud Computing Solutions - EPOCH',
-  metaDescription: 'Transform your business with enterprise cloud solutions. Migration, optimization, and management across AWS, Azure, and Google Cloud.',
-  
-  overview: {
-    title: 'Cloud Computing Services',
-    description: 'At EPOCH Software Services, we specialize in delivering robust cloud computing solutions that enable US enterprises to achieve agility, scalability, and innovation in a hybrid digital era.',
-    keyPoints: [
-      'With approximately 94% of organizations already utilizing cloud infrastructure, storage, and software in some format by 2025, our services help you optimize your cloud journey amid surging demand. The global cloud computing market is projected to reach $723.4 billion in 2025, reflecting a 21.5% growth as enterprises prioritize AI integration, cost efficiency, and multi-cloud strategies.',
-      'Partner with us to leverage platforms like AWS, Azure, and Google Cloud, ensuring seamless migrations and operations tailored to your enterprise needs.'
+  metaDescription: 'Enterprise cloud solutions including migration, optimization, and management across AWS, Azure, and Google Cloud.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Cloud adoption is no longer optional, but managing costs, security, and complexity across providers is harder than expected.',
+    painPoints: [
+      'Your cloud spend is growing faster than your workloads, with no clear visibility into waste',
+      'Migrating legacy applications to the cloud keeps stalling due to architectural complexity',
+      'Your team lacks expertise to manage multi-cloud environments securely and efficiently',
+      'Vendor lock-in concerns prevent you from optimizing across AWS, Azure, and GCP'
     ]
   },
-  
+
+  overview: {
+    title: 'Cloud Computing Services',
+    description: 'EPOCH Software Services delivers cloud computing solutions that help US enterprises achieve agility, scalability, and operational efficiency across hybrid and multi-cloud environments.',
+    keyPoints: [
+      'We help you optimize your cloud journey — whether that means migrating workloads, reducing spend, or architecting for scale across multiple providers.',
+      'Our team works with AWS, Azure, and Google Cloud to deliver migrations, cost optimization, and ongoing operations tailored to your enterprise needs.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Cloud Computing',
-    description: 'With deep experience serving US enterprises, EPOCH excels in designing and managing cloud environments that support emerging trends like AI/ML workloads and quantum computing.',
+    description: 'Our team designs and manages cloud environments that support modern workloads including AI/ML, hybrid architectures, and multi-cloud setups, with a focus on cost optimization and security.',
     skills: [
       {
-        name: 'Agile Cloud Approach',
-        description: 'Our agile approach focuses on hybrid and multi-cloud setups, addressing complexities such as cost optimization and security'
+        name: 'Multi-Cloud Architecture (AWS, Azure, GCP)',
+        description: 'Design and manage environments across all major cloud providers with unified governance and cost controls'
       },
       {
-        name: '2025 Trend Leadership',
-        description: 'We stay ahead of 2025 trends, including skyrocketing AI demand and rising cloud dissatisfaction'
+        name: 'Cloud-Native & Serverless Engineering',
+        description: 'Build applications using containers, Kubernetes, and serverless functions for automatic scaling and cost efficiency'
       },
       {
-        name: 'Resilient Solutions',
-        description: 'Deliver resilient, efficient solutions tailored to enterprise needs'
+        name: 'FinOps & Cost Optimization',
+        description: 'Implement financial operations practices that give you visibility and control over cloud spending'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Infrastructure Assessment',
+        description: 'We audit your current environment, identify migration candidates, and map dependencies across your systems.'
+      },
+      {
+        step: '02',
+        title: 'Architecture Design',
+        description: 'We design a target cloud architecture optimized for your workload patterns, compliance needs, and budget constraints.'
+      },
+      {
+        step: '03',
+        title: 'Migration & Deployment',
+        description: 'We execute migrations in phases with rollback plans, automated testing, and zero-downtime cutover strategies.'
+      },
+      {
+        step: '04',
+        title: 'Optimization & Management',
+        description: 'We continuously monitor performance and costs, rightsizing resources and implementing automation to keep spend under control.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Cloud Migration',
@@ -471,8 +649,9 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
         'Legacy modernization',
         'Disaster recovery',
         'Workload balancing',
-        'With 94% cloud adoption, migrations are essential for enterprises seeking flexibility and reduced downtime'
-      ]
+        'Zero-downtime migration strategies'
+      ],
+      demand: { badge: 'High Demand', description: 'Migration remains the top cloud engagement as enterprises move remaining on-premise workloads.' }
     },
     {
       title: 'Multi-Cloud Management',
@@ -481,8 +660,9 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
         'Vendor diversification',
         'Compliance management',
         'Cost arbitrage',
-        'Multi-cloud complexity persists as a top challenge, with enterprises leveraging it to avoid lock-in and enhance resilience'
-      ]
+        'Unified monitoring dashboards'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Managing complexity across providers is the biggest operational challenge for cloud-mature enterprises.' }
     },
     {
       title: 'Serverless Architecture',
@@ -491,8 +671,9 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
         'Event-driven apps',
         'Microservices',
         'API development',
-        'Serverless supports AI/ML demand, which is set to skyrocket, enabling faster innovation and lower costs'
-      ]
+        'Background job processing'
+      ],
+      demand: { badge: 'Growing Fast', description: 'Serverless adoption is accelerating as teams seek to reduce infrastructure management overhead.' }
     },
     {
       title: 'Cloud Cost Optimization and FinOps',
@@ -501,8 +682,9 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
         'Budget forecasting',
         'Waste elimination',
         'ROI analysis',
-        'As cloud growth continues unabated, enterprises are adopting FinOps to manage rising costs despite some repatriation trends'
-      ]
+        'Reserved instance planning'
+      ],
+      demand: { badge: 'Essential', description: 'Cloud cost overruns are a top concern for CFOs, making FinOps a strategic priority.' }
     },
     {
       title: 'Hybrid Cloud Solutions',
@@ -511,91 +693,99 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
         'Sensitive data handling',
         'Edge computing',
         'Regulatory adherence',
-        'Hybrid models dominate as enterprises navigate dissatisfaction and seek optimized setups in 2025'
-      ]
+        'Private cloud integration'
+      ],
+      demand: { badge: 'High Demand', description: 'Hybrid architectures remain the preferred approach for regulated industries balancing control and flexibility.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Scalability and Agility',
-      description: 'Easily scale resources to meet demand, supporting a 21.5% market growth driven by enterprise needs'
+      description: 'Scale resources up or down in minutes to match demand, eliminating capacity planning guesswork'
     },
     {
       title: 'Cost Efficiency',
-      description: 'Reduce expenses through optimization, with potential savings amid $94 billion quarterly spending'
+      description: 'Reduce infrastructure spend through rightsizing, automation, and pay-for-what-you-use pricing models'
     },
     {
       title: 'Enhanced Innovation',
-      description: 'Integrate AI and quantum technologies for breakthroughs in speed and efficiency'
+      description: 'Ship new features faster with managed services, CI/CD pipelines, and infrastructure-as-code'
     },
     {
       title: 'Improved Security and Compliance',
-      description: 'Built-in measures to protect data in multi-cloud environments'
+      description: 'Leverage built-in security controls and compliance frameworks across major cloud providers'
     },
     {
       title: 'Future-Proofing',
-      description: 'Prepare for trends like rising AI/ML workloads and persistent multi-cloud strategies'
+      description: 'Build on platforms that continuously add new capabilities for AI, analytics, and edge computing'
     }
   ],
-  
+
   industries: [
     {
       name: 'Finance',
-      applications: ['Secure data storage', 'real-time analytics']
+      applications: ['Secure data storage', 'Real-time analytics']
     },
     {
       name: 'Healthcare',
-      applications: ['Compliant hybrid clouds', 'patient data management']
+      applications: ['Compliant hybrid clouds', 'Patient data management']
     },
     {
       name: 'Retail',
-      applications: ['Scalable e-commerce platforms', 'serverless backends']
+      applications: ['Scalable e-commerce platforms', 'Serverless backends']
     },
     {
       name: 'Manufacturing',
-      applications: ['IoT integration', 'predictive maintenance via cloud']
+      applications: ['IoT integration', 'Predictive maintenance']
     },
     {
       name: 'Technology',
-      applications: ['Multi-cloud for dev/test environments', 'AI deployment']
+      applications: ['Multi-cloud dev/test environments', 'AI deployment']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Enterprise Migrates to Multi-Cloud for Enhanced Resilience',
-      client: 'US Financial Firm',
-      challenge: 'Need for improved resilience and cost optimization',
-      solution: 'A US financial firm partnered with us for multi-cloud migration, reducing costs by 25% and improving uptime through diversified providers.',
-      results: [
-        '25% cost reduction',
-        'Improved uptime through diversified providers',
-        'Enhanced resilience and redundancy'
-      ]
+      question: 'How long does a typical cloud migration take?',
+      answer: 'It depends on the scope. A focused migration of 10-20 applications typically takes 3-6 months. Enterprise-wide migrations are phased over 12-18 months with workloads prioritized by business impact.'
     },
     {
-      title: 'Retailer Optimizes with Serverless Architecture',
-      client: 'Major Retailer',
-      challenge: 'Need for faster deployment and peak-season scaling',
-      solution: 'We implemented serverless solutions for a major retailer, accelerating app deployment by 40% and supporting peak-season scaling.',
-      results: [
-        '40% faster app deployment',
-        'Support for peak-season scaling',
-        'Improved operational efficiency'
-      ]
+      question: 'How do you minimize downtime during migration?',
+      answer: 'We use phased migration strategies with parallel running, automated failover, and rollback plans. Most migrations achieve zero or near-zero downtime through careful cutover planning.'
+    },
+    {
+      question: 'Which cloud provider should we use?',
+      answer: 'We recommend based on your specific workloads, compliance needs, and existing investments. Many enterprises benefit from a multi-cloud approach. We help you evaluate the tradeoffs objectively.'
+    },
+    {
+      question: 'How much can we expect to save with cloud cost optimization?',
+      answer: 'Most enterprises find 20-35% savings through rightsizing, reserved instances, and eliminating waste. We provide a cost analysis upfront so you know the expected impact before committing.'
+    },
+    {
+      question: 'Do you provide ongoing cloud management after migration?',
+      answer: 'Yes. We offer managed services including 24/7 monitoring, cost optimization reviews, security patching, and capacity planning. Teams can also transition to self-management with our documentation and training.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Cloud Computing?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Explore how our Cloud Computing Services can elevate your enterprise\'s efficiency and innovation.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  whyEpoch: [
+    'Certified architects across AWS, Azure, and GCP who recommend based on fit, not vendor partnerships',
+    'FinOps expertise that has saved clients significant spend through systematic cost optimization',
+    'Migration methodology with built-in rollback plans and zero-downtime strategies',
+    'We manage the complexity of multi-cloud so your team focuses on building products, not infrastructure'
+  ],
+
+  ctaTitle: 'Discuss Your Cloud Strategy',
+  ctaDescription: 'Whether you\'re planning a migration or optimizing an existing setup, we can help you map out the right cloud approach for your organization.',
+  ctaButtonText: 'Talk to Our Team',
+
   stats: [
-    { value: '94%', label: 'Organizations Use Cloud' },
-    { value: '$723.4B', label: 'Market Size 2025' },
-    { value: '21.5%', label: 'Market Growth Rate' },
-    { value: '25%', label: 'Average Cost Savings' }
+    { value: '94%', label: 'Enterprise Cloud Adoption Rate' },
+    { value: '20-35%', label: 'Typical Cost Savings' },
+    { value: 'Certified', label: 'AWS, Azure & GCP Architects' },
+    { value: 'Ongoing', label: 'Managed Services & Support' }
   ]
 };
 
@@ -604,39 +794,80 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
   id: 'cybersecurity',
   name: 'Cybersecurity',
   heroTitle: 'Cybersecurity Solutions',
+  heroTitleLines: [
+    { text: 'Cybersecurity', highlight: true },
+    { text: 'Solutions' }
+  ],
   heroSubtitle: 'Protect what matters most',
-  heroDescription: 'Comprehensive security solutions to protect your digital assets, ensure compliance, and maintain business continuity.',
+  heroDescription: 'We provide comprehensive security solutions to protect your digital assets, ensure compliance, and maintain business continuity against evolving threats.',
   metaTitle: 'Cybersecurity Solutions - EPOCH',
-  metaDescription: 'Enterprise cybersecurity services to protect your business. Threat detection, incident response, and compliance management.',
-  
-  overview: {
-    title: 'Cybersecurity Solutions',
-    description: 'At EPOCH Software Services, we provide advanced cybersecurity solutions designed to protect US enterprises from the escalating threats in an increasingly digital world.',
-    keyPoints: [
-      'With cybercrime projected to cost businesses up to $10.5 trillion globally by 2025, and the US cybersecurity market expected to reach $86.38 billion this year, our services deliver proactive defense, compliance, and resilience. As threats like nation-state attacks, AI exploitation, and supply chain vulnerabilities intensify, we help enterprises fortify their defenses with cutting-edge strategies tailored to 2025\'s risk landscape.',
-      'Partner with us to safeguard your assets, ensure regulatory adherence, and maintain operational continuity in a high-stakes environment.'
+  metaDescription: 'Enterprise cybersecurity services including threat detection, incident response, zero-trust architecture, and compliance management.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Cyber threats are more sophisticated and frequent than ever, and most enterprises are not keeping pace with their security posture.',
+    painPoints: [
+      'Your security team is overwhelmed by alerts but lacks the tools to prioritize real threats',
+      'Compliance requirements are growing across NIST, SOC 2, HIPAA, and GDPR but your audit readiness is uncertain',
+      'Remote work and cloud adoption have expanded your attack surface beyond what traditional perimeter security covers',
+      'You have no tested incident response plan and would struggle to contain a breach quickly'
     ]
   },
-  
+
+  overview: {
+    title: 'Cybersecurity Solutions',
+    description: 'EPOCH Software Services provides cybersecurity solutions designed to protect US enterprises from escalating threats in an increasingly digital landscape.',
+    keyPoints: [
+      'We deliver proactive defense, compliance readiness, and resilience across your digital infrastructure — from endpoints to cloud environments.',
+      'Our approach addresses the full threat lifecycle: assessment, prevention, detection, response, and recovery.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Cybersecurity',
-    description: 'Leveraging extensive experience with US enterprises, EPOCH specializes in comprehensive cybersecurity frameworks that integrate AI, cloud security, and regulatory compliance.',
+    description: 'Our team specializes in comprehensive cybersecurity frameworks that integrate AI-powered detection, cloud security, and regulatory compliance for US enterprises.',
     skills: [
       {
-        name: 'Agile Methodology',
-        description: 'Our agile methodology addresses 2025 trends such as fraud impersonation and supply chain risks'
+        name: 'Zero-Trust Architecture Design',
+        description: 'Implement identity-centric security models that verify every access request regardless of network location'
       },
       {
-        name: 'Advanced Security Models',
-        description: 'We focus on high-demand areas like zero-trust models and post-quantum encryption'
+        name: 'Threat Detection & Incident Response',
+        description: 'AI-powered SIEM, endpoint detection, and 24/7 monitoring with rapid containment and forensic capabilities'
       },
       {
-        name: 'Layered Protection',
-        description: 'Deliver layered protection against sophisticated attacks that evolve with threats'
+        name: 'Compliance & Risk Management (NIST, SOC 2, HIPAA)',
+        description: 'Audit preparation, gap analysis, and policy development aligned with major regulatory frameworks'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Security Assessment & Gap Analysis',
+        description: 'We evaluate your current security posture, identify vulnerabilities, and benchmark against industry frameworks.'
+      },
+      {
+        step: '02',
+        title: 'Architecture & Policy Design',
+        description: 'We design security architectures and policies tailored to your risk profile, compliance needs, and infrastructure.'
+      },
+      {
+        step: '03',
+        title: 'Implementation & Hardening',
+        description: 'We deploy security controls, configure monitoring systems, and harden your environment against known attack vectors.'
+      },
+      {
+        step: '04',
+        title: 'Continuous Monitoring & Response',
+        description: 'We provide ongoing threat monitoring, regular penetration testing, and incident response support to keep defenses current.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Penetration Testing',
@@ -645,8 +876,9 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
         'Web app security',
         'Network assessments',
         'Red team exercises',
-        'With rising cyber threats, penetration testing is a core service for enterprises, helping prevent breaches amid $10.5 trillion in potential costs'
-      ]
+        'Social engineering tests'
+      ],
+      demand: { badge: 'Essential', description: 'Regular penetration testing is a baseline requirement for compliance and risk management.' }
     },
     {
       title: 'Zero-Trust Architecture',
@@ -655,8 +887,9 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
         'Remote work environments',
         'Cloud integrations',
         'API security',
-        'Zero-trust is essential for combating nation-state and AI-driven attacks, a top trend in 2025'
-      ]
+        'Identity and access management'
+      ],
+      demand: { badge: 'High Demand', description: 'Zero-trust is becoming the default security model as perimeter-based defenses prove insufficient.' }
     },
     {
       title: 'Post-Quantum Cryptography',
@@ -665,8 +898,9 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
         'Secure communications',
         'Data-at-rest encryption',
         'Blockchain integrations',
-        'As quantum risks emerge, enterprises prioritize post-quantum solutions to future-proof security'
-      ]
+        'Certificate migration planning'
+      ],
+      demand: { badge: 'Emerging', description: 'Forward-looking enterprises are preparing encryption infrastructure now for quantum computing threats.' }
     },
     {
       title: 'Managed Detection and Response (MDR)',
@@ -675,8 +909,9 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
         'Endpoint protection',
         'SIEM enhancements',
         'Ransomware mitigation',
-        'MDR addresses supply chain vulnerabilities and fraud, key concerns for US enterprises in 2025'
-      ]
+        'Threat intelligence feeds'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Most enterprises lack the in-house capability for round-the-clock threat monitoring and response.' }
     },
     {
       title: 'Compliance and Risk Management',
@@ -685,91 +920,99 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
         'Data privacy frameworks',
         'Third-party vendor evaluations',
         'Cyber insurance preparation',
-        'Regulatory compliance drives market growth, with enterprises facing stricter standards amid AI and cloud adoption'
-      ]
+        'Audit readiness programs'
+      ],
+      demand: { badge: 'Essential', description: 'Regulatory requirements are expanding, making compliance a continuous process rather than a one-time event.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Proactive Threat Mitigation',
-      description: 'Reduce breach risks by up to 50% through advanced detection, countering $10.5 trillion in global cybercrime costs'
+      description: 'Identify and address vulnerabilities before they are exploited, reducing breach risk significantly'
     },
     {
       title: 'Cost Savings',
-      description: 'Optimize security investments in a market growing to $86.38 billion, avoiding downtime and fines'
+      description: 'Prevent costly breaches, downtime, and regulatory fines through systematic security investment'
     },
     {
       title: 'Enhanced Resilience',
-      description: 'Build defenses against AI exploitation and supply chain attacks, top trends in 2025'
+      description: 'Build defenses that adapt to evolving threats including AI-powered attacks and supply chain compromises'
     },
     {
       title: 'Regulatory Compliance',
-      description: 'Ensure adherence to evolving standards, minimizing legal exposures'
+      description: 'Maintain audit readiness across NIST, SOC 2, HIPAA, GDPR, and industry-specific standards'
     },
     {
       title: 'Scalable Protection',
-      description: 'Adapt to enterprise growth with AI-integrated solutions for long-term security'
+      description: 'Security architectures that grow with your business without requiring proportional increases in security headcount'
     }
   ],
-  
+
   industries: [
     {
       name: 'Finance',
-      applications: ['Fraud detection', 'secure transactions against impersonation threats']
+      applications: ['Fraud detection', 'Secure transactions', 'Regulatory compliance']
     },
     {
       name: 'Healthcare',
-      applications: ['Patient data safeguarding with compliance to HIPAA', 'quantum risks mitigation']
+      applications: ['Patient data protection', 'HIPAA compliance', 'Medical device security']
     },
     {
       name: 'Retail',
-      applications: ['Supply chain security', 'endpoint protection for e-commerce']
+      applications: ['Supply chain security', 'Endpoint protection', 'PCI compliance']
     },
     {
       name: 'Manufacturing',
-      applications: ['Industrial control system defense', 'nation-state attack protection']
+      applications: ['Industrial control system defense', 'OT/IT convergence security']
     },
     {
       name: 'Technology',
-      applications: ['Cloud and AI security', 'exploitation vulnerability countering']
+      applications: ['Cloud security', 'Application security', 'DevSecOps']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Financial Institution Strengthens Defenses with Zero-Trust',
-      client: 'Major US Bank',
-      challenge: 'Need for enhanced security against unauthorized access',
-      solution: 'A major US bank implemented our zero-trust architecture, reducing unauthorized access incidents by 40% and enhancing compliance.',
-      results: [
-        '40% reduction in unauthorized access incidents',
-        'Enhanced compliance posture',
-        'Strengthened overall security framework'
-      ]
+      question: 'How quickly can you respond to a security incident?',
+      answer: 'Our MDR clients receive response within 15 minutes of confirmed threat detection. We also provide incident response retainers for enterprises that need guaranteed rapid engagement.'
     },
     {
-      title: 'Manufacturer Mitigates Supply Chain Risks via MDR',
-      client: 'Manufacturing Enterprise',
-      challenge: 'Supply chain vulnerabilities and threat detection needs',
-      solution: 'We deployed MDR for a manufacturing enterprise, detecting and responding to threats in real-time, preventing potential disruptions and saving millions.',
-      results: [
-        'Real-time threat detection and response',
-        'Prevention of potential disruptions',
-        'Millions in cost savings'
-      ]
+      question: 'What compliance frameworks do you support?',
+      answer: 'We support NIST, SOC 2, HIPAA, GDPR, PCI DSS, and ISO 27001. We tailor our approach based on which frameworks apply to your industry and customer base.'
+    },
+    {
+      question: 'How often should we conduct penetration testing?',
+      answer: 'We recommend quarterly testing for critical systems and at least annually for the full environment. Major infrastructure changes should trigger additional assessments.'
+    },
+    {
+      question: 'What does zero-trust implementation involve for an existing environment?',
+      answer: 'It is a phased process: identity consolidation, network segmentation, access policy definition, and continuous verification. Most enterprises complete initial implementation in 4-8 months.'
+    },
+    {
+      question: 'Do you provide security training for our internal team?',
+      answer: 'Yes. We offer security awareness training, phishing simulations, and technical training for your IT and development teams. We also provide knowledge transfer as part of every engagement.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Cybersecurity Solutions?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Learn how our Cybersecurity Solutions can protect your enterprise from 2025\'s top threats.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  whyEpoch: [
+    'Our security engineers hold CISSP, OSCP, and cloud-specific security certifications',
+    'We combine automated tooling with manual analysis — real security requires human judgment',
+    'We build security programs, not just run scans — your posture improves systematically over time',
+    'We provide plain-language risk reporting that executives and boards can actually act on'
+  ],
+
+  ctaTitle: 'Assess Your Security Posture',
+  ctaDescription: 'Talk to our cybersecurity team about your threat landscape, compliance requirements, and security priorities.',
+  ctaButtonText: 'Schedule a Discussion',
+
   stats: [
-    { value: '$10.5T', label: 'Cybercrime Cost 2025' },
-    { value: '$86.38B', label: 'US Market Size 2025' },
-    { value: '50%', label: 'Breach Risk Reduction' },
-    { value: '24/7', label: 'Threat Monitoring' }
+    { value: '24/7', label: 'Threat Monitoring Available' },
+    { value: 'Continuous', label: 'Vulnerability Assessment' },
+    { value: 'Certified', label: 'CISSP & OSCP Engineers' },
+    { value: 'Rapid', label: 'Incident Response Time' }
   ]
 };
 
@@ -778,39 +1021,81 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
   id: 'custom-software',
   name: 'Custom Software Development',
   heroTitle: 'Custom Software Development',
+  heroTitleLines: [
+    { text: 'Custom' },
+    { text: 'Software', highlight: true },
+    { text: 'Development' }
+  ],
   heroSubtitle: 'Built for your unique needs',
-  heroDescription: 'Transform your vision into reality with custom software solutions designed specifically for your business challenges.',
+  heroDescription: 'We design and build custom software solutions tailored to your specific business challenges — from full-stack applications to legacy modernization and API integrations.',
   metaTitle: 'Custom Software Development - EPOCH',
-  metaDescription: 'Bespoke software solutions tailored to your business. Full-stack development, mobile apps, and enterprise systems.',
-  
-  overview: {
-    title: 'Custom Software Development',
-    description: 'At EPOCH Software Services, we specialize in crafting bespoke software solutions that address the unique challenges and opportunities of US enterprises.',
-    keyPoints: [
-      'With the US custom software development market valued at approximately $15.19 billion in 2024 and projected to grow at a CAGR of 15.2% through 2033, driven by the need for tailored, scalable applications, our services empower businesses to innovate and compete effectively. Globally, the custom software development sector is anticipated to expand from $43.16 billion in 2024 at a CAGR of 22.6% from 2025 onward, fueled by enterprise demands for AI integration and digital transformation.',
-      'Partner with us to build custom platforms that integrate seamlessly, automate workflows, and drive measurable ROI in a landscape where enterprise software spending is set to reach $315 billion by 2025.'
+  metaDescription: 'Bespoke software solutions tailored to your business. Full-stack development, legacy modernization, and enterprise systems.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Off-the-shelf software rarely fits complex enterprise workflows, but building custom solutions in-house is resource-intensive.',
+    painPoints: [
+      'Your team wastes hours on workarounds because existing software does not match your actual business processes',
+      'Legacy systems are brittle and expensive to maintain but too risky to replace without a clear migration plan',
+      'You need to integrate multiple systems (CRM, ERP, third-party APIs) but lack the middleware to connect them',
+      'Hiring and retaining full-stack developers is difficult, slowing your roadmap and increasing costs'
     ]
   },
-  
+
+  overview: {
+    title: 'Custom Software Development',
+    description: 'EPOCH Software Services builds bespoke software solutions that address the unique challenges and opportunities of US enterprises, from internal tools to customer-facing platforms.',
+    keyPoints: [
+      'We build software that fits your workflows, not the other way around — from internal tools and customer portals to complex integrations.',
+      'Our approach covers the full lifecycle: requirements, architecture, development, testing, deployment, and ongoing support.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Custom Software Development',
-    description: 'With a proven track record in serving US enterprises, EPOCH delivers agile, end-to-end custom software development using modern frameworks and methodologies.',
+    description: 'Our team delivers agile, end-to-end custom software development using modern frameworks, with expertise spanning full-stack engineering, modernization, and AI-integrated applications.',
     skills: [
       {
-        name: 'Full-Stack Engineering',
-        description: 'Our expertise spans full-stack engineering, modernization, and emerging trends like AI and low-code platforms'
+        name: 'Full-Stack Engineering (React, Node.js, Python, .NET)',
+        description: 'End-to-end application development using modern frameworks with TypeScript, robust APIs, and cloud-native backends'
       },
       {
-        name: 'Modern Solutions',
-        description: 'Ensure solutions that are secure, scalable, and aligned with 2025 priorities such as automation and data-driven innovation'
+        name: 'Legacy Modernization & Migration',
+        description: 'Refactoring monolithic applications to microservices, migrating databases, and modernizing tech stacks without disrupting operations'
       },
       {
-        name: 'High-Demand Focus',
-        description: 'We focus on high-demand areas to help enterprises overcome developer shortages and accelerate time-to-market'
+        name: 'API Design & System Integration',
+        description: 'RESTful and GraphQL API development connecting CRM, ERP, payment, and third-party systems into unified workflows'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Discovery & Requirements',
+        description: 'We map your business processes, identify pain points, and define requirements with measurable success criteria.'
+      },
+      {
+        step: '02',
+        title: 'Architecture & Prototyping',
+        description: 'We design the system architecture, create interactive prototypes, and validate the approach with your stakeholders.'
+      },
+      {
+        step: '03',
+        title: 'Iterative Development',
+        description: 'We build in 2-week sprints with regular demos, incorporating feedback and shipping working software continuously.'
+      },
+      {
+        step: '04',
+        title: 'Launch & Support',
+        description: 'We handle production deployment, monitoring setup, and provide ongoing maintenance and feature development.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Full-Stack Development',
@@ -819,18 +1104,20 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
         'E-commerce platforms',
         'Internal dashboards',
         'Enterprise tools',
-        'Enterprises require end-to-end solutions for seamless user experiences, with the US market growing at 18.5% CAGR from 2025-2030'
-      ]
+        'Customer portals'
+      ],
+      demand: { badge: 'High Demand', description: 'Custom enterprise applications remain the most requested development service.' }
     },
     {
       title: 'Legacy System Modernization',
       description: 'Update outdated systems to modern architectures, migrating to cloud-native environments while preserving core functionality and data integrity.',
       features: [
-        'Refactoring monolithic apps to microservices',
-        'Better scalability',
-        'Modern architectures',
-        'With 60% of the market held by large enterprises, modernization addresses inefficiencies and supports AI/ML integration'
-      ]
+        'Monolith to microservices refactoring',
+        'Database migration',
+        'Modern UI rebuilds',
+        'Incremental modernization strategies'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Aging systems are a top operational risk, and skilled modernization teams are in short supply.' }
     },
     {
       title: 'API Development and Integration',
@@ -839,8 +1126,9 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
         'CRM-ERP syncing',
         'Payment gateways',
         'IoT ecosystems',
-        'As enterprises adopt hybrid models, API-driven architectures are crucial for automation, with CRM adoption at 79% for customer service'
-      ]
+        'Webhook and event-driven integrations'
+      ],
+      demand: { badge: 'Essential', description: 'API-first architectures are foundational for enterprises connecting modern and legacy systems.' }
     },
     {
       title: 'Low-Code/No-Code Solutions',
@@ -849,8 +1137,9 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
         'Custom workflows',
         'Dashboards',
         'Prototypes',
-        'The low-code market is projected to reach $388.6 billion by 2030 at 37.7% CAGR, with 81% of companies viewing it as strategic due to developer shortages'
-      ]
+        'Citizen developer enablement'
+      ],
+      demand: { badge: 'Growing Fast', description: 'Low-code platforms are reducing development timelines for internal tools by 60-80%.' }
     },
     {
       title: 'AI-Integrated Custom Development',
@@ -859,91 +1148,99 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
         'Personalized recommendations',
         'Process optimization',
         'Intelligent automation',
-        '85% of businesses will use AI in software by 2025, with 79% experimenting with AI PaaS for profitability gains'
-      ]
+        'Natural language interfaces'
+      ],
+      demand: { badge: 'High Demand', description: 'Enterprises increasingly expect AI capabilities embedded directly into their custom applications.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Tailored Efficiency',
-      description: 'Streamline operations with solutions built for your needs, reducing costs and boosting productivity'
+      description: 'Eliminate workarounds with software that matches your actual business processes and workflows'
     },
     {
       title: 'Scalable Growth',
-      description: 'Support enterprise expansion with flexible architectures, aligning with a 22.6% global CAGR'
+      description: 'Build on architectures designed to handle increasing users, data, and complexity without rewrites'
     },
     {
       title: 'Innovation Edge',
-      description: 'Integrate trends like AI and low-code for faster deployment and competitive advantage'
+      description: 'Integrate AI, automation, and modern UX patterns that off-the-shelf tools cannot provide'
     },
     {
       title: 'Enhanced Security',
-      description: 'Incorporate cybersecurity from the ground up, addressing rising threats with $10.5 trillion annual impact'
+      description: 'Incorporate security controls from the start, tailored to your specific compliance requirements'
     },
     {
       title: 'Measurable ROI',
-      description: 'Achieve data-driven outcomes, with enterprise software like ERP growing at 11.7% CAGR'
+      description: 'Track outcomes against defined KPIs with built-in analytics and reporting capabilities'
     }
   ],
-  
+
   industries: [
     {
       name: 'Finance',
-      applications: ['Secure transaction platforms', 'compliance tools']
+      applications: ['Secure transaction platforms', 'Compliance tools']
     },
     {
       name: 'Healthcare',
-      applications: ['Patient management systems with AI diagnostics']
+      applications: ['Patient management systems', 'Clinical workflow tools']
     },
     {
       name: 'Retail',
-      applications: ['Inventory and e-commerce integrations']
+      applications: ['Inventory management', 'E-commerce integrations']
     },
     {
       name: 'Manufacturing',
-      applications: ['Supply chain software for efficiency']
+      applications: ['Supply chain management', 'Production tracking']
     },
     {
       name: 'Technology',
-      applications: ['Agile tools for dev teams', 'with BI as the fastest-growing category']
+      applications: ['Developer tools', 'Business intelligence platforms']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Financial Enterprise Modernizes Legacy Systems',
-      client: 'US Bank',
-      challenge: 'Need for legacy system modernization and API integration',
-      solution: 'A US bank collaborated with us on legacy modernization, integrating APIs for seamless operations, resulting in 30% faster processing and improved compliance.',
-      results: [
-        '30% faster processing',
-        'Improved compliance',
-        'Seamless operations integration'
-      ]
+      question: 'How long does a typical custom software project take?',
+      answer: 'Small to mid-size applications take 3-6 months. Enterprise platforms typically run 6-12 months with phased delivery so you see working software within the first 4-6 weeks.'
     },
     {
-      title: 'Retailer Accelerates with Low-Code Platform',
-      client: 'Major Retailer',
-      challenge: 'Need for rapid custom app development and deployment',
-      solution: 'We implemented a low-code solution for a major retailer, enabling rapid custom app development and reducing deployment time by 50%.',
-      results: [
-        '50% reduction in deployment time',
-        'Rapid custom app development',
-        'Enhanced development capabilities'
-      ]
+      question: 'How do you handle changing requirements during development?',
+      answer: 'We use agile sprints with regular priority reviews. Requirements can shift between sprints without derailing the project. We build architectures that accommodate change from the start.'
+    },
+    {
+      question: 'Can you take over and modernize an existing codebase?',
+      answer: 'Yes. We regularly inherit legacy systems. We start with a code audit, document the current architecture, then develop a phased modernization plan that minimizes risk.'
+    },
+    {
+      question: 'Who owns the intellectual property?',
+      answer: 'You do. All custom code, designs, and documentation we produce belong to your organization. We provide full source code access from day one.'
+    },
+    {
+      question: 'What technologies do you use?',
+      answer: 'We are technology-agnostic and choose based on your needs. Common stacks include React/Next.js, Node.js, Python, .NET, PostgreSQL, and cloud-native services on AWS, Azure, or GCP.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Custom Software Development?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our Custom Software Development services can customize success for your enterprise.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  whyEpoch: [
+    'We deliver working software in 2-week sprints, not quarterly waterfall releases',
+    'Our architects have built enterprise systems across finance, healthcare, and logistics verticals',
+    'We write clean, documented code with comprehensive test coverage — built for the next team, not just the current sprint',
+    'Full IP ownership and source code access from day one of every engagement'
+  ],
+
+  ctaTitle: 'Get Started with Custom Software',
+  ctaDescription: 'Tell us about your requirements and we\'ll scope out a solution that fits your business, timeline, and budget.',
+  ctaButtonText: 'Discuss Your Project',
+
   stats: [
-    { value: '$15.19B', label: 'US Market Size 2024' },
-    { value: '15.2%', label: 'CAGR Through 2033' },
-    { value: '$315B', label: 'Enterprise Spending 2025' },
-    { value: '85%', label: 'Businesses Using AI' }
+    { value: 'Agile', label: '2-Week Sprint Delivery' },
+    { value: 'Full', label: 'Source Code Ownership' },
+    { value: 'Extensive', label: 'Enterprise Portfolio' },
+    { value: 'Ongoing', label: 'Maintenance & Support' }
   ]
 };
 
@@ -952,39 +1249,81 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
   id: 'data-analytics',
   name: 'Data Analytics',
   heroTitle: 'Data Analytics & Business Intelligence',
+  heroTitleLines: [
+    { text: 'Data Analytics &', highlight: true },
+    { text: 'Business' },
+    { text: 'Intelligence' }
+  ],
   heroSubtitle: 'Turn data into decisions',
-  heroDescription: 'Unlock the power of your data with advanced analytics and visualization solutions that drive strategic decision-making.',
+  heroDescription: 'We help enterprises extract actionable insights from their data with analytics platforms, visualization tools, and governance frameworks.',
   metaTitle: 'Data Analytics & Business Intelligence - EPOCH',
-  metaDescription: 'Transform data into insights with our analytics solutions. Real-time dashboards, predictive analytics, and data engineering.',
-  
-  overview: {
-    title: 'Data Analytics and Big Data Services',
-    description: 'At EPOCH Software Services, we deliver powerful data analytics and big data solutions that enable US enterprises to extract actionable insights from vast datasets, driving informed decision-making and competitive advantage.',
-    keyPoints: [
-      'With the US data analytics market valued at USD 23.76 billion in 2024 and projected to reach USD 228.60 billion by 2033 at a CAGR of 25.10%, demand for sophisticated analytics services is surging amid the explosion of data volumes and AI integration. Globally, the big data analytics market is expected to grow from USD 303.71 billion in 2025 to USD 1,045.26 billion by 2033, fueled by trends like real-time processing and data democratization.',
-      'Partner with us to harness these capabilities, transforming raw data into strategic assets for your enterprise in 2025\'s data-driven landscape.'
+  metaDescription: 'Enterprise data analytics solutions including real-time dashboards, predictive analytics, and data engineering.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'You have more data than ever, but turning it into timely, trustworthy decisions remains a struggle.',
+    painPoints: [
+      'Your data lives in silos across departments, making it impossible to get a unified view of the business',
+      'Reports take days or weeks to produce because data pipelines are fragile and manual',
+      'Leadership does not trust the numbers because data quality and governance are inconsistent',
+      'Your analytics team spends 80% of their time on data preparation instead of actual analysis'
     ]
   },
-  
+
+  overview: {
+    title: 'Data Analytics and Big Data Services',
+    description: 'EPOCH Software Services delivers data analytics and big data solutions that enable US enterprises to extract actionable insights from large datasets, supporting informed decision-making across the organization.',
+    keyPoints: [
+      'We build analytics platforms that consolidate your data, automate pipeline orchestration, and deliver real-time insights to decision-makers.',
+      'Our focus is on practical outcomes: faster reporting, better data quality, and self-service analytics that reduce your dependency on specialized data teams.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Data Analytics and Big Data',
-    description: 'Drawing on extensive experience with US enterprises, EPOCH specializes in scalable analytics frameworks that incorporate AI, edge computing, and cloud integrations.',
+    description: 'Our team builds scalable analytics frameworks that incorporate AI, edge computing, and cloud integrations, with hands-on experience in data visualization, predictive modeling, and governance.',
     skills: [
       {
-        name: 'Agile Analytics Approach',
-        description: 'Our agile approach addresses 2025 trends such as the increasing velocity and veracity of big data, ensuring high-quality, real-time insights'
+        name: 'Data Pipeline Engineering (Spark, Kafka, Airflow)',
+        description: 'Build reliable, scalable data pipelines for batch and real-time processing across cloud and hybrid environments'
       },
       {
-        name: 'In-Demand Skills Focus',
-        description: 'We focus on in-demand skills like data visualization and predictive modeling'
+        name: 'BI & Visualization (Tableau, Power BI, Looker)',
+        description: 'Design interactive dashboards and self-service reporting platforms that make data accessible to non-technical users'
       },
       {
-        name: 'Enterprise Team Building',
-        description: 'Help enterprises build dedicated data teams and overcome talent shortages'
+        name: 'Data Governance & Quality Frameworks',
+        description: 'Implement data cataloging, lineage tracking, quality monitoring, and access controls for trustworthy analytics'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Data Landscape Assessment',
+        description: 'We audit your data sources, quality, and infrastructure to identify gaps and opportunities for consolidation.'
+      },
+      {
+        step: '02',
+        title: 'Platform Architecture & Pipeline Design',
+        description: 'We design your data platform, defining schemas, pipelines, and governance rules tailored to your analytics needs.'
+      },
+      {
+        step: '03',
+        title: 'Implementation & Dashboard Development',
+        description: 'We build data pipelines, deploy governance tooling, and create dashboards that deliver insights to the right stakeholders.'
+      },
+      {
+        step: '04',
+        title: 'Enablement & Optimization',
+        description: 'We train your team on self-service tools and continuously optimize pipeline performance and data quality.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Big Data Platforms',
@@ -992,9 +1331,10 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
       features: [
         'Scalable storage for IoT data',
         'Enterprise-wide data lakes',
-        'Cloud-based solutions',
-        'With big data analytics projected to hit USD 395.27 billion in 2025 at 13.5% CAGR, enterprises need platforms to handle exploding data volumes'
-      ]
+        'Cloud-based data warehouses',
+        'Data lakehouse architectures'
+      ],
+      demand: { badge: 'High Demand', description: 'Enterprises need scalable platforms to handle exploding data volumes from applications, IoT, and customer interactions.' }
     },
     {
       title: 'Real-Time Analytics',
@@ -1003,8 +1343,9 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
         'Fraud detection',
         'Live dashboards',
         'Operational monitoring',
-        'By 2025, over 50% of enterprise-critical data will be created outside traditional data centers, driving demand for real-time capabilities'
-      ]
+        'Event-driven alerting'
+      ],
+      demand: { badge: 'Growing Fast', description: 'Real-time decision-making is becoming a competitive differentiator across industries.' }
     },
     {
       title: 'Data Governance Frameworks',
@@ -1013,8 +1354,9 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
         'Data lineage tracking',
         'Access controls',
         'Audit readiness',
-        'As data volumes grow, governance is critical for trust and regulatory compliance, with 77% of enterprises forming dedicated data teams'
-      ]
+        'Data catalog implementation'
+      ],
+      demand: { badge: 'Essential', description: 'Without governance, analytics outputs lack the trust needed for strategic decision-making.' }
     },
     {
       title: 'Predictive Analytics and Modeling',
@@ -1023,8 +1365,9 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
         'Demand forecasting',
         'Customer churn prediction',
         'Performance metrics',
-        'Predictive tools are key in a market growing at 28% CAGR, with AI enhancing analytics across industries'
-      ]
+        'Scenario analysis'
+      ],
+      demand: { badge: 'High Demand', description: 'Predictive capabilities transform analytics from backward-looking reports to forward-looking intelligence.' }
     },
     {
       title: 'Data Visualization and BI Tools',
@@ -1033,439 +1376,99 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
         'Executive reporting',
         'Performance metrics',
         'Interactive dashboards',
-        'Visualization skills are among the top in-demand for data analysts in 2025, aiding data democratization'
-      ]
+        'Self-service analytics portals'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Self-service BI is essential for scaling analytics beyond dedicated data teams.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Actionable Insights',
-      description: 'Uncover patterns to drive decisions, with the global market reaching USD 132.9 billion by 2026 at 30.08% CAGR'
+      description: 'Replace static reports with live analytics that surface trends, anomalies, and opportunities as they happen'
     },
     {
       title: 'Operational Efficiency',
-      description: 'Reduce costs through automation and real-time processing, addressing the $655.53 billion big data market projection by 2029'
+      description: 'Automate data preparation and pipeline orchestration, freeing your analysts to focus on high-value work'
     },
     {
       title: 'Scalable Solutions',
-      description: 'Handle growing data volumes, with US enterprise data management market expanding to $30.36 billion by 2035'
+      description: 'Handle growing data volumes with architectures that scale horizontally without performance degradation'
     },
     {
       title: 'Risk Mitigation',
-      description: 'Enhance governance to comply with regulations and build trust'
+      description: 'Improve data quality and governance to ensure compliance and build organizational trust in analytics'
     },
     {
       title: 'Competitive Advantage',
-      description: 'Leverage AI and analytics trends, where data scientists\' employment grows 36% through 2033'
+      description: 'Make faster, more informed decisions by embedding analytics into daily operations and workflows'
     }
   ],
-  
+
   industries: [
     {
       name: 'Healthcare',
-      applications: ['Patient outcome predictions', 'resource optimization']
+      applications: ['Patient outcome predictions', 'Resource optimization']
     },
     {
       name: 'Finance',
-      applications: ['Risk assessment', 'fraud analytics']
+      applications: ['Risk assessment', 'Fraud analytics']
     },
     {
       name: 'Retail',
-      applications: ['Customer behavior insights', 'inventory management']
+      applications: ['Customer behavior insights', 'Inventory management']
     },
     {
       name: 'Manufacturing',
-      applications: ['Predictive maintenance', 'supply chain efficiency']
+      applications: ['Predictive maintenance', 'Supply chain efficiency']
     },
     {
       name: 'Government',
-      applications: ['Policy analysis', 'public service improvements']
+      applications: ['Policy analysis', 'Public service improvements']
     }
   ],
-  
-  caseStudies: [
-    {
-      title: 'Healthcare Provider Enhances Patient Care with Predictive Analytics',
-      client: 'US Hospital System',
-      challenge: 'Need to reduce patient readmission rates and improve care quality',
-      solution: 'A US hospital system implemented our predictive models, reducing readmission rates by 25% through data-driven insights.',
-      results: [
-        '25% reduction in readmission rates',
-        'Improved patient care quality',
-        'Data-driven healthcare insights'
-      ]
-    },
-    {
-      title: 'Retail Enterprise Optimizes Inventory via Real-Time Analytics',
-      client: 'Major Retailer',
-      challenge: 'High stockout rates and supply chain inefficiencies',
-      solution: 'We deployed real-time dashboards for a major retailer, cutting stockouts by 35% and improving supply chain efficiency.',
-      results: [
-        '35% reduction in stockouts',
-        'Improved supply chain efficiency',
-        'Real-time operational insights'
-      ]
-    }
-  ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Data Analytics and Big Data Services?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Explore how our Data Analytics and Big Data Services can unlock the full potential of your data.',
-  ctaButtonText: 'Get Free Consultation',
-  
-  stats: [
-    { value: '$23.76B', label: 'US Market Size 2024' },
-    { value: '25.10%', label: 'CAGR to 2033' },
-    { value: '$1,045.26B', label: 'Global Market 2033' },
-    { value: '36%', label: 'Data Scientist Growth' }
-  ]
-};
 
-// IoT Application Development Service Data
-const IOT_DATA: ServiceDetailData = {
-  id: 'iot',
-  name: 'IoT Application Development',
-  heroTitle: 'IoT Application Development',
-  heroSubtitle: 'Connect your enterprise to the future',
-  heroDescription: 'Develop innovative IoT applications that connect devices, streamline operations, and unlock new efficiencies for your enterprise.',
-  metaTitle: 'IoT Application Development - EPOCH',
-  metaDescription: 'Innovative IoT solutions for enterprise connectivity. Device integration, edge computing, and secure IoT applications.',
-  
-  overview: {
-    title: 'IoT Application Development',
-    description: 'At EPOCH Software Services, we specialize in developing innovative IoT applications that connect devices, streamline operations, and unlock new efficiencies for US enterprises.',
-    keyPoints: [
-      'With the US Internet of Things (IoT) market estimated at USD 413.22 billion in 2024 and projected to grow at a CAGR of 7.6% from 2025 to 2030, driven by advancements in AI integration and edge computing, our services help enterprises capitalize on this expansion. Globally, the IoT market is set to reach USD 629.5 billion in 2025, reflecting surging demand for connected solutions amid trends like 5G and cybersecurity enhancements.',
-      'Partner with us to build secure, scalable IoT ecosystems that drive real-time insights and operational excellence in 2025\'s interconnected landscape.'
-    ]
-  },
-  
-  expertise: {
-    title: 'Our Expertise in IoT Application Development',
-    description: 'With deep experience serving US enterprises, EPOCH excels in creating end-to-end IoT solutions that incorporate emerging trends such as AIoT, edge computing, and 5G connectivity.',
-    skills: [
-      {
-        name: 'Agile IoT Development',
-        description: 'Our agile development process ensures seamless integration, robust security, and compliance with regulations'
-      },
-      {
-        name: '2025 IoT Challenges',
-        description: 'Address 2025 challenges like data privacy and sustainability with cutting-edge solutions'
-      },
-      {
-        name: 'High-Demand Focus',
-        description: 'We focus on high-demand areas to enable enterprises to harness IoT for predictive maintenance, automation, and enhanced decision-making'
-      }
-    ]
-  },
-  
-  keyServices: [
-    {
-      title: 'Device Integration',
-      description: 'Connect diverse devices and sensors into unified ecosystems, enabling data exchange across platforms like AWS IoT or Azure IoT Hub.',
-      features: [
-        'Smart manufacturing lines',
-        'Asset tracking',
-        'Remote monitoring',
-        'As Industrial IoT (IIoT) leads trends, enterprises seek integration for operational efficiency, with the global IIoT market growing rapidly'
-      ]
-    },
-    {
-      title: 'Edge Computing Solutions',
-      description: 'Process data at the source with edge devices to reduce latency and bandwidth usage, integrating AI for on-device analytics.',
-      features: [
-        'Real-time quality control in factories',
-        'Autonomous vehicles',
-        'Low-latency processing',
-        'Edge computing is a top trend, enhancing performance and supporting AIoT systems in low-latency environments'
-      ]
-    },
-    {
-      title: 'IoT Security Protocols',
-      description: 'Implement advanced security measures, including encryption, blockchain, and zero-trust models, to protect against vulnerabilities.',
-      features: [
-        'Secure data transmission in healthcare wearables',
-        'Supply chain networks',
-        'Zero-trust models',
-        'With rising cyber threats, IoT cybersecurity is critical, as enterprises prioritize enhanced measures in 2025'
-      ]
-    },
-    {
-      title: '5G-Enabled IoT Development',
-      description: 'Leverage 5G networks for high-speed, low-latency applications that support massive device connectivity.',
-      features: [
-        'Smart cities infrastructure',
-        'AR/VR industrial training',
-        'High-speed connectivity',
-        '5G connectivity is transforming IoT, enabling faster data transfer and new use cases across industries'
-      ]
-    },
-    {
-      title: 'Digital Twins Implementation',
-      description: 'Create virtual replicas of physical assets for simulation, optimization, and predictive analysis.',
-      features: [
-        'Equipment maintenance in manufacturing',
-        'Urban planning',
-        'Predictive analysis',
-        'Digital twins are a key 2025 trend, empowering predictive capabilities and sustainability efforts'
-      ]
-    }
-  ],
-  
-  benefits: [
-    {
-      title: 'Operational Efficiency',
-      description: 'Automate processes to cut costs and downtime, aligning with a 14% CAGR in enterprise IoT through 2030'
-    },
-    {
-      title: 'Real-Time Insights',
-      description: 'Gain actionable data for faster decisions, supported by trends in AI integration and edge computing'
-    },
-    {
-      title: 'Scalability and Flexibility',
-      description: 'Handle growing device networks with 5G and cloud hybrids for future-proof solutions'
-    },
-    {
-      title: 'Enhanced Security',
-      description: 'Mitigate risks in connected environments, addressing top concerns like cybersecurity'
-    },
-    {
-      title: 'Sustainability Gains',
-      description: 'Optimize resource use through smart monitoring, contributing to environmental trends in IoT'
-    }
-  ],
-  
-  industries: [
-    {
-      name: 'Manufacturing',
-      applications: ['Predictive maintenance', 'IIoT for smart factories']
-    },
-    {
-      name: 'Healthcare',
-      applications: ['Wearables and remote patient monitoring', 'secure data']
-    },
-    {
-      name: 'Retail',
-      applications: ['Inventory tracking', 'customer experience enhancements']
-    },
-    {
-      name: 'Logistics',
-      applications: ['Fleet management', 'supply chain visibility']
-    },
-    {
-      name: 'Energy',
-      applications: ['Smart grids', 'sustainability monitoring']
-    }
-  ],
-  
-  caseStudies: [
-    {
-      title: 'Manufacturing Firm Boosts Efficiency with Edge Computing',
-      client: 'US Manufacturer',
-      challenge: 'Need for real-time quality control and reduced latency',
-      solution: 'A US manufacturer integrated our edge IoT solutions, reducing latency by 60% and enabling real-time quality control.',
-      results: [
-        '60% reduction in latency',
-        'Real-time quality control enabled',
-        'Enhanced manufacturing efficiency'
-      ]
-    },
-    {
-      title: 'Healthcare Provider Enhances Care via Secure Wearables',
-      client: 'Major Hospital Network',
-      challenge: 'Need for secure remote monitoring and compliance',
-      solution: 'We developed secure IoT apps for remote monitoring, improving patient outcomes and compliance for a major hospital network.',
-      results: [
-        'Improved patient outcomes',
-        'Enhanced compliance posture',
-        'Secure remote monitoring implementation'
-      ]
-    }
-  ],
-  
-  ctaTitle: 'Ready to Transform Your Business with IoT Application Development?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our IoT Application Development services can connect your enterprise to the future.',
-  ctaButtonText: 'Get Free Consultation',
-  
-  stats: [
-    { value: '$413.22B', label: 'US IoT Market 2024' },
-    { value: '7.6%', label: 'CAGR 2025-2030' },
-    { value: '$629.5B', label: 'Global Market 2025' },
-    { value: '14%', label: 'Enterprise IoT CAGR' }
-  ]
-};
+  caseStudies: [],
 
-// Blockchain Development Service Data
-const BLOCKCHAIN_DATA: ServiceDetailData = {
-  id: 'blockchain',
-  name: 'Blockchain Development',
-  heroTitle: 'Blockchain Development',
-  heroSubtitle: 'Decentralize and elevate your operations',
-  heroDescription: 'Develop secure, decentralized blockchain solutions that enhance transparency, efficiency, and trust for your enterprise.',
-  metaTitle: 'Blockchain Development - EPOCH',
-  metaDescription: 'Secure blockchain solutions for enterprise. DApp development, smart contracts, tokenization, and blockchain audits.',
-  
-  overview: {
-    title: 'Blockchain Development',
-    description: 'At EPOCH Software Services, we specialize in developing secure, decentralized blockchain solutions that enhance transparency, efficiency, and trust for US enterprises.',
-    keyPoints: [
-      'With the U.S. blockchain technology market valued at USD 9.9 billion in 2024 and projected to grow at a staggering 92.4% CAGR from 2025 to 2032, adoption is accelerating amid trends like AI integration and regulatory advancements. Globally, the blockchain market is anticipated to expand from USD 32.99 billion in 2025 to USD 393.45 billion by 2030, driven by enterprise demands for scalable, hybrid models in fintech, supply chain, and beyond.',
-      'Partner with us to implement blockchain technologies that address 2025\'s key challenges, including institutional adoption, scalability, and Web3 opportunities, transforming your operations with immutable, innovative systems.'
-    ]
-  },
-  
-  expertise: {
-    title: 'Our Expertise in Blockchain Development',
-    description: 'Leveraging years of experience with US enterprises, EPOCH delivers comprehensive blockchain development using platforms like Ethereum, Hyperledger, and Solana.',
-    skills: [
-      {
-        name: 'Advanced Blockchain Platforms',
-        description: 'Our agile methodology incorporates emerging 2025 trends such as AI-powered smart contracts, decentralized finance (DeFi), and enhanced scalability solutions'
-      },
-      {
-        name: 'Secure & Compliant Implementation',
-        description: 'Ensure secure, compliant implementations that align with regulatory frameworks and enterprise needs'
-      },
-      {
-        name: 'Strategic Enterprise Adoption',
-        description: 'We excel in high-demand areas like tokenization and audits to help enterprises navigate selective, strategic adoption in a maturing market'
-      }
-    ]
-  },
-  
-  keyServices: [
+  faqs: [
     {
-      title: 'DApp Development',
-      description: 'Build decentralized applications (DApps) for peer-to-peer interactions, leveraging smart contracts for automated, trustless execution.',
-      features: [
-        'Decentralized marketplaces',
-        'Voting systems',
-        'Gaming platforms',
-        'With increasing institutional adoption, DApps are central to Web3 strategies, as enterprises explore blockchain for digital innovation'
-      ]
+      question: 'What data infrastructure do we need before starting?',
+      answer: 'You do not need a perfect setup. We assess your current state and build from there — whether you are starting with spreadsheets or already have a data warehouse that needs optimization.'
     },
     {
-      title: 'Tokenization Services',
-      description: 'Convert assets into digital tokens for fractional ownership, liquidity, and seamless transfers on blockchain networks.',
-      features: [
-        'Real estate tokenization',
-        'NFT creation',
-        'Securities trading',
-        'Tokenization is a rising trend, enabling efficient asset management in a market projected to hit USD 306 billion by 2030'
-      ]
+      question: 'How long does it take to build a data analytics platform?',
+      answer: 'A focused BI dashboard project takes 6-10 weeks. A full data platform with pipelines, governance, and self-service analytics typically takes 3-6 months in phases.'
     },
     {
-      title: 'Blockchain Audits',
-      description: 'Perform thorough security audits and code reviews to identify vulnerabilities and ensure compliance with standards like ISO and regulatory requirements.',
-      features: [
-        'Smart contract verification',
-        'Network penetration testing',
-        'Compliance verification',
-        'As cyber threats evolve, audits are essential for trust in enterprise blockchain, amid a focus on scalability and security in 2025'
-      ]
+      question: 'Can you work with our existing tools like Tableau or Power BI?',
+      answer: 'Yes. We integrate with your existing BI tools and data infrastructure. We also recommend alternatives when they better fit your use case and budget.'
     },
     {
-      title: 'Smart Contract Development',
-      description: 'Design self-executing contracts with embedded terms, automating processes like payments and agreements on blockchain.',
-      features: [
-        'Supply chain automation',
-        'Insurance claims processing',
-        'Automated payments',
-        'AI-powered smart contracts are a top trend, enhancing efficiency in enterprises adopting blockchain selectively'
-      ]
+      question: 'How do you ensure data quality?',
+      answer: 'We implement automated quality checks at every pipeline stage, data lineage tracking, and monitoring dashboards that alert your team to anomalies before they reach reports.'
     },
     {
-      title: 'Supply Chain Blockchain Solutions',
-      description: 'Implement traceable, immutable ledgers for end-to-end visibility in supply chains, reducing fraud and improving efficiency.',
-      features: [
-        'Provenance tracking for goods',
-        'Real-time inventory management',
-        'Anti-counterfeiting measures',
-        'Supply chain is a leading use case for enterprise blockchain in 2025, driven by needs for transparency and resilience'
-      ]
+      question: 'Can you help us become self-sufficient in analytics?',
+      answer: 'Absolutely. We design self-service platforms, train your team, and document everything. Our goal is to build your internal capability, not create permanent dependency.'
     }
   ],
-  
-  benefits: [
-    {
-      title: 'Enhanced Transparency and Trust',
-      description: 'Immutable records reduce disputes, aligning with a U.S. market growing at 92.4% CAGR'
-    },
-    {
-      title: 'Cost Efficiency',
-      description: 'Automate processes to lower operational expenses, in a global market expanding at 64.2% CAGR'
-    },
-    {
-      title: 'Scalability and Innovation',
-      description: 'Integrate with AI and DeFi for future-proof solutions, addressing 2025 trends like institutional adoption'
-    },
-    {
-      title: 'Robust Security',
-      description: 'Protect against threats with audits and encryption, crucial in enterprise environments'
-    },
-    {
-      title: 'Regulatory Compliance',
-      description: 'Ensure adherence to evolving standards, facilitating broader adoption'
-    }
+
+  whyEpoch: [
+    'We build data platforms for production, not proof-of-concept dashboards that break at scale',
+    'Our engineers have experience with Spark, Kafka, Airflow, and modern cloud data stacks',
+    'We prioritize data governance from day one so your analytics are trustworthy and audit-ready',
+    'We train your team on self-service tools so you are not dependent on us for every new report'
   ],
-  
-  industries: [
-    {
-      name: 'Finance',
-      applications: ['DeFi platforms', 'secure transactions']
-    },
-    {
-      name: 'Supply Chain',
-      applications: ['Traceability', 'fraud prevention']
-    },
-    {
-      name: 'Healthcare',
-      applications: ['Secure patient data sharing', 'drug tracking']
-    },
-    {
-      name: 'Real Estate',
-      applications: ['Asset tokenization', 'smart contracts']
-    },
-    {
-      name: 'Manufacturing',
-      applications: ['Provenance', 'quality assurance']
-    }
-  ],
-  
-  caseStudies: [
-    {
-      title: 'Financial Institution Launches DeFi Platform',
-      client: 'US Bank',
-      challenge: 'Need for faster, more secure transaction processing',
-      solution: 'A US bank partnered with us to develop a DeFi solution using smart contracts, reducing transaction times by 70% and enhancing security.',
-      results: [
-        '70% reduction in transaction times',
-        'Enhanced security measures',
-        'Successful DeFi platform launch'
-      ]
-    },
-    {
-      title: 'Supply Chain Firm Implements Traceability Blockchain',
-      client: 'Manufacturing Enterprise',
-      challenge: 'Need for supply chain visibility and fraud reduction',
-      solution: 'We built a blockchain network for a manufacturing enterprise, improving supply chain visibility and cutting fraud losses by 40%.',
-      results: [
-        '40% reduction in fraud losses',
-        'Improved supply chain visibility',
-        'Enhanced traceability implementation'
-      ]
-    }
-  ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Blockchain Development?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Explore how our Blockchain Development services can decentralize and elevate your enterprise operations.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  ctaTitle: 'Explore Data Analytics for Your Organization',
+  ctaDescription: 'Let\'s discuss your data challenges and how analytics can support better decision-making across your enterprise.',
+  ctaButtonText: 'Talk to Our Team',
+
   stats: [
-    { value: '$9.9B', label: 'US Market Size 2024' },
-    { value: '92.4%', label: 'CAGR 2025-2032' },
-    { value: '$393.45B', label: 'Global Market 2030' },
-    { value: '$306B', label: 'Tokenization Market 2030' }
+    { value: 'Extensive', label: 'Platform Engineering Experience' },
+    { value: 'Real-Time', label: 'Streaming Analytics Capability' },
+    { value: 'Self-Service', label: 'BI & Reporting Design' },
+    { value: 'Ongoing', label: 'Data Quality Monitoring' }
   ]
 };
 
@@ -1474,39 +1477,81 @@ const DEVOPS_DATA: ServiceDetailData = {
   id: 'devops',
   name: 'DevOps and Automation',
   heroTitle: 'DevOps and Automation Services',
-  heroSubtitle: 'Accelerate delivery and enhance collaboration',
-  heroDescription: 'Comprehensive DevOps and automation services that accelerate software delivery, enhance collaboration, and ensure operational resilience.',
+  heroTitleLines: [
+    { text: 'DevOps and', highlight: true },
+    { text: 'Automation' },
+    { text: 'Services' }
+  ],
+  heroSubtitle: 'Accelerate delivery, improve reliability',
+  heroDescription: 'We build and manage DevOps pipelines, automation workflows, and observability systems that help enterprises ship software faster and more reliably.',
   metaTitle: 'DevOps and Automation Services - EPOCH',
-  metaDescription: 'Accelerate software delivery with DevOps automation. CI/CD pipelines, monitoring, DevSecOps, and AIOps solutions.',
-  
-  overview: {
-    title: 'DevOps and Automation Services',
-    description: 'At EPOCH Software Services, we offer comprehensive DevOps and automation services that accelerate software delivery, enhance collaboration, and ensure operational resilience for US enterprises.',
-    keyPoints: [
-      'With the global DevOps market projected to reach $15.06 billion in 2025, growing exponentially from $12.54 billion in 2024, and North America leading with 38.5% market share, demand is driven by the need for faster, more secure deployments amid AI integration and cloud-native shifts.',
-      'Partner with us to implement agile pipelines, automation tools, and best practices that align with 2025 trends like DevSecOps, AIOps, and sustainability, empowering your enterprise to thrive in a competitive landscape.'
+  metaDescription: 'DevOps automation services including CI/CD pipelines, monitoring, DevSecOps, and AIOps solutions for enterprise.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Shipping software quickly and reliably requires more than just tools — it requires the right practices, pipelines, and culture.',
+    painPoints: [
+      'Deployments are manual, error-prone, and take hours instead of minutes',
+      'Your team lacks visibility into system health and spends too much time firefighting production issues',
+      'Security is bolted on at the end of the pipeline instead of integrated throughout',
+      'Infrastructure changes are manual and undocumented, creating configuration drift and inconsistency'
     ]
   },
-  
+
+  overview: {
+    title: 'DevOps and Automation Services',
+    description: 'EPOCH Software Services provides DevOps and automation services that accelerate software delivery, improve collaboration, and strengthen operational resilience for US enterprises.',
+    keyPoints: [
+      'We implement CI/CD pipelines, infrastructure-as-code, and observability systems that let your team ship faster with confidence.',
+      'Our approach integrates security, monitoring, and automation into every stage of the software delivery lifecycle.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in DevOps and Automation',
-    description: 'With extensive experience supporting US enterprises, EPOCH excels in building scalable DevOps ecosystems using modern tools like GitLab, Kubernetes, and Terraform.',
+    description: 'Our team builds scalable DevOps ecosystems using modern tools like GitLab, Kubernetes, and Terraform, with a focus on security, observability, and Infrastructure as Code.',
     skills: [
       {
-        name: 'Modern DevOps Tools',
-        description: 'Our agile approach incorporates 2025 trends such as AI-driven automation, GitOps, and self-service platforms'
+        name: 'CI/CD Pipeline Engineering (GitHub Actions, GitLab CI, Jenkins)',
+        description: 'Design and implement automated build, test, and deployment pipelines with proper gating and rollback strategies'
       },
       {
-        name: 'Security & Scalability Focus',
-        description: 'Focus on security, scalability, and efficiency to address pain points like observability and legacy tool management'
+        name: 'Infrastructure as Code (Terraform, Pulumi, Ansible)',
+        description: 'Define and manage infrastructure declaratively for consistent, reproducible environments across all stages'
       },
       {
-        name: 'High-Demand Skills',
-        description: 'We specialize in high-demand skills including Infrastructure as Code (IaC) and cloud-native architectures to help enterprises overcome developer shortages'
+        name: 'Container Orchestration (Kubernetes, Docker, ECS)',
+        description: 'Deploy and manage containerized applications with auto-scaling, health checks, and zero-downtime deployments'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Pipeline & Infrastructure Audit',
+        description: 'We assess your current deployment process, infrastructure management, and monitoring to identify bottlenecks and risks.'
+      },
+      {
+        step: '02',
+        title: 'Pipeline Design & IaC Setup',
+        description: 'We design CI/CD pipelines and codify your infrastructure, establishing version-controlled, repeatable processes.'
+      },
+      {
+        step: '03',
+        title: 'Implementation & Security Integration',
+        description: 'We build pipelines, deploy monitoring, and embed security scanning at every stage of the delivery process.'
+      },
+      {
+        step: '04',
+        title: 'Optimization & Team Enablement',
+        description: 'We tune performance, reduce pipeline times, and train your team to own and extend the DevOps platform independently.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Pipeline Setup (CI/CD)',
@@ -1514,9 +1559,10 @@ const DEVOPS_DATA: ServiceDetailData = {
       features: [
         'Software build automation',
         'Microservices deployment',
-        'Version control',
-        'As over 80% of enterprises adopt DevOps for faster delivery, CI/CD remains core, with automation skills non-negotiable in a market growing at 19.95% CAGR'
-      ]
+        'Version control workflows',
+        'Automated testing and quality gates'
+      ],
+      demand: { badge: 'Essential', description: 'CI/CD is the foundation of modern software delivery and a prerequisite for engineering velocity.' }
     },
     {
       title: 'Monitoring and Observability Tools',
@@ -1524,19 +1570,21 @@ const DEVOPS_DATA: ServiceDetailData = {
       features: [
         'System health tracking',
         'Anomaly detection',
-        'Incident response',
-        'Tighter observability is a top trend in 2025, essential for reliability in cloud-native environments amid rising AI impacts'
-      ]
+        'Incident response automation',
+        'Distributed tracing'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Observability is the difference between proactive operations and reactive firefighting.' }
     },
     {
       title: 'Process Automation',
       description: 'Automate workflows with IaC tools like Terraform and Ansible, including orchestration for infrastructure provisioning and configuration management.',
       features: [
         'Cloud resource automation',
-        'Compliance checks',
+        'Compliance-as-code',
         'Scaling operations',
-        'AI-driven automation and IaC are high-demand skills, supporting sustainability and efficiency in DevOps-as-a-service models'
-      ]
+        'Environment provisioning'
+      ],
+      demand: { badge: 'High Demand', description: 'Manual infrastructure management does not scale and creates consistency and security risks.' }
     },
     {
       title: 'DevSecOps Implementation',
@@ -1545,8 +1593,9 @@ const DEVOPS_DATA: ServiceDetailData = {
         'Vulnerability management',
         'Secure deployments',
         'Regulatory adherence',
-        'DevSecOps is the flavor of 2025, with security checks in all stages as enterprises prioritize threat mitigation'
-      ]
+        'Container image scanning'
+      ],
+      demand: { badge: 'High Demand', description: 'Shifting security left reduces vulnerabilities and compliance costs significantly.' }
     },
     {
       title: 'AIOps and GitOps Services',
@@ -1555,91 +1604,99 @@ const DEVOPS_DATA: ServiceDetailData = {
         'Intelligent pipelines',
         'Version-controlled environments',
         'Self-healing systems',
-        'AI as copilot and GitOps are emerging trends, with roles evolving toward AI workflow design in 2025'
-      ]
+        'Predictive alerting'
+      ],
+      demand: { badge: 'Emerging', description: 'AI-powered operations and GitOps are the next evolution for teams managing complex distributed systems.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Accelerated Delivery',
-      description: 'Reduce time-to-market with automated pipelines, aligning with a global market expanding to $25.5 billion by 2028'
+      description: 'Reduce deployment time from hours to minutes with automated pipelines and standardized processes'
     },
     {
       title: 'Improved Reliability',
-      description: 'Enhance system maturity through observability and feedback loops, key to 2025\'s focus on speed and resilience'
+      description: 'Catch issues before they reach production with comprehensive testing, monitoring, and rollback capabilities'
     },
     {
       title: 'Cost Optimization',
-      description: 'Implement FinOps and scalable automation to lower expenses in cloud-native setups'
+      description: 'Eliminate manual toil and optimize cloud resource usage through automation and FinOps practices'
     },
     {
       title: 'Enhanced Security',
-      description: 'Embed DevSecOps to mitigate risks, crucial as threats evolve'
+      description: 'Embed security checks at every pipeline stage, catching vulnerabilities before deployment'
     },
     {
       title: 'Innovation Edge',
-      description: 'Adopt AI and GitOps for adaptive, self-service platforms, positioning your enterprise for future growth'
+      description: 'Free your engineering team from operational overhead so they can focus on building features'
     }
   ],
-  
+
   industries: [
     {
       name: 'Finance',
-      applications: ['Secure, compliant pipelines', 'fintech deployments']
+      applications: ['Secure compliant pipelines', 'Fintech deployments']
     },
     {
       name: 'Healthcare',
-      applications: ['Automated workflows', 'patient data systems']
+      applications: ['Automated workflows', 'Patient data systems']
     },
     {
       name: 'Retail',
-      applications: ['Scalable e-commerce automation', 'monitoring']
+      applications: ['Scalable e-commerce automation', 'Performance monitoring']
     },
     {
       name: 'Manufacturing',
-      applications: ['IIoT integrations with GitOps', 'efficiency']
+      applications: ['IIoT deployment pipelines', 'Operational automation']
     },
     {
       name: 'Technology',
-      applications: ['Cloud-native DevOps for software firms', 'where demand is highest']
+      applications: ['Cloud-native DevOps', 'Platform engineering']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Tech Firm Enhances Deployment with CI/CD Pipelines',
-      client: 'US Software Company',
-      challenge: 'Need for faster release cycles and improved team collaboration',
-      solution: 'A US software company implemented our CI/CD setup, reducing release cycles by 50% and improving collaboration across teams.',
-      results: [
-        '50% reduction in release cycles',
-        'Improved team collaboration',
-        'Enhanced deployment efficiency'
-      ]
+      question: 'How long does it take to set up a CI/CD pipeline?',
+      answer: 'A basic CI/CD pipeline for a single application takes 2-4 weeks. Enterprise-wide pipeline standardization across multiple teams typically runs 2-4 months with phased rollout.'
     },
     {
-      title: 'Financial Enterprise Secures Operations via DevSecOps',
-      client: 'Banking Client',
-      challenge: 'Need for automated security scanning and vulnerability reduction',
-      solution: 'We integrated DevSecOps for a banking client, automating security scans and cutting vulnerability incidents by 35%.',
-      results: [
-        '35% reduction in vulnerability incidents',
-        'Automated security scanning',
-        'Improved operational security'
-      ]
+      question: 'Can you work with our existing tools and infrastructure?',
+      answer: 'Yes. We integrate with your current stack — whether that is Jenkins, GitHub Actions, AWS, or Azure. We recommend changes only when they provide clear, measurable benefits.'
+    },
+    {
+      question: 'What does DevSecOps implementation involve?',
+      answer: 'We add automated security scanning (SAST, DAST, dependency checks) to your pipeline, implement secret management, and establish security policies as code. It is incremental — no need to rebuild everything.'
+    },
+    {
+      question: 'How do you handle knowledge transfer to our team?',
+      answer: 'Every engagement includes documentation, runbooks, and hands-on training sessions. We pair with your engineers during implementation so they can own the platform after handoff.'
+    },
+    {
+      question: 'What metrics improve with DevOps adoption?',
+      answer: 'Key metrics include deployment frequency, lead time for changes, change failure rate, and mean time to recovery. Most teams see 3-10x improvement in deployment frequency within the first quarter.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with DevOps and Automation Services?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our DevOps and Automation Services can streamline your enterprise processes.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  whyEpoch: [
+    'We build DevOps platforms your team can own and extend — not black boxes that require our ongoing involvement',
+    'Our engineers have managed CI/CD pipelines processing thousands of deployments per month',
+    'We integrate security into pipelines from day one, not as an afterthought',
+    'We focus on developer experience — fast feedback loops, clear documentation, and self-service capabilities'
+  ],
+
+  ctaTitle: 'Improve Your DevOps Pipeline',
+  ctaDescription: 'Whether you\'re starting from scratch or optimizing an existing setup, we can help you build a more reliable delivery process.',
+  ctaButtonText: 'Talk to Our Engineers',
+
   stats: [
-    { value: '$15.06B', label: 'Global Market 2025' },
-    { value: '38.5%', label: 'North America Share' },
-    { value: '19.95%', label: 'Market CAGR' },
-    { value: '80%+', label: 'Enterprise Adoption' }
+    { value: '80%+', label: 'Enterprise DevOps Adoption' },
+    { value: '3-10x', label: 'Deployment Frequency Improvement' },
+    { value: 'Certified', label: 'Kubernetes & Cloud Engineers' },
+    { value: 'Continuous', label: 'Security Integration' }
   ]
 };
 
@@ -1648,39 +1705,81 @@ const MOBILE_DATA: ServiceDetailData = {
   id: 'mobile',
   name: 'Mobile Application Development',
   heroTitle: 'Mobile Application Development',
-  heroSubtitle: 'Mobilize your enterprise success',
-  heroDescription: 'Craft high-performance mobile applications that engage users, drive mobility, and support enterprise growth in a mobile-first world.',
+  heroTitleLines: [
+    { text: 'Mobile' },
+    { text: 'Application', highlight: true },
+    { text: 'Development' }
+  ],
+  heroSubtitle: 'High-performance apps for a mobile-first world',
+  heroDescription: 'We build mobile applications — native, hybrid, and progressive — that serve enterprise needs, from customer-facing apps to internal tools and workforce platforms.',
   metaTitle: 'Mobile Application Development - EPOCH',
-  metaDescription: 'High-performance mobile apps for enterprise. Native iOS/Android, hybrid development, PWAs, and AI-enhanced mobile solutions.',
-  
-  overview: {
-    title: 'Mobile Application Development',
-    description: 'At EPOCH Software Services, we craft high-performance mobile applications that engage users, drive mobility, and support enterprise growth in a mobile-first world.',
-    keyPoints: [
-      'With the global mobile application market projected to reach USD 330.61 billion in 2025, driven by rising smartphone adoption and AI integration, US enterprises are increasingly investing in custom apps to enhance customer experiences and internal efficiencies. The US market, where iOS holds a 59% share, is a hotspot for innovation, with trends like cross-platform development and 5G enabling new possibilities amid a global CAGR of over 13% through 2034.',
-      'Partner with us to develop intuitive, secure mobile solutions that leverage these trends, ensuring your enterprise stays connected and competitive in 2025.'
+  metaDescription: 'Mobile app development for enterprise. Native iOS/Android, hybrid development, PWAs, and AI-enhanced mobile solutions.',
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Mobile is often the primary channel for customer and employee interaction, but building reliable, performant apps across platforms is harder than it looks.',
+    painPoints: [
+      'Your mobile app is slow, buggy, or outdated and users are abandoning it for competitor alternatives',
+      'Maintaining separate iOS and Android codebases doubles your development cost and slows feature releases',
+      'Your internal teams rely on desktop-only tools that do not work for field staff and remote workers',
+      'You need to integrate mobile experiences with backend systems, authentication, and push notifications reliably'
     ]
   },
-  
+
+  overview: {
+    title: 'Mobile Application Development',
+    description: 'EPOCH Software Services builds high-performance mobile applications that serve enterprise needs in a mobile-first world, from customer-facing platforms to internal workforce tools.',
+    keyPoints: [
+      'We build mobile apps that perform well, look great, and integrate seamlessly with your backend systems and business logic.',
+      'Our team works across native iOS/Android, cross-platform (React Native, Flutter), and progressive web app technologies to match the right approach to your needs.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Mobile Application Development',
-    description: 'With proven expertise in serving US enterprises, EPOCH delivers end-to-end mobile app development using frameworks like React Native, Flutter, and Swift.',
+    description: 'Our team delivers end-to-end mobile app development using frameworks like React Native, Flutter, and Swift, with a focus on user-centric design, security, and seamless cloud connectivity.',
     skills: [
       {
-        name: 'Modern Mobile Frameworks',
-        description: 'Our agile process integrates 2025 trends such as AI personalization, AR/VR enhancements, and progressive web apps (PWAs)'
+        name: 'Cross-Platform Development (React Native, Flutter)',
+        description: 'Build high-performance apps for iOS and Android from a single codebase, reducing cost and time to market'
       },
       {
-        name: 'User-Centric Design',
-        description: 'Focus on user-centric design, security, and seamless cloud connectivity to address challenges like app fragmentation and data privacy'
+        name: 'Native iOS & Android (Swift, Kotlin)',
+        description: 'Platform-specific development for apps requiring maximum performance, deep OS integration, or hardware access'
       },
       {
-        name: 'Scalable Solutions',
-        description: 'We specialize in high-demand areas to help enterprises build apps that scale with user growth and technological advancements'
+        name: 'Mobile UX Design & Prototyping',
+        description: 'Research-driven interface design with interactive prototyping, accessibility compliance, and user testing'
       }
     ]
   },
-  
+
+  process: {
+    title: 'How We Work',
+    steps: [
+      {
+        step: '01',
+        title: 'Requirements & Platform Strategy',
+        description: 'We define your mobile requirements and recommend native, cross-platform, or PWA based on your audience, budget, and performance needs.'
+      },
+      {
+        step: '02',
+        title: 'UX Design & Prototyping',
+        description: 'We create wireframes and interactive prototypes, validate with real users, and iterate before writing production code.'
+      },
+      {
+        step: '03',
+        title: 'Development & Testing',
+        description: 'We build in sprints with automated testing on real devices, continuous integration, and regular stakeholder reviews.'
+      },
+      {
+        step: '04',
+        title: 'Launch & Iteration',
+        description: 'We handle app store submission, analytics setup, and post-launch monitoring, then iterate based on real user behavior.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Native and Hybrid App Development',
@@ -1689,18 +1788,20 @@ const MOBILE_DATA: ServiceDetailData = {
         'Enterprise mobility tools',
         'Consumer-facing apps',
         'E-commerce platforms',
-        'With Android at 70.7% global share and iOS leading in the US, hybrid approaches reduce costs while maintaining performance in a market growing to USD 1,103.48 billion by 2034'
-      ]
+        'Workforce management apps'
+      ],
+      demand: { badge: 'High Demand', description: 'Cross-platform frameworks now match native performance for most use cases, making hybrid the default choice.' }
     },
     {
       title: 'App Security Implementation',
       description: 'Embed robust security features like encryption, biometric authentication, and compliance with standards such as GDPR and CCPA.',
       features: [
-        'Secure data handling in finance apps',
+        'Secure data handling',
         'Health records protection',
         'Biometric authentication',
-        'Rising cyber threats make security a priority, especially as mobile apps handle sensitive data in an expanding market'
-      ]
+        'Certificate pinning'
+      ],
+      demand: { badge: 'Essential', description: 'Mobile apps handling sensitive data require security built in, not bolted on after launch.' }
     },
     {
       title: 'UX/UI Design',
@@ -1709,18 +1810,20 @@ const MOBILE_DATA: ServiceDetailData = {
         'Custom dashboards',
         'Gamified features',
         'Responsive layouts',
-        'User experience drives retention, with trends like AI personalization enhancing engagement in 2025'
-      ]
+        'Accessibility compliance'
+      ],
+      demand: { badge: 'Critical Skill', description: 'User experience directly determines app retention — most uninstalls happen within the first week.' }
     },
     {
       title: 'Progressive Web Apps (PWAs)',
       description: 'Develop web-based apps that function like native ones, offering offline access, push notifications, and fast loading.',
       features: [
-        'Cost-effective alternatives for e-commerce',
+        'Cost-effective e-commerce',
         'Internal tools',
         'Offline functionality',
-        'PWAs bridge web and mobile, gaining traction for their versatility and lower development costs'
-      ]
+        'Cross-device compatibility'
+      ],
+      demand: { badge: 'Growing Fast', description: 'PWAs offer native-like experiences at a fraction of the development cost for many use cases.' }
     },
     {
       title: 'AI-Enhanced Mobile Apps',
@@ -1729,265 +1832,99 @@ const MOBILE_DATA: ServiceDetailData = {
         'Smart assistants',
         'Augmented reality overlays',
         'Predictive analytics',
-        'AI integration is a top trend, boosting app intelligence as enterprises seek competitive edges in 2025'
-      ]
+        'On-device ML inference'
+      ],
+      demand: { badge: 'Emerging', description: 'On-device AI is enabling new mobile experiences from real-time translation to intelligent camera features.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'User Engagement',
-      description: 'Create addictive experiences that boost retention and satisfaction, aligning with a global market surpassing $289 billion in 2025'
+      description: 'Build experiences that users return to daily with intuitive design, fast performance, and personalized content'
     },
     {
       title: 'Scalability and Performance',
-      description: 'Support growing user bases with 5G-ready apps for seamless operations'
+      description: 'Support growing user bases with architectures optimized for speed and reliability under load'
     },
     {
       title: 'Cost Efficiency',
-      description: 'Hybrid and PWA options reduce development time and expenses while maximizing reach'
+      description: 'Reduce development and maintenance costs with cross-platform approaches and shared codebases'
     },
     {
       title: 'Security and Compliance',
-      description: 'Protect user data to build trust and meet regulatory demands'
+      description: 'Protect user data with encryption, secure authentication, and compliance with platform and regulatory standards'
     },
     {
       title: 'Innovation Boost',
-      description: 'Leverage AR/VR and AI trends to differentiate your enterprise in a crowded app ecosystem'
+      description: 'Differentiate with AR features, AI personalization, and offline capabilities that competitors lack'
     }
   ],
-  
+
   industries: [
     {
       name: 'Retail',
-      applications: ['Personalized shopping apps', 'AR try-ons']
+      applications: ['Personalized shopping apps', 'AR product preview']
     },
     {
       name: 'Healthcare',
-      applications: ['Telemedicine', 'patient tracking tools']
+      applications: ['Telemedicine', 'Patient tracking tools']
     },
     {
       name: 'Finance',
-      applications: ['Secure banking apps', 'biometric features']
+      applications: ['Secure banking apps', 'Biometric authentication']
     },
     {
       name: 'Logistics',
-      applications: ['Real-time tracking', 'workforce management']
+      applications: ['Real-time tracking', 'Workforce management']
     },
     {
       name: 'Education',
-      applications: ['Interactive learning platforms', 'AI tutors']
+      applications: ['Interactive learning platforms', 'AI tutoring']
     }
   ],
-  
-  caseStudies: [
-    {
-      title: 'Retailer Drives Sales with AI-Personalized App',
-      client: 'US E-commerce Giant',
-      challenge: 'Need for personalized user experiences and increased engagement',
-      solution: 'A US e-commerce giant partnered with us for a hybrid app featuring AI recommendations, increasing user engagement by 45%.',
-      results: [
-        '45% increase in user engagement',
-        'AI-powered personalization',
-        'Hybrid app efficiency'
-      ]
-    },
-    {
-      title: 'Healthcare Firm Enhances Access via Secure Mobile Platform',
-      client: 'Major Healthcare Provider',
-      challenge: 'Need for secure telemedicine platform and patient access',
-      solution: 'We developed a native iOS app for telemedicine, improving patient satisfaction and compliance for a major provider.',
-      results: [
-        'Improved patient satisfaction',
-        'Enhanced compliance posture',
-        'Secure telemedicine platform'
-      ]
-    }
-  ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Mobile Application Development?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Learn how our Mobile Application Development services can mobilize your enterprise success.',
-  ctaButtonText: 'Get Free Consultation',
-  
-  stats: [
-    { value: '$330.61B', label: 'Global Market 2025' },
-    { value: '59%', label: 'iOS Share in US' },
-    { value: '13%+', label: 'Global CAGR' },
-    { value: '$1,103.48B', label: 'Market by 2034' }
-  ]
-};
 
-// AR/VR/Spatial Computing Solutions Service Data
-const ARVR_DATA: ServiceDetailData = {
-  id: 'arvr',
-  name: 'AR/VR/Spatial Computing Solutions',
-  heroTitle: 'AR VR Spatial Computing Solutions',
-  heroSubtitle: 'Enter the era of immersive technology',
-  heroDescription: 'Transform your enterprise operations with cutting-edge AR, VR, and spatial computing solutions that redefine how teams collaborate, train, and visualize complex data.',
-  metaTitle: 'AR/VR/Spatial Computing Solutions - EPOCH',
-  metaDescription: 'Immersive AR/VR solutions for enterprise. Virtual training, spatial analytics, metaverse integration, and digital twins.',
-  
-  overview: {
-    title: 'AR/VR/Spatial Computing Solutions',
-    description: 'At EPOCH Software Services, we deliver advanced AR, VR, and spatial computing solutions that enable US enterprises to immerse teams in virtual environments for training, collaboration, and data visualization.',
-    keyPoints: [
-      'With the global XR (Extended Reality) market projected to reach USD 189.85 billion in 2025, driven by breakthrough advances in headset technology, AI integration, and spatial computing platforms, enterprises are discovering unprecedented opportunities for operational enhancement. The US leads adoption across industries like healthcare, manufacturing, and logistics, where mixed reality is transforming workflows through immersive training, remote collaboration, and real-time data visualization.',
-      'Partner with us to implement AR/VR solutions that leverage 2025 trends such as Apple Vision Pro ecosystem expansion, generative AI-powered 3D content creation, and digital twins integration, positioning your enterprise at the forefront of immersive innovation.'
-    ]
-  },
-  
-  expertise: {
-    title: 'Our Expertise in AR/VR/Spatial Computing',
-    description: 'With comprehensive experience serving US enterprises, EPOCH specializes in developing immersive solutions using platforms like Unity, Unreal Engine, and emerging spatial computing frameworks.',
-    skills: [
-      {
-        name: 'Immersive Technology Stack',
-        description: 'Our expertise spans modern AR/VR development using Unity 3D, WebXR, and spatial computing APIs for seamless cross-platform experiences'
-      },
-      {
-        name: '2025 Innovation Integration',
-        description: 'Integrate 2025 innovations including AI-generated 3D environments, passthrough AR experiences, and metaverse-ready applications'
-      },
-      {
-        name: 'Enterprise-Scale Solutions',
-        description: 'Focus on scalable, secure implementations that address enterprise challenges like training consistency, remote collaboration, and data visualization complexity'
-      }
-    ]
-  },
-  
-  keyServices: [
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'VR Simulations',
-      description: 'Develop realistic virtual reality training simulations for high-risk environments, complex procedures, and skill development programs.',
-      features: [
-        'Safety training for manufacturing environments',
-        'Medical procedure simulations',
-        'Equipment operation training',
-        'Crisis response scenarios'
-      ]
+      question: 'Should we build native or cross-platform?',
+      answer: 'Cross-platform (React Native or Flutter) works for 80-90% of apps and significantly reduces cost. We recommend native only when you need maximum performance, complex animations, or deep hardware integration.'
     },
     {
-      title: 'AR Overlays',
-      description: 'Create augmented reality applications that overlay digital information onto real-world environments for enhanced productivity and decision-making.',
-      features: [
-        'Equipment maintenance guidance',
-        'Assembly line quality control',
-        'Remote expert assistance',
-        'Inventory management visualization'
-      ]
+      question: 'How long does mobile app development take?',
+      answer: 'A focused MVP takes 10-14 weeks. Full-featured enterprise apps typically run 4-8 months. We ship working builds to TestFlight/internal tracks within the first sprint for early feedback.'
     },
     {
-      title: 'Metaverse Integrations',
-      description: 'Build immersive collaborative spaces and virtual offices that enable seamless remote work, meetings, and team interactions in shared virtual environments.',
-      features: [
-        'Virtual meeting rooms',
-        'Collaborative design spaces',
-        'Remote training environments',
-        'Digital showrooms'
-      ]
+      question: 'How do you handle app store submission and approval?',
+      answer: 'We manage the full submission process for both App Store and Google Play, including metadata, screenshots, compliance requirements, and review response. We know the common rejection reasons and avoid them.'
     },
     {
-      title: 'Digital Twins',
-      description: 'Create virtual replicas of physical assets, processes, or environments that enable real-time monitoring, analysis, and predictive maintenance.',
-      features: [
-        'Facility management systems',
-        'Production line optimization',
-        'Infrastructure monitoring',
-        'Predictive analytics integration'
-      ]
+      question: 'What about ongoing maintenance after launch?',
+      answer: 'Mobile apps require ongoing updates for OS changes, security patches, and feature additions. We offer maintenance retainers or can transfer to your internal team with documentation and training.'
     },
     {
-      title: 'Spatial Data Visualization',
-      description: 'Transform complex datasets into immersive 3D visualizations that enable intuitive data exploration and analysis in spatial environments.',
-      features: [
-        'Business intelligence dashboards',
-        'Scientific data exploration',
-        'Financial modeling environments',
-        'Geographic information systems'
-      ]
+      question: 'Can you rebuild or improve our existing mobile app?',
+      answer: 'Yes. We frequently take over existing apps, audit the codebase, and either improve incrementally or recommend a rebuild when the technical debt makes maintenance unsustainable.'
     }
   ],
-  
-  benefits: [
-    {
-      title: 'Enhanced Training Effectiveness',
-      description: 'Immersive training programs show 75% improvement in knowledge retention compared to traditional methods'
-    },
-    {
-      title: 'Reduced Operational Costs',
-      description: 'VR training reduces equipment wear, travel costs, and safety incidents while accelerating skill development'
-    },
-    {
-      title: 'Improved Remote Collaboration',
-      description: 'Spatial computing enables natural team interactions regardless of geographic location, boosting productivity'
-    },
-    {
-      title: 'Accelerated Decision Making',
-      description: '3D data visualization helps executives understand complex information faster and make informed decisions'
-    },
-    {
-      title: 'Competitive Innovation Edge',
-      description: 'Early adoption of spatial computing positions your enterprise as an industry leader in digital transformation'
-    }
+
+  whyEpoch: [
+    'We ship to both app stores and have deep experience navigating platform review requirements',
+    'Our cross-platform expertise means you get iOS and Android without paying for two separate development teams',
+    'We design mobile-first — not responsive web shrunk to fit a phone screen',
+    'We set up analytics and crash reporting from day one so you understand how users actually use the app'
   ],
-  
-  industries: [
-    {
-      name: 'Healthcare',
-      applications: ['Surgical training simulations', 'patient therapy programs', 'medical education platforms']
-    },
-    {
-      name: 'Manufacturing',
-      applications: ['Assembly training', 'quality control AR guides', 'digital factory twins']
-    },
-    {
-      name: 'Retail',
-      applications: ['Virtual showrooms', 'product configuration tools', 'immersive shopping experiences']
-    },
-    {
-      name: 'Logistics',
-      applications: ['Warehouse navigation', 'package sorting optimization', 'fleet management visualization']
-    },
-    {
-      name: 'Entertainment/Sports',
-      applications: ['Fan engagement experiences', 'athlete performance analysis', 'immersive content creation']
-    }
-  ],
-  
-  caseStudies: [
-    {
-      title: 'Healthcare System Transforms Training with VR Simulations',
-      client: 'Fraser Health Authority',
-      challenge: 'Need for safe, scalable medical training without risk to patients',
-      solution: 'Implemented comprehensive VR medical training simulations enabling risk-free practice of complex procedures and emergency response scenarios.',
-      results: [
-        '40% improvement in procedure accuracy',
-        '60% reduction in training costs',
-        '85% of staff preferred VR over traditional methods'
-      ]
-    },
-    {
-      title: 'Oil & Gas Company Enhances Safety with Digital Twins',
-      client: 'Major Energy Corporation',
-      challenge: 'High-risk inspection procedures and equipment monitoring challenges',
-      solution: 'Developed digital twin infrastructure with AR overlays for equipment inspection, enabling remote monitoring and predictive maintenance.',
-      results: [
-        '50% reduction in safety incidents',
-        '30% decrease in equipment downtime',
-        '25% improvement in maintenance efficiency'
-      ]
-    }
-  ],
-  
-  ctaTitle: 'Ready to Transform Your Business with AR/VR/Spatial Computing?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our AR/VR/Spatial Computing Solutions can immerse your enterprise in the future of technology.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  ctaTitle: 'Plan Your Mobile App',
+  ctaDescription: 'Share your requirements and target platforms. We\'ll help you choose the right approach and build an app that works for your users.',
+  ctaButtonText: 'Discuss Your App',
+
   stats: [
-    { value: '$189.85B', label: 'Global XR Market 2025' },
-    { value: '75%', label: 'Training Retention Improvement' },
-    { value: '40%', label: 'Procedure Accuracy Gains' },
-    { value: '50%', label: 'Safety Incident Reduction' }
+    { value: '59%', label: 'iOS Share in US Market' },
+    { value: 'Cross-Platform', label: 'React Native & Flutter' },
+    { value: 'Full Lifecycle', label: 'Design to App Store' },
+    { value: 'Ongoing', label: 'Maintenance & Updates' }
   ]
 };
 
@@ -1996,172 +1933,226 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
   id: 'digital-transformation',
   name: 'Digital Transformation Consulting',
   heroTitle: 'Digital Transformation Consulting',
-  heroSubtitle: 'Redefine your enterprise\'s future',
-  heroDescription: 'Strategic digital transformation consulting to guide US enterprises through comprehensive tech overhauls, fostering agility, innovation, and long-term growth.',
+  heroTitleLines: [
+    { text: 'Digital' },
+    { text: 'Transformation', highlight: true },
+    { text: 'Consulting' }
+  ],
+  heroSubtitle: 'Strategic guidance for enterprise technology decisions',
+  heroDescription: 'We provide strategic consulting to help US enterprises plan and execute technology initiatives — from assessments and roadmaps to change management and implementation oversight.',
   metaTitle: 'Digital Transformation Consulting - EPOCH',
   metaDescription: 'Strategic digital transformation consulting for enterprises. Assessments, roadmaps, change management, and implementation support.',
-  
-  overview: {
-    title: 'Digital Transformation Consulting',
-    description: 'At EPOCH Software Services, we provide strategic digital transformation consulting to guide US enterprises through comprehensive tech overhauls, fostering agility, innovation, and long-term growth.',
-    keyPoints: [
-      'With the global digital transformation strategy consulting market valued at USD 141.32 billion in 2025 and projected to reach USD 472.98 billion by 2032, enterprises are increasingly seeking expert guidance to navigate AI-driven changes and regulatory landscapes. The broader US digital transformation market is expected to exceed USD 400 billion in 2025, driven by imperatives like AI integration and sustainability.',
-      'Partner with us to develop tailored strategies that leverage 2025 trends such as agentic AI, edge computing, and AI governance, ensuring your enterprise thrives in a rapidly evolving digital ecosystem.'
+
+  problemStatement: {
+    title: 'Challenges You May Be Facing',
+    description: 'Technology decisions are becoming more complex and consequential, and the wrong strategy can waste years of investment.',
+    painPoints: [
+      'Your organization has invested in technology initiatives that delivered tools but not outcomes',
+      'Leadership cannot agree on technology priorities because there is no shared view of current capabilities and gaps',
+      'Transformation efforts stall because change management is treated as an afterthought',
+      'You need expert guidance to evaluate emerging technologies (AI, cloud, IoT) against your specific business context'
     ]
   },
-  
+
+  overview: {
+    title: 'Digital Transformation Consulting',
+    description: 'EPOCH Software Services provides strategic digital transformation consulting to help US enterprises plan and execute comprehensive technology initiatives with clarity and confidence.',
+    keyPoints: [
+      'We help you build a clear, phased technology roadmap aligned with your business objectives, competitive landscape, and organizational readiness.',
+      'Our consulting covers the full transformation lifecycle: assessment, strategy, implementation oversight, change management, and optimization.'
+    ]
+  },
+
   expertise: {
     title: 'Our Expertise in Digital Transformation Consulting',
-    description: 'With a strong track record in advising US enterprises, EPOCH offers holistic consulting that encompasses strategy formulation, technology assessments, and change management.',
+    description: 'Our consulting practice encompasses strategy formulation, technology assessments, and change management, with a focus on aligning technology decisions with business objectives.',
     skills: [
       {
-        name: '2025 Trend Integration',
-        description: 'Our agile framework integrates 2025 trends like generative AI in operations, decentralized data architectures, and sustainability-focused transformations'
+        name: 'Technology Assessment & Roadmapping',
+        description: 'Evaluate current maturity, identify gaps, and build phased transformation roadmaps with clear milestones and success metrics'
       },
       {
-        name: 'Challenge Resolution',
-        description: 'Help clients address challenges such as talent gaps and legacy system integration'
+        name: 'Change Management & Organizational Readiness',
+        description: 'Guide stakeholder alignment, employee reskilling, and cultural adaptation to ensure technology investments deliver adoption'
       },
       {
-        name: 'Strategic Alignment',
-        description: 'We specialize in high-demand areas to empower enterprises with roadmaps that align technology with business objectives for measurable outcomes'
+        name: 'AI, Cloud & Data Strategy',
+        description: 'Advisory services for enterprise AI adoption, cloud migration planning, and data architecture modernization'
       }
     ]
   },
-  
+
+  process: {
+    title: 'Our Process',
+    steps: [
+      {
+        step: '01',
+        title: 'Current State Assessment',
+        description: 'We audit your technology landscape, organizational capabilities, and competitive position to establish a clear baseline.'
+      },
+      {
+        step: '02',
+        title: 'Strategy & Roadmap Development',
+        description: 'We build a prioritized, phased roadmap with business case justification, resource requirements, and measurable milestones.'
+      },
+      {
+        step: '03',
+        title: 'Implementation Oversight',
+        description: 'We provide hands-on guidance during execution including vendor selection, architecture review, and progress tracking.'
+      },
+      {
+        step: '04',
+        title: 'Optimization & Continuous Improvement',
+        description: 'We measure outcomes against defined KPIs and adjust the roadmap based on what the data shows.'
+      }
+    ]
+  },
+
   keyServices: [
     {
       title: 'Assessments and Audits',
       description: 'Conduct thorough evaluations of your current tech stack, processes, and readiness for digital initiatives, identifying gaps and opportunities.',
       features: [
-        'Maturity assessments for AI adoption',
+        'AI readiness assessments',
         'Cloud readiness evaluations',
         'Process optimization analysis',
-        'With 80% of enterprises viewing transformation as essential, assessments are foundational for strategic planning in a market growing at over 20% CAGR'
-      ]
+        'Technology maturity scoring'
+      ],
+      demand: { badge: 'Essential', description: 'Most transformation failures start with a lack of honest assessment of current capabilities and gaps.' }
     },
     {
       title: 'Transformation Roadmaps',
       description: 'Develop customized, phased roadmaps outlining technology adoption, integration strategies, and milestones for AI, cloud, and data-driven initiatives.',
       features: [
-        'Multi-year plans incorporating edge computing',
-        'Post-quantum security integration',
+        'Multi-year technology plans',
+        'Investment prioritization frameworks',
         'Phased implementation strategies',
-        'Roadmaps address top trends like agentic AI and spatial computing, crucial for executives in 2025'
-      ]
+        'Risk mitigation planning'
+      ],
+      demand: { badge: 'High Demand', description: 'Clear roadmaps prevent scattered technology investments and align stakeholders around shared priorities.' }
     },
     {
       title: 'Change Management Support',
       description: 'Guide organizational shifts through training, stakeholder engagement, and cultural adaptation to ensure smooth adoption of new technologies.',
       features: [
-        'Employee reskilling for AI tools',
+        'Employee reskilling programs',
         'Process reengineering',
         'Cultural adaptation strategies',
-        'Change management mitigates resistance, a key barrier as consulting revenues grow amid economic optimism'
-      ]
+        'Stakeholder communication plans'
+      ],
+      demand: { badge: 'Critical Skill', description: 'Technology alone does not drive transformation — adoption and organizational change determine success.' }
     },
     {
       title: 'Implementation Consulting',
       description: 'Provide hands-on advice during rollout, including vendor selection, integration oversight, and performance metrics setup.',
       features: [
-        'Deploying AI governance platforms',
-        'Ambient intelligence systems',
-        'Vendor selection and oversight',
-        'Enterprises prioritize implementation support for trends like nuclear-powered AI and micro LLMs in 2025'
-      ]
+        'Vendor evaluation and selection',
+        'Architecture review',
+        'Progress tracking dashboards',
+        'Quality assurance oversight'
+      ],
+      demand: { badge: 'High Demand', description: 'Complex technology rollouts benefit from independent oversight that keeps execution aligned with strategy.' }
     },
     {
       title: 'Optimization and Sustainability Advisory',
       description: 'Optimize post-implementation performance with ongoing audits, focusing on cost efficiency, scalability, and eco-friendly practices.',
       features: [
         'Sustainable supply chain digitization',
-        'Energy-efficient tech stacks',
+        'Energy-efficient technology stacks',
         'Performance optimization',
-        'Sustainability is a rising trend, aligning with operations surveys highlighting AI and green transformations'
-      ]
+        'Continuous improvement frameworks'
+      ],
+      demand: { badge: 'Growing Fast', description: 'Post-implementation optimization is where most transformation ROI is actually captured.' }
     }
   ],
-  
+
   benefits: [
     {
       title: 'Strategic Agility',
-      description: 'Adapt quickly to market changes, with the global market poised for $1,009.8 billion by 2025'
+      description: 'Adapt quickly to market changes with a technology strategy designed for flexibility and iterative improvement'
     },
     {
       title: 'Cost Optimization',
-      description: 'Achieve efficiencies through targeted tech investments, reducing operational overheads'
+      description: 'Avoid wasted investment by prioritizing technology initiatives based on validated business cases and clear ROI expectations'
     },
     {
       title: 'Innovation Acceleration',
-      description: 'Harness trends like generative AI and blockchain for competitive edges'
+      description: 'Identify and adopt emerging technologies that create genuine competitive advantage in your specific industry'
     },
     {
       title: 'Risk Reduction',
-      description: 'Ensure compliance and security in transformations, minimizing disruptions'
+      description: 'Minimize disruption through phased rollouts, proper change management, and compliance-aware implementation'
     },
     {
       title: 'Sustainable Growth',
-      description: 'Build resilient models that support long-term scalability and environmental goals'
+      description: 'Build resilient technology foundations that support long-term scalability and evolving business needs'
     }
   ],
-  
+
   industries: [
     {
       name: 'Finance',
-      applications: ['AI-driven risk management', 'decentralized finance integrations']
+      applications: ['AI-driven risk management', 'Digital banking transformation']
     },
     {
       name: 'Healthcare',
-      applications: ['Telehealth optimizations', 'data privacy frameworks']
+      applications: ['Telehealth optimization', 'Data privacy frameworks']
     },
     {
       name: 'Retail',
-      applications: ['Omnichannel experiences', 'edge computing']
+      applications: ['Omnichannel experiences', 'Supply chain digitization']
     },
     {
       name: 'Manufacturing',
-      applications: ['Smart factories via IoT', 'digital twins']
+      applications: ['Smart factory roadmaps', 'Digital twin strategy']
     },
     {
       name: 'Energy',
-      applications: ['Sustainable operations', 'AI governance']
+      applications: ['Sustainable operations', 'Grid modernization']
     }
   ],
-  
-  caseStudies: [
+
+  caseStudies: [],
+
+  faqs: [
     {
-      title: 'Financial Firm Accelerates AI Adoption',
-      client: 'US Bank',
-      challenge: 'Need for AI integration and operational efficiency',
-      solution: 'A US bank engaged our roadmap services, integrating generative AI for operations, resulting in 30% efficiency gains and enhanced compliance.',
-      results: [
-        '30% efficiency gains',
-        'Enhanced compliance posture',
-        'Successful generative AI integration'
-      ]
+      question: 'How is this different from hiring a management consulting firm?',
+      answer: 'We combine strategic consulting with hands-on technical expertise. Our consultants can evaluate a cloud architecture, assess an AI vendor, and review code — not just produce slide decks.'
     },
     {
-      title: 'Manufacturer Achieves Sustainability Goals',
-      client: 'Manufacturing Enterprise',
-      challenge: 'Need for supply chain optimization and carbon footprint reduction',
-      solution: 'We consulted on digital twins for a manufacturing enterprise, optimizing supply chains and reducing carbon footprint by 25%.',
-      results: [
-        '25% reduction in carbon footprint',
-        'Optimized supply chain operations',
-        'Digital twins implementation success'
-      ]
+      question: 'How long does a digital transformation assessment take?',
+      answer: 'A focused assessment takes 4-6 weeks. Comprehensive enterprise-wide audits covering technology, process, and organizational readiness run 8-12 weeks.'
+    },
+    {
+      question: 'What if we already have a transformation strategy that is not working?',
+      answer: 'We frequently help organizations course-correct. We start with a rapid diagnostic to identify what is stalling progress — whether that is technical, organizational, or strategic — and recommend specific adjustments.'
+    },
+    {
+      question: 'Do you stay involved during implementation?',
+      answer: 'Yes, if you want us to. We offer implementation oversight, architecture review, and vendor management to ensure execution stays aligned with the strategy. We can also step back after the roadmap phase.'
+    },
+    {
+      question: 'How do you measure transformation success?',
+      answer: 'We define measurable KPIs during the strategy phase — adoption rates, cost savings, time-to-market improvements, revenue impact. We track these throughout implementation and adjust based on results.'
     }
   ],
-  
-  ctaTitle: 'Ready to Transform Your Business with Digital Transformation Consulting?',
-  ctaDescription: 'Contact EPOCH Software Services today for a free consultation. Discover how our Digital Transformation Consulting can redefine your enterprise\'s future.',
-  ctaButtonText: 'Get Free Consultation',
-  
+
+  whyEpoch: [
+    'Our consultants are technologists first — they understand architecture, not just strategy frameworks',
+    'We build transformation roadmaps grounded in your current reality, not aspirational vendor pitches',
+    'We stay involved through implementation to ensure strategy translates into actual results',
+    'We focus on adoption and change management because the best technology fails without organizational buy-in'
+  ],
+
+  ctaTitle: 'Discuss Your Digital Strategy',
+  ctaDescription: 'Whether you\'re starting a new initiative or reassessing an existing one, we can help you build a clear, practical roadmap.',
+  ctaButtonText: 'Schedule a Discussion',
+
   stats: [
-    { value: '$141.32B', label: 'Global Market 2025' },
-    { value: '$472.98B', label: 'Projected 2032' },
-    { value: '$400B+', label: 'US Market 2025' },
-    { value: '20%+', label: 'Market CAGR' }
+    { value: 'Holistic', label: 'Strategy to Execution' },
+    { value: 'Measurable', label: 'KPI-Driven Outcomes' },
+    { value: 'Technical', label: 'Hands-On Consulting' },
+    { value: 'Ongoing', label: 'Implementation Oversight' }
   ]
 };
 
@@ -2173,12 +2164,9 @@ export const SERVICE_DETAIL_DATA = {
   'cybersecurity': CYBERSECURITY_DATA,
   'custom-software': CUSTOM_SOFTWARE_DATA,
   'data-analytics': DATA_ANALYTICS_DATA,
-  'iot': IOT_DATA,
-  'blockchain': BLOCKCHAIN_DATA,
   'devops': DEVOPS_DATA,
   'mobile': MOBILE_DATA,
-  'digital-transformation': DIGITAL_TRANSFORMATION_DATA,
-  'arvr': ARVR_DATA
+  'digital-transformation': DIGITAL_TRANSFORMATION_DATA
 } as const;
 
 export type ServiceId = keyof typeof SERVICE_DETAIL_DATA;

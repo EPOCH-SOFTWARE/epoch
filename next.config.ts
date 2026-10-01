@@ -4,10 +4,19 @@
  */
 
 import type { NextConfig } from 'next';
+import { RETIRED_SERVICE_IDS } from './src/shared/constants/services';
 
 const nextConfig: NextConfig = {
   eslint: {
     dirs: ['src', 'app'],
+  },
+
+  async redirects() {
+    return RETIRED_SERVICE_IDS.map(id => ({
+      source: `/services/${id}`,
+      destination: '/services',
+      permanent: true,
+    }));
   },
   experimental: {
     optimizeCss: true,
