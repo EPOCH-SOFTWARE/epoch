@@ -1,6 +1,6 @@
 #!/bin/sh
 # Get list of staged JS/TS files
-FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(js|jsx|ts|tsx)$')
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(js|jsx|ts|tsx)$' || true)
 
 if [ -n "$FILES" ]; then
     echo "🔍 Running ESLint on staged files..."
