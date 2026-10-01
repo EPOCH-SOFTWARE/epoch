@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Start a project — EPOCH</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/prefs.js"></script>
+  </head>
+  <body data-page="contact">
+    <main id="main">
+      <section class="page-hero">
+        <div class="wrap">
+          <h1 class="display">Start a project.</h1>
+          <p class="lede">Tell us what you’re building and what’s in the way. You’ll hear back within 24 hours.</p>
+        </div>
+      </section>
+
+      <section class="section ruled">
+        <div class="wrap contact-grid">
+          <form class="form" data-contact-form novalidate aria-label="Project inquiry">
+            <div class="pair">
+              <div class="field">
+                <label for="name">Your name <span>(required)</span></label>
+                <input id="name" name="name" autocomplete="name" aria-describedby="name-error" />
+                <p class="error" id="name-error" data-error-for="name" hidden></p>
+              </div>
+              <div class="field">
+                <label for="email">Work email <span>(required)</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error" />
+                <p class="error" id="email-error" data-error-for="email" hidden></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" autocomplete="organization" />
+            </div>
+            <div class="triple">
+              <div class="field">
+                <label for="projectType">Project type</label>
+                <select id="projectType" name="projectType">
+                  <option value="">Choose one</option>
+                  <option>AI &amp; machine learning</option>
+                  <option>Generative AI</option>
+                  <option>Data &amp; analytics</option>
+                  <option>Custom software</option>
+                  <option>Cloud &amp; DevOps</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="budget">Budget</label>
+                <select id="budget" name="budget">
+                  <option value="">Choose one</option>
+                  <option>$25,000–$50,000</option>
+                  <option>$50,000–$100,000</option>
+                  <option>$100,000–$250,000</option>
+                  <option>$250,000+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="timeline">Timeline</label>
+                <select id="timeline" name="timeline">
+                  <option value="">Choose one</option>
+                  <option>As soon as possible</option>
+                  <option>1–3 months</option>
+                  <option>3–6 months</option>
+                  <option>6+ months</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">What are you building, and what’s in the way? <span>(required)</span></label>
+              <textarea id="message" name="message" aria-describedby="message-error"></textarea>
+              <p class="error" id="message-error" data-error-for="message" hidden></p>
+            </div>
+            <div><button class="btn" type="submit">Send message</button></div>
+            <p class="form-status" data-form-status role="status" hidden></p>
+          </form>
+
+          <aside class="direct" aria-labelledby="direct-title">
+            <h2 id="direct-title" class="h3">Or reach us directly</h2>
+            <dl class="mt-m">
+              <div><dt>Email</dt><dd><a href="mailto:operator@epoch.sh">operator@epoch.sh</a></dd></div>
+              <div><dt>Phone</dt><dd><a href="tel:+17043145262">+1 (704) 314-5262</a></dd></div>
+              <div><dt>Response time</dt><dd>Within 24 hours</dd></div>
+              <div><dt>Hours</dt><dd>Mon–Fri, 9 AM–6 PM PST</dd></div>
+            </dl>
+            <ul class="offices" data-offices></ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
