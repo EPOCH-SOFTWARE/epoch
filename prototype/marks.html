@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kept time — EPOCH marks</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <style>
+      :root { --ink: #f2efe8; --muted: #9a968e; --line: rgba(242, 239, 232, 0.1); --signal: #ff4f00; --black: #050505; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: var(--black); color: var(--ink); font-family: 'Host Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; }
+      .mono { font-family: 'IBM Plex Mono', monospace; }
+      .top { max-width: 1240px; margin: 0 auto; padding: 56px 32px 16px; }
+      .back { font-size: 14px; color: var(--muted); text-decoration: none; }
+      .back:hover { color: var(--ink); }
+      h1 { margin-top: 40px; font-weight: 500; font-size: clamp(44px, 7vw, 112px); letter-spacing: -0.05em; line-height: 0.95; }
+      .intro { max-width: 46rem; margin-top: 24px; font-size: 19px; line-height: 1.55; color: var(--muted); }
+      .seed { color: var(--signal); }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px 48px; max-width: 1240px; margin: 0 auto; padding: 48px 32px 120px; }
+      .stage { position: relative; }
+      .stage canvas { display: block; width: 100%; aspect-ratio: 1; border: 1px solid var(--line); }
+      .readout { position: absolute; left: 16px; bottom: 14px; font-size: 12px; color: var(--muted); }
+      .num { margin-top: 22px; font-size: 13px; color: var(--signal); }
+      h2 { margin-top: 6px; font-weight: 500; font-size: 34px; letter-spacing: -0.035em; }
+      .piece p { max-width: 34rem; margin-top: 10px; line-height: 1.6; color: var(--muted); }
+      .uses { display: grid; gap: 6px; margin-top: 16px; font-size: 14px; line-height: 1.5; color: #cfcbc2; }
+      .uses b { font-weight: 550; color: var(--ink); }
+      .strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      .strip figure { display: grid; gap: 6px; justify-items: center; font-size: 11px; color: var(--muted); }
+      .strip canvas { width: 56px; height: 56px; }
+      .lockup { display: flex; align-items: center; gap: 16px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+      .lockup canvas { width: 52px; height: 52px; flex: none; }
+      .lockup svg { height: 22px; width: auto; color: var(--ink); }
+      .closing { max-width: 1240px; margin: 0 auto; padding: 0 32px 96px; color: var(--muted); font-size: 15px; }
+      .stage.word { display: grid; place-items: center; aspect-ratio: 1; border: 1px solid var(--line); padding: 8%; }
+      .stage.word.light { background: #ebe6dc; }
+      .stage.word.light .readout { color: #6b665c; }
+      .stage.word.light svg.big { color: #0c0d0f; }
+      .stage.word svg.big { width: 100%; height: auto; overflow: visible; color: var(--ink); }
+      @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+      <symbol id="wordmark" viewBox="-0.5 -1 208 42">
+        <g fill="none" stroke="currentColor" stroke-width="6.6">
+          <path d="M26 3.3H3.3V36.7H26M3.3 20H23" />
+          <path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3" />
+          <circle cx="98.5" cy="20" r="17.1" />
+          <path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44" />
+          <path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7" />
+        </g>
+      </symbol>
+    </svg>
+
+    <header class="top">
+      <a class="back" href="index.html">EPOCH prototype</a>
+      <h1>Kept time.</h1>
+      <p class="intro">
+        The best living identities keep one thing fixed and let one real signal change it: Nordkyn’s
+        logo is reshaped by the live weather, MIT Media Lab’s by an algorithm with 40,000 variations,
+        the Whitney’s W by the space it has to fill. EPOCH’s signal is time. None of these put a
+        picture in front of the name; time changes the logo itself. Seeded by the second you opened
+        this page, <span class="mono seed" data-seed></span>.
+      </p>
+    </header>
+
+    <main class="grid">
+      <article class="piece" aria-labelledby="p1">
+        <div class="stage"><canvas data-piece="now" aria-label="A ring whose opening points to the current time of day"></canvas><span class="readout mono" data-now-label></span></div>
+        <p class="num mono">01</p>
+        <h2 id="p1">Now</h2>
+        <p>The mark is a clock. Its opening always points to the current time of day, with the orange point sitting in it, so the logo is never the same twice. Shown here as a time-lapse: one day in 24 seconds.</p>
+        <div class="uses"><span><b>On screen:</b> moves with the real clock, almost too slowly to notice.</span><span><b>In print:</b> every business card and proposal carries the moment it was printed.</span></div>
+        <div class="strip" data-now-strip></div>
+        <div class="lockup"><canvas data-lockup="now"></canvas><svg viewBox="-0.5 -1 208 42"><use href="#wordmark" /></svg></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p2">
+        <div class="stage word"><svg class="big" data-daylight viewBox="-12 -16 232 72" role="img" aria-label="EPOCH wordmark whose O holds a sun that rises and sets with local time"></svg><span class="readout mono" data-daylight-label></span></div>
+        <p class="num mono">02</p>
+        <h2 id="p2">Daylight</h2>
+        <p>The O is the sky. A horizon crosses it, and the orange sun rises and sets inside it with your local time. After sunset a small moon takes its place. Shown as a time-lapse: one day in 24 seconds.</p>
+        <div class="uses"><span><b>Like Nordkyn:</b> a real-world signal shapes the logo, so it is never wrong about the time of day.</span><span><b>Belief:</b> we work around the clock, and it shows.</span></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p3">
+        <div class="stage word"><svg class="big" data-weight viewBox="-12 -16 232 72" role="img" aria-label="EPOCH wordmark whose stroke weight follows the daylight"></svg><span class="readout mono" data-weight-label></span></div>
+        <p class="num mono">03</p>
+        <h2 id="p3">Weight of the day</h2>
+        <p>The letters gain weight with the light: a hairline at midnight, at their boldest at noon, easing back down by evening. The same name, never quite the same thickness twice. Time-lapse: one day in 24 seconds.</p>
+        <div class="uses"><span><b>Like the WPP campus logo:</b> one typeface whose weight is driven by the time of day.</span><span><b>Belief:</b> full strength when it matters most.</span></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p4">
+        <div class="stage word"><svg class="big" data-stamp viewBox="-12 -16 232 96" role="img" aria-label="EPOCH wordmark above a live 32-bit timestamp"></svg><span class="readout mono" data-stamp-label></span></div>
+        <p class="num mono">04</p>
+        <h2 id="p4">Timestamp</h2>
+        <p>Under the name, 32 cells spell the current Unix time in binary, the count of seconds since the epoch on January 1, 1970. It ticks every second; the cells that just changed flash orange. Every logo is a real, unique moment.</p>
+        <div class="uses"><span><b>Like MIT Media Lab:</b> one system, endless variations, except every one is true.</span><span><b>Use:</b> stamp each proposal, contract and launch with its exact second.</span></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p5">
+        <div class="stage word light"><svg class="big" data-sundial viewBox="-62 -30 332 112" role="img" aria-label="EPOCH letters casting shadows that follow the sun"></svg><span class="readout mono" data-sundial-label></span></div>
+        <p class="num mono">05</p>
+        <h2 id="p5">Sundial</h2>
+        <p>The name is the sundial. Its letters cast real shadows that swing and stretch with the sun: long at dawn, short at noon, gone at night. The orange point is the sun itself. Time-lapse: one day in 24 seconds.</p>
+        <div class="uses"><span><b>Like a real sundial:</b> you can read the hour from the logo.</span><span><b>Belief:</b> built for daylight, measured honestly.</span></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p6">
+        <div class="stage word"><svg class="big" data-moon-o viewBox="-12 -16 232 72" role="img" aria-label="EPOCH wordmark whose O shows the moon phase in orange"></svg><span class="readout mono" data-moon-label></span></div>
+        <p class="num mono">06</p>
+        <h2 id="p6">Tonight’s moon</h2>
+        <p>The O carries the real phase of the moon in orange, calculated from the lunar cycle, so tonight’s logo matches tonight’s sky. Over a month it waxes to full and wanes back to new. Shown here: one lunar month in 20 seconds.</p>
+        <div class="uses"><span><b>Rhythm:</b> a quiet change every night that people notice over weeks.</span><span><b>Ambition:</b> a brand in step with something much bigger than itself.</span></div>
+      </article>
+
+      <article class="piece" aria-labelledby="p7">
+        <div class="stage word"><svg class="big" data-daychart viewBox="-12 -16 232 72" role="img" aria-label="EPOCH wordmark whose weight traces the last 24 hours of daylight"></svg><span class="readout mono" data-daychart-label></span></div>
+        <p class="num mono">07</p>
+        <h2 id="p7">Twenty-four hours</h2>
+        <p>Read the name left to right and you read the last day. Each thin slice of the letters is drawn at the strength of the light at that hour, so the logo becomes a chart of the past 24 hours, ending at the orange line: now.</p>
+        <div class="uses"><span><b>Data, not decoration:</b> every bump in the letters is a real hour.</span><span><b>Belief:</b> the record of the work is the work.</span></div>
+      </article>
+    </main>
+
+    <p class="closing">Examples referenced: <a href="https://www.researchgate.net/publication/263963695_Dynamic_identities_for_the_Cultural_Heritage">Nordkyn and Casa da Música</a>, <a href="https://www.researchgate.net/publication/348310009_MIT_Media_Lab's_Dynamic_Identity">MIT Media Lab</a>, <a href="https://www.yeti.co/blog/7-successful-dynamic-brand-identities">the Whitney</a>, <a href="https://www.monotype.com/resources/monotype-labs/world%E2%80%99s-first-variable-font-logo">the WPP campus variable-font logo</a>.</p>
+
+    <script>
+      (function () {
+        'use strict';
+
+        var SEED = Math.floor(Date.now() / 1000);
+        var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var INK = '242, 239, 232';
+        var SIGNAL = '#ff4f00';
+        var BLACK = '#050505';
+        var TAU = Math.PI * 2;
+
+        document.querySelectorAll('[data-seed]').forEach(function (node) {
+          node.textContent = String(SEED);
+        });
+
+        // Mulberry32: tiny seeded PRNG, so a given second always renders the same marks.
+        function rng(seed) {
+          var state = seed >>> 0;
+          return function () {
+            state = (state + 0x6d2b79f5) >>> 0;
+            var t = state;
+            t = Math.imul(t ^ (t >>> 15), t | 1);
+            t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+
+        function surface(canvas) {
+          var ratio = Math.min(window.devicePixelRatio || 1, 2);
+          var size = canvas.clientWidth;
+          canvas.width = Math.round(size * ratio);
+          canvas.height = Math.round(size * ratio);
+          var ctx = canvas.getContext('2d');
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+          return { ctx: ctx, size: size };
+        }
+
+        function clear(ctx, size) {
+          ctx.fillStyle = BLACK;
+          ctx.fillRect(0, 0, size, size);
+        }
+
+        function pad(value) {
+          return String(value).padStart(2, '0');
+        }
+
+        // Animates a piece only while it is on screen; reduced motion gets one finished frame.
+        function run(canvas, piece) {
+          var s = surface(canvas);
+          piece.init(s);
+          if (REDUCE) {
+            piece.still(s);
+            return;
+          }
+          var frameId = null;
+          var last = 0;
+          function frame(now) {
+            frameId = window.requestAnimationFrame(frame);
+            var dt = last ? Math.min(now - last, 64) : 16;
+            last = now;
+            piece.frame(s, dt);
+          }
+          new IntersectionObserver(function (entries) {
+            var onScreen = entries.some(function (entry) {
+              return entry.isIntersecting;
+            });
+            if (onScreen && frameId === null) {
+              last = 0;
+              frameId = window.requestAnimationFrame(frame);
+            } else if (!onScreen && frameId !== null) {
+              window.cancelAnimationFrame(frameId);
+              frameId = null;
+            }
+          }).observe(canvas);
+        }
+
+        // ---------- 01 Now: a ring whose opening points at the time of day ----------
+
+        function drawNow(ctx, size, dayFraction, withDial) {
+          clear(ctx, size);
+          var c = size / 2;
+          var radius = size * (withDial ? 0.27 : 0.33);
+          var weight = size * (withDial ? 0.07 : 0.11);
+          var angle = dayFraction * TAU - Math.PI / 2;
+          var halfGap = (24 * Math.PI) / 180;
+          ctx.save();
+          ctx.translate(c, c);
+          if (withDial) {
+            for (var i = 0; i < 96; i++) {
+              var a = (i / 96) * TAU;
+              var hour = i % 4 === 0;
+              var inner = radius + weight * 0.95;
+              var outer = inner + size * (i % 24 === 0 ? 0.05 : hour ? 0.03 : 0.012);
+              ctx.strokeStyle = 'rgba(' + INK + ',' + (hour ? 0.42 : 0.14) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(Math.sin(a) * inner, -Math.cos(a) * inner);
+              ctx.lineTo(Math.sin(a) * outer, -Math.cos(a) * outer);
+              ctx.stroke();
+            }
+          }
+          ctx.strokeStyle = 'rgb(' + INK + ')';
+          ctx.lineWidth = weight;
+          ctx.beginPath();
+          ctx.arc(0, 0, radius, angle + halfGap, angle - halfGap + TAU);
+          ctx.stroke();
+          ctx.fillStyle = SIGNAL;
+          ctx.beginPath();
+          ctx.arc(Math.cos(angle) * radius, Math.sin(angle) * radius, weight * 0.62, 0, TAU);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function dayFraction(seconds) {
+          return (seconds % 86400) / 86400;
+        }
+
+        var nowLabel = document.querySelector('[data-now-label]');
+        function showClock(fraction) {
+          var minutes = Math.floor(fraction * 1440);
+          nowLabel.textContent = pad(Math.floor(minutes / 60)) + ':' + pad(minutes % 60) + ' UTC';
+        }
+
+        var NOW = {
+          init: function (s) {
+            s.start = Date.now() / 1000;
+            s.elapsed = 0;
+          },
+          frame: function (s, dt) {
+            s.elapsed += dt / 1000;
+            var fraction = dayFraction(s.start + s.elapsed * 3600);
+            drawNow(s.ctx, s.size, fraction, true);
+            showClock(fraction);
+          },
+          still: function (s) {
+            var fraction = dayFraction(Date.now() / 1000);
+            drawNow(s.ctx, s.size, fraction, true);
+            showClock(fraction);
+          },
+        };
+
+        // ---------- Shared: the bold monoline wordmark, drawn so parts can be driven by time ----------
+
+        var NS = 'http://www.w3.org/2000/svg';
+        var LETTERS =
+          '<path d="M26 3.3H3.3V36.7H26M3.3 20H23"/>' +
+          '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>' +
+          '<path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44"/>' +
+          '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>';
+        var RING = '<circle cx="98.5" cy="20" r="17.1"/>';
+
+        // Approximate daylight: sun elevation from -1 (midnight) through 0 (06:00, 18:00) to 1 (noon).
+        function elevation(fraction) {
+          return Math.sin(TAU * (fraction - 0.25));
+        }
+
+        function localFraction(date) {
+          return (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()) / 86400;
+        }
+
+        function clockText(fraction) {
+          var minutes = Math.floor(fraction * 1440);
+          return pad(Math.floor(minutes / 60)) + ':' + pad(minutes % 60);
+        }
+
+        var LAPSE_START = localFraction(new Date());
+        function lapseFraction(seconds) {
+          return REDUCE ? LAPSE_START : (LAPSE_START + seconds / 24) % 1;
+        }
+
+        // ---------- 02 Daylight: the O holds a sun that rises and sets ----------
+
+        var daylight = document.querySelector('[data-daylight]');
+        daylight.innerHTML =
+          '<defs><clipPath id="sky"><rect x="80" y="-2" width="37" height="22"/></clipPath>' +
+          '<clipPath id="inside"><circle cx="98.5" cy="20" r="13.8"/></clipPath></defs>' +
+          '<g fill="none" stroke="currentColor" stroke-width="6.6">' + LETTERS + RING + '</g>' +
+          '<g clip-path="url(#inside)"><g clip-path="url(#sky)">' +
+          '<circle data-sun cx="98.5" cy="20" r="5.2" fill="' + SIGNAL + '"/>' +
+          '<circle data-moon cx="98.5" cy="20" r="2.6" fill="currentColor"/></g>' +
+          '<path d="M84 20.5H113" stroke="currentColor" stroke-width="1.2"/></g>';
+        var sun = daylight.querySelector('[data-sun]');
+        var moon = daylight.querySelector('[data-moon]');
+        var daylightLabel = document.querySelector('[data-daylight-label]');
+
+        function showDaylight(fraction) {
+          var e = elevation(fraction);
+          // Above the horizon the body climbs to the top of the O; below it, it sinks out of view.
+          sun.setAttribute('cy', (20.5 - e * 11 + (e < 0 ? 6 : 0)).toFixed(2));
+          moon.setAttribute('cy', (20.5 + e * 11 + (e > 0 ? 6 : 0)).toFixed(2));
+          daylightLabel.textContent = 'local ' + clockText(fraction);
+        }
+
+        // ---------- 03 Weight of the day ----------
+
+        var weight = document.querySelector('[data-weight]');
+        weight.innerHTML = '<g data-weight-group fill="none" stroke="currentColor" stroke-width="6.6">' + LETTERS + RING + '</g>';
+        var weightGroup = weight.querySelector('[data-weight-group]');
+        var weightLabel = document.querySelector('[data-weight-label]');
+
+        function showWeight(fraction) {
+          var light = Math.pow((elevation(fraction) + 1) / 2, 1.4);
+          var stroke = 1.6 + light * 7.4;
+          weightGroup.setAttribute('stroke-width', stroke.toFixed(2));
+          weightLabel.textContent = 'local ' + clockText(fraction) + '   weight ' + Math.round(100 + light * 800);
+        }
+
+        // ---------- 04 Timestamp: 32 bits of Unix time under the name ----------
+
+        var stamp = document.querySelector('[data-stamp]');
+        var cells = '';
+        var CELL = 207 / 32;
+        for (var bit = 0; bit < 32; bit++) {
+          cells += '<rect data-bit="' + (31 - bit) + '" x="' + (bit * CELL + 0.6).toFixed(2) + '" y="56" width="' + (CELL - 1.2).toFixed(2) + '" height="10"/>';
+        }
+        stamp.innerHTML =
+          '<g fill="none" stroke="currentColor" stroke-width="6.6">' + LETTERS + RING + '</g>' +
+          '<g data-cells>' + cells + '</g>';
+        var bitCells = Array.prototype.slice.call(stamp.querySelectorAll('[data-bit]'));
+        var stampLabel = document.querySelector('[data-stamp-label]');
+        var previous = null;
+
+        function showStamp(seconds) {
+          bitCells.forEach(function (cell) {
+            var position = Number(cell.dataset.bit);
+            var on = Math.floor(seconds / Math.pow(2, position)) % 2 === 1;
+            var changed = previous !== null && on !== (Math.floor(previous / Math.pow(2, position)) % 2 === 1);
+            cell.setAttribute('fill', changed ? SIGNAL : on ? 'rgb(' + INK + ')' : 'none');
+            cell.setAttribute('stroke', changed ? SIGNAL : 'rgba(' + INK + ', 0.35)');
+            cell.setAttribute('stroke-width', '0.6');
+          });
+          previous = seconds;
+          stampLabel.textContent = 'unix ' + seconds;
+        }
+
+
+        // ---------- 05 Sundial: the letters cast shadows from a moving sun ----------
+
+        var sundial = document.querySelector('[data-sundial]');
+        var SHADOW_STEPS = 30;
+        var shadowLayers = '';
+        // Uses map the symbol 1:1 (same box as its viewBox) so shadows share the letters' coordinates.
+        var WORD_BOX = ' width="208" height="42"';
+        for (var layer = SHADOW_STEPS; layer >= 1; layer--) shadowLayers += '<use href="#wordmark" data-shadow="' + layer + '"' + WORD_BOX + '/>';
+        sundial.innerHTML =
+          '<g style="color: rgba(12, 13, 15, 0.05)">' + shadowLayers + '</g>' +
+          '<use href="#wordmark" x="-0.5" y="-1"' + WORD_BOX + '/>' +
+          '<circle data-dial-sun r="3.6" fill="' + SIGNAL + '"/>';
+        var shadowUses = Array.prototype.slice.call(sundial.querySelectorAll('[data-shadow]'));
+        var dialSun = sundial.querySelector('[data-dial-sun]');
+        var sundialLabel = document.querySelector('[data-sundial-label]');
+
+        function showSundial(fraction) {
+          var e = elevation(fraction);
+          // -1 at sunrise (east, left) to 1 at sunset (west, right).
+          var across = -Math.cos(TAU * (fraction - 0.25));
+          dialSun.setAttribute('cx', (103.5 + across * 140).toFixed(1));
+          dialSun.setAttribute('cy', (-6 - Math.max(e, 0) * 18).toFixed(1));
+          dialSun.setAttribute('opacity', e > 0 ? 1 : 0);
+          // Shadows lengthen as the sun drops, and fall away from it onto the ground.
+          var length = e > 0.05 ? Math.min(58, 7 / e) : 0;
+          var dx = -across * length;
+          var dy = length * 0.32;
+          shadowUses.forEach(function (use) {
+            var share = Number(use.dataset.shadow) / SHADOW_STEPS;
+            use.setAttribute('x', (dx * share - 0.5).toFixed(2));
+            use.setAttribute('y', (dy * share - 1).toFixed(2));
+          });
+          sundialLabel.textContent = 'local ' + clockText(fraction) + (e > 0 ? '' : '   after dark');
+        }
+
+        // ---------- 06 Tonight's moon: the O shows the lunar phase ----------
+
+        var moonO = document.querySelector('[data-moon-o]');
+        moonO.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="6.6">' + LETTERS + RING + '</g><path data-lit fill="' + SIGNAL + '"/>';
+        var litPart = moonO.querySelector('[data-lit]');
+        var moonLabel = document.querySelector('[data-moon-label]');
+        var SYNODIC = 29.530588853 * 86400;
+        var NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14) / 1000;
+
+        function lunarPhase(seconds) {
+          return ((((seconds - NEW_MOON_2000) / SYNODIC) % 1) + 1) % 1;
+        }
+
+        function phaseName(p) {
+          if (p < 0.03 || p > 0.97) return 'new moon';
+          if (p < 0.22) return 'waxing crescent';
+          if (p < 0.28) return 'first quarter';
+          if (p < 0.47) return 'waxing gibbous';
+          if (p < 0.53) return 'full moon';
+          if (p < 0.72) return 'waning gibbous';
+          if (p < 0.78) return 'last quarter';
+          return 'waning crescent';
+        }
+
+        // Lit area: the outer limb on the sunlit side, closed by the terminator ellipse.
+        function moonShape(p, cx, cy, r) {
+          var waxing = p < 0.5;
+          var k = Math.cos(TAU * p);
+          var limbSweep = waxing ? 1 : 0;
+          var terminatorSweep = (k > 0) === waxing ? 0 : 1;
+          return 'M' + cx + ' ' + (cy - r) + 'A' + r + ' ' + r + ' 0 0 ' + limbSweep + ' ' + cx + ' ' + (cy + r) +
+            'A' + (Math.abs(k) * r).toFixed(3) + ' ' + r + ' 0 0 ' + terminatorSweep + ' ' + cx + ' ' + (cy - r) + 'Z';
+        }
+
+        var TONIGHT = lunarPhase(Date.now() / 1000);
+        function showMoon(elapsed) {
+          var p = REDUCE ? TONIGHT : (TONIGHT + elapsed / 20) % 1;
+          litPart.setAttribute('d', moonShape(p, 98.5, 20, 11.4));
+          moonLabel.textContent = 'tonight ' + phaseName(TONIGHT) + '   shown ' + phaseName(p);
+        }
+
+        // ---------- 07 Twenty-four hours: the name as a chart of the last day ----------
+
+        var dayChart = document.querySelector('[data-daychart]');
+        var SLICES = 54;
+        var SLICE = 216 / SLICES;
+        var clips = '';
+        var groups = '';
+        for (var slice = 0; slice < SLICES; slice++) {
+          clips += '<clipPath id="hour-' + slice + '"><rect x="' + (-4 + slice * SLICE).toFixed(2) + '" y="-12" width="' + (SLICE + 0.4).toFixed(2) + '" height="64"/></clipPath>';
+          groups += '<g clip-path="url(#hour-' + slice + ')" data-slice="' + slice + '" fill="none" stroke="currentColor">' + LETTERS + RING + '</g>';
+        }
+        dayChart.innerHTML = '<defs>' + clips + '</defs>' + groups + '<path d="M213 -10V50" stroke="' + SIGNAL + '" stroke-width="1"/>';
+        var sliceGroups = Array.prototype.slice.call(dayChart.querySelectorAll('[data-slice]'));
+        var dayChartLabel = document.querySelector('[data-daychart-label]');
+
+        function showDayChart(fraction) {
+          sliceGroups.forEach(function (group) {
+            var hoursAgo = 1 - (Number(group.dataset.slice) + 0.5) / SLICES;
+            var light = Math.pow((elevation(fraction - hoursAgo + 1) + 1) / 2, 1.4);
+            group.setAttribute('stroke-width', (1.6 + light * 7.4).toFixed(2));
+          });
+          dayChartLabel.textContent = '24 h ago   to   now ' + clockText(fraction);
+        }
+
+        // One loop drives the word word marks; it pauses with the tab.
+        var started = performance.now();
+        var lastSecond = null;
+        function tick(now) {
+          var elapsed = (now - started) / 1000;
+          var fraction = lapseFraction(elapsed);
+          showDaylight(fraction);
+          showWeight(fraction);
+          showSundial(fraction);
+          showMoon(elapsed);
+          showDayChart(fraction);
+          var second = Math.floor(Date.now() / 1000);
+          if (second !== lastSecond) {
+            showStamp(second);
+            lastSecond = second;
+          }
+          if (!REDUCE) window.requestAnimationFrame(tick);
+        }
+        tick(started);
+
+        // ---------- 01's lockup and 24-hour strip ----------
+
+        function lockup(kind, canvas) {
+          var s = surface(canvas);
+          if (kind === 'now') drawNow(s.ctx, s.size, 0, false);
+        }
+
+        var strip = document.querySelector('[data-now-strip]');
+        [0, 4, 8, 12, 16, 20].forEach(function (hour) {
+          strip.insertAdjacentHTML('beforeend', '<figure><canvas></canvas><figcaption class="mono">' + pad(hour) + ':00</figcaption></figure>');
+          var s = surface(strip.lastElementChild.querySelector('canvas'));
+          drawNow(s.ctx, s.size, hour / 24, false);
+        });
+
+        document.querySelectorAll('[data-lockup]').forEach(function (canvas) {
+          lockup(canvas.dataset.lockup, canvas);
+        });
+
+        var PIECES = { now: NOW };
+        document.querySelectorAll('[data-piece]').forEach(function (canvas) {
+          run(canvas, PIECES[canvas.dataset.piece]);
+        });
+      })();
+    </script>
+  </body>
+</html>
