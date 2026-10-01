@@ -1,58 +1,64 @@
 /**
- * @fileoverview Root layout component
+ * @fileoverview Root layout: fonts, site chrome, and default metadata
  * @author Epoch Development Team
  */
 
-import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Archivo, IBM_Plex_Mono } from 'next/font/google';
 import { ErrorBoundary } from '@/src/components/common/ErrorBoundary';
+import { Header } from '@/src/components/layout/Header';
+import { Footer } from '@/src/components/layout/Footer';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const archivo = Archivo({
+  variable: '--font-archivo',
   subsets: ['latin'],
+  axes: ['wdth'],
   display: 'swap',
-  preload: true,
-  weight: ['300', '400', '500', '600', '700'],
 });
 
+const plexMono = IBM_Plex_Mono({
+  variable: '--font-plex-mono',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const TITLE = 'EPOCH — AI systems, built all the way through';
+const DESCRIPTION =
+  'EPOCH builds AI systems that work in production: machine learning, generative AI and the data and engineering underneath them. All in, every project, every time.';
 
 export const metadata: Metadata = {
-  title: 'Epoch - Crafting Software with Swiss Precision',
-  description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
-  keywords: ['software development', 'AI', 'machine learning', 'cloud architecture', 'digital transformation'],
-  authors: [{ name: 'Epoch Development Team' }],
-  creator: 'Epoch',
+  metadataBase: new URL('https://epoch.sh'),
+  title: {
+    default: TITLE,
+    template: '%s — EPOCH',
+  },
+  description: DESCRIPTION,
+  keywords: ['AI development', 'machine learning', 'generative AI', 'AI agents', 'data engineering'],
+  creator: 'Epoch Software Services',
   openGraph: {
-    title: 'Epoch - Crafting Software with Swiss Precision',
-    description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
-    url: 'https://epoch.dev',
-    siteName: 'Epoch',
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: 'EPOCH',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Epoch - Crafting Software with Swiss Precision',
-    description: 'We build intelligent systems that transform complexity into elegance.',
-    creator: '@epoch_dev',
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#060f01',
 };
 
 interface RootLayoutProps {
@@ -61,20 +67,17 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-      </head>
-      <body
-        className={`${geistSans.className} antialiased`}
-        suppressHydrationWarning
-      >
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+    // Browser extensions inject attributes on <html>; don't treat those as hydration errors.
+    <html lang="en" className={`${archivo.variable} ${plexMono.variable}`} suppressHydrationWarning>
+      <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,0 +1,68 @@
+.card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--moss);
+}
+
+.mark {
+  width: 11rem;
+}
+
+.client {
+  margin-top: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--reseda);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.link {
+  transition: color 160ms var(--ease-out);
+}
+
+.card:hover .link,
+.link:focus-visible {
+  color: var(--signal);
+}
+
+.summary {
+  max-width: 52ch;
+  color: var(--reseda);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  font-size: var(--text-sm);
+}
+
+.facts dt {
+  color: var(--reseda);
+}
+
+.facts dd {
+  color: var(--bone);
+}
+
+.more {
+  margin-top: 0.5rem;
+  font-weight: 650;
+  color: var(--signal);
+}

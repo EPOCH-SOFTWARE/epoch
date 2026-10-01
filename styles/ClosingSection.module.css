@@ -1,0 +1,21 @@
+.closing {
+  border-top: 1px solid var(--moss-line);
+}
+
+.title {
+  max-width: 14ch;
+  font-size: clamp(2.5rem, 7.5vw - 0.25rem, 7rem);
+}
+
+.footer {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 60rem) {
+  .footer {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}

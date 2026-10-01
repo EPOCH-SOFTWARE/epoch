@@ -1,44 +1,121 @@
+/*
+ * EPOCH design tokens. The palette comes from the logo: night is the page,
+ * moss draws structure, reseda carries secondary text, bone carries primary text,
+ * and signal is reserved for the training pass and the one action that matters.
+ */
 :root {
-  --night: #060F01;
-  --dark-moss-green: #455422;
-  --reseda-green: #878A73;
-  --yellow-green: #9BC136;
-  --white: #FEFEFE;
-  --flint: #666666;
-  --cubic: cubic-bezier(0.23, 1, 0.320, 1);
-  
-  /* Additional color variables for client components */
-  --gunmetal: #2C2C2C;
-  --gray-500: #6B7280;
-  --gray-600: #4B5563;
-  --gray-700: #374151;
-  
-  /* Header height variables */
-  --header-height: 112px; /* 32px padding * 2 + 48px content */
-  --header-height-scrolled: 88px; /* 20px padding * 2 + 48px content */
-  
-  /* Font family variables - removed CSS variable references that don't work */
+  --night: #060f01;
+  --night-raised: #0b1606;
+  --moss: #455422;
+  --moss-line: #1d2811;
+  --reseda: #878a73;
+  --bone: #eef0e6;
+  --signal: #9bc136;
+  --signal-bright: #b4d65a;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Type scale (Bringhurst's classical scale, fluid at the top end). */
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-md: 1.3125rem;
+  --text-lg: 1.5rem;
+  --text-xl: clamp(1.75rem, 1.25rem + 1.6vw, 2.25rem);
+  --text-2xl: clamp(2.25rem, 1.35rem + 3vw, 3.75rem);
+  --text-display: clamp(3rem, 0.9rem + 8.2vw, 8.75rem);
+
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --page-max: 90rem;
+  --section-space: clamp(5rem, 3rem + 8vw, 10rem);
+  --header-height: 4.5rem;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-::selection {
-  background: var(--yellow-green);
-  color: var(--night);
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--header-height);
 }
 
 body {
-  background: var(--white);
-  color: var(--night);
-  overflow-x: hidden;
+  min-height: 100svh;
+  background: var(--night);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: 'kern' 1;
-  font-variant-ligatures: common-ligatures;
 }
 
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--night);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -10rem;
+  left: var(--gutter);
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--signal);
+  color: var(--night);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
