@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
     <link rel="stylesheet" href="assets/css/site.css" />
-    <script src="assets/js/prefs.js"></script>
   </head>
   <body data-page="contact">
     <main id="main">
@@ -20,9 +19,30 @@
         </div>
       </section>
 
-      <section class="section ruled">
+      <section class="section ruled" id="book" aria-labelledby="book-title">
+        <div class="wrap split">
+          <div>
+            <h2 id="book-title" class="h2">Book a 30-minute call</h2>
+            <p class="body mt-s">Pick a time that suits you and we’ll talk through what you’re building and what’s in the way.</p>
+            <div class="actions mt-m">
+              <a class="btn" data-booking href="mailto:operator@epoch.sh?subject=Book%20a%2030-minute%20call">Choose a time</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="sub-h">What happens next</h3>
+            <ol class="steps">
+              <li><span class="num" aria-hidden="true">01</span><h3>We reply within 24 hours</h3><p>To confirm the time, or with a few questions if we need them.</p></li>
+              <li><span class="num" aria-hidden="true">02</span><h3>A 30-minute call</h3><p>We listen first: the goal, the constraints, the data and the deadline.</p></li>
+              <li><span class="num" aria-hidden="true">03</span><h3>A written plan</h3><p>Scope, timeline and cost, so you can decide with everything in front of you.</p></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ruled" aria-labelledby="message-title">
         <div class="wrap contact-grid">
-          <form class="form" data-contact-form novalidate aria-label="Project inquiry">
+          <form class="form" data-contact-form novalidate aria-labelledby="message-title">
+            <h2 id="message-title" class="h3">Or send us a message</h2>
             <div class="pair">
               <div class="field">
                 <label for="name">Your name <span>(required)</span></label>

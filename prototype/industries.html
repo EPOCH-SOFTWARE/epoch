@@ -3,41 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Work — EPOCH</title>
+    <title>Industries — EPOCH</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
     <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
   </head>
-  <body data-page="work">
+  <body data-page="industries">
     <main id="main">
       <section class="page-hero">
         <div class="wrap">
-          <h1 class="display">Work that had to hold up.</h1>
+          <h1 class="display">Industries.</h1>
           <p class="lede">
-            Production systems for insurance, retirement, healthcare, payments and retail. Two of
-            them, in detail.
+            AI only pays off when the people building it understand the business it runs in. These
+            are the industries our clients work in.
           </p>
         </div>
       </section>
 
-      <section class="section ruled" aria-labelledby="cases-title">
+      <section class="section ruled" aria-label="Industries we serve">
         <div class="wrap">
-          <div class="head split">
-            <h2 id="cases-title" class="h2">Case studies</h2>
-            <p class="body">What we built, how the teams worked, where it got hard and what changed.</p>
-          </div>
-          <div class="cards" data-case-cards="with-cta"></div>
-        </div>
-      </section>
-
-      <section class="section ruled" aria-labelledby="clients-title">
-        <div class="wrap">
-          <div class="head split">
-            <h2 id="clients-title" class="h2">Everyone we’ve worked with</h2>
-          </div>
-          <ul class="clients grid" data-clients></ul>
+          <ul class="rows" data-industry-rows></ul>
         </div>
       </section>
 
@@ -45,5 +33,6 @@
     </main>
     <script src="assets/js/data.js"></script>
     <script src="assets/js/site.js"></script>
+    <script src="assets/js/industries.js"></script>
   </body>
 </html>

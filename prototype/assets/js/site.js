@@ -1,14 +1,10 @@
-// EPOCH identity prototype: shared chrome, the direction/logo switcher and the page renderers.
+// EPOCH prototype: shared chrome (logo, header, footer) and the page renderers.
 // Content comes from data.js, which is exported from src/shared/constants.
 (function () {
   'use strict';
 
   var DATA = window.EPOCH_DATA;
-  var root = document.documentElement;
   var page = document.body.dataset.page || '';
-
-  var DIRECTIONS = { a: 'Midnight', b: 'Draftsman', c: 'Ultramarine' };
-  var LOGOS = ['1', '2', '3'];
 
   // ---------- Helpers ----------
 
@@ -34,14 +30,6 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
-  function save(key, value) {
-    try {
-      window.localStorage.setItem(key, value);
-    } catch (error) {
-      console.warn('Could not save the prototype choice; it still applies to this page.', error);
-    }
-  }
-
   function findService(id) {
     return DATA.services.filter(function (service) {
       return service.id === id;
@@ -58,23 +46,15 @@
 
   var SPRITE =
     '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">' +
-    '<symbol id="wm-integrated" viewBox="-0.5 -1 208 42">' +
-    '<g fill="none" stroke="currentColor" stroke-width="4.4">' +
-    '<path d="M26 2.2H2.2V37.8H26M2.2 20H23"/>' +
-    '<path transform="translate(39 0)" d="M2.2 40V2.2H14A9.9 9.9 0 0 1 14 22H2.2"/>' +
-    '<path transform="translate(78.5 0)" d="M27.4 3.37A18.2 18.2 0 1 1 12.6 3.37"/>' +
-    '<path transform="translate(131.3 0)" d="M33.53 7.82A18.2 18.2 0 1 0 33.53 32.18"/>' +
-    '<path transform="translate(176.5 0)" d="M2.2 0V40M27.8 0V40M2.2 20H27.8"/>' +
-    '</g>' +
-    '<circle cx="98.5" cy="1.8" r="3" style="fill:var(--logo-dot,currentColor)"/>' +
-    '</symbol>' +
+    // Monoline caps, stroke 6.6 on a 40-unit cap height. Paths sit half a stroke inside the
+    // letter edges so the ink keeps the same outer bounds (and spacing) at any weight.
     '<symbol id="wm-plain" viewBox="-0.5 -1 208 42">' +
-    '<g fill="none" stroke="currentColor" stroke-width="4.4">' +
-    '<path d="M26 2.2H2.2V37.8H26M2.2 20H23"/>' +
-    '<path transform="translate(39 0)" d="M2.2 40V2.2H14A9.9 9.9 0 0 1 14 22H2.2"/>' +
-    '<circle cx="98.5" cy="20" r="18.2"/>' +
-    '<path transform="translate(131.3 0)" d="M33.53 7.82A18.2 18.2 0 1 0 33.53 32.18"/>' +
-    '<path transform="translate(176.5 0)" d="M2.2 0V40M27.8 0V40M2.2 20H27.8"/>' +
+    '<g fill="none" stroke="currentColor" stroke-width="6.6">' +
+    '<path d="M26 3.3H3.3V36.7H26M3.3 20H23"/>' +
+    '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>' +
+    '<circle cx="98.5" cy="20" r="17.1"/>' +
+    '<path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44"/>' +
+    '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>' +
     '</g>' +
     '</symbol>' +
     '<symbol id="mark" viewBox="0 0 48 48">' +
@@ -85,12 +65,11 @@
 
   var WORDMARK_BOX = '-0.5 -1 208 42';
 
+  // The symbol (a full pass with its zero point) beside the wordmark.
   function logo() {
     return (
-      '<span class="logo logo-1"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-integrated"/></svg></span>' +
-      '<span class="logo logo-2"><svg class="mk" viewBox="0 0 48 48"><use href="#mark"/></svg>' +
-      '<svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></span>' +
-      '<span class="logo logo-3"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></span>'
+      '<span class="logo"><svg class="mk" viewBox="0 0 48 48"><use href="#mark"/></svg>' +
+      '<svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></span>'
     );
   }
 
@@ -99,6 +78,9 @@
   var NAV = [
     { href: 'work.html', label: 'Work', pages: ['work', 'case'] },
     { href: 'services.html', label: 'Services', pages: ['services', 'service'] },
+    { href: 'industries.html', label: 'Industries', pages: ['industries', 'industry'] },
+    { href: 'how-we-work.html', label: 'How we work', pages: ['how-we-work'] },
+    { href: 'insights.html', label: 'Insights', pages: ['insights', 'article'] },
     { href: 'about.html', label: 'About', pages: ['about'] },
   ];
 
@@ -141,60 +123,15 @@
       '<div class="foot-brand">' + logo() + '<p class="foot-tag">AI, engineered all the way to production.</p></div>' +
       '<nav class="foot-col" aria-label="AI services"><h2>AI</h2>' + footerServices('ai') + '</nav>' +
       '<nav class="foot-col" aria-label="Engineering services"><h2>Engineering</h2>' + footerServices('engineering') + '</nav>' +
-      '<nav class="foot-col" aria-label="Company"><h2>Company</h2><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>' +
+      '<nav class="foot-col" aria-label="Company"><h2>Company</h2><a href="work.html">Work</a><a href="industries.html">Industries</a>' +
+      '<a href="how-we-work.html">How we work</a><a href="insights.html">Insights</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>' +
       '<div class="foot-col"><h2>Talk to us</h2><a href="mailto:' + contact.email + '">' + esc(contact.email) + '</a>' +
       '<a href="' + contact.phoneHref + '">' + esc(contact.phone) + '</a>' + social + '</div>' +
       '</div>' +
       '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span><span>Charlotte, NC and Ahmedabad, India</span></div>' +
+      '<div class="foot-mark" aria-hidden="true"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></div>' +
       '</div></footer>'
     );
-  }
-
-  // ---------- Prototype switcher ----------
-
-  function switcher() {
-    var themes = list(Object.keys(DIRECTIONS), function (key) {
-      return '<button type="button" data-theme-set="' + key + '" title="' + DIRECTIONS[key] + '">' + key.toUpperCase() + '</button>';
-    });
-    var logos = list(LOGOS, function (key) {
-      return '<button type="button" data-logo-set="' + key + '" title="Logo ' + key + '">' + key + '</button>';
-    });
-    return (
-      '<div class="proto" role="group" aria-label="Prototype: choose a direction and a logo">' +
-      '<span class="proto-name" data-proto-name></span>' +
-      '<div class="proto-group">' + themes + '</div>' +
-      '<span class="proto-sep"></span><span>Logo</span>' +
-      '<div class="proto-group">' + logos + '</div>' +
-      '</div>'
-    );
-  }
-
-  function syncSwitcher() {
-    all('[data-theme-set]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.dataset.themeSet === root.dataset.theme));
-    });
-    all('[data-logo-set]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.dataset.logoSet === root.dataset.logo));
-    });
-    all('[data-proto-name]').forEach(function (label) {
-      label.textContent = DIRECTIONS[root.dataset.theme];
-    });
-  }
-
-  function bindSwitcher() {
-    document.addEventListener('click', function (event) {
-      var themeButton = event.target.closest('[data-theme-set]');
-      var logoButton = event.target.closest('[data-logo-set]');
-      if (themeButton) {
-        root.dataset.theme = themeButton.dataset.themeSet;
-        save('epoch-theme', root.dataset.theme);
-      }
-      if (logoButton) {
-        root.dataset.logo = logoButton.dataset.logoSet;
-        save('epoch-logo', root.dataset.logo);
-      }
-      if (themeButton || logoButton) syncSwitcher();
-    });
   }
 
   function bindMenu() {
@@ -234,11 +171,33 @@
     );
   }
 
+  // Prototype content: the main parts of each system, taken from the case study deliverables.
+  // `ai` marks the step where the AI does its work.
+  var SYSTEM_SKETCH = {
+    'hub-international': {
+      steps: ['Legacy systems', 'API integration layer', 'AI risk assessment', 'Automated claims workflow', 'Real-time analytics'],
+      ai: 2,
+    },
+    'inspira-financial': {
+      steps: ['Participant portal', 'API gateway', 'Plan administration engine', 'AI retirement guidance', 'Compliance monitoring'],
+      ai: 3,
+    },
+  };
+
+  function sketch(studyId) {
+    var system = SYSTEM_SKETCH[studyId];
+    if (!system) return '';
+    return '<ol class="sketch" aria-label="How the system fits together">' + list(system.steps, function (step, index) {
+      return '<li' + (index === system.ai ? ' class="ai"' : '') + '><span class="node" aria-hidden="true"></span>' + esc(step) + '</li>';
+    }) + '</ol>';
+  }
+
   function caseCard(study) {
     return (
       '<article class="card">' +
       '<div class="client" data-client="' + study.id + '"><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '"></div>' +
       '<p class="meta">' + esc(study.industry) + '</p>' +
+      sketch(study.id) +
       '<h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) + '</a></h3>' +
       '<div class="facts"><span>' + esc(study.timeline) + '</span><span>Team of ' + study.teamSize.epoch + ' from EPOCH</span></div>' +
       '<p class="more" aria-hidden="true">Read the case study</p>' +
@@ -256,7 +215,7 @@
     '<h2 id="closing-title" class="display">Bring us the project that matters most.</h2>' +
     '<div class="closing-foot"><p class="lede">Tell us what you’re building and what’s in the way. You’ll hear back within 24 hours.</p>' +
     '<div class="actions"><a class="btn" href="contact.html">Start a project</a>' +
-    '<a class="btn secondary" href="mailto:operator@epoch.sh">operator@epoch.sh</a></div></div>' +
+    '<a class="btn secondary" href="contact.html#book">Book a 30-minute call</a></div></div>' +
     '</div></section>';
 
   function office(item) {
@@ -446,57 +405,72 @@
       CLOSING;
   }
 
-  // ---------- Home hero: the dial ----------
+  // ---------- Home hero: live time since t0 ----------
 
-  function initDial() {
-    var ticks = document.querySelector('[data-dial-ticks]');
-    var readout = document.querySelector('[data-unix]');
-    if (!ticks || !readout) return;
+  function initClock() {
+    var labels = all('[data-unix-label]');
+    if (!labels.length) return;
 
-    var NS = 'http://www.w3.org/2000/svg';
-    var OUTER = 479;
-    for (var i = 0; i < 360; i++) {
-      var major = i % 30 === 0;
-      var length = major ? 22 : i % 5 === 0 ? 12 : 6;
-      var angle = (i * Math.PI) / 180;
-      var sin = Math.sin(angle);
-      var cos = Math.cos(angle);
-      var line = document.createElementNS(NS, 'line');
-      line.setAttribute('x1', (sin * OUTER).toFixed(2));
-      line.setAttribute('y1', (-cos * OUTER).toFixed(2));
-      line.setAttribute('x2', (sin * (OUTER - length)).toFixed(2));
-      line.setAttribute('y2', (-cos * (OUTER - length)).toFixed(2));
-      line.setAttribute('class', major ? 't-major' : i % 5 === 0 ? 't-mid' : 't-minor');
-      ticks.appendChild(line);
-      if (major) {
-        var x = (sin * (OUTER - 36)).toFixed(2);
-        var y = (-cos * (OUTER - 36)).toFixed(2);
-        var label = document.createElementNS(NS, 'text');
-        label.setAttribute('x', x);
-        label.setAttribute('y', y);
-        label.setAttribute('transform', 'rotate(' + i + ' ' + x + ' ' + y + ')');
-        label.textContent = String(i).padStart(3, '0');
-        ticks.appendChild(label);
-      }
+    function show() {
+      var seconds = Math.floor(Date.now() / 1000);
+      labels.forEach(function (label) {
+        label.textContent = 't = ' + seconds + ' s';
+      });
     }
 
-    // One tick per second since the Unix epoch: the bezel steps under the fixed zero marker.
-    var start = Math.floor(Date.now() / 1000);
-    var base = -(start % 360);
-    function show(seconds, animate) {
-      ticks.style.transition = animate ? 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
-      ticks.style.transform = 'rotate(' + (base - (seconds - start)) + 'deg)';
-      readout.textContent = String(seconds);
-    }
-    show(start, false);
+    show();
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     function step() {
-      var now = Date.now();
-      show(Math.floor(now / 1000), true);
-      window.setTimeout(step, 1000 - (now % 1000) + 10);
+      show();
+      window.setTimeout(step, 1000 - (Date.now() % 1000) + 10);
     }
     window.setTimeout(step, 1000 - (Date.now() % 1000) + 10);
+  }
+
+  // ---------- Home hero: measuring crosshair ----------
+
+  function initMeasure() {
+    var panel = document.querySelector('.v-draft');
+    var svg = panel && panel.querySelector('svg');
+    if (!panel || !svg || !window.matchMedia('(pointer: fine)').matches) return;
+
+    panel.classList.add('measuring');
+    panel.insertAdjacentHTML('beforeend', '<div class="xhair" aria-hidden="true"><span class="xh-h"></span><span class="xh-v"></span><span class="xh-label"></span></div>');
+    var guide = panel.querySelector('.xhair');
+    var label = panel.querySelector('.xh-label');
+    var point = svg.createSVGPoint();
+
+    panel.addEventListener('pointermove', function (event) {
+      var box = panel.getBoundingClientRect();
+      var x = event.clientX - box.left;
+      var y = event.clientY - box.top;
+      point.x = event.clientX;
+      point.y = event.clientY;
+      var local = point.matrixTransform(svg.getScreenCTM().inverse());
+      label.textContent = 'x ' + local.x.toFixed(1) + '   y ' + local.y.toFixed(1);
+      // Keep the readout inside the panel near the right and bottom edges.
+      var flipX = x > box.width - 170;
+      var flipY = y > box.height - 40;
+      guide.style.setProperty('--x', x + 'px');
+      guide.style.setProperty('--y', y + 'px');
+      guide.style.setProperty('--lx', (flipX ? x - label.offsetWidth - 10 : x + 10) + 'px');
+      guide.style.setProperty('--ly', (flipY ? y - label.offsetHeight - 10 : y + 10) + 'px');
+    });
+  }
+
+  // ---------- Booking ----------
+
+  // Set this to the scheduling link (Calendly, Cal.com, ...) to switch "Choose a time" over.
+  // Until then the button opens an email asking for a call.
+  var BOOKING_URL = '';
+
+  function initBooking() {
+    if (!BOOKING_URL) return;
+    all('[data-booking]').forEach(function (link) {
+      link.href = BOOKING_URL;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
   }
 
   // ---------- Contact form ----------
@@ -544,14 +518,14 @@
   // ---------- Boot ----------
 
   document.body.insertAdjacentHTML('afterbegin', SPRITE + header());
-  document.body.insertAdjacentHTML('beforeend', footer() + switcher());
+  document.body.insertAdjacentHTML('beforeend', footer());
 
   if (page === 'service') renderService();
   if (page === 'case') renderCase();
   renderBlocks();
-  initDial();
+  initClock();
+  initMeasure();
+  initBooking();
   initForm();
   bindMenu();
-  bindSwitcher();
-  syncSwitcher();
 })();

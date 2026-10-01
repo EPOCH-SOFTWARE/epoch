@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
     <link rel="stylesheet" href="assets/css/site.css" />
-    <script src="assets/js/prefs.js"></script>
   </head>
   <body data-page="home">
     <main id="main">
@@ -28,15 +27,9 @@
             </div>
           </div>
 
-          <!-- B: the mark, drawn as a technical construction. t0 is the Unix epoch. -->
-          <div class="hero-visual v-draft" aria-hidden="true">
+          <!-- The mark, drawn as a technical construction. t0 is the Unix epoch. -->
+          <div class="v-draft" aria-hidden="true">
             <svg viewBox="0 0 640 640">
-              <defs>
-                <pattern id="draft-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                  <path d="M32 0H0V32" fill="none" stroke="#eef0f2" stroke-width="1" />
-                </pattern>
-              </defs>
-              <rect width="640" height="640" fill="url(#draft-grid)" />
               <g fill="none" stroke="#b9bfc6" stroke-width="1" stroke-dasharray="2 5">
                 <circle cx="320" cy="340" r="213" />
                 <circle cx="320" cy="340" r="190" />
@@ -56,6 +49,7 @@
                   <text x="396" y="386">r 1.000</text>
                   <text x="320" y="78" text-anchor="middle">48°</text>
                   <text x="424" y="62">t₀ 1970-01-01 00:00 UTC</text>
+                  <text x="424" y="96" font-size="13" fill="#969ca4" data-unix-label></text>
                 </g>
                 <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#969ca4">
                   <text x="20" y="34">EPOCH mark</text>
@@ -64,47 +58,18 @@
               </g>
             </svg>
           </div>
-
-          <!-- C: the mark as an orbit completing one full pass. -->
-          <div class="hero-visual v-orbit" aria-hidden="true">
-            <div class="orbit">
-              <div class="orbit-ring"></div>
-              <div class="orbit-trail"></div>
-              <div class="orbit-arm"><span class="orbit-body"></span></div>
-              <span class="orbit-start"></span>
-              <p class="orbit-caption">one complete pass</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- A: a bezel that steps once per second since the Unix epoch. -->
-        <div class="hero-visual v-dial" aria-hidden="true">
-          <div class="dial-glow"></div>
-          <svg class="dial" viewBox="-500 -500 1000 1000">
-            <defs>
-              <radialGradient id="dial-disc" cx="0" cy="0" r="480" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#000" />
-                <stop offset="0.94" stop-color="#040404" />
-                <stop offset="1" stop-color="#0e0e0e" />
-              </radialGradient>
-              <linearGradient id="dial-rim" x1="0" y1="-480" x2="0" y2="-140" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#fff" stop-opacity="0.85" />
-                <stop offset="0.45" stop-color="#fff" stop-opacity="0.14" />
-                <stop offset="1" stop-color="#fff" stop-opacity="0" />
-              </linearGradient>
-            </defs>
-            <circle r="480" fill="url(#dial-disc)" />
-            <circle r="480" fill="none" stroke="url(#dial-rim)" stroke-width="1.2" vector-effect="non-scaling-stroke" />
-            <g class="dial-ticks" data-dial-ticks></g>
-          </svg>
-          <div class="dial-zero"></div>
-          <p class="dial-readout"><span data-unix></span><small>seconds since the epoch</small></p>
         </div>
       </section>
 
       <section class="wrap logo-strip" aria-labelledby="clients-title">
         <h2 id="clients-title" class="label">Trusted by teams at</h2>
-        <ul class="clients" data-clients></ul>
+        <!-- Two copies of the list make the scroll loop seamlessly; the copy is hidden from screen readers. -->
+        <div class="marquee">
+          <div class="marquee-track">
+            <ul class="clients" data-clients></ul>
+            <ul class="clients" data-clients aria-hidden="true"></ul>
+          </div>
+        </div>
       </section>
 
       <section class="section ruled" aria-labelledby="why-title">
