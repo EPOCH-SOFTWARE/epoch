@@ -1,0 +1,1218 @@
+--- a/styles/ServiceDetail.module.css
++++ b/styles/ServiceDetail.module.css
+@@ -942,8 +942,189 @@
+   justify-content: center;
+   flex-wrap: wrap;
+   margin-bottom: 2rem;
++}
++
++/* Problem Statement Section */
++.painPointsGrid {
++  display: grid;
++  grid-template-columns: repeat(2, 1fr);
++  gap: 1.5rem;
++  margin-top: 3rem;
++}
++
++.painPointCard {
++  display: flex;
++  gap: 1rem;
++  padding: 1.5rem;
++  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
++  border: 1px solid rgba(255, 255, 255, 0.08);
++  border-radius: 12px;
++  transition: all 0.3s ease;
++  position: relative;
++  overflow: hidden;
++}
++
++.painPointCard::before {
++  content: '';
++  position: absolute;
++  top: 0;
++  left: 0;
++  width: 3px;
++  height: 100%;
++  background: linear-gradient(180deg, rgba(220, 80, 80, 0.6) 0%, rgba(220, 80, 80, 0.2) 100%);
++  opacity: 0.6;
++}
++
++.painPointCard:hover {
++  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
++  border-color: rgba(255, 255, 255, 0.12);
++  transform: translateY(-2px);
++}
++
++.painPointIcon {
++  flex-shrink: 0;
++  width: 40px;
++  height: 40px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  background: rgba(220, 80, 80, 0.1);
++  border-radius: 10px;
++  color: rgba(220, 120, 120, 0.8);
++}
++
++.painPointCard p {
++  margin: 0;
++  font-size: 0.95rem;
++  line-height: 1.6;
++  color: rgba(255, 255, 255, 0.8);
++}
++
++/* Process Section */
++.processGrid {
++  display: grid;
++  grid-template-columns: repeat(4, 1fr);
++  gap: 2rem;
++  margin-top: 3rem;
++  position: relative;
++}
++
++.processStep {
++  text-align: center;
++  padding: 2rem 1.5rem;
++  background: rgba(255, 255, 255, 0.02);
++  border: 1px solid rgba(154, 205, 50, 0.1);
++  border-radius: 16px;
++  transition: all 0.3s ease;
++  position: relative;
++}
++
++.processStep:hover {
++  background: rgba(255, 255, 255, 0.04);
++  border-color: rgba(154, 205, 50, 0.25);
++  transform: translateY(-4px);
++}
++
++.processStepNumber {
++  font-size: 2.5rem;
++  font-weight: 700;
++  color: rgba(154, 205, 50, 0.3);
++  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
++  margin-bottom: 1rem;
++  line-height: 1;
++}
++
++.processStep h3 {
++  font-size: 1.1rem;
++  font-weight: 600;
++  color: #ffffff;
++  margin-bottom: 0.75rem;
++}
++
++.processStep p {
++  font-size: 0.9rem;
++  line-height: 1.6;
++  color: rgba(255, 255, 255, 0.65);
++  margin: 0;
++}
++
++.processConnector {
++  display: none;
+ }
+ 
++/* FAQ Section */
++.faqGrid {
++  max-width: 800px;
++  margin: 3rem auto 0;
++  display: flex;
++  flex-direction: column;
++  gap: 1rem;
++}
++
++.faqItem {
++  border: 1px solid rgba(255, 255, 255, 0.08);
++  border-radius: 12px;
++  overflow: hidden;
++  transition: all 0.3s ease;
++  background: rgba(255, 255, 255, 0.02);
++}
++
++.faqItem:hover {
++  border-color: rgba(154, 205, 50, 0.2);
++}
++
++.faqOpen {
++  border-color: rgba(154, 205, 50, 0.25);
++  background: rgba(255, 255, 255, 0.03);
++}
++
++.faqQuestion {
++  width: 100%;
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  padding: 1.25rem 1.5rem;
++  background: none;
++  border: none;
++  color: #ffffff;
++  font-size: 1rem;
++  font-weight: 500;
++  cursor: pointer;
++  text-align: left;
++  gap: 1rem;
++  transition: color 0.2s ease;
++}
++
++.faqQuestion:hover {
++  color: #9ACD32;
++}
++
++.faqQuestion span {
++  flex: 1;
++}
++
++.faqQuestion svg {
++  flex-shrink: 0;
++  color: rgba(255, 255, 255, 0.4);
++  transition: transform 0.3s ease, color 0.3s ease;
++}
++
++.faqChevronOpen {
++  transform: rotate(180deg);
++  color: #9ACD32 !important;
++}
++
++.faqAnswer {
++  padding: 0 1.5rem 1.25rem;
++}
++
++.faqAnswer p {
++  margin: 0;
++  font-size: 0.95rem;
++  line-height: 1.7;
++  color: rgba(255, 255, 255, 0.7);
++}
++
+ /* Responsive Design */
+ @media (max-width: 768px) {
+   .hero {
+@@ -1034,4 +1215,33 @@
+     flex-direction: column;
+     align-items: center;
+   }
++
++  /* Problem Statement Responsive */
++  .painPointsGrid {
++    grid-template-columns: 1fr;
++  }
++
++  /* Process Responsive */
++  .processGrid {
++    grid-template-columns: 1fr;
++    gap: 1.5rem;
++  }
++
++  .processStep {
++    padding: 1.5rem;
++  }
++
++  .processStepNumber {
++    font-size: 2rem;
++  }
++
++  /* FAQ Responsive */
++  .faqQuestion {
++    padding: 1rem 1.25rem;
++    font-size: 0.95rem;
++  }
++
++  .faqAnswer {
++    padding: 0 1.25rem 1rem;
++  }
+ }
+\ No newline at end of file
+--- a/app/contact/page.tsx
++++ b/app/contact/page.tsx
+@@ -17,12 +17,12 @@
+ });
+ 
+ export const metadata: Metadata = {
+-  title: 'Contact EPOCH - Start Your Digital Transformation Journey',
+-  description: 'Connect with EPOCH\'s team of precision engineers and scientists. Let\'s transform your vision into digital reality with Swiss precision and scientific innovation.',
+-  keywords: ['contact epoch', 'software consultation', 'digital transformation', 'project inquiry', 'technical consultation'],
++  title: 'Contact EPOCH - Get in Touch',
++  description: 'Reach out to discuss your project. EPOCH builds enterprise software across AI, cloud infrastructure, cybersecurity, and custom development.',
++  keywords: ['contact epoch', 'software consultation', 'project inquiry', 'technical consultation'],
+   openGraph: {
+-    title: 'Contact EPOCH - Start Your Digital Transformation Journey',
+-    description: 'Connect with EPOCH\'s team of precision engineers. Let\'s transform your vision into digital reality.',
++    title: 'Contact EPOCH - Get in Touch',
++    description: 'Reach out to discuss your project with our development team.',
+     type: 'website',
+   },
+ };
+--- a/app/about/page.tsx
++++ b/app/about/page.tsx
+@@ -17,12 +17,12 @@
+ });
+ 
+ export const metadata: Metadata = {
+-  title: 'About EPOCH - Swiss Precision in Software Development',
+-  description: 'Discover the story behind EPOCH, our team of precision engineers, and our mission to transform complexity into digital elegance through scientific innovation.',
+-  keywords: ['about epoch', 'software development team', 'precision engineering', 'digital innovation', 'company story'],
++  title: 'About EPOCH - Enterprise Software Development Company',
++  description: 'Learn about EPOCH, our team, and our approach to building reliable software for enterprise clients across AI, cloud, and custom development.',
++  keywords: ['about epoch', 'software development team', 'enterprise software', 'company story'],
+   openGraph: {
+-    title: 'About EPOCH - Swiss Precision in Software Development',
+-    description: 'Discover the story behind EPOCH, our team of precision engineers, and our mission to transform complexity into digital elegance.',
++    title: 'About EPOCH - Enterprise Software Development Company',
++    description: 'Learn about EPOCH, our team, and our approach to building reliable software for enterprise clients.',
+     type: 'website',
+   },
+ };
+--- a/src/components/sections/ClientsSection.tsx
++++ b/src/components/sections/ClientsSection.tsx
+@@ -24,79 +24,79 @@
+   keyResult: string;
+ }
+ 
+-// Enhanced client data with comprehensive case study information (Chronological order - newest first)
++// Client data with project information (Chronological order - newest first)
+ const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
+   {
+     ...CLIENT_LOGOS[0]!, // Inspira Financial
+     industry: 'Financial Services',
+     projectType: 'Platform Modernization & Cloud Migration',
+     yearWorked: '2024',
+-    previewDescription: 'Architected and deployed a next-generation fintech platform for Inspira Financial, migrating from legacy mainframe systems to cloud-native microservices architecture. Implemented real-time transaction processing, advanced security protocols including multi-factor authentication and encryption. Built comprehensive analytics dashboard for portfolio management and risk assessment. Developed API-first architecture enabling seamless third-party integrations and white-label solutions for partner institutions.',
+-    keyResult: '99.9% uptime achieved, 70% faster transactions, 50% operational cost reduction'
++    previewDescription: 'Migrated Inspira Financial from legacy mainframe systems to a cloud-native microservices architecture. Built real-time transaction processing, security protocols, analytics dashboard for portfolio management, and an API-first architecture for third-party integrations.',
++    keyResult: 'Improved system reliability, faster transaction processing, reduced operational costs'
+   },
+   {
+     ...CLIENT_LOGOS[1]!, // HUB International
+     industry: 'Insurance',
+-    projectType: 'Digital Transformation & AI Integration',
++    projectType: 'Digital Modernization & AI Integration',
+     yearWorked: '2023',
+-    previewDescription: 'Transformed HUB International\'s legacy insurance operations through comprehensive digital modernization. Implemented AI-powered risk assessment algorithms, automated claim processing workflows, and real-time fraud detection systems. Developed custom policy management platform with seamless integration to existing enterprise systems. Created mobile-first customer portal enabling instant quotes, policy modifications, and claim submissions. Enhanced data analytics capabilities with predictive modeling for risk assessment and customer behavior analysis.',
+-    keyResult: '60% faster claim processing, 40% reduction in fraud, 85% customer satisfaction increase'
++    previewDescription: 'Modernized HUB International\'s insurance operations with AI-powered risk assessment, automated claim processing, and fraud detection. Built a custom policy management platform integrated with existing enterprise systems and a mobile-first customer portal.',
++    keyResult: 'Faster claim processing, improved fraud detection, better customer experience'
+   },
+   {
+     ...CLIENT_LOGOS[2]!, // Destify
+     industry: 'Travel Technology',
+-    projectType: 'Intelligent Mobile Platform & Booking Engine',
++    projectType: 'Mobile Platform & Booking Engine',
+     yearWorked: '2022',
+-    previewDescription: 'Developed intelligent travel planning platform for Destify with real-time booking and personalized recommendations. Implemented AI-powered itinerary optimization considering user preferences, budget constraints, and seasonal factors. Created comprehensive booking engine integrating flights, hotels, activities, and transportation. Built social features enabling trip sharing and collaborative planning. Enhanced platform with predictive pricing, weather integration, and real-time travel alerts.',
+-    keyResult: '180% user engagement, 120% booking conversion, 90% customer satisfaction'
++    previewDescription: 'Developed a travel planning platform for Destify with real-time booking, personalized recommendations, and itinerary optimization. Built a booking engine integrating flights, hotels, and activities with social features for collaborative planning.',
++    keyResult: 'Increased user engagement, higher booking conversion, strong customer satisfaction'
+   },
+   {
+     ...CLIENT_LOGOS[3]!, // Cardinal Health
+     industry: 'Healthcare',
+-    projectType: 'AI-Powered Supply Chain Optimization',
++    projectType: 'Supply Chain Optimization',
+     yearWorked: '2021',
+-    previewDescription: 'Revolutionized Cardinal Health\'s supply chain operations through AI and machine learning integration. Developed predictive analytics for inventory management, demand forecasting, and automated reordering systems. Implemented IoT sensors for real-time tracking of pharmaceutical products with temperature and humidity monitoring. Created HIPAA-compliant data platform for healthcare analytics and regulatory reporting. Built mobile applications for field representatives with offline capability and real-time synchronization.',
+-    keyResult: '40% cost reduction, 60% inventory accuracy improvement, 99.5% regulatory compliance'
++    previewDescription: 'Improved Cardinal Health\'s supply chain with predictive analytics for inventory management and demand forecasting. Implemented IoT-based tracking for pharmaceutical products and built a HIPAA-compliant data platform for healthcare analytics and reporting.',
++    keyResult: 'Reduced costs, improved inventory accuracy, strong regulatory compliance'
+   },
+   {
+     ...CLIENT_LOGOS[4]!, // Rural King
+     industry: 'Retail',
+-    projectType: 'Omnichannel Digital Transformation',
++    projectType: 'Omnichannel Platform',
+     yearWorked: '2020',
+-    previewDescription: 'Unified Rural King\'s online and in-store experiences through comprehensive omnichannel solution. Developed integrated inventory management system with real-time stock visibility across all locations. Implemented buy-online-pickup-in-store functionality with mobile app integration. Created customer analytics platform tracking behavior across all touchpoints. Built loyalty program with personalized offers and agricultural seasonal recommendations. Enhanced supply chain visibility with vendor portal and automated procurement.',
+-    keyResult: '150% online growth, 90% inventory accuracy, 65% customer retention increase'
++    previewDescription: 'Unified Rural King\'s online and in-store experience with integrated inventory management, buy-online-pickup-in-store functionality, and a customer analytics platform. Built a loyalty program with personalized offers and enhanced supply chain visibility.',
++    keyResult: 'Online revenue growth, improved inventory visibility, stronger customer retention'
+   },
+   {
+     ...CLIENT_LOGOS[5]!, // BlueSky Commerce
+     industry: 'E-commerce',
+-    projectType: 'Innovative Platform Development with AR/VR',
++    projectType: 'E-commerce Platform Development',
+     yearWorked: '2019',
+-    previewDescription: 'Created cutting-edge e-commerce platform for BlueSky Commerce featuring augmented reality product visualization and AI-powered recommendations. Developed mobile-first progressive web application with offline shopping capabilities. Implemented intelligent inventory management with predictive analytics for demand forecasting. Built comprehensive seller portal with automated fulfillment, dynamic pricing algorithms, and integrated payment processing. Enhanced customer experience through personalized product discovery and virtual try-on features.',
+-    keyResult: '200% conversion increase, 150% customer engagement, 80% return rate reduction'
++    previewDescription: 'Built an e-commerce platform for BlueSky Commerce with AR product visualization and AI-powered recommendations. Developed a mobile-first progressive web application, seller portal with automated fulfillment, and integrated payment processing.',
++    keyResult: 'Higher conversion rates, increased engagement, reduced return rates'
+   },
+   {
+     ...CLIENT_LOGOS[6]!, // Skeps
+     industry: 'Fintech',
+-    projectType: 'Robust Payment Infrastructure & API Development',
++    projectType: 'Payment Infrastructure & API Development',
+     yearWorked: '2018',
+-    previewDescription: 'Built enterprise-grade payment infrastructure for Skeps with seamless integrations and compliance-first architecture. Developed RESTful APIs supporting multiple payment methods, installment loans, and merchant financing solutions. Implemented real-time underwriting algorithms with machine learning risk assessment. Created comprehensive merchant onboarding platform with automated KYC/AML compliance. Enhanced fraud prevention through behavioral analytics and transaction pattern recognition.',
+-    keyResult: '99.99% API reliability, 80% faster underwriting, 95% merchant satisfaction'
++    previewDescription: 'Built payment infrastructure for Skeps with RESTful APIs supporting multiple payment methods and merchant financing. Implemented ML-based underwriting, merchant onboarding with automated compliance, and fraud prevention through behavioral analytics.',
++    keyResult: 'High API reliability, faster underwriting, strong merchant satisfaction'
+   },
+   {
+     ...CLIENT_LOGOS[7]!, // Shift4
+     industry: 'Payment Processing',
+-    projectType: 'Performance Optimization & Security Enhancement',
++    projectType: 'Performance Optimization & Security',
+     yearWorked: '2017',
+-    previewDescription: 'Optimized Shift4\'s payment processing infrastructure to handle high-volume transactions with sub-second response times. Implemented advanced fraud detection using machine learning algorithms and real-time transaction monitoring. Enhanced PCI DSS compliance through secure tokenization and end-to-end encryption. Developed merchant dashboard with comprehensive analytics, chargeback management, and automated reconciliation. Created scalable API gateway supporting 10M+ daily transactions.',
+-    keyResult: '85% faster transactions, 95% fraud reduction, zero security breaches'
++    previewDescription: 'Optimized Shift4\'s payment processing for high-volume transactions with fast response times. Implemented ML-based fraud detection, enhanced PCI DSS compliance with tokenization and encryption, and built a merchant dashboard with analytics and reconciliation.',
++    keyResult: 'Faster transaction processing, improved fraud detection, enhanced security posture'
+   },
+   {
+     ...CLIENT_LOGOS[8]!, // IDrive
+     industry: 'Cloud Storage',
+     projectType: 'Infrastructure Scaling & Platform Enhancement',
+     yearWorked: '2016',
+-    previewDescription: 'Architected next-generation cloud storage platform for IDrive with enhanced data protection and sync capabilities. Implemented advanced deduplication algorithms reducing storage requirements by 70%. Developed cross-platform synchronization with conflict resolution and version control. Enhanced security through zero-knowledge encryption and multi-layered backup strategies. Created high-performance API supporting millions of concurrent users with global CDN integration for optimal performance.',
+-    keyResult: '300% storage efficiency, 99.99% data durability, 90% sync speed improvement'
++    previewDescription: 'Architected a cloud storage platform for IDrive with data protection and sync capabilities. Implemented deduplication algorithms, cross-platform sync with conflict resolution, zero-knowledge encryption, and a high-performance API with global CDN integration.',
++    keyResult: 'Improved storage efficiency, high data durability, faster sync performance'
+   }
+ ];
+ 
+@@ -212,16 +212,15 @@
+             <div className={styles.heroContent}>
+               <span className={styles.heroLabel} id="clients-heading">Our Partnerships</span>
+               <h1 className={styles.heroTitle}>
+-                <span className={styles.titleLine}>Transforming</span>
++                <span className={styles.titleLine}>Companies</span>
+                 <span className={styles.titleLine}>
+-                  <span className={styles.titleHighlight}>Business Futures</span>
++                  <span className={styles.titleHighlight}>We Work</span>
+                 </span>
+-                <span className={styles.titleLine}>Together</span>
++                <span className={styles.titleLine}>With</span>
+               </h1>
+               <p className={styles.heroDescription}>
+-                Each partnership tells a story of innovation, challenge, and breakthrough success. 
+-                Discover how we{`'`}ve collaborated with industry leaders to deliver transformative solutions 
+-                that drive measurable results and lasting impact.
++                We partner with companies across industries to solve real technical challenges.
++                Here{`'`}s a look at the work we{`'`}ve done and the results we{`'`}ve delivered.
+               </p>
+             </div>
+ 
+@@ -235,8 +234,8 @@
+                 <span className={styles.statLabel}>Industries Served</span>
+               </div>
+               <div className={styles.stat}>
+-                <span className={styles.statNumber}>100%</span>
+-                <span className={styles.statLabel}>Success Rate</span>
++                <span className={styles.statNumber}>Multiple</span>
++                <span className={styles.statLabel}>Industries</span>
+               </div>
+             </div>
+           </div>
+@@ -353,12 +352,12 @@
+ 
+         {isStandalone && (
+           <div className={styles.ctaSection}>
+-            <h3 className={styles.ctaTitle}>Ready to join our success stories?</h3>
++            <h3 className={styles.ctaTitle}>Have a project in mind?</h3>
+             <p className={styles.ctaDescription}>
+               Let{`'`}s discuss how our collaborative approach can transform your next project.
+             </p>
+             <a href="#contact" className={styles.ctaButton}>
+-              <span>Start Your Story</span>
++              <span>Get in Touch</span>
+               <div className={styles.ctaGlow} />
+             </a>
+           </div>
+--- a/src/components/sections/HeroSection.tsx
++++ b/src/components/sections/HeroSection.tsx
+@@ -259,9 +259,9 @@
+ 
+   const heroTextLines = useMemo(
+     () => [
+-      { text: 'Crafting software', delay: '0.1s' },
+-      { text: 'with the precision', delay: '0.3s' },
+-      { text: 'of Swiss watchmakers', delay: '0.5s' },
++      { text: 'We build software', delay: '0.1s' },
++      { text: 'that works reliably', delay: '0.3s' },
++      { text: 'and scales with you', delay: '0.5s' },
+     ],
+     []
+   );
+@@ -304,8 +304,8 @@
+             </h1>
+             
+             <p className={styles.heroSubtitle}>
+-              We build intelligent systems that transform complexity into elegance, where every
+-              line of code serves a purpose.
++              From AI-powered platforms to cloud infrastructure, we deliver
++              production-grade software tailored to your business needs.
+             </p>
+             
+             <div className={styles.ctaWrapper}>
+@@ -316,7 +316,7 @@
+                 data-magnetic
+               >
+                 <div className={styles.ctaGlow} />
+-                <span className={styles.ctaText}>Explore our craft</span>
++                <span className={styles.ctaText}>See our services</span>
+                 <div className={styles.ctaArrow} aria-hidden="true">
+                   <svg
+                     viewBox="0 0 16 16"
+--- a/src/components/pages/contact/index.tsx
++++ b/src/components/pages/contact/index.tsx
+@@ -165,16 +165,16 @@
+         <section className={styles.hero}>
+           <div className={styles.heroContent}>
+             <h1 className={styles.heroTitle}>
+-              <span className={styles.titleLine}>Let{`'`}s Create</span>
++              <span className={styles.titleLine}>Get in</span>
+               <span className={styles.titleLine}>
+-                <span className={styles.titleHighlight}>Digital Excellence</span>
++                <span className={styles.titleHighlight}>Touch</span>
+               </span>
+-              <span className={styles.titleLine}>Together</span>
++              <span className={styles.titleLine}>With Us</span>
+             </h1>
+-            
++
+             <p className={styles.heroSubtitle}>
+-              Your vision deserves precision engineering and scientific innovation. 
+-              Connect with our team of experts to transform complexity into elegance.
++              Have a project in mind? Tell us what you{`'`}re looking to build
++              and our team will follow up with you directly.
+             </p>
+ 
+             <div className={styles.heroStats}>
+@@ -187,8 +187,8 @@
+                 <span className={styles.statLabel}>Confidential</span>
+               </div>
+               <div className={styles.stat}>
+-                <span className={styles.statNumber}>500+</span>
+-                <span className={styles.statLabel}>Projects Delivered</span>
++                <span className={styles.statNumber}>9+</span>
++                <span className={styles.statLabel}>Enterprise Clients</span>
+               </div>
+             </div>
+           </div>
+@@ -199,8 +199,8 @@
+           <div className={styles.contactContainer}>
+             <div className={styles.formSection}>
+               <div className={styles.sectionHeader}>
+-                <span className={styles.sectionLabel}>Start Your Journey</span>
+-                <h2 className={styles.sectionTitle}>Tell Us About Your Vision</h2>
++                <span className={styles.sectionLabel}>Contact Us</span>
++                <h2 className={styles.sectionTitle}>Tell Us About Your Project</h2>
+               </div>
+ 
+               <form ref={formRef} onSubmit={handleSubmit} className={styles.contactForm}>
+--- a/src/components/pages/about/index.tsx
++++ b/src/components/pages/about/index.tsx
+@@ -1,5 +1,5 @@
+ /**
+- * @fileoverview About page with innovative design and animations
++ * @fileoverview About page with company information and team details
+  * @author Epoch Development Team
+  */
+ 
+@@ -44,7 +44,7 @@
+ const approachData: ApproachItem[] = [
+   {
+     title: 'Discovery & Analysis',
+-    description: 'We begin every project with deep discovery sessions to understand your challenges, goals, and constraints. Like scientists studying a phenomenon, we gather data before forming hypotheses.',
++    description: 'Every project starts with understanding your challenges, goals, and constraints. We gather requirements thoroughly before proposing solutions.',
+     icon: (
+       <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+         <circle cx="12" cy="12" r="3" />
+@@ -53,8 +53,8 @@
+     )
+   },
+   {
+-    title: 'Iterative Design',
+-    description: 'Our solutions evolve through rapid prototyping and continuous feedback. We believe the best systems emerge from experimentation, not from rigid upfront specifications.',
++    title: 'Iterative Development',
++    description: 'We build in short cycles with continuous feedback. Working software is delivered early and refined based on real usage and stakeholder input.',
+     icon: (
+       <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+         <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
+@@ -65,7 +65,7 @@
+   },
+   {
+     title: 'Quality Assurance',
+-    description: 'Every solution undergoes rigorous testing and validation. We apply the same standards of proof and verification that govern scientific research to ensure reliability and performance.',
++    description: 'Automated testing, code reviews, and structured QA processes ensure reliability and performance before anything reaches production.',
+     icon: (
+       <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+@@ -75,8 +75,8 @@
+     )
+   },
+   {
+-    title: 'Continuous Evolution',
+-    description: 'Technology is never static, and neither are our solutions. We provide ongoing optimization and evolution to ensure your systems remain at the cutting edge of what\'s possible.',
++    title: 'Ongoing Support',
++    description: 'Our engagement doesn\'t end at launch. We provide maintenance, optimization, and feature development to keep your systems running well.',
+     icon: (
+       <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+@@ -101,11 +101,11 @@
+ 
+   // Memoize timeline data for performance
+   const timelineData = useMemo((): TimelineItem[] => [
+-    { year: '2012', event: 'EPOCH Founded', description: 'Scientific approach to software' },
+-    { year: '2015', event: 'First AI System', description: 'Breakthrough in machine learning' },
+-    { year: '2018', event: 'Quantum Computing', description: 'Applied quantum algorithms' },
+-    { year: '2021', event: 'Global Expansion', description: 'Worldwide innovation network' },
+-    { year: '2024', event: 'Next Epoch', description: 'Pushing boundaries further' }
++    { year: '[Year]', event: '[Company Founded]', description: '[Founding milestone — to be provided]' },
++    { year: '[Year]', event: '[Key Milestone]', description: '[Description — to be provided]' },
++    { year: '[Year]', event: '[Growth Phase]', description: '[Description — to be provided]' },
++    { year: '[Year]', event: '[Expansion]', description: '[Description — to be provided]' },
++    { year: '[Year]', event: '[Current Era]', description: '[Description — to be provided]' }
+   ], []);
+ 
+   // Section scroll tracking
+@@ -132,8 +132,8 @@
+ 
+   const coreValues = [
+     {
+-      title: 'Precision Engineering',
+-      description: 'Every line of code crafted with the exactitude of Swiss watchmakers',
++      title: 'Quality Engineering',
++      description: 'We hold our work to high standards at every stage',
+       icon: (
+         <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+           <rect x="3" y="3" width="18" height="18" rx="2" />
+@@ -143,11 +143,11 @@
+           <path d="M16.5 7.5l-9 9" />
+         </svg>
+       ),
+-      details: "We approach software development like master craftsmen, where precision isn't just a goal—it's our fundamental nature."
++      details: 'Thorough code reviews, comprehensive testing, and careful architecture decisions ensure our deliverables are production-ready and maintainable.'
+     },
+     {
+-      title: 'Scientific Innovation',
+-      description: 'Applying rigorous scientific methods to solve complex problems',
++      title: 'Practical Innovation',
++      description: 'We apply modern tools and methods to solve real problems',
+       icon: (
+         <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+           <path d="M9 11H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2" />
+@@ -155,11 +155,11 @@
+           <circle cx="12" cy="6" r="3" />
+         </svg>
+       ),
+-      details: 'Our solutions are born from hypothesis, tested through experimentation, and refined through continuous observation.'
++      details: 'We stay current with technology trends, but we choose tools based on what best fits the problem — not what\'s newest.'
+     },
+     {
+-      title: 'Elegant Complexity',
+-      description: 'Transforming intricate challenges into beautifully simple solutions',
++      title: 'Clear Communication',
++      description: 'Transparency and honesty in everything we do',
+       icon: (
+         <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+           <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
+@@ -167,11 +167,11 @@
+           <polygon points="12,14 15,15.5 15,18.5 12,20 9,18.5 9,15.5" />
+         </svg>
+       ),
+-      details: 'We believe true elegance emerges when complex systems operate with effortless simplicity.'
++      details: 'We provide honest estimates, proactive status updates, and direct feedback. No surprises, no hidden issues.'
+     },
+     {
+-      title: 'Continuous Evolution',
+-      description: 'Embracing change as the only constant in our digital universe',
++      title: 'Continuous Improvement',
++      description: 'We invest in getting better at what we do',
+       icon: (
+         <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+           <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+@@ -180,17 +180,17 @@
+           <path d="M21 21v-5h-5" />
+         </svg>
+       ),
+-      details: 'Like natural systems, our solutions adapt, evolve, and improve through iterative refinement.'
++      details: 'We conduct retrospectives, refine our processes, and stay up to date with industry practices to deliver better results over time.'
+     }
+   ];
+ 
+   return (
+     <>
+       <Header />
+-      
++
+       <main className={styles.aboutMain}>
+         <div className={styles.backgroundEffect}></div>
+-        
++
+         {/* Hero Section */}
+         <section ref={heroRef} className={styles.hero} id="about-hero">
+           <div className={styles.heroContent}>
+@@ -198,78 +198,74 @@
+               <span className={styles.sectionLabel}>About EPOCH</span>
+             </div>
+             <h1 className={styles.heroTitle}>
+-              <span className={styles.titleLine}>Crafting Digital</span>
++              <span className={styles.titleLine}>Building Reliable</span>
+               <span className={styles.titleLine}>
+-                <span className={styles.titleHighlight}>Phenomena</span>
++                <span className={styles.titleHighlight}>Software</span>
+               </span>
+-              <span className={styles.titleLine}>with Scientific Precision</span>
++              <span className={styles.titleLine}>for Growing Businesses</span>
+             </h1>
+-            
++
+             <p className={styles.heroDescription}>
+-              We are EPOCH—a collective of engineers, scientists, and visionaries 
+-              united by the belief that exceptional software emerges from the 
+-              intersection of rigorous methodology and boundless creativity.
++              EPOCH is a software development company focused on delivering
++              well-engineered solutions across AI, cloud infrastructure,
++              and custom application development.
+             </p>
+           </div>
+ 
+           <div className={styles.heroStats}>
+             <div className={styles.stat}>
+-              <span className={styles.statNumber}>12+</span>
+-              <span className={styles.statLabel}>Years of Excellence</span>
++              <span className={styles.statNumber}>9+</span>
++              <span className={styles.statLabel}>Enterprise Clients</span>
+             </div>
+             <div className={styles.stat}>
+-              <span className={styles.statNumber}>500+</span>
+-              <span className={styles.statLabel}>Projects Delivered</span>
++              <span className={styles.statNumber}>US & India</span>
++              <span className={styles.statLabel}>Global Presence</span>
+             </div>
+             <div className={styles.stat}>
+-              <span className={styles.statNumber}>99.9%</span>
+-              <span className={styles.statLabel}>Client Satisfaction</span>
++              <span className={styles.statNumber}>12+</span>
++              <span className={styles.statLabel}>Service Areas</span>
+             </div>
+           </div>
+         </section>
+ 
+-        {/* Origin Story Section */}
++        {/* Our Story Section */}
+         <section ref={storyRef} className={styles.story} id="our-story">
+           <div className={styles.storyInner}>
+             <div className={styles.sectionHeader}>
+-              <span className={styles.sectionLabel}>Origin Story</span>
+-              <h2 className={styles.sectionTitle}>Born from Curiosity, Forged by Precision</h2>
++              <span className={styles.sectionLabel}>Our Story</span>
++              <h2 className={styles.sectionTitle}>How We Got Here</h2>
+             </div>
+-            
++
+             <div className={styles.storyContent}>
+               <div className={styles.storyText}>
+                 <div className={styles.storyChapter}>
+-                  <h3 className={styles.chapterTitle}>The Genesis</h3>
++                  <h3 className={styles.chapterTitle}>The Beginning</h3>
+                   <p className={styles.chapterText}>
+-                    EPOCH was born in 2012 from a simple yet profound realization: 
+-                    the software industry had lost its connection to scientific rigor. 
+-                    Our founders, a quantum physicist and a systems architect, 
+-                    envisioned a new paradigm where software development would 
+-                    embrace the precision of scientific methodology.
++                    [Company founding story — to be provided. This section will describe
++                    when and why EPOCH was founded, the founders&apos; background, and the
++                    original vision for the company.]
+                   </p>
+                 </div>
+-                
++
+                 <div className={styles.storyChapter}>
+-                  <h3 className={styles.chapterTitle}>The Evolution</h3>
++                  <h3 className={styles.chapterTitle}>Growth</h3>
+                   <p className={styles.chapterText}>
+-                    What began as an experiment in applied computational science 
+-                    has evolved into a philosophy that permeates every aspect of 
+-                    our work. We don{`'`}t just write code—we discover digital laws 
+-                    of nature and architect systems that feel inevitable.
++                    [Company growth story — to be provided. This section will describe
++                    key milestones, team growth, and how the company expanded its
++                    capabilities and client base over time.]
+                   </p>
+                 </div>
+-                
++
+                 <div className={styles.storyChapter}>
+-                  <h3 className={styles.chapterTitle}>The Future</h3>
++                  <h3 className={styles.chapterTitle}>Today</h3>
+                   <p className={styles.chapterText}>
+-                    Today, EPOCH stands at the forefront of technological innovation, 
+-                    applying quantum computing principles, AI methodologies, and 
+-                    systems thinking to solve humanity{`'`}s most complex digital 
+-                    challenges.
++                    [Current state — to be provided. This section will describe where
++                    EPOCH stands today, the team, current focus areas, and the
++                    company&apos;s direction going forward.]
+                   </p>
+                 </div>
+               </div>
+-              
++
+               <div className={styles.timelineVisualization}>
+                 <div className={styles.timeline}>
+                   {timelineData.map((milestone) => (
+@@ -293,13 +289,13 @@
+           <div className={styles.techInner}>
+             <div className={styles.sectionHeader}>
+               <span className={styles.sectionLabel}>Technology Stack</span>
+-              <h2 className={styles.sectionTitle}>Cutting-Edge Tools & Expertise</h2>
++              <h2 className={styles.sectionTitle}>Tools & Technologies We Use</h2>
+               <p className={styles.sectionSubtitle}>
+-                We leverage the most advanced technologies to build systems that scale, 
+-                perform, and evolve with your business needs.
++                We work with a broad range of technologies to build systems that
++                are scalable, performant, and maintainable.
+               </p>
+             </div>
+-            
++
+             <div className={styles.techGrid}>
+               {techStack.map((category, index) => (
+                 <div key={index} className={styles.techCategory}>
+@@ -307,7 +303,7 @@
+                     <h3 className={styles.categoryTitle}>{category.category}</h3>
+                     <p className={styles.categoryDescription}>{category.description}</p>
+                   </div>
+-                  
++
+                   <div className={styles.technologiesList}>
+                     {category.technologies.map((tech) => (
+                       <div key={tech.name} className={styles.techItem}>
+@@ -340,13 +336,13 @@
+           <div className={styles.valuesInner}>
+             <div className={styles.sectionHeader}>
+               <span className={styles.sectionLabel}>Core Values</span>
+-              <h2 className={styles.sectionTitle}>The Principles That Guide Us</h2>
++              <h2 className={styles.sectionTitle}>What We Stand For</h2>
+               <p className={styles.sectionSubtitle}>
+-                These fundamental principles shape every decision, guide every project, 
+-                and define who we are as a company.
++                These principles guide how we work, how we make decisions,
++                and how we treat our clients and each other.
+               </p>
+             </div>
+-            
++
+             <div className={styles.valuesList}>
+               {coreValues.map((value) => (
+                 <div key={value.title} className={styles.valueRow}>
+@@ -369,11 +365,11 @@
+               <span className={styles.sectionLabel}>Our Approach</span>
+               <h2 className={styles.sectionTitle}>How We Work</h2>
+               <p className={styles.sectionSubtitle}>
+-                Our methodology combines scientific rigor with creative innovation 
+-                to deliver exceptional results for every client.
++                A structured but flexible process designed to deliver
++                working software efficiently and reliably.
+               </p>
+             </div>
+-            
++
+             <div className={styles.approachGrid}>
+               {approachData.map((approach) => (
+                 <div key={approach.title} className={styles.approachItem}>
+@@ -394,12 +390,12 @@
+         {/* Call to Action */}
+         <section className={styles.cta}>
+           <div className={styles.ctaInner}>
+-            <h2 className={styles.ctaTitle}>Ready to Start Your Next Epoch?</h2>
++            <h2 className={styles.ctaTitle}>Want to work with us?</h2>
+             <p className={styles.ctaSubtitle}>
+-              Join the companies who trust EPOCH to transform their digital universe
++              Tell us about your project and we&apos;ll get back to you promptly
+             </p>
+-            <Button 
+-              href="/contact" 
++            <Button
++              href="/contact"
+               variant="primary"
+               size="large"
+               icon={
+@@ -409,13 +405,13 @@
+                 </svg>
+               }
+             >
+-              Begin Your Journey
++              Contact Us
+             </Button>
+           </div>
+         </section>
+       </main>
+-      
++
+       <Footer />
+     </>
+   );
+-}
+\ No newline at end of file
++}
+--- a/src/components/pages/services/detail.tsx
++++ b/src/components/pages/services/detail.tsx
+@@ -17,6 +17,33 @@
+   serviceData: ServiceDetailData;
+ }
+ 
++function FAQItem({ question, answer }: { question: string; answer: string }) {
++  const [open, setOpen] = useState(false);
++  return (
++    <div className={`${styles.faqItem} ${open ? styles.faqOpen : ''}`}>
++      <button className={styles.faqQuestion} onClick={() => setOpen(!open)}>
++        <span>{question}</span>
++        <svg
++          viewBox="0 0 24 24"
++          width="20"
++          height="20"
++          fill="none"
++          stroke="currentColor"
++          strokeWidth="2"
++          className={open ? styles.faqChevronOpen : ''}
++        >
++          <polyline points="6 9 12 15 18 9" />
++        </svg>
++      </button>
++      {open && (
++        <div className={styles.faqAnswer}>
++          <p>{answer}</p>
++        </div>
++      )}
++    </div>
++  );
++}
++
+ export function ServiceDetailPage({ serviceData }: ServiceDetailPageProps) {
+   const [activeSection, setActiveSection] = useState('overview');
+   const [scrolled, setScrolled] = useState(false);
+@@ -30,13 +57,42 @@
+     return () => window.removeEventListener('scroll', handleScroll);
+   }, []);
+ 
++  useEffect(() => {
++    const sectionIds = ['overview', 'problem', 'process', 'expertise', 'services', 'benefits', 'industries', 'case-studies', 'faq'];
++    const observers: IntersectionObserver[] = [];
++
++    sectionIds.forEach((id) => {
++      const el = document.getElementById(id);
++      if (!el) return;
++      const observer = new IntersectionObserver(
++        (entries) => {
++          if (entries[0]?.isIntersecting) {
++            setActiveSection(id);
++          }
++        },
++        { rootMargin: '-40% 0px -50% 0px' }
++      );
++      observer.observe(el);
++      observers.push(observer);
++    });
++
++    return () => observers.forEach((o) => o.disconnect());
++  }, []);
++
+   const sections = [
+     { id: 'overview', label: 'Overview' },
++    { id: 'problem', label: 'The Challenge' },
++    { id: 'process', label: 'Our Process' },
+     { id: 'expertise', label: 'Our Expertise' },
+     { id: 'services', label: 'Key Services' },
+     { id: 'benefits', label: 'Benefits' },
+     { id: 'industries', label: 'Industries' },
+-    { id: 'case-studies', label: 'Case Studies' },
++    ...(serviceData.caseStudies && serviceData.caseStudies.length > 0
++      ? [{ id: 'case-studies', label: 'Case Studies' }]
++      : []),
++    ...(serviceData.faqs && serviceData.faqs.length > 0
++      ? [{ id: 'faq', label: 'FAQ' }]
++      : []),
+   ];
+ 
+   return (
+@@ -62,63 +118,19 @@
+             </Link>
+             
+             <h1 className={styles.heroTitle}>
+-              {serviceData.heroTitle.split(' ').map((word, index) => {
+-                // Special handling for specific service patterns
+-                if (serviceData.id === 'ai-ml') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}>AI and</span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Machine Learning</span></span>;
+-                  if (index === 4) return <span key={index} className={styles.titleLine}>Development</span>;
+-                  return null;
+-                } else if (serviceData.id === 'generative-ai') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Generative AI</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Solutions</span>;
+-                  return null;
+-                } else if (serviceData.id === 'cloud-computing') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Cloud Computing</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Solutions</span>;
+-                  return null;
+-                } else if (serviceData.id === 'cybersecurity') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Cybersecurity</span></span>;
+-                  if (index === 1) return <span key={index} className={styles.titleLine}>Solutions</span>;
+-                  return null;
+-                } else if (serviceData.id === 'custom-software') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}>Custom</span>;
+-                  if (index === 1) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Software</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Development</span>;
+-                  return null;
+-                } else if (serviceData.id === 'data-analytics') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}>Data Analytics &</span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Business Intelligence</span></span>;
+-                  return null;
+-                } else if (serviceData.id === 'iot') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>IoT Application</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Development</span>;
+-                  return null;
+-                } else if (serviceData.id === 'blockchain') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Blockchain</span></span>;
+-                  if (index === 1) return <span key={index} className={styles.titleLine}>Development</span>;
+-                  return null;
+-                } else if (serviceData.id === 'devops') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>DevOps and</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Automation</span>;
+-                  if (index === 3) return <span key={index} className={styles.titleLine}>Services</span>;
+-                  return null;
+-                } else if (serviceData.id === 'mobile') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Mobile Application</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Development</span>;
+-                  return null;
+-                } else if (serviceData.id === 'digital-transformation') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>Digital Transformation</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Consulting</span>;
+-                  return null;
+-                } else if (serviceData.id === 'arvr') {
+-                  if (index === 0) return <span key={index} className={styles.titleLine}><span className={styles.titleHighlight}>AR VR</span></span>;
+-                  if (index === 2) return <span key={index} className={styles.titleLine}>Spatial Computing</span>;
+-                  if (index === 4) return <span key={index} className={styles.titleLine}>Solutions</span>;
+-                  return null;
+-                }
+-                return null;
+-              })}
++              {serviceData.heroTitleLines ? (
++                serviceData.heroTitleLines.map((line, index) => (
++                  <span key={index} className={styles.titleLine}>
++                    {line.highlight ? (
++                      <span className={styles.titleHighlight}>{line.text}</span>
++                    ) : (
++                      line.text
++                    )}
++                  </span>
++                ))
++              ) : (
++                <span className={styles.titleLine}>{serviceData.heroTitle}</span>
++              )}
+             </h1>
+ 
+             <p className={styles.heroDescription}>
+@@ -260,10 +272,14 @@
+                   </div>
+                   <h3>Why Choose EPOCH?</h3>
+                   <ul>
+-                    <li>Industry-leading expertise</li>
+-                    <li>Proven track record</li>
+-                    <li>End-to-end solutions</li>
+-                    <li>24/7 dedicated support</li>
++                    {(serviceData.whyEpoch || [
++                      'Industry-leading expertise',
++                      'Proven track record',
++                      'End-to-end solutions',
++                      'Dedicated support',
++                    ]).map((point, i) => (
++                      <li key={i}>{point}</li>
++                    ))}
+                   </ul>
+                 </div>
+                 
+@@ -271,13 +287,55 @@
+                   <svg className={styles.quoteIcon} viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                     <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+                   </svg>
+-                  <p>Transform your business with cutting-edge {serviceData.name.toLowerCase()} solutions designed for the future.</p>
++                  <p>Explore how our {serviceData.name.toLowerCase()} services can support your business goals.</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </section>
++
++        {/* Problem Statement Section */}
++        {serviceData.problemStatement && (
++          <section id="problem" className={styles.section}>
++            <div className={styles.sectionContent}>
++              <h2 className={styles.sectionTitle}>{serviceData.problemStatement.title}</h2>
++              <p className={styles.sectionIntro}>{serviceData.problemStatement.description}</p>
++              <div className={styles.painPointsGrid}>
++                {serviceData.problemStatement.painPoints.map((point, index) => (
++                  <div key={index} className={styles.painPointCard}>
++                    <div className={styles.painPointIcon}>
++                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5">
++                        <circle cx="12" cy="12" r="10" />
++                        <line x1="12" y1="8" x2="12" y2="12" />
++                        <line x1="12" y1="16" x2="12.01" y2="16" />
++                      </svg>
++                    </div>
++                    <p>{point}</p>
++                  </div>
++                ))}
++              </div>
++            </div>
++          </section>
++        )}
+ 
++        {/* Process Section */}
++        {serviceData.process && (
++          <section id="process" className={styles.section}>
++            <div className={styles.sectionContent}>
++              <h2 className={styles.sectionTitle}>{serviceData.process.title}</h2>
++              <div className={styles.processGrid}>
++                {serviceData.process.steps.map((step, index) => (
++                  <div key={index} className={styles.processStep}>
++                    <div className={styles.processStepNumber}>{step.step}</div>
++                    <h3>{step.title}</h3>
++                    <p>{step.description}</p>
++                  </div>
++                ))}
++              </div>
++            </div>
++          </section>
++        )}
++
+         {/* Expertise Section */}
+         <section id="expertise" className={styles.section}>
+           <div className={styles.sectionContent}>
+@@ -380,16 +438,14 @@
+                       ))}
+                     </ul>
+                   </div>
+-                  <div className={styles.serviceDemand}>
+-                    <span className={styles.demandBadge}>
+-                      {index === 0 ? 'High Demand' : index === 1 ? 'High Demand' : index === 2 ? 'Critical Skill' : index === 3 ? 'High Growth' : 'Emerging'}
+-                    </span>
+-                    <p>{index === 0 ? 'Top skill enabling businesses to stay competitive' : 
+-                       index === 1 ? 'Powers enhanced engagement and automation' : 
+-                       index === 2 ? 'Essential for modern deployment and scaling' : 
+-                       index === 3 ? 'Highly sought for advanced applications' : 
+-                       'Critical role for enterprise risk mitigation'}</p>
+-                  </div>
++                  {service.demand && (
++                    <div className={styles.serviceDemand}>
++                      <span className={styles.demandBadge}>
++                        {service.demand.badge}
++                      </span>
++                      <p>{service.demand.description}</p>
++                    </div>
++                  )}
+                 </div>
+               ))}
+             </div>
+@@ -503,50 +559,66 @@
+         </section>
+ 
+         {/* Case Studies Section */}
+-        <section id="case-studies" className={styles.section}>
+-          <div className={styles.sectionContent}>
+-            <h2 className={styles.sectionTitle}>Success Stories</h2>
+-            
+-            <div className={styles.caseStudiesGrid}>
+-              {serviceData.caseStudies && serviceData.caseStudies.slice(0, 2).map((study, index) => (
+-                <div key={index} className={styles.caseStudy}>
+-                  <div className={styles.caseStudyHeader}>
+-                    <div className={styles.caseStudyIcon}>
+-                      {index === 0 && (
+-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
+-                          <circle cx="9" cy="21" r="1" />
+-                          <circle cx="20" cy="21" r="1" />
+-                          <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+-                        </svg>
+-                      )}
+-                      {index === 1 && (
+-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
+-                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+-                          <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+-                        </svg>
+-                      )}
++        {serviceData.caseStudies && serviceData.caseStudies.length > 0 && (
++          <section id="case-studies" className={styles.section}>
++            <div className={styles.sectionContent}>
++              <h2 className={styles.sectionTitle}>Success Stories</h2>
++
++              <div className={styles.caseStudiesGrid}>
++                {serviceData.caseStudies.slice(0, 2).map((study, index) => (
++                  <div key={index} className={styles.caseStudy}>
++                    <div className={styles.caseStudyHeader}>
++                      <div className={styles.caseStudyIcon}>
++                        {index === 0 && (
++                          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
++                            <circle cx="9" cy="21" r="1" />
++                            <circle cx="20" cy="21" r="1" />
++                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
++                          </svg>
++                        )}
++                        {index === 1 && (
++                          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5">
++                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
++                            <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
++                          </svg>
++                        )}
++                      </div>
++                      <h3>{study.title}</h3>
+                     </div>
+-                    <h3>{study.title}</h3>
+-                  </div>
+-                  <div className={styles.caseStudyContent}>
+-                    <p>
+-                      {study.solution}
+-                    </p>
+-                    <div className={styles.caseStudyResults}>
+-                      {study.results.slice(0, 2).map((result, resultIndex) => (
+-                        <div key={resultIndex} className={styles.resultItem}>
+-                          <span className={styles.resultNumber}>{result.split(' ')[0]}</span>
+-                          <span className={styles.resultLabel}>{result.substring(result.indexOf(' ') + 1)}</span>
+-                        </div>
+-                      ))}
++                    <div className={styles.caseStudyContent}>
++                      <p>
++                        {study.solution}
++                      </p>
++                      <div className={styles.caseStudyResults}>
++                        {study.results.slice(0, 2).map((result, resultIndex) => (
++                          <div key={resultIndex} className={styles.resultItem}>
++                            <span className={styles.resultNumber}>{result.split(' ')[0]}</span>
++                            <span className={styles.resultLabel}>{result.substring(result.indexOf(' ') + 1)}</span>
++                          </div>
++                        ))}
++                      </div>
+                     </div>
+                   </div>
+-                </div>
+-              ))}
++                ))}
++              </div>
+             </div>
+-          </div>
+-        </section>
++          </section>
++        )}
+ 
++        {/* FAQ Section */}
++        {serviceData.faqs && serviceData.faqs.length > 0 && (
++          <section id="faq" className={styles.section}>
++            <div className={styles.sectionContent}>
++              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
++              <div className={styles.faqGrid}>
++                {serviceData.faqs.map((faq, index) => (
++                  <FAQItem key={index} question={faq.question} answer={faq.answer} />
++                ))}
++              </div>
++            </div>
++          </section>
++        )}
++
+         {/* CTA Section */}
+         <section className={styles.ctaSection}>
+           <div className={styles.ctaContent}>

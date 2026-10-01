@@ -1,0 +1,368 @@
+/**
+ * @fileoverview Enhanced clients section component serving as hub for client details
+ * @author Epoch Development Team
+ */
+
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { CLIENT_LOGOS, type ClientLogoProps } from '../../shared/constants/content';
+import styles from '../../../styles/ClientsSection.module.css';
+
+interface ClientsSectionProps {
+  className?: string;
+  isStandalone?: boolean; // Whether this is used as standalone hub page
+}
+
+interface ClientPreviewData extends ClientLogoProps {
+  industry: string;
+  projectType: string;
+  yearWorked: string;
+  previewDescription: string;
+  keyResult: string;
+}
+
+// Client data with project information (Chronological order - newest first)
+const CLIENT_PREVIEW_DATA: ClientPreviewData[] = [
+  {
+    ...CLIENT_LOGOS[0]!, // Inspira Financial
+    industry: 'Financial Services',
+    projectType: 'Platform Modernization & Cloud Migration',
+    yearWorked: '2024',
+    previewDescription: 'Migrated Inspira Financial from legacy mainframe systems to a cloud-native microservices architecture. Built real-time transaction processing, security protocols, analytics dashboard for portfolio management, and an API-first architecture for third-party integrations.',
+    keyResult: 'Improved system reliability, faster transaction processing, reduced operational costs'
+  },
+  {
+    ...CLIENT_LOGOS[1]!, // HUB International
+    industry: 'Insurance',
+    projectType: 'Digital Modernization & AI Integration',
+    yearWorked: '2023',
+    previewDescription: 'Modernized HUB International\'s insurance operations with AI-powered risk assessment, automated claim processing, and fraud detection. Built a custom policy management platform integrated with existing enterprise systems and a mobile-first customer portal.',
+    keyResult: 'Faster claim processing, improved fraud detection, better customer experience'
+  },
+  {
+    ...CLIENT_LOGOS[2]!, // Destify
+    industry: 'Travel Technology',
+    projectType: 'Mobile Platform & Booking Engine',
+    yearWorked: '2022',
+    previewDescription: 'Developed a travel planning platform for Destify with real-time booking, personalized recommendations, and itinerary optimization. Built a booking engine integrating flights, hotels, and activities with social features for collaborative planning.',
+    keyResult: 'Increased user engagement, higher booking conversion, strong customer satisfaction'
+  },
+  {
+    ...CLIENT_LOGOS[3]!, // Cardinal Health
+    industry: 'Healthcare',
+    projectType: 'Supply Chain Optimization',
+    yearWorked: '2021',
+    previewDescription: 'Improved Cardinal Health\'s supply chain with predictive analytics for inventory management and demand forecasting. Implemented IoT-based tracking for pharmaceutical products and built a HIPAA-compliant data platform for healthcare analytics and reporting.',
+    keyResult: 'Reduced costs, improved inventory accuracy, strong regulatory compliance'
+  },
+  {
+    ...CLIENT_LOGOS[4]!, // Rural King
+    industry: 'Retail',
+    projectType: 'Omnichannel Platform',
+    yearWorked: '2020',
+    previewDescription: 'Unified Rural King\'s online and in-store experience with integrated inventory management, buy-online-pickup-in-store functionality, and a customer analytics platform. Built a loyalty program with personalized offers and enhanced supply chain visibility.',
+    keyResult: 'Online revenue growth, improved inventory visibility, stronger customer retention'
+  },
+  {
+    ...CLIENT_LOGOS[5]!, // BlueSky Commerce
+    industry: 'E-commerce',
+    projectType: 'E-commerce Platform Development',
+    yearWorked: '2019',
+    previewDescription: 'Built an e-commerce platform for BlueSky Commerce with AR product visualization and AI-powered recommendations. Developed a mobile-first progressive web application, seller portal with automated fulfillment, and integrated payment processing.',
+    keyResult: 'Higher conversion rates, increased engagement, reduced return rates'
+  },
+  {
+    ...CLIENT_LOGOS[6]!, // Skeps
+    industry: 'Fintech',
+    projectType: 'Payment Infrastructure & API Development',
+    yearWorked: '2018',
+    previewDescription: 'Built payment infrastructure for Skeps with RESTful APIs supporting multiple payment methods and merchant financing. Implemented ML-based underwriting, merchant onboarding with automated compliance, and fraud prevention through behavioral analytics.',
+    keyResult: 'High API reliability, faster underwriting, strong merchant satisfaction'
+  },
+  {
+    ...CLIENT_LOGOS[7]!, // Shift4
+    industry: 'Payment Processing',
+    projectType: 'Performance Optimization & Security',
+    yearWorked: '2017',
+    previewDescription: 'Optimized Shift4\'s payment processing for high-volume transactions with fast response times. Implemented ML-based fraud detection, enhanced PCI DSS compliance with tokenization and encryption, and built a merchant dashboard with analytics and reconciliation.',
+    keyResult: 'Faster transaction processing, improved fraud detection, enhanced security posture'
+  },
+  {
+    ...CLIENT_LOGOS[8]!, // IDrive
+    industry: 'Cloud Storage',
+    projectType: 'Infrastructure Scaling & Platform Enhancement',
+    yearWorked: '2016',
+    previewDescription: 'Architected a cloud storage platform for IDrive with data protection and sync capabilities. Implemented deduplication algorithms, cross-platform sync with conflict resolution, zero-knowledge encryption, and a high-performance API with global CDN integration.',
+    keyResult: 'Improved storage efficiency, high data durability, faster sync performance'
+  }
+];
+
+export function ClientsSection({ className, isStandalone = false }: ClientsSectionProps) {
+  const router = useRouter();
+  const [hoveredClient, setHoveredClient] = useState<string | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{[key: string]: boolean}>({});
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const toggleDescription = (clientId: string) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [clientId]: !prev[clientId]
+    }));
+  };
+
+  const truncateText = (text: string, maxLength: number = 150) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength).trim();
+  };
+
+  // Get unique industries for filtering
+  const industries = ['All', ...Array.from(new Set(CLIENT_PREVIEW_DATA.map(client => client.industry)))];
+
+  // Background animation for standalone page
+  useEffect(() => {
+    if (!isStandalone) return;
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      opacity: number;
+    }> = [];
+
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.1
+      });
+    }
+
+    const animate = () => {
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(154, 205, 50, ${particle.opacity})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isStandalone]);
+
+  // Filter clients based on selected industry
+  const filteredClients = selectedIndustry === 'All' 
+    ? CLIENT_PREVIEW_DATA 
+    : CLIENT_PREVIEW_DATA.filter(client => client.industry === selectedIndustry);
+
+  const handleClientClick = (clientId: string) => {
+    router.push(`/clients/${clientId}`);
+  };
+
+  return (
+    <section 
+      className={`${styles.clients} ${className || ''} ${isStandalone ? styles.standalone : ''}`}
+      id="clients" 
+      aria-labelledby="clients-heading"
+    >
+      {/* Canvas background for standalone page */}
+      {isStandalone && <canvas ref={canvasRef} className={styles.backgroundCanvas} />}
+
+      <div className={styles.clientsInner}>
+        {/* Hero Section for standalone */}
+        {isStandalone && (
+          <div className={styles.hero}>
+            <div className={styles.heroContent}>
+              <span className={styles.heroLabel} id="clients-heading">Our Partnerships</span>
+              <h1 className={styles.heroTitle}>
+                <span className={styles.titleLine}>Companies</span>
+                <span className={styles.titleLine}>
+                  <span className={styles.titleHighlight}>We Work</span>
+                </span>
+                <span className={styles.titleLine}>With</span>
+              </h1>
+              <p className={styles.heroDescription}>
+                We partner with companies across industries to solve real technical challenges.
+                Here{`'`}s a look at the work we{`'`}ve done and the results we{`'`}ve delivered.
+              </p>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>9+</span>
+                <span className={styles.statLabel}>Enterprise Partners</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>5</span>
+                <span className={styles.statLabel}>Industries Served</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>Multiple</span>
+                <span className={styles.statLabel}>Industries</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Regular section header for non-standalone */}
+        {!isStandalone && (
+          <div className={styles.sectionHeader}>
+            <p className={styles.sectionLabel} id="clients-heading">
+              Trusted partnerships
+            </p>
+            <h2 className={styles.sectionTitle}>
+              Industry leaders who chose Epoch
+            </h2>
+          </div>
+        )}
+
+        {isStandalone && (
+          <div className={styles.industryFilter}>
+            <div className={styles.filterButtons}>
+              {industries.map((industry) => (
+                <button
+                  key={industry}
+                  className={`${styles.filterButton} ${selectedIndustry === industry ? styles.active : ''}`}
+                  onClick={() => setSelectedIndustry(industry)}
+                  aria-pressed={selectedIndustry === industry}
+                >
+                  {industry}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className={styles.clientShowcase}>
+          <div className={`${styles.clientGrid} ${isStandalone ? styles.enhanced : ''}`}>
+            {(isStandalone ? filteredClients : CLIENT_PREVIEW_DATA).map((client, index) => (
+              <div
+                key={client.id}
+                className={`${styles.clientCard} ${hoveredClient === client.id ? styles.hovered : ''}`}
+                style={{
+                  '--card-delay': `${index * 0.1}s`
+                } as React.CSSProperties}
+                onMouseEnter={() => setHoveredClient(client.id)}
+                onMouseLeave={() => setHoveredClient(null)}
+                // onClick={() => handleClientClick(client.id)}
+                // role="button"
+                // tabIndex={0}
+                // aria-label={`View ${client.name} collaboration details`}
+              >
+                <div className={styles.cardGlow} />
+                
+                <div className={styles.logoSection}>
+                  <div className={styles.logoContainer}>
+                    <Image 
+                      src={client.logo} 
+                      alt={client.alt} 
+                      className={styles.clientLogo}
+                      width={160}
+                      height={50}
+                    />
+                  </div>
+                  {isStandalone && (
+                    <div className={styles.clientMeta}>
+                      <span className={styles.industry}>{client.industry}</span>
+                      <span className={styles.year}>{client.yearWorked}</span>
+                    </div>
+                  )}
+                </div>
+
+                {isStandalone && (
+                  <div className={styles.cardContent}>
+                    <h3 className={styles.projectType}>{client.projectType}</h3>
+                    <div className={styles.descriptionContainer}>
+                      <p className={`${styles.previewDescription} ${expandedDescriptions[client.id] ? styles.expanded : styles.truncated}`}>
+                        {expandedDescriptions[client.id] 
+                          ? client.previewDescription 
+                          : truncateText(client.previewDescription)}
+                        {!expandedDescriptions[client.id] && client.previewDescription.length > 150 && '...'}
+                      </p>
+                      {client.previewDescription.length > 150 && (
+                        <button 
+                          className={styles.readMoreBtn}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleDescription(client.id);
+                          }}
+                        >
+                          {expandedDescriptions[client.id] ? 'Read less' : 'Read more'}
+                        </button>
+                      )}
+                    </div>
+                    <div className={styles.metricsSection}>
+                      {client.keyResult.split(',').map((metric, index) => (
+                        <div key={index} className={styles.metricItem}>
+                          <div className={styles.resultIcon}></div>
+                          <span className={styles.resultText}>{metric.trim()}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* <div className={styles.cardCta}>
+                      <span>View Full Story</span>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M1 8h14m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5"/>
+                      </svg>
+                    </div> */}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+        {isStandalone && (
+          <div className={styles.ctaSection}>
+            <h3 className={styles.ctaTitle}>Have a project in mind?</h3>
+            <p className={styles.ctaDescription}>
+              Let{`'`}s discuss how our collaborative approach can transform your next project.
+            </p>
+            <a href="#contact" className={styles.ctaButton}>
+              <span>Get in Touch</span>
+              <div className={styles.ctaGlow} />
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}

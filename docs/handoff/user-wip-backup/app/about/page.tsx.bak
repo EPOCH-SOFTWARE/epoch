@@ -1,0 +1,32 @@
+/**
+ * @fileoverview About page component
+ * @author Epoch Development Team
+ */
+
+import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
+
+// Lazy load the about page component
+const AboutPage = dynamic(() => import('@/src/components/pages/about'), {
+  ssr: true,
+  loading: () => (
+    <div className="loading-container">
+      <div className="loading-spinner" />
+    </div>
+  ),
+});
+
+export const metadata: Metadata = {
+  title: 'About EPOCH - Enterprise Software Development Company',
+  description: 'Learn about EPOCH, our team, and our approach to building reliable software for enterprise clients across AI, cloud, and custom development.',
+  keywords: ['about epoch', 'software development team', 'enterprise software', 'company story'],
+  openGraph: {
+    title: 'About EPOCH - Enterprise Software Development Company',
+    description: 'Learn about EPOCH, our team, and our approach to building reliable software for enterprise clients.',
+    type: 'website',
+  },
+};
+
+export default function About() {
+  return <AboutPage />;
+}

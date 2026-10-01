@@ -47,3 +47,5 @@ Claude.md
 temp.txt
 
 .history
+# Headless Chrome profiles created by docs/handoff/tools scripts
+chrome-profile-*/

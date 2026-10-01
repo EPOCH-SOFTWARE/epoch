@@ -1,0 +1,32 @@
+/**
+ * @fileoverview Contact page component
+ * @author Epoch Development Team
+ */
+
+import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
+
+// Lazy load the contact page component
+const ContactPage = dynamic(() => import('@/src/components/pages/contact'), {
+  ssr: true,
+  loading: () => (
+    <div className="loading-container">
+      <div className="loading-spinner" />
+    </div>
+  ),
+});
+
+export const metadata: Metadata = {
+  title: 'Contact EPOCH - Get in Touch',
+  description: 'Reach out to discuss your project. EPOCH builds enterprise software across AI, cloud infrastructure, cybersecurity, and custom development.',
+  keywords: ['contact epoch', 'software consultation', 'project inquiry', 'technical consultation'],
+  openGraph: {
+    title: 'Contact EPOCH - Get in Touch',
+    description: 'Reach out to discuss your project with our development team.',
+    type: 'website',
+  },
+};
+
+export default function Contact() {
+  return <ContactPage />;
+}
