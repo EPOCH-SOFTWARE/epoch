@@ -147,3 +147,36 @@ test('spiralPath starts and ends where it is asked to', () => {
   assert.ok(path.startsWith('M24 10L'), path.slice(0, 20));
   assert.ok(path.endsWith('L36.86 8.68'), path.slice(-20));
 });
+
+const SYNODIC_SECONDS = 29.530588853 * 86400;
+const NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14) / 1000;
+
+test('lunarPhase counts the lunar month from a known new moon', () => {
+  assertNear(K.lunarPhase(NEW_MOON_2000), 0, 'new moon');
+  assertNear(K.lunarPhase(NEW_MOON_2000 + SYNODIC_SECONDS / 2), 0.5, 'full moon');
+  assertNear(K.lunarPhase(NEW_MOON_2000 - SYNODIC_SECONDS / 4), 0.75, 'last quarter, before the reference');
+});
+
+test('phaseName names the phase the way a calendar does', () => {
+  assert.equal(K.phaseName(0.01), 'new moon');
+  assert.equal(K.phaseName(0.1), 'waxing crescent');
+  assert.equal(K.phaseName(0.25), 'first quarter');
+  assert.equal(K.phaseName(0.4), 'waxing gibbous');
+  assert.equal(K.phaseName(0.5), 'full moon');
+  assert.equal(K.phaseName(0.6), 'waning gibbous');
+  assert.equal(K.phaseName(0.75), 'last quarter');
+  assert.equal(K.phaseName(0.9), 'waning crescent');
+  assert.equal(K.phaseName(0.99), 'new moon');
+});
+
+test('moonPath lights the whole disc at full moon', () => {
+  assert.equal(K.moonPath(0.5, 98.5, 20, 11.4), 'M98.5 8.6A11.4 11.4 0 0 0 98.5 31.4A11.4 11.4 0 0 0 98.5 8.6Z');
+});
+
+test('moonPath lights the right half at first quarter', () => {
+  assert.equal(K.moonPath(0.25, 98.5, 20, 11.4), 'M98.5 8.6A11.4 11.4 0 0 1 98.5 31.4A0 11.4 0 0 0 98.5 8.6Z');
+});
+
+test('moonPath lights nothing at new moon', () => {
+  assert.equal(K.moonPath(0, 98.5, 20, 11.4), 'M98.5 8.6A11.4 11.4 0 0 1 98.5 31.4A11.4 11.4 0 0 0 98.5 8.6Z');
+});

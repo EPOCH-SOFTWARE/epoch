@@ -1,4 +1,4 @@
-// Pure time and geometry helpers for the living marks in marks.html (08 onwards).
+// Pure time and geometry helpers for the living marks in marks.html (08 onwards) and the site's moon logo.
 // Loads as window.KeptTime in the browser and as a CommonJS module in the tests.
 // Angles are in degrees, measured clockwise from twelve o'clock.
 (function (root, factory) {
@@ -176,6 +176,37 @@
     return polar(cx, cy, offset, angle + 180);
   }
 
+  // A known new moon and the mean lunar month; good to within about a day.
+  var NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14) / 1000;
+  var SYNODIC_MONTH = 29.530588853 * DAY;
+
+  function lunarPhase(seconds) {
+    return mod((seconds - NEW_MOON_2000) / SYNODIC_MONTH, 1);
+  }
+
+  function phaseName(phase) {
+    if (phase < 0.03 || phase > 0.97) return 'new moon';
+    if (phase < 0.22) return 'waxing crescent';
+    if (phase < 0.28) return 'first quarter';
+    if (phase < 0.47) return 'waxing gibbous';
+    if (phase < 0.53) return 'full moon';
+    if (phase < 0.72) return 'waning gibbous';
+    if (phase < 0.78) return 'last quarter';
+    return 'waning crescent';
+  }
+
+  // The lit part of the moon as seen from the north: the sunlit limb, closed by the terminator ellipse.
+  function moonPath(phase, cx, cy, r) {
+    var waxing = phase < 0.5;
+    var bulge = Math.cos(2 * Math.PI * phase);
+    var limbSweep = waxing ? 1 : 0;
+    var terminatorSweep = (bulge > 0) === waxing ? 0 : 1;
+    var top = num(cx) + ' ' + num(cy - r);
+    var bottom = num(cx) + ' ' + num(cy + r);
+    return 'M' + top + 'A' + num(r) + ' ' + num(r) + ' 0 0 ' + limbSweep + ' ' + bottom +
+      'A' + num(Math.abs(bulge) * r) + ' ' + num(r) + ' 0 0 ' + terminatorSweep + ' ' + top + 'Z';
+  }
+
   function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
     var points = [];
     for (var step = 0; step <= steps; step++) {
@@ -202,5 +233,8 @@
     engraving: engraving,
     moonCenter: moonCenter,
     spiralPath: spiralPath,
+    lunarPhase: lunarPhase,
+    phaseName: phaseName,
+    moonPath: moonPath,
   };
 });

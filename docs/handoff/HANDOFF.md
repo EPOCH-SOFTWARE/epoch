@@ -112,6 +112,7 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - Founder on 08–15: "i only liked 08 and 11, everything else is just ugly same shit!!!!! KEEP ADDING DO NOT REMOVE", and asked for research into designers who make logos that stand out.
    - Two research briefs found that no brand mark shows the real live time (open ground), and that the great marks put one idea into how the mark is built rather than adding effects.
    - Added 16–22 in an "All in." section below 15. **No feedback yet.**
+10. **"put Tonight's moon in the website" (2026-10-02).** The prototype site's logo is now concept 06: the plain wordmark with tonight's real moon phase lit in orange inside the O (header and footer lockups, plus a live favicon). The giant faint footer wordmark stays plain, as the founder chose earlier. The homepage hero drawing still shows the old ring-and-dot mark.
 
 ---
 
@@ -174,7 +175,7 @@ H  translate(176.5 0) M3.3 0V40M26.7 0V40M3.3 20H26.7
 ```
 Symbol mark (logo 2), viewBox `0 0 48 48`: ring `M31.45 8.72A17 17 0 1 1 16.55 8.72` stroke 5.2, plus a dot `circle 24,7 r3.6` in orange `#ff4f00`.
 Logo 1 (dot-in-O) at bold weight: O = `translate(78.5 0) M28.03 4.9A17.1 17.1 0 1 1 11.97 4.9` + dot `circle 98.5,2.9 r4.2`.
-The header lockup is symbol + plain wordmark (logo 2).
+The site logo (header and footer) is now **Tonight's moon** (concept 06): the plain wordmark plus `KeptTime.moonPath(lunarPhase(now), 98.5, 20, 11.4)` filled with `--logo-dot`, built once per page load in `site.js` as the `wm-moon` symbol. `site.js` also redraws the favicon with the same moon. Every page loads `kept-time.js` before `site.js`; `site.js` throws if it is missing. Logo 2 (symbol + wordmark) lives in git history up to commit 8e0d908.
 
 ---
 

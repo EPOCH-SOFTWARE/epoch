@@ -320,18 +320,13 @@ ol {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   color: var(--text);
 }
 
 .logo svg {
-  height: 16px;
+  height: 19px;
   width: auto;
   overflow: visible;
-}
-
-.logo .mk {
-  height: 24px;
 }
 
 /* ---------- Header ---------- */
@@ -427,11 +422,7 @@ ol {
 }
 
 .foot-brand .logo svg {
-  height: 15px;
-}
-
-.foot-brand .logo .mk {
-  height: 22px;
+  height: 18px;
 }
 
 .foot-tag {
