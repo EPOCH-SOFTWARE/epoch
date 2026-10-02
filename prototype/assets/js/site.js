@@ -44,50 +44,68 @@
 
   // ---------- Logo ----------
 
-  // Tonight's moon: the wordmark's O carries the real phase of the moon in the signal orange.
+  // Mark 08, "In the name": the wordmark's O is a clock. Its opening and the orange point
+  // turn once a day with the local time, midnight at the top.
   var KEPT = window.KeptTime;
   if (!KEPT) throw new Error('site.js needs kept-time.js to be loaded before it');
-  var MOON = KEPT.lunarPhase(Date.now() / 1000);
 
   // Monoline caps, stroke 6.6 on a 40-unit cap height. Paths sit half a stroke inside the
   // letter edges so the ink keeps the same outer bounds (and spacing) at any weight.
-  var LETTERS =
-    '<g fill="none" stroke="currentColor" stroke-width="6.6">' +
+  var STROKES = '<g fill="none" stroke="currentColor" stroke-width="6.6">';
+  var E_AND_P =
     '<path d="M26 3.3H3.3V36.7H26M3.3 20H23"/>' +
-    '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>' +
-    '<circle cx="98.5" cy="20" r="17.1"/>' +
+    '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>';
+  var C_AND_H =
     '<path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44"/>' +
-    '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>' +
-    '</g>';
-
+    '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>';
+  var O_CENTER = '98.5 20';
   var WORDMARK_BOX = '-0.5 -1 208 42';
 
   var SPRITE =
     '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">' +
-    '<symbol id="wm-plain" viewBox="' + WORDMARK_BOX + '">' + LETTERS + '</symbol>' +
-    '<symbol id="wm-moon" viewBox="' + WORDMARK_BOX + '">' + LETTERS +
-    '<path d="' + KEPT.moonPath(MOON, 98.5, 20, 11.4) + '" style="fill:var(--logo-dot,currentColor)"/>' +
+    '<symbol id="wm-plain" viewBox="' + WORDMARK_BOX + '">' +
+    STROKES + E_AND_P + '<circle cx="98.5" cy="20" r="17.1"/>' + C_AND_H + '</g>' +
+    '</symbol>' +
+    '<symbol id="wm-clock" viewBox="' + WORDMARK_BOX + '">' +
+    STROKES + E_AND_P + C_AND_H + '</g>' +
+    '<g data-clock-o>' +
+    '<path d="' + KEPT.arcPath(98.5, 20, 17.1, 28, 304) + '" fill="none" stroke="currentColor" stroke-width="6.6"/>' +
+    '<circle cx="98.5" cy="2.9" r="4.2" style="fill:var(--logo-dot,currentColor)"/>' +
+    '</g>' +
     '</symbol>' +
     '</svg>';
 
   function logo() {
+    return '<span class="logo"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-clock"/></svg></span>';
+  }
+
+  // The browser tab shows the same clock.
+  function clockIcon(angle) {
     return (
-      '<span class="logo" title="Tonight’s moon: ' + KEPT.phaseName(MOON) + '">' +
-      '<svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-moon"/></svg></span>'
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">' +
+      '<rect width="48" height="48" rx="10" fill="#0c0d0f"/>' +
+      '<g transform="rotate(' + angle + ' 24 24)">' +
+      '<path d="' + KEPT.arcPath(24, 24, 15, 28, 304) + '" fill="none" stroke="#fff" stroke-width="4.6"/>' +
+      '<circle cx="24" cy="9" r="3.8" fill="#ff4f00"/>' +
+      '</g></svg>'
     );
   }
 
-  // The browser tab shows tonight's moon as well.
-  function moonIcon() {
+  // Points the O (every logo on the page shares one symbol) and the favicon at the current time.
+  function setLogoClock() {
+    var fraction = KEPT.localDayFraction(new Date());
+    var angle = KEPT.num(fraction * 360);
+    document.querySelector('[data-clock-o]').setAttribute('transform', 'rotate(' + angle + ' ' + O_CENTER + ')');
+    all('.logo').forEach(function (node) {
+      node.setAttribute('title', 'The O points to the time: ' + KEPT.clockText(fraction));
+    });
     var icon = document.querySelector('link[rel="icon"]');
-    if (!icon) return;
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">' +
-      '<rect width="48" height="48" rx="10" fill="#0c0d0f"/>' +
-      '<circle cx="24" cy="24" r="15" fill="none" stroke="#fff" stroke-width="4.6"/>' +
-      '<path d="' + KEPT.moonPath(MOON, 24, 24, 10) + '" fill="#ff4f00"/>' +
-      '</svg>';
-    icon.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(svg));
+    if (icon) icon.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(clockIcon(angle)));
+  }
+
+  function initLogoClock() {
+    setLogoClock();
+    window.setInterval(setLogoClock, 60000);
   }
 
   // ---------- Header and footer ----------
@@ -536,7 +554,7 @@
 
   document.body.insertAdjacentHTML('afterbegin', SPRITE + header());
   document.body.insertAdjacentHTML('beforeend', footer());
-  moonIcon();
+  initLogoClock();
 
   if (page === 'service') renderService();
   if (page === 'case') renderCase();

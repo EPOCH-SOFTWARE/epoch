@@ -308,6 +308,7 @@
 
     <p class="closing">Examples referenced: <a href="https://www.researchgate.net/publication/263963695_Dynamic_identities_for_the_Cultural_Heritage">Nordkyn and Casa da Música</a>, <a href="https://www.researchgate.net/publication/348310009_MIT_Media_Lab's_Dynamic_Identity">MIT Media Lab</a>, <a href="https://www.yeti.co/blog/7-successful-dynamic-brand-identities">the Whitney</a>, <a href="https://www.monotype.com/resources/monotype-labs/world%E2%80%99s-first-variable-font-logo">the WPP campus variable-font logo</a>.</p>
 
+    <script src="assets/js/kept-time.js"></script>
     <script>
       (function () {
         'use strict';
@@ -585,39 +586,11 @@
         moonO.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="6.6">' + LETTERS + RING + '</g><path data-lit fill="' + SIGNAL + '"/>';
         var litPart = moonO.querySelector('[data-lit]');
         var moonLabel = document.querySelector('[data-moon-label]');
-        var SYNODIC = 29.530588853 * 86400;
-        var NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14) / 1000;
-
-        function lunarPhase(seconds) {
-          return ((((seconds - NEW_MOON_2000) / SYNODIC) % 1) + 1) % 1;
-        }
-
-        function phaseName(p) {
-          if (p < 0.03 || p > 0.97) return 'new moon';
-          if (p < 0.22) return 'waxing crescent';
-          if (p < 0.28) return 'first quarter';
-          if (p < 0.47) return 'waxing gibbous';
-          if (p < 0.53) return 'full moon';
-          if (p < 0.72) return 'waning gibbous';
-          if (p < 0.78) return 'last quarter';
-          return 'waning crescent';
-        }
-
-        // Lit area: the outer limb on the sunlit side, closed by the terminator ellipse.
-        function moonShape(p, cx, cy, r) {
-          var waxing = p < 0.5;
-          var k = Math.cos(TAU * p);
-          var limbSweep = waxing ? 1 : 0;
-          var terminatorSweep = (k > 0) === waxing ? 0 : 1;
-          return 'M' + cx + ' ' + (cy - r) + 'A' + r + ' ' + r + ' 0 0 ' + limbSweep + ' ' + cx + ' ' + (cy + r) +
-            'A' + (Math.abs(k) * r).toFixed(3) + ' ' + r + ' 0 0 ' + terminatorSweep + ' ' + cx + ' ' + (cy - r) + 'Z';
-        }
-
-        var TONIGHT = lunarPhase(Date.now() / 1000);
+        var TONIGHT = window.KeptTime.lunarPhase(Date.now() / 1000);
         function showMoon(elapsed) {
           var p = REDUCE ? TONIGHT : (TONIGHT + elapsed / 20) % 1;
-          litPart.setAttribute('d', moonShape(p, 98.5, 20, 11.4));
-          moonLabel.textContent = 'tonight ' + phaseName(TONIGHT) + '   shown ' + phaseName(p);
+          litPart.setAttribute('d', window.KeptTime.moonPath(p, 98.5, 20, 11.4));
+          moonLabel.textContent = 'tonight ' + window.KeptTime.phaseName(TONIGHT) + '   shown ' + window.KeptTime.phaseName(p);
         }
 
         // ---------- 07 Twenty-four hours: the name as a chart of the last day ----------
@@ -688,7 +661,6 @@
         });
       })();
     </script>
-    <script src="assets/js/kept-time.js"></script>
     <script src="assets/js/marks-live.js"></script>
   </body>
 </html>

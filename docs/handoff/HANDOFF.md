@@ -113,6 +113,7 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - Two research briefs found that no brand mark shows the real live time (open ground), and that the great marks put one idea into how the mark is built rather than adding effects.
    - Added 16–22 in an "All in." section below 15. **No feedback yet.**
 10. **"put Tonight's moon in the website" (2026-10-02).** The prototype site's logo is now concept 06: the plain wordmark with tonight's real moon phase lit in orange inside the O (header and footer lockups, plus a live favicon). The giant faint footer wordmark stays plain, as the founder chose earlier. The homepage hero drawing still shows the old ring-and-dot mark.
+11. **"put 08 on the website let me see how it goes" (2026-10-02).** The site logo switched from the moon (06) to 08: the wordmark's O is a clock whose opening and orange point turn once a day with the visitor's local time (midnight at the top), updated every minute, with a matching live favicon and a hover title giving the time. The moon version is commit 2567b4f.
 
 ---
 
@@ -175,7 +176,7 @@ H  translate(176.5 0) M3.3 0V40M26.7 0V40M3.3 20H26.7
 ```
 Symbol mark (logo 2), viewBox `0 0 48 48`: ring `M31.45 8.72A17 17 0 1 1 16.55 8.72` stroke 5.2, plus a dot `circle 24,7 r3.6` in orange `#ff4f00`.
 Logo 1 (dot-in-O) at bold weight: O = `translate(78.5 0) M28.03 4.9A17.1 17.1 0 1 1 11.97 4.9` + dot `circle 98.5,2.9 r4.2`.
-The site logo (header and footer) is now **Tonight's moon** (concept 06): the plain wordmark plus `KeptTime.moonPath(lunarPhase(now), 98.5, 20, 11.4)` filled with `--logo-dot`, built once per page load in `site.js` as the `wm-moon` symbol. `site.js` also redraws the favicon with the same moon. Every page loads `kept-time.js` before `site.js`; `site.js` throws if it is missing. Logo 2 (symbol + wordmark) lives in git history up to commit 8e0d908.
+The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock` symbol in `site.js` is the wordmark without its O, plus an O open at the top (`KeptTime.arcPath(98.5, 20, 17.1, 28, 304)`, logo 1's geometry) holding the orange point (`circle 98.5,2.9 r4.2`, `--logo-dot`). `setLogoClock()` rotates that O to the local time of day every minute and redraws the favicon to match. Every page loads `kept-time.js` before `site.js`; `site.js` throws if it is missing. Earlier site logos are in git history: logo 2 (symbol + wordmark) up to 8e0d908, Tonight's moon in 2567b4f. marks.html's 06 now uses the shared, tested moon maths in kept-time.js.
 
 ---
 
