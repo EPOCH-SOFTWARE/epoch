@@ -329,6 +329,35 @@ ol {
   overflow: visible;
 }
 
+.logo {
+  position: relative;
+}
+
+/* Hovering the logo says what it is: a clock pointing at now. */
+.logo-note {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  z-index: 5;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo:hover .logo-note,
+.brand:focus-visible .logo-note {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- Header ---------- */
 .site-header {
   view-transition-name: site-header;
@@ -584,8 +613,8 @@ ol {
 }
 
 .draft-ring {
-  stroke-dasharray: 1036;
-  stroke-dashoffset: 1036;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   animation: draft-draw 1.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
 }
 
@@ -599,6 +628,20 @@ ol {
 .draft-notes {
   opacity: 0;
   animation: draft-fade 0.8s ease 2.5s forwards;
+}
+
+.draft-hand {
+  opacity: 0;
+  animation: draft-fade 0.6s ease 2.4s forwards;
+}
+
+.draft-now {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.draft-now.on {
+  opacity: 1;
 }
 
 @keyframes draft-draw {
@@ -1400,6 +1443,13 @@ a.chip:hover {
   font-size: var(--text-md);
   font-weight: var(--heading-weight);
   letter-spacing: -0.015em;
+}
+
+.office-time {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .office address {

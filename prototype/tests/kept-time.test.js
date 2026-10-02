@@ -180,3 +180,9 @@ test('moonPath lights the right half at first quarter', () => {
 test('moonPath lights nothing at new moon', () => {
   assert.equal(K.moonPath(0, 98.5, 20, 11.4), 'M98.5 8.6A11.4 11.4 0 0 1 98.5 31.4A11.4 11.4 0 0 0 98.5 8.6Z');
 });
+
+test('zoneTime reads the clock in another city, never wrapping between time and AM/PM', () => {
+  const moment = new Date(Date.UTC(2026, 9, 2, 15, 35));
+  assert.equal(K.zoneTime(moment, 'America/New_York'), '11:35 AM');
+  assert.equal(K.zoneTime(moment, 'Asia/Kolkata'), '9:05 PM');
+});

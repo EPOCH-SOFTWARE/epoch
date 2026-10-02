@@ -76,7 +76,10 @@
     '</svg>';
 
   function logo() {
-    return '<span class="logo"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-clock"/></svg></span>';
+    return (
+      '<span class="logo"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-clock"/></svg>' +
+      '<span class="logo-note" aria-hidden="true" data-logo-note></span></span>'
+    );
   }
 
   // The browser tab shows the same clock.
@@ -91,21 +94,20 @@
     );
   }
 
-  // Points the O (every logo on the page shares one symbol) and the favicon at the current time.
-  function setLogoClock() {
-    var fraction = KEPT.localDayFraction(new Date());
-    var angle = KEPT.num(fraction * 360);
-    document.querySelector('[data-clock-o]').setAttribute('transform', 'rotate(' + angle + ' ' + O_CENTER + ')');
-    all('.logo').forEach(function (node) {
-      node.setAttribute('title', 'The O points to the time: ' + KEPT.clockText(fraction));
-    });
-    var icon = document.querySelector('link[rel="icon"]');
-    if (icon) icon.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(clockIcon(angle)));
+  // ---------- Office clocks ----------
+
+  var OFFICE_ZONES = { 'Charlotte, NC': 'America/New_York', 'Ahmedabad, India': 'Asia/Kolkata' };
+
+  function officeClock(city) {
+    if (!OFFICE_ZONES[city]) throw new Error('No time zone for the office in "' + city + '"');
+    return '<time data-zone="' + OFFICE_ZONES[city] + '"></time>';
   }
 
-  function initLogoClock() {
-    setLogoClock();
-    window.setInterval(setLogoClock, 60000);
+  // "Charlotte 11:35 AM · Ahmedabad 9:05 PM", filled in and kept current by showTime().
+  function officeClocks() {
+    return DATA.contact.offices.map(function (item) {
+      return esc(item.city.split(',')[0]) + ' ' + officeClock(item.city);
+    }).join(' · ');
   }
 
   // ---------- Header and footer ----------
@@ -113,9 +115,7 @@
   var NAV = [
     { href: 'work.html', label: 'Work', pages: ['work', 'case'] },
     { href: 'services.html', label: 'Services', pages: ['services', 'service'] },
-    { href: 'industries.html', label: 'Industries', pages: ['industries', 'industry'] },
     { href: 'how-we-work.html', label: 'How we work', pages: ['how-we-work'] },
-    { href: 'insights.html', label: 'Insights', pages: ['insights', 'article'] },
     { href: 'about.html', label: 'About', pages: ['about'] },
   ];
 
@@ -163,7 +163,7 @@
       '<div class="foot-col"><h2>Talk to us</h2><a href="mailto:' + contact.email + '">' + esc(contact.email) + '</a>' +
       '<a href="' + contact.phoneHref + '">' + esc(contact.phone) + '</a>' + social + '</div>' +
       '</div>' +
-      '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span><span>Charlotte, NC and Ahmedabad, India</span></div>' +
+      '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span><span>' + officeClocks() + '</span></div>' +
       '<div class="foot-mark" aria-hidden="true"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></div>' +
       '</div></footer>'
     );
@@ -256,6 +256,7 @@
   function office(item) {
     return (
       '<li class="office"><h3>' + esc(item.city) + '</h3>' +
+      '<p class="office-time">Local time ' + officeClock(item.city) + '</p>' +
       '<address>' + item.address.map(esc).join('<br>') + '</address>' +
       '<a href="' + item.mapHref + '" target="_blank" rel="noopener noreferrer">Get directions</a></li>'
     );
@@ -493,6 +494,107 @@
     });
   }
 
+  // ---------- The living O ----------
+
+  // Every O on the page is a 24-hour clock: the logo (one shared symbol), the favicon and the home drawing.
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var HERO_PIVOT = '320 340';
+
+  function nowAngle() {
+    return KEPT.localDayFraction(new Date()) * 360;
+  }
+
+  function turn(node, degrees, pivot) {
+    node.setAttribute('transform', 'rotate(' + KEPT.num(degrees) + ' ' + pivot + ')');
+  }
+
+  // Turns an O from midnight to the current time, easing out, then calls done.
+  function windToNow(node, pivot, duration, done) {
+    var started = null;
+    function frame(time) {
+      if (started === null) started = time;
+      var progress = Math.min((time - started) / duration, 1);
+      turn(node, nowAngle() * (1 - Math.pow(1 - progress, 3)), pivot);
+      if (progress < 1) {
+        window.requestAnimationFrame(frame);
+      } else {
+        done();
+      }
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  // The logo winds once per visit, so people notice that it is a clock.
+  function firstPageThisVisit() {
+    try {
+      if (window.sessionStorage.getItem('epoch-wound')) return false;
+      window.sessionStorage.setItem('epoch-wound', '1');
+      return true;
+    } catch (error) {
+      // Storage can be blocked (private browsing); winding on every page is the acceptable fallback.
+      return true;
+    }
+  }
+
+  // The label sits a little clockwise of the hand so the line never runs through the text.
+  function placeNowLabel(label) {
+    var spot = KEPT.polar(320, 340, 96, nowAngle() + 24);
+    label.setAttribute('x', KEPT.num(spot.x));
+    label.setAttribute('y', KEPT.num(spot.y + 5));
+    label.textContent = 'now ' + KEPT.zoneTime(new Date());
+  }
+
+  // Everything that reads the clock as text: the logo's note, the favicon and the office clocks.
+  function showTime() {
+    var now = new Date();
+    all('[data-logo-note]').forEach(function (note) {
+      note.textContent = 'It’s ' + KEPT.zoneTime(now) + '. The O points to now.';
+    });
+    var icon = document.querySelector('link[rel="icon"]');
+    if (icon) icon.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(clockIcon(KEPT.num(nowAngle()))));
+    all('time[data-zone]').forEach(function (clock) {
+      clock.textContent = KEPT.zoneTime(now, clock.dataset.zone);
+    });
+  }
+
+  function initLivingO() {
+    var logoO = document.querySelector('[data-clock-o]');
+    var heroO = document.querySelector('[data-hero-o]');
+    var heroNow = document.querySelector('[data-hero-now]');
+    showTime();
+
+    if (REDUCED || !firstPageThisVisit()) {
+      turn(logoO, nowAngle(), O_CENTER);
+    } else {
+      windToNow(logoO, O_CENTER, 1400, function () {});
+    }
+
+    if (heroO) {
+      var showNow = function () {
+        placeNowLabel(heroNow);
+        heroNow.classList.add('on');
+      };
+      if (REDUCED) {
+        turn(heroO, nowAngle(), HERO_PIVOT);
+        showNow();
+      } else {
+        // Wait for the ring to finish drawing itself, then wind it round to now.
+        window.setTimeout(function () {
+          windToNow(heroO, HERO_PIVOT, 1600, showNow);
+        }, 2400);
+      }
+    }
+
+    window.setInterval(function () {
+      turn(logoO, nowAngle(), O_CENTER);
+      if (heroO) {
+        turn(heroO, nowAngle(), HERO_PIVOT);
+        placeNowLabel(heroNow);
+      }
+      showTime();
+    }, 60000);
+  }
+
   // ---------- Booking ----------
 
   // Set this to the scheduling link (Calendly, Cal.com, ...) to switch "Choose a time" over.
@@ -554,7 +656,6 @@
 
   document.body.insertAdjacentHTML('afterbegin', SPRITE + header());
   document.body.insertAdjacentHTML('beforeend', footer());
-  initLogoClock();
 
   if (page === 'service') renderService();
   if (page === 'case') renderCase();
@@ -564,4 +665,5 @@
   initBooking();
   initForm();
   bindMenu();
+  initLivingO();
 })();

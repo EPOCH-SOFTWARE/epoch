@@ -124,6 +124,13 @@
     return pad(parts.hours) + ':' + pad(parts.minutes);
   }
 
+  // "9:05 PM" in an IANA time zone (omit it for the visitor's own), with a no-break space so it never wraps.
+  function zoneTime(date, timeZone) {
+    return new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: timeZone })
+      .format(date)
+      .replace(/\s/g, '\u00a0');
+  }
+
   function localDayFraction(date) {
     var seconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds() + date.getMilliseconds() / 1000;
     return seconds / DAY;
@@ -224,6 +231,7 @@
     visibleArcs: visibleArcs,
     clockText: clockText,
     localDayFraction: localDayFraction,
+    zoneTime: zoneTime,
     lapse: lapse,
     watchAngles: watchAngles,
     openingWidth: openingWidth,
