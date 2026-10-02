@@ -501,7 +501,20 @@ ol {
 
 /* ---------- Footer ---------- */
 .site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   font-size: 14px;
+}
+
+/* Dusk behind the giant wordmark: a low orange glow rising from the bottom edge of every page. */
+.foot-glow {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: clamp(160px, 28vw, 400px);
+  pointer-events: none;
+  background: radial-gradient(64% 70% at 50% 100%, rgba(255, 79, 0, 0.5), rgba(170, 38, 4, 0.26) 42%, rgba(60, 10, 2, 0.12) 66%, transparent 86%);
 }
 
 .foot-grid {
@@ -551,6 +564,7 @@ ol {
 
 .foot-mark {
   padding-block: 8px 28px;
+  color: rgba(242, 239, 232, 0.2);
 }
 
 .foot-mark svg {
