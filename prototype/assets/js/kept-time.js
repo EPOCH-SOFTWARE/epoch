@@ -1,4 +1,4 @@
-// Pure time and geometry helpers for the living marks in marks.html (08 onwards) and the site's living O.
+// Pure helpers for the living marks, page interactions and the document review demo.
 // Loads as window.KeptTime in the browser and as a CommonJS module in the tests.
 // Angles are in degrees, measured clockwise from twelve o'clock.
 (function (root, factory) {
@@ -263,6 +263,50 @@
     return match ? Number(match[1]) : null;
   }
 
+  // The document demo reads explicitly labelled fields. It does not infer facts from prose.
+  // Keep exact source offsets so each result can take the reader back to its evidence.
+  function reviewBrief(text) {
+    if (text.length > 10000) throw new Error('Use a document of 10,000 characters or fewer.');
+    var aliases = { project: 'project', request: 'project', owner: 'owner', lead: 'owner', target: 'target', 'target date': 'target', due: 'target' };
+    var fields = { project: [], owner: [], target: [] };
+    var offset = 0;
+    text.split('\n').forEach(function (raw, index) {
+      var quote = raw.replace(/\r$/, '');
+      var match = /^\s*([a-z ]+)\s*:\s*(.*?)\s*$/i.exec(quote);
+      var key = match && aliases[match[1].trim().toLowerCase()];
+      if (key && Object.prototype.hasOwnProperty.call(fields, key)) {
+        fields[key].push({ value: match[2], line: index + 1, quote: quote, start: offset, end: offset + quote.length });
+      }
+      offset += raw.length + 1;
+    });
+    var result = {};
+    Object.keys(fields).forEach(function (key) {
+      var entries = fields[key];
+      var values = [];
+      var seen = [];
+      var unconfirmed = false;
+      entries.forEach(function (entry) {
+        var normalized = entry.value.toLowerCase().replace(/\s+/g, ' ').trim();
+        if (/^(|tbd|pending|not confirmed|unknown|\?)$/.test(normalized)) {
+          unconfirmed = true;
+        } else if (seen.indexOf(normalized) === -1) {
+          seen.push(normalized);
+          values.push(entry.value);
+        }
+      });
+      var status = !values.length ? 'missing' : values.length > 1 || unconfirmed ? 'conflict' : 'found';
+      result[key] = {
+        status: status,
+        value: status === 'found' ? values[0] : null,
+        values: values,
+        sources: entries.map(function (entry) {
+          return { line: entry.line, quote: entry.quote, start: entry.start, end: entry.end };
+        }),
+      };
+    });
+    return result;
+  }
+
   function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
     var points = [];
     for (var step = 0; step <= steps; step++) {
@@ -299,5 +343,6 @@
     stepAt: stepAt,
     ringStop: ringStop,
     monthsIn: monthsIn,
+    reviewBrief: reviewBrief,
   };
 });

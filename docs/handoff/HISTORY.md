@@ -298,12 +298,21 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 
 ---
 
-## Session 3: footer letter colour (2026-10-03)
+## Session 3: footer letter colour, project showcase and demo (2026-10-03)
 
 - **Asked:** match the big footer EPOCH letter colour to footer-lab option 8, "One warm line".
 - **Changed:** shared `.foot-mark` colour from ivory at 20% opacity to option 8's exact 12%. The existing dusk glow and scroll rise remain; this request changes the letter colour only.
 - **Preserved:** the wordmark geometry and every footer-lab concept.
 - Desktop and phone captures: `screens/2026-10-03/desktop-18-footer-soft-ivory.png` and `screens/2026-10-03/mobile-07-footer-soft-ivory.png`.
+
+### Project showcase and document review
+
+- **Asked:** make the website support EPOCH's ambition more strongly. The founder agreed to start on a project showcase and a working demo.
+- **Built:** selected work moves directly below the home page's client strip. HUB has a larger editorial feature with selected deliverables, and Inspira has its own companion story. Work adds the existing challenge and scope. All client copy comes from the existing case studies; no results, quotes or product screens were invented.
+- **Built:** `document-demo.html`, an editable fictional brief with sourced Project, Owner and Target results. Three samples cover complete, missing and conflicting information. Source buttons select the exact document line. Editing clears old results; reviewing recalculates them. All rendering treats document text as text.
+- **Limit:** the demo deliberately says it reads labelled fields and has no live AI model. It demonstrates the review interaction, not model quality. Real AI integration requires a backend and model configuration. Approved project screens, confirmed outcomes, founder material and a booking link remain missing.
+- **Validation:** 9 tests were written failing before the extraction helper, then passed. All 50 pure tests pass. The browser check covers keyboard operation, citations, edits, conflicting values, reset, safe rendering and reduced motion at desktop and phone widths. All 31 checked routes have no console errors or page overflow at 390px; the home marquee remains intentionally clipped. The contact form check and em-dash scan pass.
+- **Status:** first pass for founder review. The larger showcase still needs real product imagery and confirmed results to become a complete evidence-led case study.
 
 ---
 

@@ -240,6 +240,30 @@
     '<h3>One team, from the first model to long after launch.</h3>' +
     '<a class="btn sm" href="contact.html">Start a project</a></article>';
 
+  // A larger editorial view of the existing case study, using its published scope verbatim.
+  function featuredProject(study, full) {
+    return '<article class="project-feature" id="featured-' + study.id + '">' +
+      '<div class="project-mast"><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
+      '<span>' + esc(study.industry) + '</span></div>' +
+      '<div class="project-layout"><div class="project-story">' +
+      '<h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) + '</a></h3>' +
+      '<p>' + esc(study.summary) + '</p>' +
+      '<a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div>' +
+      '<div class="project-scope"><p class="scope-caption">Selected deliverables</p>' +
+      '<ul>' + list(study.deliverables.slice(0, 3), function (item) {
+        return '<li><span class="scope-node" aria-hidden="true"></span>' + esc(item) + '</li>';
+      }) + '</ul><p class="scope-foot">' + esc(study.deliverables[study.id === 'hub-international' ? 4 : 6]) + '</p></div></div>' +
+      (full ? '<div class="project-context"><div><h4>The challenge</h4><p>' + esc(study.generalChallenges[0]) +
+        '.</p></div><div><h4>EPOCH’s scope</h4><p>' + esc(study.projectScope) + '</p></div></div>' : '') +
+      '</article>';
+  }
+
+  function projectCompanion(study) {
+    return '<article class="project-companion"><div><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
+      '<p>' + esc(study.industry) + '</p></div><div><h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) +
+      '</a></h3><p>' + esc(study.summary) + '</p><a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div></article>';
+  }
+
   // The two ways in, offered the same way on every page.
   var CALLS =
     '<div class="actions"><a class="btn" href="contact.html">Start a project</a>' +
@@ -304,6 +328,10 @@
     });
     all('[data-case-cards]').forEach(function (target) {
       target.innerHTML = list(DATA.caseStudies, caseCard) + (target.dataset.caseCards === 'with-cta' ? PROJECT_CARD : '');
+    });
+    all('[data-featured-work]').forEach(function (target) {
+      target.innerHTML = featuredProject(DATA.caseStudies[0], target.dataset.featuredWork === 'full') +
+        projectCompanion(DATA.caseStudies[1]);
     });
     all('[data-commitments]').forEach(function (target) {
       target.innerHTML = list(DATA.commitments, function (item) {

@@ -16,6 +16,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 4. **Do NOT port the prototype to Next.js until the founder says so.** They explicitly said "dont port it into next js tho".
 5. The GitHub repo `EPOCH-SOFTWARE/epoch` is **public**. Never commit private material such as chat transcripts, the founder's messages word for word, or credentials. Those stay in the local archive (section 12).
 6. Before showing the founder anything, run the full check in `docs/handoff/tools/README.md`, then look at the screenshots yourself.
+7. Latest work (2026-10-03): the home page brings selected work directly after the client strip. Home and Work now give HUB a full-width showcase and Inspira its own editorial row, using existing case-study text only. `document-demo.html` demonstrates editable source review, missing fields and conflicting values with fictional briefs. It uses deterministic labelled-field extraction, not a live AI model. Approved project screenshots, confirmed outcomes and any live-model integration are still outstanding.
 
 ---
 
@@ -183,7 +184,8 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 | --- | --- |
 | `index.html` | Home. Hero: copy on the left; on the right, the logo's O drawn as a technical construction ("rev B"): a 24-hour dial whose ring, hand and orange point turn to the visitor's time of day, with light from the opening and a label showing the time. The ring draws in and winds to now once per visit. Notes include `t₀ 1970-01-01 00:00 UTC` and the live Unix time. On desktop the cursor becomes a measuring crosshair. Then: "Trusted by" marquee, Why EPOCH (epoch in computing and in ML), commitments, AI services rows plus engineering chips, case cards with system sketches, closing CTA. |
 | `services.html`, `service.html?id=` | Two tiers. The detail page is rendered from `data.js`. |
-| `work.html`, `case.html?id=` | Case cards plus a logo grid. Case detail is rendered from `data.js`. |
+| `work.html`, `case.html?id=` | Work has a lead HUB showcase, an Inspira companion story, a document-demo invitation and the client logo grid. Case detail is rendered from `data.js`. |
+| `document-demo.html` | Working browser example using fictional briefs. Reads labelled Project, Owner and Target fields, highlights sources, and flags missing or conflicting values. No model or backend. Linked from Work. |
 | `industries.html`, `industry.html?id=` | insurance, financial-services, healthcare, retail. Data in `assets/js/industries.js`. |
 | `how-we-work.html` | Engagement models, first 30 days, how pricing works, FAQs. **Contains claims to confirm** (section 7). |
 | `insights.html`, `article.html?id=` | 3 articles in `assets/js/insights.js`: `why-ai-pilots-stall`, `evaluating-llm-systems`, `first-30-days`. Byline "EPOCH"; dates picked by Claude. |
@@ -218,6 +220,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   - `pages.css` (prefix `pg-`) and `insights.css` (prefix `ins-`) are page-specific.
 - **`assets/js/kept-time.js`** holds the pure time and geometry helpers: rings with openings, watch angles, seven-segment letters, the engraving text and eclipse geometry (marks 08 onwards), the moon phase (mark 06), the living O's time of day, reading and range progress (the reading clock and the footer rise), the magnetic buttons, and the craft-pass helpers `stepAt`, `ringStop` and `monthsIn`. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (41 tests). Jest only looks in `src/`, so these never mix with the app's tests.
 - **`assets/js/marks-live.js`** draws marks 08 onwards as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
+- **Showcase and document demo:** `assets/css/work.css` styles the lead project and companion story rendered by `site.js` from existing case-study content. `assets/js/document-demo.js` owns sample selection, editing and citations; `assets/css/document-demo.css` styles the source and results panels. The pure `KeptTime.reviewBrief` helper has 9 tests in `tests/document-review.test.js`, making 50 pure tests in total. `docs/handoff/tools/demo-check.mjs` checks the actual browser flow. The sample text is fictional and is never sent or persisted.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.
   - Cardinal, iDrive and Rural King are cropped PNGs.

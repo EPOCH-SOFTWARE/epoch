@@ -6,6 +6,8 @@ The marketing site for EPOCH Software Services: an AI-first engineering company.
 
 The next version of the site is being designed as a static prototype in `prototype/` on the `feat/night` branch. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
 
+The home and Work pages feature the existing HUB and Inspira case studies. `prototype/document-demo.html` is an interactive document review using fictional sample briefs and deterministic labelled-field extraction. It has no AI backend and sends no document text. Run `node --test 'prototype/tests/*.test.js'` for pure helpers and `node docs/handoff/tools/demo-check.mjs` for the demo's browser checks.
+
 ## Getting started
 
 ```bash

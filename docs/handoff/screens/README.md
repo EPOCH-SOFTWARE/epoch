@@ -32,3 +32,12 @@ Desktop shots are 1440 × 900 and phone shots are 390 × 844 at 2x.
 ### Footer letter colour update
 
 `desktop-18-footer-soft-ivory.png` and `mobile-07-footer-soft-ivory.png` show the giant wordmark using footer-lab option 8's ivory at 12% opacity, with the existing dusk glow and scroll rise. Earlier screenshots above retain the previous 20% letter opacity.
+
+### Project showcase and document demo
+
+- `desktop-19-work-showcase.png` and `mobile-08-work-showcase.png`: the larger HUB feature, built from existing case-study content.
+- `desktop-20-document-demo.png` and `mobile-09-document-demo.png`: the editable fictional source document and results.
+- `desktop-21-demo-conflict.png`: conflicting dates, with both source references retained.
+- `desktop-22-home-showcase.png`: selected work directly after the client strip.
+
+These show the first pass for review. No project product imagery or new client results were supplied. The demo uses labelled-field extraction in the browser, with no live AI model.
