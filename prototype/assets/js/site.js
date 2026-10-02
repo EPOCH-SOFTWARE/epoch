@@ -103,13 +103,6 @@
     return '<time data-zone="' + OFFICE_ZONES[city] + '"></time>';
   }
 
-  // "Charlotte 11:35 AM · Ahmedabad 9:05 PM", filled in and kept current by showTime().
-  function officeClocks() {
-    return DATA.contact.offices.map(function (item) {
-      return esc(item.city.split(',')[0]) + ' ' + officeClock(item.city);
-    }).join(' · ');
-  }
-
   // ---------- Header and footer ----------
 
   var NAV = [
@@ -162,7 +155,7 @@
       '<div class="foot-col"><h2>Talk to us</h2><a href="mailto:' + contact.email + '">' + esc(contact.email) + '</a>' +
       '<a href="' + contact.phoneHref + '">' + esc(contact.phone) + '</a>' + social + '</div>' +
       '</div>' +
-      '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span><span>' + officeClocks() + '</span></div>' +
+      '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span></div>' +
       '<div class="foot-mark" aria-hidden="true"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></div>' +
       '</div></footer>'
     );
