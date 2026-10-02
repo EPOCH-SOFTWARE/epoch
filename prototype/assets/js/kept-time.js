@@ -1,0 +1,206 @@
+// Pure time and geometry helpers for the living marks in marks.html (08 onwards).
+// Loads as window.KeptTime in the browser and as a CommonJS module in the tests.
+// Angles are in degrees, measured clockwise from twelve o'clock.
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = factory();
+  } else {
+    root.KeptTime = factory();
+  }
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  var RADIANS = Math.PI / 180;
+  var DAY = 86400;
+
+  // Seven-segment display: a top, b top right, c bottom right, d bottom, e bottom left, f top left, g middle.
+  var SEGMENTS = {
+    0: 'abcdef',
+    1: 'bc',
+    2: 'abdeg',
+    3: 'abcdg',
+    4: 'bcfg',
+    5: 'acdfg',
+    6: 'acdefg',
+    7: 'abc',
+    8: 'abcdefg',
+    9: 'abcdfg',
+    E: 'adefg',
+    P: 'abefg',
+    O: 'abcdef',
+    C: 'adef',
+    H: 'bcefg',
+    ' ': '',
+  };
+
+  function mod(value, base) {
+    return ((value % base) + base) % base;
+  }
+
+  function pad(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  // Two decimals, no trailing zeros and no "-0", so paths stay short and stable.
+  function num(value) {
+    var rounded = Math.round(value * 100) / 100;
+    return String(rounded === 0 ? 0 : rounded);
+  }
+
+  function polar(cx, cy, r, angle) {
+    return { x: cx + r * Math.sin(angle * RADIANS), y: cy - r * Math.cos(angle * RADIANS) };
+  }
+
+  function point(p) {
+    return num(p.x) + ' ' + num(p.y);
+  }
+
+  function arcTo(cx, cy, r, angle, large) {
+    return 'A' + num(r) + ' ' + num(r) + ' 0 ' + large + ' 1 ' + point(polar(cx, cy, r, angle));
+  }
+
+  // A clockwise arc; a full turn is drawn as two halves because SVG cannot arc back to its own start.
+  function arcPath(cx, cy, r, start, sweep) {
+    var from = 'M' + point(polar(cx, cy, r, start));
+    if (sweep >= 360) return from + arcTo(cx, cy, r, start + 180, 0) + arcTo(cx, cy, r, start + 360, 0);
+    return from + arcTo(cx, cy, r, start + sweep, sweep > 180 ? 1 : 0);
+  }
+
+  function cutsFor(gaps) {
+    var cuts = [];
+    gaps.forEach(function (gap) {
+      if (gap.width <= 0) return;
+      if (gap.width >= 360) {
+        cuts.push([0, 360]);
+        return;
+      }
+      var from = mod(gap.center - gap.width / 2, 360);
+      var to = from + gap.width;
+      if (to <= 360) {
+        cuts.push([from, to]);
+      } else {
+        cuts.push([from, 360], [0, to - 360]);
+      }
+    });
+    return cuts;
+  }
+
+  function mergeCuts(cuts) {
+    var sorted = cuts.slice().sort(function (a, b) {
+      return a[0] - b[0];
+    });
+    var merged = [sorted[0].slice()];
+    sorted.slice(1).forEach(function (cut) {
+      var last = merged[merged.length - 1];
+      if (cut[0] <= last[1]) {
+        last[1] = Math.max(last[1], cut[1]);
+      } else {
+        merged.push(cut.slice());
+      }
+    });
+    return merged;
+  }
+
+  // The parts of a ring left standing once its openings ({ center, width }) are cut out.
+  function visibleArcs(gaps) {
+    var cuts = cutsFor(gaps);
+    if (cuts.length === 0) return [{ start: 0, sweep: 360 }];
+    var merged = mergeCuts(cuts);
+    var arcs = [];
+    merged.forEach(function (cut, index) {
+      var end = index + 1 < merged.length ? merged[index + 1][0] : merged[0][0] + 360;
+      if (end > cut[1]) arcs.push({ start: mod(cut[1], 360), sweep: end - cut[1] });
+    });
+    return arcs;
+  }
+
+  function clockParts(fraction) {
+    var seconds = Math.round(mod(fraction, 1) * DAY) % DAY;
+    return { hours: Math.floor(seconds / 3600), minutes: Math.floor(seconds / 60) % 60 };
+  }
+
+  function clockText(fraction) {
+    var parts = clockParts(fraction);
+    return pad(parts.hours) + ':' + pad(parts.minutes);
+  }
+
+  function localDayFraction(date) {
+    var seconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds() + date.getMilliseconds() / 1000;
+    return seconds / DAY;
+  }
+
+  // A time-lapse: from a starting time of day, one whole day passes every `secondsPerDay`.
+  function lapse(startFraction, elapsedSeconds, secondsPerDay) {
+    return mod(startFraction + elapsedSeconds / secondsPerDay, 1);
+  }
+
+  function watchAngles(fraction) {
+    var seconds = mod(fraction, 1) * DAY;
+    return { hour: (mod(seconds, 43200) / 43200) * 360, minute: (mod(seconds, 3600) / 3600) * 360 };
+  }
+
+  // Full at midnight, closed by the end of the day.
+  function openingWidth(fraction, widest) {
+    return widest * (1 - Math.min(Math.max(fraction, 0), 1));
+  }
+
+  // The Swiss railway clock's second hand: one lap in 58.5 s, then it waits at the top for the minute.
+  function lapAngle(secondsIntoMinute) {
+    return secondsIntoMinute < 58.5 ? (secondsIntoMinute / 58.5) * 360 : 0;
+  }
+
+  function segmentsFor(character) {
+    if (!Object.prototype.hasOwnProperty.call(SEGMENTS, character)) {
+      throw new Error('A seven-segment display cannot show "' + character + '"');
+    }
+    return SEGMENTS[character];
+  }
+
+  // Five cells: the name, or the time with the O's cell left for the separator point.
+  function displayCells(mode, fraction) {
+    if (mode === 'name') return ['E', 'P', 'O', 'C', 'H'];
+    if (mode === 'time') {
+      var text = clockText(fraction);
+      return [text[0], text[1], ' ', text[3], text[4]];
+    }
+    throw new Error('unknown display mode "' + mode + '"');
+  }
+
+  function engraving(date) {
+    var iso = date.toISOString();
+    return 'EPOCH OR NOTHING · ' + iso.slice(0, 10) + ' · ' + iso.slice(11, 19) + ' UTC · ' + Math.floor(date.getTime() / 1000);
+  }
+
+  // In an eclipse the light gathers on one side; the moon sits on the other.
+  function moonCenter(cx, cy, offset, angle) {
+    return polar(cx, cy, offset, angle + 180);
+  }
+
+  function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
+    var points = [];
+    for (var step = 0; step <= steps; step++) {
+      var t = step / steps;
+      points.push(point(polar(cx, cy, r0 + (r1 - r0) * t, start + sweep * t)));
+    }
+    return 'M' + points.join('L');
+  }
+
+  return {
+    num: num,
+    pad: pad,
+    polar: polar,
+    arcPath: arcPath,
+    visibleArcs: visibleArcs,
+    clockText: clockText,
+    localDayFraction: localDayFraction,
+    lapse: lapse,
+    watchAngles: watchAngles,
+    openingWidth: openingWidth,
+    lapAngle: lapAngle,
+    segmentsFor: segmentsFor,
+    displayCells: displayCells,
+    engraving: engraving,
+    moonCenter: moonCenter,
+    spiralPath: spiralPath,
+  };
+});

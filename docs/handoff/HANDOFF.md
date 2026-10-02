@@ -103,6 +103,10 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - Researched dynamic identities (Nordkyn, MIT Media Lab, Casa da Música, Whitney, the WPP variable-font logo). Rule learned: **keep one thing fixed and let one real signal change the logo itself.**
    - v2 had 01 Now, 02 Daylight, 03 Weight of the day and 04 Timestamp. Founder: "not that much interesting, **try something else keep these 4 tho**."
    - Added 05 Sundial, 06 Tonight's moon and 07 Twenty-four hours. **No feedback yet.**
+8. **Logo round 3 (2026-10-02), same page.**
+   - Founder: "I only liked 01 Now so far. Show me more ideas in that spirit, where the logo itself keeps time, not a picture next to the name… really out-of-the-box and professional."
+   - After five proposals in chat: "i like some of em, now you are cooking… still not that much interesting, try something else, keep all of the current work intact, EPOCH or nothing!!!"
+   - Added 08–15 in a new "EPOCH or nothing." section below 07; 01–07 are untouched apart from a "New: 08–15" jump link. **No feedback yet.**
 
 ---
 
@@ -121,7 +125,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 | `insights.html`, `article.html?id=` | 3 articles in `assets/js/insights.js`: `why-ai-pilots-stall`, `evaluating-llm-systems`, `first-30-days`. Byline "EPOCH"; dates picked by Claude. |
 | `about.html`, `contact.html` | Contact has `#book`, a "Book a 30-minute call" section with "What happens next", plus a form with inline validation. On a prototype submit it shows a note and sends nothing. |
 | `logos.html` | Logo directions A–E: zero point, overrun, extra mile, in focus, new era. |
-| `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts 01–07 on a dark gallery page. `marks.md` is the written concept. |
+| `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts on a dark gallery page: 01–07, then 08–15 under "EPOCH or nothing.". `marks.md` is the written concept. |
 
 ### Code
 - **`assets/js/data.js`** is generated from the TypeScript content in `src/shared/constants` (services, serviceDetails, caseStudies, clients, commitments, contact, techStack). To regenerate:
@@ -146,6 +150,8 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   - view transitions (`@view-transition`), CAD-style corner brackets on `.card:hover`, `.sketch`, `.marquee`, `.foot-mark`;
   - nav collapses to a menu below 1060px.
   - `pages.css` (prefix `pg-`) and `insights.css` (prefix `ins-`) are page-specific.
+- **`assets/js/kept-time.js`** holds the pure time and geometry math for marks 08–15: rings with openings, watch angles, seven-segment letters, the engraving text and the eclipse geometry. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (22 tests). Jest only looks in `src/`, so these never mix with the app's tests.
+- **`assets/js/marks-08-15.js`** draws marks 08–15 as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.
   - Cardinal, iDrive and Rural King are cropped PNGs.
@@ -181,6 +187,15 @@ The header lockup is symbol + plain wordmark (logo 2).
 ## 6. Open: the logo decision (next conversation starts here)
 - `marks.html` shows 01 Now (liked), 02 Daylight, 03 Weight of the day, 04 Timestamp, 05 Sundial, 06 Tonight's moon, 07 Twenty-four hours.
 - 02–04: "not that much interesting." 05–07: no feedback yet.
+- Round 3, no feedback yet:
+  - 08 In the name: the wordmark's O is 01's clock.
+  - 09 Display: EPOCH on seven-segment clock digits; every minute it flips to the time, and the orange point becomes the colon.
+  - 10 Overrun: a spiral one full turn plus 40°, tip on the time of day.
+  - 11 Hour and minute: hour opening plus a narrow minute cut, read like a watch.
+  - 12 Engraved: the ring carries "EPOCH OR NOTHING", the UTC date and time, and the Unix second, in microtext.
+  - 13 Full circle: the opening is what is left of today; the logo at noon, closed at midnight.
+  - 14 Totality: an eclipse "diamond ring" whose bright side turns with the day.
+  - 15 On the minute: the point laps the ring every minute and rests in the opening, like the Swiss railway clock.
 - The founder wants something "out of the box… passes time itself… really professional… stands out", reflecting the beliefs (all in, goes further, never stops paying attention) and the ambition (frontier AI).
 - **Rules learned:**
   1. Integrate the idea into the logo itself; no pictures beside the name.
