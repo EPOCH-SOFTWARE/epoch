@@ -26,6 +26,7 @@ Read this first in a new session. It records everything decided, built, rejected
   - Wants SHORT, plain-language answers. They often reply "explain that to me in short."
   - Ask choices as simple multiple choice (AskUserQuestion with previews worked well).
   - Show built pages instead of describing designs ("build it ill just review the page directly").
+  - **No em dashes anywhere in copy** ("em dashes feels like AI"). Titles use " | ".
   - Impatient with slow process. Gets excited when things look great.
 - **Do NOT drive the founder's own Chrome** (claude-in-chrome). They interrupted twice when it took over their screen. Use the headless scripts in `docs/handoff/tools/` (section 9).
 - Global CLAUDE.md rules (`~/.claude/CLAUDE.md`):
@@ -106,7 +107,11 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
 8. **Logo round 3 (2026-10-02), same page.**
    - Founder: "I only liked 01 Now so far. Show me more ideas in that spirit, where the logo itself keeps time, not a picture next to the name… really out-of-the-box and professional."
    - After five proposals in chat: "i like some of em, now you are cooking… still not that much interesting, try something else, keep all of the current work intact, EPOCH or nothing!!!"
-   - Added 08–15 in a new "EPOCH or nothing." section below 07; 01–07 are untouched apart from a "New: 08–15" jump link. **No feedback yet.**
+   - Added 08–15 in a new "EPOCH or nothing." section below 07; 01–07 are untouched apart from a "New: 08–15" jump link.
+9. **Logo round 4 (2026-10-02).**
+   - Founder on 08–15: "i only liked 08 and 11, everything else is just ugly same shit!!!!! KEEP ADDING DO NOT REMOVE", and asked for research into designers who make logos that stand out.
+   - Two research briefs found that no brand mark shows the real live time (open ground), and that the great marks put one idea into how the mark is built rather than adding effects.
+   - Added 16–22 in an "All in." section below 15. **No feedback yet.**
 
 ---
 
@@ -125,7 +130,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 | `insights.html`, `article.html?id=` | 3 articles in `assets/js/insights.js`: `why-ai-pilots-stall`, `evaluating-llm-systems`, `first-30-days`. Byline "EPOCH"; dates picked by Claude. |
 | `about.html`, `contact.html` | Contact has `#book`, a "Book a 30-minute call" section with "What happens next", plus a form with inline validation. On a prototype submit it shows a note and sends nothing. |
 | `logos.html` | Logo directions A–E: zero point, overrun, extra mile, in focus, new era. |
-| `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts on a dark gallery page: 01–07, then 08–15 under "EPOCH or nothing.". `marks.md` is the written concept. |
+| `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts on a dark gallery page: 01–07, then 08–15 under "EPOCH or nothing.", then 16–22 under "All in.". `marks.md` is the written concept. |
 
 ### Code
 - **`assets/js/data.js`** is generated from the TypeScript content in `src/shared/constants` (services, serviceDetails, caseStudies, clients, commitments, contact, techStack). To regenerate:
@@ -151,7 +156,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   - nav collapses to a menu below 1060px.
   - `pages.css` (prefix `pg-`) and `insights.css` (prefix `ins-`) are page-specific.
 - **`assets/js/kept-time.js`** holds the pure time and geometry math for marks 08–15: rings with openings, watch angles, seven-segment letters, the engraving text and the eclipse geometry. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (22 tests). Jest only looks in `src/`, so these never mix with the app's tests.
-- **`assets/js/marks-08-15.js`** draws marks 08–15 as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
+- **`assets/js/marks-live.js`** draws marks 08 onwards as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.
   - Cardinal, iDrive and Rural King are cropped PNGs.
@@ -196,6 +201,16 @@ The header lockup is symbol + plain wordmark (logo 2).
   - 13 Full circle: the opening is what is left of today; the logo at noon, closed at midnight.
   - 14 Totality: an eclipse "diamond ring" whose bright side turns with the day.
   - 15 On the minute: the point laps the ring every minute and rests in the opening, like the Swiss railway clock.
+- Founder verdict on 08–15: **liked 08 and 11 only**; the rest "ugly same shit".
+- Round 4, no feedback yet (each names the design it borrows from):
+  - 16 In the name, to the minute: 08 + 11, the wordmark's O shows the hour opening with the point and a minute cut.
+  - 17 Parallel lines: the wordmark in Mexico 68 lines (Lance Wyman); two slots through the O are the hands.
+  - 18 Slashed zero: the O is a programmer's Ø whose slash is the hour hand (after Stankowski's Deutsche Bank slash).
+  - 19 One orange letter: only the O is orange, with hour opening and minute cut (after Mobil, Chermayeff & Geismar).
+  - 20 Stencil: stencil letters; the O's two bridges are the hands (hidden in plain sight, after the FedEx arrow).
+  - 21 Flip: twelve hour tiles; on the hour the next tile turns edge-on to open (after Louis Vuitton's Spin Time).
+  - 22 Wandering point: the opening jumps hourly and the point drifts across it with the minutes (after Urwerk).
+- Research seeds not built yet: the logo shows your last visit and winds to now on arrival (Long Now clock); hover suspends it to the standard pose (Hermès Temps Suspendu); minute as a notch from the inside so the outline stays pure; the hour hand running out of the logo as a hairline across the hero (Wyman); every exported logo frozen at the minute it was made (Nordkyn).
 - The founder wants something "out of the box… passes time itself… really professional… stands out", reflecting the beliefs (all in, goes further, never stops paying attention) and the ambition (frontier AI).
 - **Rules learned:**
   1. Integrate the idea into the logo itself; no pictures beside the name.

@@ -42,7 +42,8 @@
       .stage.word.light svg.big { color: #0c0d0f; }
       .stage.word svg.big { width: 100%; height: auto; overflow: visible; color: var(--ink); }
       @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
-      .jump { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--signal); text-decoration: none; }
+      .jumps { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 22px; font-size: 13px; }
+      .jump { color: var(--signal); text-decoration: none; }
       .jump:hover { text-decoration: underline; }
       .round { border-top: 1px solid var(--line); }
       .round .top { padding-top: 88px; }
@@ -81,7 +82,7 @@
         picture in front of the name; time changes the logo itself. Seeded by the second you opened
         this page, <span class="mono seed" data-seed></span>.
       </p>
-      <a class="jump mono" href="#new">New: 08–15 ↓</a>
+      <p class="jumps mono"><a class="jump" href="#all-in">Newest: 16 and up ↓</a><a class="jump" href="#new">08 to 15 ↓</a></p>
     </header>
 
     <main class="grid">
@@ -227,6 +228,80 @@
           <div class="uses"><span><b>Belief:</b> on time, every time.</span><span><b>At rest,</b> it is the current logo, exactly.</span></div>
           <div class="strip" data-strip="minute"></div>
           <div class="lockup"><svg class="sym" data-lockup-mark="minute" aria-hidden="true"></svg><svg viewBox="-0.5 -1 208 42" aria-hidden="true"><use href="#wordmark" /></svg></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="round" id="all-in" aria-labelledby="all-in-title">
+      <header class="top">
+        <h2 id="all-in-title" class="round-title">All in.</h2>
+        <p class="intro">Your two favourites, 08 and 11, joined into one. Then new marks, each built on a trick from the great logo designers and watchmakers.</p>
+      </header>
+
+      <div class="grid">
+        <article class="piece" aria-labelledby="p16">
+          <div class="stage word"><svg class="big" data-live="namewatch" role="img" aria-label="EPOCH wordmark whose O shows the hour with the orange point and the minute with a narrow cut"></svg><span class="readout mono" data-label="namewatch"></span></div>
+          <p class="num mono">16</p>
+          <h3 id="p16">In the name, to the minute</h3>
+          <p>08 and 11 together. The O in EPOCH is a watch: the opening with the orange point is the hour, the narrow cut is the minute. Read the name and you read the time. Shown here: one hour in 30 seconds.</p>
+          <div class="uses"><span><b>One word, one watch:</b> the O alone is the app icon.</span><span><b>Twice a day,</b> at twelve, it is logo 1 exactly.</span></div>
+          <div class="strip" data-strip="namewatch"></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p17">
+          <div class="stage word"><svg class="big" data-live="parallel" role="img" aria-label="EPOCH drawn in parallel lines, with two slots in the O for the hour and the minute"></svg><span class="readout mono" data-label="parallel"></span></div>
+          <p class="num mono">17</p>
+          <h3 id="p17">Parallel lines</h3>
+          <p>After Lance Wyman’s identity for the Mexico 1968 Olympics, where every letter is drawn in parallel lines. Here two slots cut through the O: the wide one with the orange point is the hour, the thin one the minute. Shown here: one hour in 30 seconds.</p>
+          <div class="uses"><span><b>After:</b> Lance Wyman, Mexico 68.</span><span><b>Reads like 11 and 16,</b> in a louder voice. The symbol below is the app icon.</span></div>
+          <div class="strip" data-strip="parallel"></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p18">
+          <div class="stage word"><svg class="big" data-live="slashed" role="img" aria-label="EPOCH whose O is a slashed zero, the slash turning as the hour hand"></svg><span class="readout mono" data-label="slashed"></span></div>
+          <p class="num mono">18</p>
+          <h3 id="p18">Slashed zero</h3>
+          <p>In code, a zero carries a slash so it never looks like an O. An epoch is time zero, so the O becomes a slashed zero, and the slash is the hour hand. The orange point marks which end is the hour. Time-lapse: one day in 24 seconds.</p>
+          <div class="uses"><span><b>After:</b> Anton Stankowski’s single slash for Deutsche Bank (1974), unchanged for 50 years.</span><span><b>Engineers</b> recognise the Ø at once.</span></div>
+          <div class="strip" data-strip="slashed"></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p19">
+          <div class="stage word"><svg class="big" data-live="orange" role="img" aria-label="EPOCH with an orange O whose opening is the hour and narrow cut the minute"></svg><span class="readout mono" data-label="orange"></span></div>
+          <p class="num mono">19</p>
+          <h3 id="p19">One orange letter</h3>
+          <p>Mobil’s whole identity is one red O. Here the O is the only orange letter, because orange always means now: its wide opening is the hour, its narrow cut the minute. Shown here: one hour in 30 seconds.</p>
+          <div class="uses"><span><b>After:</b> Chermayeff &amp; Geismar, Mobil (1964).</span><span><b>Stands out</b> from across a room, a slide or a stadium screen.</span></div>
+          <div class="strip" data-strip="orange"></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p20">
+          <div class="stage word"><svg class="big" data-live="stencil" role="img" aria-label="EPOCH in stencil letters, the O's two bridges showing the hour and the minute"></svg><span class="readout mono" data-label="stencil"></span></div>
+          <p class="num mono">20</p>
+          <h3 id="p20">Stencil</h3>
+          <p>A stencil name, like the lettering sprayed on aircraft and machines: every letter has small bridges. Nobody notices that the O’s two bridges move. The wide one with the orange point is the hour, the thin one the minute. Shown here: one hour in 30 seconds.</p>
+          <div class="uses"><span><b>After:</b> the FedEx arrow (Lindon Leader, 1994): hidden in plain sight.</span><span><b>Engineered look:</b> built, not drawn.</span></div>
+          <div class="strip" data-strip="stencil"></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p21">
+          <div class="stage sym"><svg data-live="flip" role="img" aria-label="A ring of twelve tiles; on the hour the next tile turns edge-on to become the opening"></svg><span class="readout mono" data-label="flip"></span></div>
+          <p class="num mono">21</p>
+          <h3 id="p21">Flip</h3>
+          <p>The ring is twelve hour tiles. The current hour’s tile stands edge-on, and that is the opening. On the hour the next tile turns away, the last one turns back, and the orange point steps over. Time-lapse: one day in 48 seconds.</p>
+          <div class="uses"><span><b>After:</b> Louis Vuitton’s Tambour Spin Time (2009), whose hour cubes turn on the hour.</span><span><b>A moment people wait for:</b> the turn, once an hour, on every screen.</span></div>
+          <div class="strip" data-strip="flip"></div>
+          <div class="lockup"><svg class="sym" data-lockup-mark="flip" aria-hidden="true"></svg><svg viewBox="-0.5 -1 208 42" aria-hidden="true"><use href="#wordmark" /></svg></div>
+        </article>
+
+        <article class="piece" aria-labelledby="p22">
+          <div class="stage sym"><svg data-live="wander" role="img" aria-label="The logo's opening jumps each hour while the orange point drifts across it with the minutes"></svg><span class="readout mono" data-label="wander"></span></div>
+          <p class="num mono">22</p>
+          <h3 id="p22">Wandering point</h3>
+          <p>The logo almost never changes. The opening jumps once an hour, and inside it the orange point drifts from one edge to the other. The opening is the hour; where the point sits in it is the minute. Shown here: one hour in 30 seconds.</p>
+          <div class="uses"><span><b>After:</b> Urwerk’s wandering hours (UR-105, 2014).</span><span><b>Quietest of all:</b> one point moving, nothing else.</span></div>
+          <div class="strip" data-strip="wander"></div>
+          <div class="lockup"><svg class="sym" data-lockup-mark="wander" aria-hidden="true"></svg><svg viewBox="-0.5 -1 208 42" aria-hidden="true"><use href="#wordmark" /></svg></div>
         </article>
       </div>
     </section>
@@ -614,6 +689,6 @@
       })();
     </script>
     <script src="assets/js/kept-time.js"></script>
-    <script src="assets/js/marks-08-15.js"></script>
+    <script src="assets/js/marks-live.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-// Marks 08–15 on marks.html: more logos that keep time themselves.
+// Marks 08 onwards on marks.html: logos that keep time themselves.
 // Time and geometry come from kept-time.js (unit-tested); this file only draws.
 (function () {
   'use strict';
@@ -108,8 +108,28 @@
     });
   }
 
-  function clockSample(hours, minutes) {
-    return { caption: K.pad(hours) + ':' + K.pad(minutes), state: { fraction: (hours * 60 + minutes) / 1440 }, options: {} };
+  function watchSamples(options) {
+    return [[10, 10], [12, 0], [3, 45], [6, 30], [9, 5], [11, 55]].map(function (time) {
+      return { caption: K.pad(time[0]) + ':' + K.pad(time[1]), state: { fraction: (time[0] * 60 + time[1]) / 1440 }, options: options || {} };
+    });
+  }
+
+  // A ring read like a watch: the opening holding the orange point is the hour, the narrow cut the minute.
+  function watchRing(svg, ring) {
+    var arcs = [0, 1].map(function () {
+      return make(svg, 'path', { fill: 'none', stroke: INK, 'stroke-width': ring.weight });
+    });
+    var hand = make(svg, 'circle', { r: ring.point, fill: SIGNAL });
+    return function (fraction) {
+      var angles = K.watchAngles(fraction);
+      var visible = K.visibleArcs([{ center: angles.hour, width: ring.opening }, { center: angles.minute, width: ring.cut }]);
+      arcs.forEach(function (path, index) {
+        var arc = visible[index];
+        path.style.display = arc ? '' : 'none';
+        if (arc) path.setAttribute('d', K.arcPath(ring.cx, ring.cy, ring.r, arc.start, arc.sweep));
+      });
+      movePoint(hand, K.polar(ring.cx, ring.cy, ring.r, angles.hour));
+    };
   }
 
   // ---------- 08 In the name: the wordmark's O is 01's clock ----------
@@ -258,22 +278,15 @@
   // ---------- 11 Hour and minute: two openings read like a watch ----------
 
   var MINUTE_CUT = 12;
+  var SYMBOL_WATCH = { cx: MARK.cx, cy: MARK.cy, r: MARK.r, weight: MARK.weight, opening: MARK.opening, point: MARK.point, cut: MINUTE_CUT };
 
   var WATCH = {
     build: function (svg, options) {
       svg.setAttribute('viewBox', options.stage ? STAGE_BOX : MARK_BOX);
       if (options.stage) minuteDial(svg, 21.2);
-      var arcs = [ringStroke(svg), ringStroke(svg)];
-      var hand = orangePoint(svg, { x: MARK.cx, y: MARK.cy });
+      var show = watchRing(svg, SYMBOL_WATCH);
       return function (state) {
-        var angles = K.watchAngles(state.fraction);
-        var visible = K.visibleArcs([{ center: angles.hour, width: MARK.opening }, { center: angles.minute, width: MINUTE_CUT }]);
-        arcs.forEach(function (path, index) {
-          var arc = visible[index];
-          path.style.display = arc ? '' : 'none';
-          if (arc) path.setAttribute('d', K.arcPath(MARK.cx, MARK.cy, MARK.r, arc.start, arc.sweep));
-        });
-        movePoint(hand, K.polar(MARK.cx, MARK.cy, MARK.r, angles.hour));
+        show(state.fraction);
       };
     },
     live: function (clock) {
@@ -282,7 +295,7 @@
     label: function (state) {
       return local(state.fraction);
     },
-    strip: [clockSample(10, 10), clockSample(12, 0), clockSample(3, 45), clockSample(6, 30), clockSample(9, 5), clockSample(11, 55)],
+    strip: watchSamples(),
   };
 
   // ---------- 12 Engraved: the ring carries the exact second it was drawn ----------
@@ -394,6 +407,282 @@
     }),
   };
 
+  // ---------- 16 In the name, to the minute: 08's O read like 11's watch ----------
+
+  var NAME_WATCH_RING = { cx: O_CENTER.x, cy: O_CENTER.y, r: 17.1, weight: 6.6, opening: 56, point: 4.2, cut: 12 };
+
+  var NAME_WATCH = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.icon ? '76.5 -2 44 44' : WORD_BOX);
+      if (!options.icon) drawLetters(svg);
+      var show = watchRing(svg, NAME_WATCH_RING);
+      return function (state) {
+        show(state.fraction);
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(720) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples({ icon: true }),
+  };
+
+  // ---------- 17 Parallel lines: after Lance Wyman's Mexico 68 ----------
+
+  // A stroke laid down in alternating ivory and black widths turns into parallel lines.
+  var WYMAN = {
+    word: [9, 6.6, 4.2, 1.8],
+    rings: [12.4, 14.7, 17, 19.3, 21.6],
+    ringWeight: 1.3,
+    hourSlot: 4.6,
+    minuteSlot: 1.3,
+  };
+  var WORD_LETTERS =
+    '<path d="M26 3.3H3.3V36.7H26M3.3 20H23"/>' +
+    '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>' +
+    '<circle cx="98.5" cy="20" r="17.1"/>' +
+    '<path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44"/>' +
+    '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>';
+  var masks = 0;
+
+  // Two parallel-sided slots from the center outward, cut through everything under the mask.
+  function slotMask(svg, center, reach, box) {
+    masks += 1;
+    var id = 'slots-' + masks;
+    var mask = make(make(svg, 'defs', {}), 'mask', { id: id, maskUnits: 'userSpaceOnUse', x: box[0], y: box[1], width: box[2], height: box[3] });
+    make(mask, 'rect', { x: box[0], y: box[1], width: box[2], height: box[3], fill: 'white' });
+    function slot(half) {
+      return make(mask, 'rect', { x: center.x - half, y: center.y - reach, width: half * 2, height: reach, fill: 'black' });
+    }
+    var hour = slot(WYMAN.hourSlot);
+    var minute = slot(WYMAN.minuteSlot);
+    return {
+      id: id,
+      turn: function (angles) {
+        hour.setAttribute('transform', 'rotate(' + K.num(angles.hour) + ' ' + center.x + ' ' + center.y + ')');
+        minute.setAttribute('transform', 'rotate(' + K.num(angles.minute) + ' ' + center.x + ' ' + center.y + ')');
+      },
+    };
+  }
+
+  function parallelLines(parent, widths, inner) {
+    widths.forEach(function (width, index) {
+      var group = make(parent, 'g', { fill: 'none', stroke: index % 2 ? BLACK : INK, 'stroke-width': width });
+      group.innerHTML = inner;
+    });
+  }
+
+  var PARALLEL = {
+    build: function (svg, options) {
+      var center = options.icon ? { x: MARK.cx, y: MARK.cy } : O_CENTER;
+      var radius = options.icon ? MARK.r : 17.1;
+      svg.setAttribute('viewBox', options.icon ? MARK_BOX : WORD_BOX);
+      var slots = slotMask(svg, center, 23, options.icon ? [0, 0, 48, 48] : [-12, -16, 232, 72]);
+      var lines = make(svg, 'g', { mask: 'url(#' + slots.id + ')' });
+      if (options.icon) {
+        WYMAN.rings.forEach(function (r) {
+          make(lines, 'circle', { cx: MARK.cx, cy: MARK.cy, r: r, fill: 'none', stroke: INK, 'stroke-width': WYMAN.ringWeight });
+        });
+      } else {
+        parallelLines(lines, WYMAN.word, WORD_LETTERS);
+      }
+      var hand = make(svg, 'circle', { r: options.icon ? MARK.point : 4.2, fill: SIGNAL });
+      return function (state) {
+        var angles = K.watchAngles(state.fraction);
+        slots.turn(angles);
+        movePoint(hand, K.polar(center.x, center.y, radius, angles.hour));
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(720) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples({ icon: true }),
+  };
+
+  // ---------- 18 Slashed zero: after Stankowski's slash and the programmer's zero ----------
+
+  var SLASH = { reach: 13.8, weight: 4.4 };
+
+  function drawO(parent, color) {
+    return make(parent, 'circle', { cx: O_CENTER.x, cy: O_CENTER.y, r: 17.1, fill: 'none', stroke: color, 'stroke-width': 6.6 });
+  }
+
+  var SLASHED_ZERO = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.icon ? '76.5 -2 44 44' : WORD_BOX);
+      if (!options.icon) drawLetters(svg);
+      drawO(svg, INK);
+      var slash = make(svg, 'line', { stroke: INK, 'stroke-width': SLASH.weight });
+      var hand = make(svg, 'circle', { r: 4.2, fill: SIGNAL });
+      return function (state) {
+        var hour = K.watchAngles(state.fraction).hour;
+        var tip = K.polar(O_CENTER.x, O_CENTER.y, SLASH.reach, hour);
+        var tail = K.polar(O_CENTER.x, O_CENTER.y, SLASH.reach, hour + 180);
+        slash.setAttribute('x1', K.num(tail.x));
+        slash.setAttribute('y1', K.num(tail.y));
+        slash.setAttribute('x2', K.num(tip.x));
+        slash.setAttribute('y2', K.num(tip.y));
+        movePoint(hand, K.polar(O_CENTER.x, O_CENTER.y, 17.1, hour));
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(24) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples({ icon: true }),
+  };
+
+  // ---------- 19 One orange letter: after Mobil's red O ----------
+
+  var ORANGE_O = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.icon ? '76.5 -2 44 44' : WORD_BOX);
+      if (!options.icon) drawLetters(svg);
+      var arcs = [0, 1].map(function () {
+        return make(svg, 'path', { fill: 'none', stroke: SIGNAL, 'stroke-width': 6.6 });
+      });
+      return function (state) {
+        var angles = K.watchAngles(state.fraction);
+        var visible = K.visibleArcs([{ center: angles.hour, width: 56 }, { center: angles.minute, width: 12 }]);
+        arcs.forEach(function (path, index) {
+          var arc = visible[index];
+          path.style.display = arc ? '' : 'none';
+          if (arc) path.setAttribute('d', K.arcPath(O_CENTER.x, O_CENTER.y, 17.1, arc.start, arc.sweep));
+        });
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(720) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples({ icon: true }),
+  };
+
+  // ---------- 20 Stencil: every letter has bridges, and the O's two bridges are the hands ----------
+
+  var STENCIL = { gap: 2.6, bridge: 8.7 };
+  var STENCIL_STRAIGHTS = [
+    'M3.3 0V40', 'M26 3.3H9.2', 'M9.2 20H23', 'M26 36.7H9.2',
+    'M42.3 0V40', 'M48.2 3.3H53A9.2 9.2 0 0 1 53 21.7H48.2',
+    'M179.8 0V40', 'M203.2 0V40', 'M185.7 20H197.3',
+  ];
+  var C_CENTER = { x: 151.3, y: 20 };
+
+  var STENCIL_PIECE = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.icon ? '76.5 -2 44 44' : WORD_BOX);
+      var group = make(svg, 'g', { fill: 'none', stroke: INK, 'stroke-width': 6.6 });
+      if (!options.icon) {
+        STENCIL_STRAIGHTS.forEach(function (d) {
+          make(group, 'path', { d: d });
+        });
+        K.visibleArcs([{ center: 90, width: 84 }, { center: 0, width: STENCIL.bridge }, { center: 180, width: STENCIL.bridge }]).forEach(function (arc) {
+          make(group, 'path', { d: K.arcPath(C_CENTER.x, C_CENTER.y, 17.1, arc.start, arc.sweep) });
+        });
+      }
+      var show = watchRing(svg, { cx: O_CENTER.x, cy: O_CENTER.y, r: 17.1, weight: 6.6, opening: 56, point: 4.2, cut: STENCIL.bridge });
+      return function (state) {
+        show(state.fraction);
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(720) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples({ icon: true }),
+  };
+
+  // ---------- 21 Flip: after Louis Vuitton's Tambour Spin Time ----------
+
+  // Twelve hour tiles. The current hour's tile stands edge-on, which is the opening; on the hour the
+  // next tile turns away and the last one turns back, like a card on its axis.
+  var TILES = { count: 12, seam: 0.8, turn: 0.22 };
+
+  function tileTurn(progress) {
+    var eased = Math.min(progress / TILES.turn, 1);
+    return 0.5 - Math.cos(eased * Math.PI) / 2;
+  }
+
+  var FLIP = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.stage ? STAGE_BOX : MARK_BOX);
+      if (options.stage) dial(svg, 12, 21.2, function () {
+        return 1.9;
+      }, 3);
+      var step = 360 / TILES.count;
+      var half = step / 2 - TILES.seam;
+      var tiles = [];
+      for (var index = 0; index < TILES.count; index++) {
+        var holder = make(svg, 'g', { transform: 'rotate(' + index * step + ' ' + MARK.cx + ' ' + MARK.cy + ')' });
+        tiles.push(make(holder, 'path', {
+          d: K.arcPath(MARK.cx, MARK.cy, MARK.r, -half, half * 2),
+          fill: 'none',
+          stroke: INK,
+          'stroke-width': MARK.weight,
+        }));
+      }
+      var point = orangePoint(svg, { x: MARK.cx, y: MARK.cy });
+      return function (state) {
+        var hours = (state.fraction * 24) % 12;
+        var current = Math.floor(hours);
+        var turned = tileTurn(hours - current);
+        var previous = (current + TILES.count - 1) % TILES.count;
+        tiles.forEach(function (tile, index) {
+          var width = index === current ? 1 - turned : index === previous ? turned : 1;
+          tile.setAttribute('transform', 'translate(' + MARK.cx + ' 0) scale(' + K.num(width) + ' 1) translate(' + -MARK.cx + ' 0)');
+          tile.setAttribute('stroke-opacity', K.num(0.35 + 0.65 * width));
+        });
+        movePoint(point, K.polar(MARK.cx, MARK.cy, MARK.r, (previous + turned) * step));
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(48) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples(),
+  };
+
+  // ---------- 22 Wandering point: after Urwerk's wandering hours ----------
+
+  // The opening jumps once an hour; inside it the orange point drifts from one edge to the other,
+  // so the opening says the hour and the point's place in it says the minute.
+  var WANDER = {
+    build: function (svg, options) {
+      svg.setAttribute('viewBox', options.stage ? STAGE_BOX : MARK_BOX);
+      if (options.stage) minuteDial(svg, 21.2);
+      var ring = ringStroke(svg);
+      var point = orangePoint(svg, { x: MARK.cx, y: MARK.cy });
+      var travel = MARK.opening - 2 * (MARK.point / MARK.r) * (180 / Math.PI);
+      return function (state) {
+        var hours = (state.fraction * 24) % 12;
+        var center = Math.floor(hours) * 30 + 15;
+        var arc = K.visibleArcs([{ center: center, width: MARK.opening }])[0];
+        ring.setAttribute('d', K.arcPath(MARK.cx, MARK.cy, MARK.r, arc.start, arc.sweep));
+        movePoint(point, K.polar(MARK.cx, MARK.cy, MARK.r, center - travel / 2 + (hours % 1) * travel));
+      };
+    },
+    live: function (clock) {
+      return { fraction: clock.lapse(720) };
+    },
+    label: function (state) {
+      return local(state.fraction);
+    },
+    strip: watchSamples(),
+  };
+
   var PIECES = {
     inname: IN_NAME,
     display: DISPLAY,
@@ -403,10 +692,17 @@
     fullcircle: FULL_CIRCLE,
     totality: TOTALITY,
     minute: ON_THE_MINUTE,
+    namewatch: NAME_WATCH,
+    parallel: PARALLEL,
+    slashed: SLASHED_ZERO,
+    orange: ORANGE_O,
+    stencil: STENCIL_PIECE,
+    flip: FLIP,
+    wander: WANDER,
   };
 
   function pieceFor(key) {
-    if (!Object.prototype.hasOwnProperty.call(PIECES, key)) throw new Error('marks-08-15: no mark called "' + key + '"');
+    if (!Object.prototype.hasOwnProperty.call(PIECES, key)) throw new Error('marks-live: no mark called "' + key + '"');
     return PIECES[key];
   }
 
