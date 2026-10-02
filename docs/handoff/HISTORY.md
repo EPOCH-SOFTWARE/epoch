@@ -314,6 +314,15 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 - **Validation:** 9 tests were written failing before the extraction helper, then passed. All 50 pure tests pass. The browser check covers keyboard operation, citations, edits, conflicting values, reset, safe rendering and reduced motion at desktop and phone widths. All 31 checked routes have no console errors or page overflow at 390px; the home marquee remains intentionally clipped. The contact form check and em-dash scan pass.
 - **Status:** first pass for founder review. The larger showcase still needs real product imagery and confirmed results to become a complete evidence-led case study.
 
+### Local AI review integration
+
+- **Asked:** connect the document demo to a real AI model, keeping the key on the local server.
+- **Built:** `POST /api/document-review` in the prototype server, using OpenAI Responses with a strict schema and configurable model (default `gpt-5-mini`). The backend verifies source quotes and cited values against the supplied text, then computes browser selection offsets. Missing and conflicting fields remain visible.
+- **Interaction:** Review with AI is an explicit submission. Sample preview remains available and is labelled separately. Loading, connection failures, usage limits and retries have clear states. Editing or changing samples aborts the browser request and prevents late results from replacing newer text. A provider call already in progress can still finish and incur usage.
+- **Boundary:** credentials stay in the server environment. Documents are not written to disk, API storage is disabled, and raw provider errors are not returned. Same-origin checks, body limits, one active review and request timeouts protect the local endpoint. It is not a public hosting setup.
+- **Validation:** backend tests were written failing first. All 50 JavaScript and 18 Python tests pass. Headless browser checks cover AI success and failures with controlled responses, plus desktop, phone, keyboard and reduced motion. All 31 routes passed console and 390px page-width checks; the home logo strip is intentionally clipped. Contact form, lint, type checks and the em-dash scan passed. Screenshots record the honest disconnected state, not simulated model output.
+- **Open:** no API key was available, so a real provider call and model-quality evaluation are still required. Setup instructions are in `tools/AI-REVIEW.md`.
+
 ---
 
 ## Logo concepts at a glance

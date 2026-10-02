@@ -41,3 +41,10 @@ Desktop shots are 1440 × 900 and phone shots are 390 × 844 at 2x.
 - `desktop-22-home-showcase.png`: selected work directly after the client strip.
 
 These show the first pass for review. No project product imagery or new client results were supplied. The demo uses labelled-field extraction in the browser, with no live AI model.
+
+### Local AI connection
+
+- `desktop-23-demo-ai-setup.png` and `mobile-10-demo-ai-setup.png`: the AI submission control, separate sample preview, disclosure and disconnected status with no local key configured.
+- `desktop-24-demo-ai-unavailable.png`: the real server error state after requesting AI review without a key.
+
+These show the integration interface. No live model output is represented in these captures.

@@ -18,7 +18,7 @@
         <a class="demo-back" href="work.html">Back to our work</a>
         <h1 id="demo-title">An answer should<br>come with evidence.</h1>
         <p class="lede">Find the source. Catch what’s missing. Keep the human in the decision.</p>
-        <p class="demo-caption">An interactive sample with fictional data. No live AI model.</p>
+        <p class="demo-caption">Explore the sample, then review your own text with AI.</p>
       </section>
 
       <section class="wrap demo-stage" aria-label="Interactive document review">
@@ -30,18 +30,19 @@
         <div class="demo-workspace">
           <form class="demo-document" id="review-form">
             <div class="document-heading"><label for="source-document">Source document</label><span>handover.txt</span></div>
-            <p id="document-help">Keep the Project, Owner and Target date labels. Edit their values, then review.</p>
+            <p id="document-help">Edit the brief or paste your own notes. AI review reads prose and labelled fields, and sends your text to OpenAI.</p>
             <textarea id="source-document" name="document" maxlength="10000" spellcheck="false" aria-describedby="document-help demo-method" aria-label="Source document, editable project brief"></textarea>
-            <div class="document-actions"><button type="submit" class="btn">Review document</button><button type="button" class="demo-reset">Reset sample</button></div>
+            <div class="document-actions"><button type="submit" class="btn">Review with AI</button><button type="button" class="demo-preview" data-preview>Preview labelled fields</button><button type="button" class="demo-reset">Reset sample</button></div>
+          <p class="demo-connection" data-ai-connection role="status">Checking AI connection…</p>
           </form>
           <section class="demo-results" aria-labelledby="results-title">
-            <div class="results-heading"><h2 id="results-title">What the document says</h2><span class="review-state" data-review-state>Reviewed</span></div>
+            <div class="results-heading"><h2 id="results-title">What the document says</h2><span class="review-state" data-review-state>Sample preview</span></div>
             <div data-review-results></div>
             <p class="review-summary" role="status" aria-live="polite" data-review-summary></p>
             <p class="demo-error" role="alert" data-review-error hidden></p>
           </section>
         </div>
-        <p class="demo-method" id="demo-method">Fictional sample data. This browser demo reads labelled Project, Owner and Target fields. It does not use an AI model or infer answers from prose. Your text stays in this tab.</p>
+        <p class="demo-method" id="demo-method">The samples are fictional. Sample preview reads labelled fields in your browser. Review with AI sends this document to OpenAI. Source quotes are checked against your text, but AI can still misread it. Check the evidence before using an answer.</p>
         <noscript><p class="demo-error">Enable JavaScript to try the document review.</p></noscript>
       </section>
 
