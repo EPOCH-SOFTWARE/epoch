@@ -132,6 +132,13 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - Page changes reveal as a circle growing from the logo's O (cross-document view transitions).
    - Primary buttons drift slightly toward the cursor.
    - Judgement calls the founder may revisit: the AI step in case sketches and the card corner brackets are now ivory, not orange; the header blur needed the mobile menu moved outside the header.
+14. **Inner-page craft pass (2026-10-03).**
+   - One twelve-column grid (`--col-gap`): section titles in columns 1-5, content from column 6, on rows, pricing, articles, contact and the case hero. Section titles on inner pages stay pinned while long content scrolls.
+   - How we work: "Your first 30 days" is told on the logo's O. Four week arcs light as the reader passes each step, and the point ends in the opening at the top, so the finished plan is the mark. Static and complete on phones and for reduced motion.
+   - Case pages: the engagement is drawn on a one-year dial from the real timeline (8 and 12 months). No orange: it is not "now". Each team in the facts row sits on its own line.
+   - Contact: inline validation on leaving a field, a confirmation in place of the form, drawn select arrows; "Book a 30-minute call" no longer breaks at the hyphen.
+   - Articles: about 70 characters a line, a lead paragraph, a hanging pull quote, the contents list marks the section being read with the logo's orange point (it is "now"), and the last paragraph ends on a small O.
+   - Judgement calls the founder may revisit: the case dial (if it reads as decoration) and the small O ending articles.
 
 ---
 
@@ -162,8 +169,9 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   require('fs').writeFileSync('prototype/assets/js/data.js','window.EPOCH_DATA = '+JSON.stringify({tiers:s.SERVICE_TIERS,services:s.SERVICES,serviceDetails:d.SERVICE_DETAIL_DATA,caseStudies:c.CASE_STUDIES,clients:ct.CLIENT_LOGOS,commitments:ct.COMMITMENTS,contact:k.CONTACT,techStack:tech},null,1)+';\n');"
   ```
   After regenerating, change `"/logos/ruralking.webp"` to `"/logos/ruralking.png"` in data.js; the prototype uses a cropped PNG.
+  The service-detail headings in data.js (section titles, steps, offerings, skills, industries, CTA titles) were put into sentence case directly in data.js on 2026-10-03. `src/shared/constants/serviceData.ts` still has the Title Case originals, so make the same change there before regenerating, or it will be lost.
 - **`assets/js/site.js`** is an IIFE that:
-  - injects the SVG sprite (symbols `wm-plain` and `wm-clock`), the header (nav: Work, Services, How we work, About + "Start a project") and the footer (giant faint wordmark, live office clocks);
+  - injects the SVG sprite (symbols `wm-plain` and `wm-clock`), the header (nav: Work, Services, How we work, About + "Start a project") and the footer (giant wordmark over a dusk glow that rises as the page ends, copyright);
   - renders blocks into `[data-clients]`, `[data-service-rows=tier]`, `[data-service-chips=tier]`, `[data-case-cards]` (`with-cta` adds the dark "Your project" card), `[data-commitments]`, `[data-offices]`, `[data-tech]`, `[data-closing]`, and the service and case pages;
   - adds the live clock (`[data-unix-label]`), the measuring crosshair (`.v-draft`, fine pointers only) and booking.
   - `SYSTEM_SKETCH` holds the case-card system diagrams, built from each case study's deliverables.
