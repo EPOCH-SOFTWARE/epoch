@@ -218,13 +218,13 @@
     return Math.min(Math.max(value, low), high);
   }
 
-  // How far down the page the reader is: 0 at the top, 1 at the bottom, 0 when the page cannot scroll.
   // How far `value` has travelled from `start` to `end`, from 0 to 1; an empty range counts as reached.
   function rangeProgress(value, start, end) {
     if (end <= start) return value >= end ? 1 : 0;
     return clamp((value - start) / (end - start), 0, 1);
   }
 
+  // How far down the page the reader is: 0 at the top, 1 at the bottom, 0 when the page cannot scroll.
   function readingProgress(scrollTop, pageHeight, viewportHeight) {
     var travel = pageHeight - viewportHeight;
     if (travel <= 0) return 0;
@@ -238,6 +238,29 @@
     var y = clamp(dy / halfHeight, -1, 1) * limit;
     var scale = Math.min(1, limit / (Math.hypot(x, y) || 1));
     return { x: x * scale, y: y * scale };
+  }
+
+  // Which step of a list the reader is on: the last one whose top has reached the reading line
+  // (tops and line in the same coordinates, list order), or -1 before the first gets there.
+  function stepAt(tops, line) {
+    var current = -1;
+    tops.forEach(function (top, index) {
+      if (top <= line) current = index;
+    });
+    return current;
+  }
+
+  // A sequence told on the O: the point waits at the start of the ring, then step `index` carries it
+  // to stops[index] degrees. `lit` is how much of the ring (start to start + sweep) lies behind it.
+  function ringStop(start, sweep, stops, index) {
+    var angle = index < 0 ? start : stops[Math.min(index, stops.length - 1)];
+    return { angle: angle, lit: clamp((angle - start) / sweep, 0, 1) };
+  }
+
+  // The number of months in a timeline such as "8 months", or null when it is not written that way.
+  function monthsIn(timeline) {
+    var match = /^(\d+) months?$/.exec(String(timeline).trim());
+    return match ? Number(match[1]) : null;
   }
 
   function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
@@ -273,5 +296,8 @@
     readingProgress: readingProgress,
     rangeProgress: rangeProgress,
     magnet: magnet,
+    stepAt: stepAt,
+    ringStop: ringStop,
+    monthsIn: monthsIn,
   };
 });

@@ -222,3 +222,42 @@ test('rangeProgress measures how far a value is through a range', () => {
   assertNear(K.rangeProgress(150, 0, 100), 1, 'past the range');
   assertNear(K.rangeProgress(100, 100, 100), 1, 'an empty range counts as reached');
 });
+
+test('stepAt finds the last step that has reached the reading line', () => {
+  assert.equal(K.stepAt([500, 700, 900], 600), 0);
+  assert.equal(K.stepAt([100, 300, 500], 600), 2);
+  assert.equal(K.stepAt([100, 600, 900], 600), 1, 'a step exactly on the line has reached it');
+});
+
+test('stepAt is -1 until the first step reaches the reading line', () => {
+  assert.equal(K.stepAt([700, 900], 600), -1);
+  assert.equal(K.stepAt([], 600), -1);
+});
+
+test('ringStop waits at the start of the ring before the first step', () => {
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], -1), { angle: 28, lit: 0 });
+});
+
+test('ringStop moves the point to the end of each step and lights the ring behind it', () => {
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], 0), { angle: 104, lit: 0.25 });
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], 1), { angle: 180, lit: 0.5 });
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], 2), { angle: 332, lit: 1 });
+});
+
+test('ringStop rests the point in the opening once the ring is complete', () => {
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], 3), { angle: 360, lit: 1 });
+  assert.deepEqual(K.ringStop(28, 304, [104, 180, 332, 360], 9), { angle: 360, lit: 1 }, 'past the last step');
+});
+
+test('monthsIn reads a timeline written in whole months', () => {
+  assert.equal(K.monthsIn('8 months'), 8);
+  assert.equal(K.monthsIn('12 months'), 12);
+  assert.equal(K.monthsIn('1 month'), 1);
+});
+
+test('monthsIn refuses timelines it cannot read as whole months', () => {
+  assert.equal(K.monthsIn('6 weeks'), null);
+  assert.equal(K.monthsIn('Ongoing'), null);
+  assert.equal(K.monthsIn('3-4 months'), null);
+  assert.equal(K.monthsIn(''), null);
+});
