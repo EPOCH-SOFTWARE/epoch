@@ -631,6 +631,7 @@
 
   function initScroll() {
     var header = document.querySelector('.site-header');
+    var footer = document.querySelector('.site-footer');
     var clock = readingClock();
     var hand = clock.querySelector('[data-reading-o]');
     var queued = false;
@@ -644,6 +645,9 @@
       // Only long pages get the clock, and only once the reader is past the first screen.
       clock.classList.toggle('shown', page > view * 2.2 && top > view * 0.6);
       turn(hand, KEPT.readingProgress(top, page, view) * 360, O_CENTER);
+      // The footer's dusk rises like a sunrise: dim as the footer enters, fully lit at the very end of the page.
+      var footerTop = footer.getBoundingClientRect().top + top;
+      footer.style.setProperty('--rise', REDUCED ? 1 : KEPT.num(KEPT.rangeProgress(top + view, footerTop, page)));
     }
 
     function queue() {

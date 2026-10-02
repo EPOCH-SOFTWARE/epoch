@@ -215,3 +215,10 @@ test('magnet never drifts further than the limit, even past a corner', () => {
   assertNear(Math.hypot(corner.x, corner.y), 6, 'distance at the corner');
   assertNear(corner.x, corner.y, 'diagonal');
 });
+
+test('rangeProgress measures how far a value is through a range', () => {
+  assertNear(K.rangeProgress(50, 0, 100), 0.5, 'halfway');
+  assertNear(K.rangeProgress(-10, 0, 100), 0, 'before the range');
+  assertNear(K.rangeProgress(150, 0, 100), 1, 'past the range');
+  assertNear(K.rangeProgress(100, 100, 100), 1, 'an empty range counts as reached');
+});

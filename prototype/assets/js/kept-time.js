@@ -219,6 +219,12 @@
   }
 
   // How far down the page the reader is: 0 at the top, 1 at the bottom, 0 when the page cannot scroll.
+  // How far `value` has travelled from `start` to `end`, from 0 to 1; an empty range counts as reached.
+  function rangeProgress(value, start, end) {
+    if (end <= start) return value >= end ? 1 : 0;
+    return clamp((value - start) / (end - start), 0, 1);
+  }
+
   function readingProgress(scrollTop, pageHeight, viewportHeight) {
     var travel = pageHeight - viewportHeight;
     if (travel <= 0) return 0;
@@ -265,6 +271,7 @@
     phaseName: phaseName,
     moonPath: moonPath,
     readingProgress: readingProgress,
+    rangeProgress: rangeProgress,
     magnet: magnet,
   };
 });
