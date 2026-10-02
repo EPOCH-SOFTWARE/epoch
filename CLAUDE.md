@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Current work (read first)
+
+The redesign lives in `prototype/` (static HTML, CSS and JS) on the branch `feat/night`. Before doing anything, read `AGENTS.md` (the brief for any coding agent, including the founder's rules), then `docs/handoff/HANDOFF.md` and `docs/handoff/HISTORY.md`. Don't port the prototype to Next.js until the founder asks. The repo is public, so never commit transcripts or private notes.
+
 ## Project Overview
 
 Epoch is the Next.js 15 marketing site for EPOCH Software Services, an AI-first engineering company. The homepage pairs editorial typography with the Epoch Field, a canvas animation of a training pass reaching every node of a network.

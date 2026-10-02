@@ -2,6 +2,10 @@
 
 The marketing site for EPOCH Software Services: an AI-first engineering company. Built with Next.js 15 (App Router), React 19, TypeScript and CSS Modules.
 
+## Redesign in progress
+
+The next version of the site is being designed as a static prototype in `prototype/` on the `feat/night` branch. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
+
 ## Getting started
 
 ```bash
