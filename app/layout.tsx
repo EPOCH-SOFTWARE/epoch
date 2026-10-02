@@ -24,7 +24,7 @@ const plexMono = IBM_Plex_Mono({
   display: 'swap',
 });
 
-const TITLE = 'EPOCH — AI systems, built all the way through';
+const TITLE = 'EPOCH | AI systems, built all the way through';
 const DESCRIPTION =
   'EPOCH builds AI systems that work in production: machine learning, generative AI and the data and engineering underneath them. All in, every project, every time.';
 
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://epoch.sh'),
   title: {
     default: TITLE,
-    template: '%s — EPOCH',
+    template: '%s | EPOCH',
   },
   description: DESCRIPTION,
   keywords: ['AI development', 'machine learning', 'generative AI', 'AI agents', 'data engineering'],

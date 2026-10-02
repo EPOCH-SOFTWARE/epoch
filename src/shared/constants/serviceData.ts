@@ -113,7 +113,7 @@ const AI_ML_DATA: ServiceDetailData = {
     { text: 'Development' }
   ],
   heroSubtitle: 'Intelligent systems for enterprise operations',
-  heroDescription: 'We build AI and machine learning solutions that help enterprises make better use of their data — from predictive models to production-ready ML pipelines.',
+  heroDescription: 'We build AI and machine learning solutions that help enterprises make better use of their data, from predictive models to production-ready ML pipelines.',
   metaTitle: 'AI & Machine Learning Development - EPOCH',
   metaDescription: 'Custom AI and machine learning solutions for enterprise applications. Development, implementation, and optimization across industries.',
 
@@ -130,10 +130,10 @@ const AI_ML_DATA: ServiceDetailData = {
 
   overview: {
     title: 'Practical AI for Enterprise',
-    description: 'EPOCH Software Services delivers AI and Machine Learning solutions that help US enterprises integrate intelligent systems into their operations — whether that means building predictive models, deploying algorithms at scale, or improving existing data workflows.',
+    description: 'EPOCH Software Services delivers AI and Machine Learning solutions that help US enterprises integrate intelligent systems into their operations, whether that means building predictive models, deploying algorithms at scale, or improving existing data workflows.',
     keyPoints: [
       'We help you move from experimentation to production with ML systems designed for reliability, scalability, and measurable business impact.',
-      'Our approach focuses on practical applications — predictive models, NLP systems, and computer vision — built around your existing data infrastructure.'
+      'Our approach focuses on practical applications such as predictive models, NLP systems, and computer vision, built around your existing data infrastructure.'
     ]
   },
 
@@ -344,7 +344,7 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
     { text: 'Implementation' }
   ],
   heroSubtitle: 'Practical GenAI for enterprise workflows',
-  heroDescription: 'We help enterprises integrate generative AI into their operations — from custom chatbots and content generation to autonomous AI agents and governance frameworks.',
+  heroDescription: 'We help enterprises integrate generative AI into their operations, from custom chatbots and content generation to autonomous AI agents and governance frameworks.',
   metaTitle: 'Generative AI Implementation - EPOCH',
   metaDescription: 'Generative AI solutions for enterprise. Custom LLMs, content generation, AI agents, and responsible implementation.',
 
@@ -364,7 +364,7 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
     description: 'EPOCH Software Services implements generative AI solutions that help US enterprises automate content creation, streamline workflows, and build intelligent agent systems.',
     keyPoints: [
       'We help you move from pilot projects to production-ready GenAI systems with proper governance, security, and integration into your existing workflows.',
-      'Our team specializes in practical applications — custom chatbots, content automation, AI agents, and code generation tools — built on foundation models fine-tuned for your domain.'
+      'Our team specializes in practical applications such as custom chatbots, content automation, AI agents, and code generation tools, built on foundation models fine-tuned for your domain.'
     ]
   },
 
@@ -521,7 +521,7 @@ const GENERATIVE_AI_DATA: ServiceDetailData = {
 
   faqs: [
     {
-      question: 'Which foundation model should we use — GPT, Claude, Llama, or something else?',
+      question: 'Which foundation model should we use: GPT, Claude, Llama, or something else?',
       answer: 'It depends on your use case, data sensitivity, and budget. We evaluate multiple models against your specific requirements and recommend the best fit, including open-source options for on-premise deployment.'
     },
     {
@@ -591,7 +591,7 @@ const CLOUD_COMPUTING_DATA: ServiceDetailData = {
     title: 'Cloud Computing Services',
     description: 'EPOCH Software Services delivers cloud computing solutions that help US enterprises achieve agility, scalability, and operational efficiency across hybrid and multi-cloud environments.',
     keyPoints: [
-      'We help you optimize your cloud journey — whether that means migrating workloads, reducing spend, or architecting for scale across multiple providers.',
+      'We help you optimize your cloud journey, whether that means migrating workloads, reducing spend, or architecting for scale across multiple providers.',
       'Our team works with AWS, Azure, and Google Cloud to deliver migrations, cost optimization, and ongoing operations tailored to your enterprise needs.'
     ]
   },
@@ -818,7 +818,7 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
     title: 'Cybersecurity Solutions',
     description: 'EPOCH Software Services provides cybersecurity solutions designed to protect US enterprises from escalating threats in an increasingly digital landscape.',
     keyPoints: [
-      'We deliver proactive defense, compliance readiness, and resilience across your digital infrastructure — from endpoints to cloud environments.',
+      'We deliver proactive defense, compliance readiness, and resilience across your digital infrastructure, from endpoints to cloud environments.',
       'Our approach addresses the full threat lifecycle: assessment, prevention, detection, response, and recovery.'
     ]
   },
@@ -999,8 +999,8 @@ const CYBERSECURITY_DATA: ServiceDetailData = {
 
   whyEpoch: [
     'Our security engineers hold CISSP, OSCP, and cloud-specific security certifications',
-    'We combine automated tooling with manual analysis — real security requires human judgment',
-    'We build security programs, not just run scans — your posture improves systematically over time',
+    'We combine automated tooling with manual analysis, because real security requires human judgment',
+    'We build security programs, not just run scans, so your posture improves systematically over time',
     'We provide plain-language risk reporting that executives and boards can actually act on'
   ],
 
@@ -1027,7 +1027,7 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
     { text: 'Development' }
   ],
   heroSubtitle: 'Built for your unique needs',
-  heroDescription: 'We design and build custom software solutions tailored to your specific business challenges — from full-stack applications to legacy modernization and API integrations.',
+  heroDescription: 'We design and build custom software solutions tailored to your specific business challenges, from full-stack applications to legacy modernization and API integrations.',
   metaTitle: 'Custom Software Development - EPOCH',
   metaDescription: 'Bespoke software solutions tailored to your business. Full-stack development, legacy modernization, and enterprise systems.',
 
@@ -1046,7 +1046,7 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
     title: 'Custom Software Development',
     description: 'EPOCH Software Services builds bespoke software solutions that address the unique challenges and opportunities of US enterprises, from internal tools to customer-facing platforms.',
     keyPoints: [
-      'We build software that fits your workflows, not the other way around — from internal tools and customer portals to complex integrations.',
+      'We build software that fits your workflows, not the other way around, from internal tools and customer portals to complex integrations.',
       'Our approach covers the full lifecycle: requirements, architecture, development, testing, deployment, and ongoing support.'
     ]
   },
@@ -1228,7 +1228,7 @@ const CUSTOM_SOFTWARE_DATA: ServiceDetailData = {
   whyEpoch: [
     'We deliver working software in 2-week sprints, not quarterly waterfall releases',
     'Our architects have built enterprise systems across finance, healthcare, and logistics verticals',
-    'We write clean, documented code with comprehensive test coverage — built for the next team, not just the current sprint',
+    'We write clean, documented code with comprehensive test coverage, built for the next team and not just the current sprint',
     'Full IP ownership and source code access from day one of every engagement'
   ],
 
@@ -1433,7 +1433,7 @@ const DATA_ANALYTICS_DATA: ServiceDetailData = {
   faqs: [
     {
       question: 'What data infrastructure do we need before starting?',
-      answer: 'You do not need a perfect setup. We assess your current state and build from there — whether you are starting with spreadsheets or already have a data warehouse that needs optimization.'
+      answer: 'You do not need a perfect setup. We assess your current state and build from there, whether you are starting with spreadsheets or already have a data warehouse that needs optimization.'
     },
     {
       question: 'How long does it take to build a data analytics platform?',
@@ -1489,7 +1489,7 @@ const DEVOPS_DATA: ServiceDetailData = {
 
   problemStatement: {
     title: 'Challenges You May Be Facing',
-    description: 'Shipping software quickly and reliably requires more than just tools — it requires the right practices, pipelines, and culture.',
+    description: 'Shipping software quickly and reliably requires more than just tools. It requires the right practices, pipelines, and culture.',
     painPoints: [
       'Deployments are manual, error-prone, and take hours instead of minutes',
       'Your team lacks visibility into system health and spends too much time firefighting production issues',
@@ -1665,11 +1665,11 @@ const DEVOPS_DATA: ServiceDetailData = {
     },
     {
       question: 'Can you work with our existing tools and infrastructure?',
-      answer: 'Yes. We integrate with your current stack — whether that is Jenkins, GitHub Actions, AWS, or Azure. We recommend changes only when they provide clear, measurable benefits.'
+      answer: 'Yes. We integrate with your current stack, whether that is Jenkins, GitHub Actions, AWS, or Azure. We recommend changes only when they provide clear, measurable benefits.'
     },
     {
       question: 'What does DevSecOps implementation involve?',
-      answer: 'We add automated security scanning (SAST, DAST, dependency checks) to your pipeline, implement secret management, and establish security policies as code. It is incremental — no need to rebuild everything.'
+      answer: 'We add automated security scanning (SAST, DAST, dependency checks) to your pipeline, implement secret management, and establish security policies as code. It is incremental, so there is no need to rebuild everything.'
     },
     {
       question: 'How do you handle knowledge transfer to our team?',
@@ -1682,10 +1682,10 @@ const DEVOPS_DATA: ServiceDetailData = {
   ],
 
   whyEpoch: [
-    'We build DevOps platforms your team can own and extend — not black boxes that require our ongoing involvement',
+    'We build DevOps platforms your team can own and extend, not black boxes that require our ongoing involvement',
     'Our engineers have managed CI/CD pipelines processing thousands of deployments per month',
     'We integrate security into pipelines from day one, not as an afterthought',
-    'We focus on developer experience — fast feedback loops, clear documentation, and self-service capabilities'
+    'We focus on developer experience: fast feedback loops, clear documentation, and self-service capabilities'
   ],
 
   ctaTitle: 'Improve Your DevOps Pipeline',
@@ -1711,7 +1711,7 @@ const MOBILE_DATA: ServiceDetailData = {
     { text: 'Development' }
   ],
   heroSubtitle: 'High-performance apps for a mobile-first world',
-  heroDescription: 'We build mobile applications — native, hybrid, and progressive — that serve enterprise needs, from customer-facing apps to internal tools and workforce platforms.',
+  heroDescription: 'We build native, hybrid, and progressive mobile applications that serve enterprise needs, from customer-facing apps to internal tools and workforce platforms.',
   metaTitle: 'Mobile Application Development - EPOCH',
   metaDescription: 'Mobile app development for enterprise. Native iOS/Android, hybrid development, PWAs, and AI-enhanced mobile solutions.',
 
@@ -1812,7 +1812,7 @@ const MOBILE_DATA: ServiceDetailData = {
         'Responsive layouts',
         'Accessibility compliance'
       ],
-      demand: { badge: 'Critical Skill', description: 'User experience directly determines app retention — most uninstalls happen within the first week.' }
+      demand: { badge: 'Critical Skill', description: 'User experience directly determines app retention. Most uninstalls happen within the first week.' }
     },
     {
       title: 'Progressive Web Apps (PWAs)',
@@ -1912,7 +1912,7 @@ const MOBILE_DATA: ServiceDetailData = {
   whyEpoch: [
     'We ship to both app stores and have deep experience navigating platform review requirements',
     'Our cross-platform expertise means you get iOS and Android without paying for two separate development teams',
-    'We design mobile-first — not responsive web shrunk to fit a phone screen',
+    'We design mobile-first, not responsive web shrunk to fit a phone screen',
     'We set up analytics and crash reporting from day one so you understand how users actually use the app'
   ],
 
@@ -1939,7 +1939,7 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
     { text: 'Consulting' }
   ],
   heroSubtitle: 'Strategic guidance for enterprise technology decisions',
-  heroDescription: 'We provide strategic consulting to help US enterprises plan and execute technology initiatives — from assessments and roadmaps to change management and implementation oversight.',
+  heroDescription: 'We provide strategic consulting to help US enterprises plan and execute technology initiatives, from assessments and roadmaps to change management and implementation oversight.',
   metaTitle: 'Digital Transformation Consulting - EPOCH',
   metaDescription: 'Strategic digital transformation consulting for enterprises. Assessments, roadmaps, change management, and implementation support.',
 
@@ -2040,7 +2040,7 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
         'Cultural adaptation strategies',
         'Stakeholder communication plans'
       ],
-      demand: { badge: 'Critical Skill', description: 'Technology alone does not drive transformation — adoption and organizational change determine success.' }
+      demand: { badge: 'Critical Skill', description: 'Technology alone does not drive transformation. Adoption and organizational change determine success.' }
     },
     {
       title: 'Implementation Consulting',
@@ -2117,7 +2117,7 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
   faqs: [
     {
       question: 'How is this different from hiring a management consulting firm?',
-      answer: 'We combine strategic consulting with hands-on technical expertise. Our consultants can evaluate a cloud architecture, assess an AI vendor, and review code — not just produce slide decks.'
+      answer: 'We combine strategic consulting with hands-on technical expertise. Our consultants can evaluate a cloud architecture, assess an AI vendor, and review code, not just produce slide decks.'
     },
     {
       question: 'How long does a digital transformation assessment take?',
@@ -2125,7 +2125,7 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
     },
     {
       question: 'What if we already have a transformation strategy that is not working?',
-      answer: 'We frequently help organizations course-correct. We start with a rapid diagnostic to identify what is stalling progress — whether that is technical, organizational, or strategic — and recommend specific adjustments.'
+      answer: 'We frequently help organizations course-correct. We start with a rapid diagnostic to identify what is stalling progress, whether that is technical, organizational, or strategic, and recommend specific adjustments.'
     },
     {
       question: 'Do you stay involved during implementation?',
@@ -2133,12 +2133,12 @@ const DIGITAL_TRANSFORMATION_DATA: ServiceDetailData = {
     },
     {
       question: 'How do you measure transformation success?',
-      answer: 'We define measurable KPIs during the strategy phase — adoption rates, cost savings, time-to-market improvements, revenue impact. We track these throughout implementation and adjust based on results.'
+      answer: 'We define measurable KPIs during the strategy phase, such as adoption rates, cost savings, time-to-market improvements, and revenue impact. We track these throughout implementation and adjust based on results.'
     }
   ],
 
   whyEpoch: [
-    'Our consultants are technologists first — they understand architecture, not just strategy frameworks',
+    'Our consultants are technologists first. They understand architecture, not just strategy frameworks',
     'We build transformation roadmaps grounded in your current reality, not aspirational vendor pitches',
     'We stay involved through implementation to ensure strategy translates into actual results',
     'We focus on adoption and change management because the best technology fails without organizational buy-in'

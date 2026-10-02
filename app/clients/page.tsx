@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'Work',
   description: DESCRIPTION,
   openGraph: {
-    title: 'Work — EPOCH',
+    title: 'Work | EPOCH',
     description: DESCRIPTION,
     type: 'website',
   },

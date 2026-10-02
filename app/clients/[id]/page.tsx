@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ClientPageProps): Promise<Met
     title,
     description: study.metaDescription,
     openGraph: {
-      title: `${title} — EPOCH`,
+      title: `${title} | EPOCH`,
       description: study.metaDescription,
       type: 'article',
     },

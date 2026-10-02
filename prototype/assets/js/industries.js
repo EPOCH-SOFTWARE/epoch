@@ -224,7 +224,7 @@
       notFound(target);
       return;
     }
-    document.title = industry.name + ' — EPOCH';
+    document.title = industry.name + ' | EPOCH';
 
     var services = resolve(DATA.services, industry.serviceIds);
     target.innerHTML =

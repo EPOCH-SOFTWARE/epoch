@@ -297,7 +297,7 @@
     var tier = DATA.tiers.filter(function (item) {
       return item.id === summary.tier;
     })[0];
-    document.title = summary.title + ' — EPOCH';
+    document.title = summary.title + ' | EPOCH';
 
     var skills = '<ul class="skills">' + list(detail.expertise.skills, function (skill) {
       return '<li><strong>' + esc(skill.name) + '</strong><span>' + esc(skill.description) + '</span></li>';
@@ -351,7 +351,7 @@
       main.innerHTML = notFound('We haven’t published that case study.', 'work.html', 'See all work');
       return;
     }
-    document.title = study.name + ' — EPOCH';
+    document.title = study.name + ' | EPOCH';
 
     var facts =
       '<dl class="facts-row">' +

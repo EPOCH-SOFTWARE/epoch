@@ -301,14 +301,14 @@
     if (!target) return;
     var article = findArticle(new URLSearchParams(window.location.search).get('id'));
     if (!article) {
-      document.title = 'Article not found — EPOCH';
+      document.title = 'Article not found | EPOCH';
       target.innerHTML =
         '<section class="page-hero"><div class="wrap"><p class="mono">404</p>' +
         '<h1 class="display">We haven’t published that article.</h1>' +
         '<div class="actions"><a class="btn" href="insights.html">See all insights</a></div></div></section>';
       return;
     }
-    document.title = article.title + ' — EPOCH';
+    document.title = article.title + ' | EPOCH';
     target.innerHTML = articleMarkup(article);
   }
 
