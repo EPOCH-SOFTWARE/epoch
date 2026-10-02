@@ -246,7 +246,7 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
    - founder photo, bio and team;
    - certifications or partnerships, only if true;
    - the Calendly link.
-8. Office hours say "9 AM–6 PM PST", but the US office is in Charlotte (Eastern).
+8. ~~Office hours said "9 AM–6 PM PST" although Charlotte is Eastern.~~ Removed from the prototype's contact page on 2026-10-02 at the founder's call ("its not important"); the port should drop them too.
 
 ---
 
