@@ -125,7 +125,7 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - Tokens: canvas `#000000`, raised surface `#0d0d0c`, ivory `#f2efe8`, muted `#8f8a80`, faint `#5c5850`, lines at 12% and 24% ivory. Orange `#ff4f00` means "now" only (the logo's point, the live hand, the light); buttons are ivory with black text.
    - The memorable element: orange light leaks from the hero O's opening and turns with it.
    - Fine film grain over every page, and soft light on raised surfaces.
-   - A full-screen "EPOCH or nothing." section before the closing invitation, with a huge live O behind it.
+   - A full-screen "EPOCH or nothing." section was tried and removed the same day (founder: "it looks ugly").
    - Lines and case-card sketches draw themselves once as they scroll into view (text never animates).
    - A reading clock: a small O at the bottom right whose point travels round as you scroll; click it to go back to the top.
    - Page changes reveal as a circle growing from the logo's O (cross-document view transitions).

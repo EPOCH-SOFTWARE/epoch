@@ -1319,54 +1319,6 @@ a.chip:hover {
   }
 }
 
-/* ---------- EPOCH or nothing: the motto over a huge, live O ---------- */
-.moment {
-  display: grid;
-  place-items: center;
-  min-height: 100svh;
-  padding: var(--space-section) var(--gutter);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.moment-o {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: -1;
-  width: min(94vh, 94vw);
-  height: min(94vh, 94vw);
-  overflow: visible;
-  transform: translate(-50%, -50%);
-}
-
-.moment-ring {
-  stroke: rgba(242, 239, 232, 0.075);
-}
-
-.moment-dot {
-  fill: var(--accent);
-  opacity: 0.6;
-}
-
-.moment-light {
-  mix-blend-mode: screen;
-}
-
-.moment-title {
-  font-family: var(--font-display);
-  font-weight: var(--display-weight);
-  font-size: clamp(56px, 11.5vw, 208px);
-  letter-spacing: -0.05em;
-  line-height: 0.92;
-  text-align: center;
-}
-
-/* The two halves wrap as wholes: "EPOCH" over "or nothing." when the line is too long. */
-.moment-title span {
-  display: inline-block;
-}
-
 /* ---------- Reading clock: the O keeps reading time on long pages ---------- */
 .reading-clock {
   position: fixed;

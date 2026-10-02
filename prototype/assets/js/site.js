@@ -494,7 +494,6 @@
   // Every O on the page is a 24-hour clock: the logo (one shared symbol), the favicon and the home drawing.
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var HERO_PIVOT = '320 340';
-  var MOMENT_PIVOT = '0 0';
 
   function nowAngle() {
     return KEPT.localDayFraction(new Date()) * 360;
@@ -553,40 +552,11 @@
     });
   }
 
-  // The big O near the end of the home page winds to now the first time it comes into view.
-  function windWhenSeen(node, pivot, done) {
-    if (!('IntersectionObserver' in window)) {
-      turn(node, nowAngle(), pivot);
-      done();
-      return;
-    }
-    var observer = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      observer.disconnect();
-      windToNow(node, pivot, 2200, done);
-    }, { threshold: 0.35 });
-    observer.observe(node.ownerSVGElement);
-  }
-
   function initLivingO() {
     var logoO = document.querySelector('[data-clock-o]');
     var heroO = document.querySelector('[data-hero-o]');
     var heroNow = document.querySelector('[data-hero-now]');
-    var momentO = document.querySelector('[data-moment-o]');
-    var momentKeepsTime = false;
     showTime();
-
-    if (momentO) {
-      var keepTime = function () {
-        momentKeepsTime = true;
-      };
-      if (REDUCED) {
-        turn(momentO, nowAngle(), MOMENT_PIVOT);
-        keepTime();
-      } else {
-        windWhenSeen(momentO, MOMENT_PIVOT, keepTime);
-      }
-    }
 
     if (REDUCED || !firstPageThisVisit()) {
       turn(logoO, nowAngle(), O_CENTER);
@@ -616,7 +586,6 @@
         turn(heroO, nowAngle(), HERO_PIVOT);
         placeNowLabel(heroNow);
       }
-      if (momentKeepsTime) turn(momentO, nowAngle(), MOMENT_PIVOT);
       showTime();
     }, 60000);
   }
