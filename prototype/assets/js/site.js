@@ -103,6 +103,21 @@
     return '<time data-zone="' + OFFICE_ZONES[city] + '"></time>';
   }
 
+  // The giant footer wordmark, lit like a sunset from below: ivory at the top, warming to orange at the base.
+  function footMark() {
+    return (
+      '<div class="foot-mark" aria-hidden="true"><svg viewBox="' + WORDMARK_BOX + '">' +
+      '<defs><linearGradient id="foot-sunset" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="40">' +
+      '<stop offset="0" stop-color="#f2efe8" stop-opacity="0.92"/>' +
+      '<stop offset="0.55" stop-color="#efc9a8" stop-opacity="0.82"/>' +
+      '<stop offset="1" stop-color="#ff4f00" stop-opacity="0.95"/>' +
+      '</linearGradient></defs>' +
+      '<g fill="none" stroke="url(#foot-sunset)" stroke-width="6.6">' +
+      E_AND_P + '<circle cx="98.5" cy="20" r="17.1"/>' + C_AND_H + '</g>' +
+      '</svg></div>'
+    );
+  }
+
   // ---------- Header and footer ----------
 
   var NAV = [
@@ -156,7 +171,7 @@
       '<a href="' + contact.phoneHref + '">' + esc(contact.phone) + '</a>' + social + '</div>' +
       '</div>' +
       '<div class="legal"><span>© ' + new Date().getFullYear() + ' Epoch Software Services</span></div>' +
-      '<div class="foot-mark" aria-hidden="true"><svg viewBox="' + WORDMARK_BOX + '"><use href="#wm-plain"/></svg></div>' +
+      footMark() +
       '</div></footer>'
     );
   }

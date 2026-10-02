@@ -126,6 +126,7 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - The memorable element: orange light leaks from the hero O's opening and turns with it.
    - Fine film grain over every page, and soft light on raised surfaces.
    - A full-screen "EPOCH or nothing." section was tried and removed the same day (founder: "it looks ugly").
+   - The giant footer wordmark is "sunset-lit" (option 5 of `prototype/footer-lab.html`, which compares eight treatments): an ivory-to-orange vertical gradient, drawn inline by `footMark()` in site.js. The footer's bottom row shows only the copyright.
    - Lines and case-card sketches draw themselves once as they scroll into view (text never animates).
    - A reading clock: a small O at the bottom right whose point travels round as you scroll; click it to go back to the top.
    - Page changes reveal as a circle growing from the logo's O (cross-document view transitions).
