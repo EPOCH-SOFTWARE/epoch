@@ -1,18 +1,21 @@
-# EPOCH website: session handoff (2026-10-01 → 2026-10-02)
+# EPOCH website: session handoff (2026-10-01 to 2026-10-03)
 
 Read this first in a new session. It records everything decided, built, rejected and still open.
+For the full story of how we got here, read `HISTORY.md` next to this file. Section 12 says where every file lives.
 
 ---
 
 ## 0. Quick start (what to do first)
 
-1. `git switch feat/epoch-identity` (all current work is here).
+1. `git switch feat/night` (all current work is here, and it is pushed to GitHub).
 2. Start the prototype server, which disables caching so edits show on refresh:
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
    - If port 3460 is busy: `kill $(lsof -ti tcp:3460)`.
-3. The founder is reviewing **logo concepts** at http://localhost:3460/marks.html and http://localhost:3460/logos.html. The next step is getting their pick (section 6).
+3. Current state (2026-10-03): the prototype is the **Night** design (ivory on black, with one orange point that always means "now"). Mark **08** is the site logo: the O of the wordmark is a live 24-hour clock. The inner-page craft pass (section 3, item 14) is done and pushed, and the founder is reviewing it. Screenshots of every page are in `screens/2026-10-03/`.
 4. **Do NOT port the prototype to Next.js until the founder says so.** They explicitly said "dont port it into next js tho".
+5. The GitHub repo `EPOCH-SOFTWARE/epoch` is **public**. Never commit private material such as chat transcripts, the founder's messages word for word, or credentials. Those stay in the local archive (section 12).
+6. Before showing the founder anything, run the full check in `docs/handoff/tools/README.md`, then look at the screenshots yourself.
 
 ---
 
@@ -70,7 +73,35 @@ a032a0d feat(content): honest case studies, OneSix AI, one contact source
 7d94918 chore(test): register jest-dom types and browser mocks
 5481072 [content] - copyright year fix   ← last commit on main
 ```
-The prototype work after `c6a3e70` and this handoff are committed at the end of the session (see `git log`).
+Then on `feat/epoch-identity` (newest first; `2d077c9` is tagged `light-site-2026-10-02`, the light site before Night):
+```
+2d077c9 fix(prototype): drop office hours from the contact page
+0d98d48 feat(prototype): make the clock logo obvious, live office times, shorter menu
+fa5cb0c feat(prototype): mark 08 as the site logo, so the name keeps time
+2567b4f feat(prototype): Tonight's moon as the site logo
+8e0d908 feat(prototype): marks 16 to 22, built on the two the founder liked
+61fdbf7 fix(copy): drop em dashes from page titles and service copy
+0fd3f3a feat(prototype): eight more time-keeping marks, 08 to 15
+e82ad64 docs(handoff): full session handoff, QA tools and backup of lost edits
+22311ff feat(prototype): logo explorations, including living time-keeping marks
+decb1a2 feat(prototype): lock in Draftsman with logo 2; add new pages and UI pass
+```
+Then on `feat/night` (newest first):
+```
+63c4acb docs(handoff): record the inner-page craft pass
+d5c871f feat(prototype): craft pass on the inner pages
+8791bd5 fix(prototype): sentence case for service detail headings
+d01bfdd feat(prototype): tested helpers for reading steps, ring stops and timeline months
+756e6a0 feat(prototype): footer dusk rises like a sunrise as you scroll down
+481e118 feat(prototype): dusk glow behind the footer wordmark (footer-lab option 6)
+ff861ad feat(prototype): sunset-lit giant wordmark in the footer
+49a2dd0 feat(prototype): footer-lab round 2, readable variations on the horizon glow
+d1dda73 feat(prototype): footer-lab page comparing four treatments of the giant wordmark
+66dc5a9 fix(prototype): remove the "EPOCH or nothing." section from the home page
+4dafbf5 fix(prototype): footer shows only the copyright
+340ee64 feat(prototype): Night, the dark redesign with light from the O
+```
+`feat/ai-first-upgrade`, `feat/epoch-identity`, `feat/night` and the tag are all pushed to origin. Later commits are documentation only; see `git log`.
 
 ---
 
@@ -206,7 +237,7 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
 
 ---
 
-## 5. UI upgrade pass (done, in the prototype)
+## 5. UI upgrade pass (light site, 2026-10-01; partly replaced by Night, see section 3, item 13)
 - Page-to-page cross-fade via CSS view transitions; the header doesn't move.
 - Orange CAD-selection corner brackets on card hover and focus.
 - A "system sketch" (vertical pipeline, AI step in orange) on each case card.
@@ -217,7 +248,8 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
 
 ---
 
-## 6. Open: the logo decision (next conversation starts here)
+## 6. The logo: 08 is on the site, and every concept stays in marks.html
+- **Status (2026-10-03):** 06 Tonight's moon was the site logo briefly (`2567b4f`). Then 08 replaced it (`fa5cb0c`, "ok put 08 on the website let me see how it goes"). The founder has kept building on 08 since then but has not formally called it final, and gave no verdict on 16 to 22. Never remove a concept from `marks.html` ("KEEP ADDING DO NOT REMOVE").
 - `marks.html` shows 01 Now (liked), 02 Daylight, 03 Weight of the day, 04 Timestamp, 05 Sundial, 06 Tonight's moon, 07 Twenty-four hours.
 - 02–04: "not that much interesting." 05–07: no feedback yet.
 - Round 3, no feedback yet:
@@ -283,19 +315,18 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
 
 ---
 
-## 9. Tools (copied from the session scratchpad into `docs/handoff/tools/`)
-Headless Chrome via CDP. They never touch the founder's browser. They need macOS Google Chrome and Node 24.
-- `node docs/handoff/tools/shot.mjs <url> <out.png> [w=1440] [h=900] [waitMs] [scrollY|cssSelector] [scale]` takes one viewport screenshot.
-- `node docs/handoff/tools/mobile-check.mjs <url> <outPrefix> 390 [selector…]` prints `documentWidth` (must equal the viewport) plus any overflowing elements, and saves screenshots.
-- `node docs/handoff/tools/formcheck.mjs` loads the prototype pages, prints each h1, reports JS exceptions and console errors/warnings, and exercises the contact form. Edit the `for (const path of [...])` list to check other pages.
-- These scripts create `chrome-profile-*` folders next to themselves. `shot.mjs` deletes its own; delete the others manually and don't commit them.
+## 9. Tools (`docs/handoff/tools/`)
+Headless Chrome via CDP. They never touch the founder's browser. `docs/handoff/tools/README.md` explains every tool, with usage, and gives the full check to run before showing the founder anything.
+- Screenshots: `shot.mjs` (one viewport; `REDUCED=1` for reduced motion), `tiles.mjs` (a scroll column), `seq.mjs` (scroll-driven moments), `clip.mjs` (one element), `hover.mjs`, `tabfocus.mjs`, `reduced.mjs`.
+- Checks: `errors.mjs` (console errors, and optionally the value of an expression), `mobile-check.mjs` (overflow at phone width), `audit.mjs` (stranded words, line length, overflow), `formcheck.mjs` and `form.mjs` (the contact form).
+- Pure helpers have unit tests: `node --test 'prototype/tests/*.test.js'`.
 - `reference-screenshots/` contains the Anduril, Palantir, Linear, Mistral and OneSix captures used for inspiration.
 
 ---
 
 ## 10. When the founder says "port it"
-1. Make a new branch from `feat/epoch-identity`.
-2. Rebuild the Draftsman design system in the Next app:
+1. Make a new branch from `feat/night`.
+2. Rebuild the Night design system in the Next app:
    - tokens go in `app/globals.css`;
    - fonts via `next/font` (Host_Grotesk, IBM_Plex_Mono);
    - the logo becomes inline SVG components using the geometry in section 4;
@@ -310,3 +341,20 @@ Headless Chrome via CDP. They never touch the founder's browser. They need macOS
 - `review-by-result.md`
 - `workflow-branches-and-browser.md`
 - `handoff-location.md` (points here)
+- `no-em-dashes.md`
+
+## 12. Where everything lives
+**In the repo (public):**
+- `docs/handoff/HANDOFF.md`: this file, the current state and how to work.
+- `docs/handoff/HISTORY.md`: the full story, session by session, with what was asked, built, kept and rejected, and the commits.
+- `docs/handoff/screens/`: dated screenshots of every page. `README.md` there says what each one shows.
+- `docs/handoff/tools/`: the QA tools and their guide.
+- `docs/handoff/reference-screenshots/`: the inspiration captures.
+- `docs/handoff/user-wip-backup/`: the founder's uncommitted edits that were saved (section 8).
+- `prototype/marks.html`, `prototype/logos.html` and `prototype/footer-lab.html`: every logo and footer option, kept on purpose.
+
+**On the founder's Mac only (private, never commit):** `/Users/yashdesai/Codebase/EPOCH/epoch-context-archive/`
+- `transcripts/`: copies of the raw Claude Code session transcripts, the subagent transcripts and the memory files. Claude Code deletes its own copies after about 30 days, so these copies are the long-term record.
+- `founder-messages.md`: every message the founder sent, word for word, in order.
+- `tmp/`: everything that was in the sessions' temporary scratchpads (QA screenshots, logo sketches, variants, intermediate data files, the first versions of the tools). Chrome profiles were left out.
+- `README.md` there lists the contents.
