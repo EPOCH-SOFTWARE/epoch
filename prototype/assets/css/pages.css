@@ -1,6 +1,6 @@
 /*
  * Page-specific styles for Industries and How we work.
- * Everything is prefixed pg- and reads the Draftsman tokens from site.css.
+ * Everything is prefixed pg- and reads the Night tokens from site.css.
  */
 
 .pg-label {
@@ -74,8 +74,7 @@
 }
 
 .pg-meta dt {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -116,19 +115,18 @@
 }
 
 .pg-price .pg-billing {
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
 }
 
-/* The one orange detail on the page: a signal square marking how each engagement is billed. */
+/* A small ivory square marks how each engagement is billed. */
 .pg-billing::before {
   content: '';
   display: inline-block;
   width: 7px;
   height: 7px;
   margin-right: 10px;
-  background: var(--accent);
+  background: var(--text);
   vertical-align: 1px;
 }
 

@@ -86,9 +86,9 @@
   function clockIcon(angle) {
     return (
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">' +
-      '<rect width="48" height="48" rx="10" fill="#0c0d0f"/>' +
+      '<rect width="48" height="48" rx="10" fill="#000"/>' +
       '<g transform="rotate(' + angle + ' 24 24)">' +
-      '<path d="' + KEPT.arcPath(24, 24, 15, 28, 304) + '" fill="none" stroke="#fff" stroke-width="4.6"/>' +
+      '<path d="' + KEPT.arcPath(24, 24, 15, 28, 304) + '" fill="none" stroke="#f2efe8" stroke-width="4.6"/>' +
       '<circle cx="24" cy="9" r="3.8" fill="#ff4f00"/>' +
       '</g></svg>'
     );
@@ -134,10 +134,9 @@
       '<nav class="nav" aria-label="Main">' + navLinks() + '</nav>' +
       '<a class="btn sm" href="contact.html">Start a project</a>' +
       '<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>' +
-      '</div>' +
+      '</div></header>' +
       '<nav class="menu" id="menu" aria-label="Menu" hidden>' + navLinks() +
-      '<a href="contact.html">Start a project</a></nav>' +
-      '</header>'
+      '<a href="contact.html">Start a project</a></nav>'
     );
   }
 
@@ -153,7 +152,7 @@
       return '<a href="' + profile.href + '" target="_blank" rel="noopener noreferrer">' + esc(profile.label) + '</a>';
     });
     return (
-      '<footer class="site-footer"><div class="wrap">' +
+      '<footer class="site-footer ruled"><div class="wrap">' +
       '<div class="foot-grid">' +
       '<div class="foot-brand">' + logo() + '<p class="foot-tag">AI, engineered all the way to production.</p></div>' +
       '<nav class="foot-col" aria-label="AI services"><h2>AI</h2>' + footerServices('ai') + '</nav>' +
@@ -222,8 +221,11 @@
   function sketch(studyId) {
     var system = SYSTEM_SKETCH[studyId];
     if (!system) return '';
+    // --i orders the drawing: each node, then the line down to the next, top to bottom.
     return '<ol class="sketch" aria-label="How the system fits together">' + list(system.steps, function (step, index) {
-      return '<li' + (index === system.ai ? ' class="ai"' : '') + '><span class="node" aria-hidden="true"></span>' + esc(step) + '</li>';
+      return '<li style="--i:' + index + '"' + (index === system.ai ? ' class="ai"' : '') + '>' +
+        '<svg class="node" viewBox="0 0 9 9" aria-hidden="true"><circle cx="4.5" cy="4.5" r="4" pathLength="1"/></svg>' +
+        esc(step) + '</li>';
     }) + '</ol>';
   }
 
@@ -308,7 +310,7 @@
     });
     all('[data-tech]').forEach(function (target) {
       target.innerHTML = list(DATA.techStack, function (group) {
-        return '<div class="def"><dt class="mono">' + esc(group.category) + '</dt><dd><ul class="chips">' +
+        return '<div class="def"><dt>' + esc(group.category) + '</dt><dd><ul class="chips">' +
           list(group.technologies, function (name) {
             return '<li class="chip">' + esc(name) + '</li>';
           }) + '</ul></dd></div>';
@@ -499,6 +501,7 @@
   // Every O on the page is a 24-hour clock: the logo (one shared symbol), the favicon and the home drawing.
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var HERO_PIVOT = '320 340';
+  var MOMENT_PIVOT = '0 0';
 
   function nowAngle() {
     return KEPT.localDayFraction(new Date()) * 360;
@@ -557,11 +560,40 @@
     });
   }
 
+  // The big O near the end of the home page winds to now the first time it comes into view.
+  function windWhenSeen(node, pivot, done) {
+    if (!('IntersectionObserver' in window)) {
+      turn(node, nowAngle(), pivot);
+      done();
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      windToNow(node, pivot, 2200, done);
+    }, { threshold: 0.35 });
+    observer.observe(node.ownerSVGElement);
+  }
+
   function initLivingO() {
     var logoO = document.querySelector('[data-clock-o]');
     var heroO = document.querySelector('[data-hero-o]');
     var heroNow = document.querySelector('[data-hero-now]');
+    var momentO = document.querySelector('[data-moment-o]');
+    var momentKeepsTime = false;
     showTime();
+
+    if (momentO) {
+      var keepTime = function () {
+        momentKeepsTime = true;
+      };
+      if (REDUCED) {
+        turn(momentO, nowAngle(), MOMENT_PIVOT);
+        keepTime();
+      } else {
+        windWhenSeen(momentO, MOMENT_PIVOT, keepTime);
+      }
+    }
 
     if (REDUCED || !firstPageThisVisit()) {
       turn(logoO, nowAngle(), O_CENTER);
@@ -591,8 +623,98 @@
         turn(heroO, nowAngle(), HERO_PIVOT);
         placeNowLabel(heroNow);
       }
+      if (momentKeepsTime) turn(momentO, nowAngle(), MOMENT_PIVOT);
       showTime();
     }, 60000);
+  }
+
+  // ---------- Lines that draw themselves ----------
+
+  // Section rules and the case-card sketches draw once, as they come into view. Text never moves.
+  function initDrawing() {
+    var drawings = all('.ruled, .sketch');
+    if (REDUCED || !drawings.length || !('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('draws');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('drawn');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    drawings.forEach(function (drawing) {
+      observer.observe(drawing);
+    });
+  }
+
+  // ---------- Scrolling: the header's blur and the reading clock ----------
+
+  // The logo's O again, keeping reading time: the point goes once round as the page is read.
+  function readingClock() {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'reading-clock';
+    button.setAttribute('aria-label', 'Back to top');
+    button.innerHTML =
+      '<svg viewBox="77 -1.5 43 43" aria-hidden="true"><g data-reading-o>' +
+      '<path d="' + KEPT.arcPath(98.5, 20, 17.1, 28, 304) + '" fill="none" stroke="currentColor" stroke-width="6.6"/>' +
+      '<circle cx="98.5" cy="2.9" r="4.2" style="fill:var(--logo-dot)"/></g></svg>';
+    button.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+      document.querySelector('.brand').focus({ preventScroll: true });
+    });
+    document.body.appendChild(button);
+    return button;
+  }
+
+  function initScroll() {
+    var header = document.querySelector('.site-header');
+    var clock = readingClock();
+    var hand = clock.querySelector('[data-reading-o]');
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var top = window.scrollY;
+      var page = document.documentElement.scrollHeight;
+      var view = window.innerHeight;
+      header.classList.toggle('scrolled', top > 4);
+      // Only long pages get the clock, and only once the reader is past the first screen.
+      clock.classList.toggle('shown', page > view * 2.2 && top > view * 0.6);
+      turn(hand, KEPT.readingProgress(top, page, view) * 360, O_CENTER);
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+  }
+
+  // ---------- Magnetic buttons ----------
+
+  // Primary buttons lean up to 6px toward a mouse pointer and settle back when it leaves.
+  function initMagnets() {
+    if (REDUCED || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    all('.btn:not(.secondary)').forEach(function (button) {
+      var pull = { x: 0, y: 0 };
+      button.addEventListener('pointermove', function (event) {
+        var box = button.getBoundingClientRect();
+        // Measure from where the button rests, not from where it has drifted to.
+        var centerX = box.left - pull.x + box.width / 2;
+        var centerY = box.top - pull.y + box.height / 2;
+        pull = KEPT.magnet(event.clientX - centerX, event.clientY - centerY, box.width / 2, box.height / 2, 6);
+        button.style.translate = KEPT.num(pull.x) + 'px ' + KEPT.num(pull.y) + 'px';
+      });
+      button.addEventListener('pointerleave', function () {
+        pull = { x: 0, y: 0 };
+        button.style.translate = '';
+      });
+    });
   }
 
   // ---------- Booking ----------
@@ -666,4 +788,7 @@
   initForm();
   bindMenu();
   initLivingO();
+  initDrawing();
+  initScroll();
+  initMagnets();
 })();

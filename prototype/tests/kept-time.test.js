@@ -186,3 +186,32 @@ test('zoneTime reads the clock in another city, never wrapping between time and 
   assert.equal(K.zoneTime(moment, 'America/New_York'), '11:35 AM');
   assert.equal(K.zoneTime(moment, 'Asia/Kolkata'), '9:05 PM');
 });
+
+test('readingProgress is 0 at the top of the page and 1 at the bottom', () => {
+  assertNear(K.readingProgress(0, 3000, 1000), 0, 'top');
+  assertNear(K.readingProgress(1000, 3000, 1000), 0.5, 'halfway');
+  assertNear(K.readingProgress(2000, 3000, 1000), 1, 'bottom');
+});
+
+test('readingProgress stays between 0 and 1 when the page bounces past either end', () => {
+  assertNear(K.readingProgress(-40, 3000, 1000), 0, 'above the top');
+  assertNear(K.readingProgress(2100, 3000, 1000), 1, 'below the bottom');
+});
+
+test('readingProgress is 0 on a page too short to scroll', () => {
+  assertNear(K.readingProgress(0, 800, 1000), 0, 'shorter than the window');
+  assertNear(K.readingProgress(0, 1000, 1000), 0, 'exactly the window');
+});
+
+test('magnet pulls toward the pointer, up to the limit at the edge', () => {
+  assert.deepEqual(K.magnet(0, 0, 80, 23, 6), { x: 0, y: 0 });
+  assert.deepEqual(K.magnet(80, 0, 80, 23, 6), { x: 6, y: 0 });
+  assert.deepEqual(K.magnet(-40, 0, 80, 23, 6), { x: -3, y: 0 });
+  assert.deepEqual(K.magnet(0, -23, 80, 23, 6), { x: 0, y: -6 });
+});
+
+test('magnet never drifts further than the limit, even past a corner', () => {
+  const corner = K.magnet(200, 60, 80, 23, 6);
+  assertNear(Math.hypot(corner.x, corner.y), 6, 'distance at the corner');
+  assertNear(corner.x, corner.y, 'diagonal');
+});

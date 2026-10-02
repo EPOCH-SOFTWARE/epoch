@@ -133,7 +133,7 @@
 .ins-quote {
   margin-block: 1.8em;
   padding: 4px 0 4px 24px;
-  border-left: 3px solid var(--accent);
+  border-left: 2px solid var(--text);
   font-family: var(--font-display);
   font-size: clamp(24px, 1.1vw + 16px, 32px);
   font-weight: 500;

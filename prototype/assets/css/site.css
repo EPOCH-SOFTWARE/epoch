@@ -1,6 +1,6 @@
 /*
- * EPOCH prototype, Draftsman direction: ink on white, one signal orange,
- * hairline rails and rules, the mark drawn as a technical construction.
+ * EPOCH prototype, Night: ivory on true black, hairline rails and rules,
+ * and one orange light that only ever means "now".
  */
 
 /* ---------- Shared scale ---------- */
@@ -18,8 +18,10 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---------- Tokens: Draftsman ---------- */
+/* ---------- Tokens: Night ---------- */
 :root {
+  color-scheme: dark;
+
   --font-display: 'Host Grotesk', system-ui, sans-serif;
   --font-body: 'Host Grotesk', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -28,47 +30,48 @@
   --display-stretch: 100%;
   --display-tracking: -0.045em;
 
-  --bg: #ffffff;
-  --bg-alt: #f5f6f7;
-  --text: #0c0d0f;
-  --muted: #5d636b;
-  --faint: #969ca4;
-  --line: #e2e5e8;
-  --line-strong: #c4c9cf;
-  --row-hover: #f7f8f9;
+  --bg: #000000;
+  --raised: #0d0d0c;
+  --text: #f2efe8;
+  --muted: #8f8a80;
+  --faint: #5c5850;
+  --line: rgba(242, 239, 232, 0.12);
+  --line-strong: rgba(242, 239, 232, 0.24);
+  --row-hover: rgba(242, 239, 232, 0.03);
   --accent: #ff4f00;
-  --grid: #eef0f2;
+  --grid: rgba(242, 239, 232, 0.045);
+  --error: #ff6b6b;
 
-  --btn-bg: #0c0d0f;
-  --btn-text: #ffffff;
-  --btn-hover: #2b2e33;
+  --btn-bg: #f2efe8;
+  --btn-text: #000000;
+  --btn-hover: #ffffff;
   --btn2-bg: transparent;
-  --btn2-text: #0c0d0f;
-  --btn2-border: #0c0d0f;
-  --btn2-hover: #f5f6f7;
+  --btn2-text: #f2efe8;
+  --btn2-border: var(--line-strong);
+  --btn2-hover: rgba(242, 239, 232, 0.06);
   --radius-btn: 2px;
   --radius-card: 0px;
   --radius-field: 2px;
 
-  --card-bg: #ffffff;
-  --card-text: #0c0d0f;
-  --card-muted: #5d636b;
-  --card-line: #e2e5e8;
-  --card-accent: #ff4f00;
-  --card-invert-bg: #0c0d0f;
-  --card-invert-text: #ffffff;
-  --card-client-filter: brightness(0);
-  --card-client-blend: normal;
+  --card-bg: var(--raised);
+  --card-text: var(--text);
+  --card-muted: var(--muted);
+  --card-line: var(--line);
+  --card-accent: var(--text);
+  --card-invert-bg: var(--bg);
+  --card-invert-text: var(--text);
+  --card-client-filter: brightness(0) invert(1);
 
-  --header-bg: rgba(255, 255, 255, 0.88);
-  --field-bg: #ffffff;
-  --field-border: #c4c9cf;
+  --field-bg: var(--raised);
+  /* Soft depth for raised surfaces only: a faint light from above. */
+  --depth: linear-gradient(180deg, rgba(242, 239, 232, 0.035), rgba(242, 239, 232, 0) 55%);
+  --field-border: var(--line-strong);
   --logo-dot: #ff4f00;
-  --client-filter: brightness(0);
-  --client-opacity: 0.8;
-  --client-blend: normal;
-  --selection-bg: #ff4f00;
-  --selection-text: #ffffff;
+  /* Client logos are drawn as ivory silhouettes, quieter than the text around them. */
+  --client-filter: brightness(0) invert(1);
+  --client-opacity: 0.62;
+  --selection-bg: #f2efe8;
+  --selection-text: #000000;
 }
 
 /* ---------- Page transitions (cross-document, progressive enhancement) ---------- */
@@ -76,9 +79,30 @@
   navigation: auto;
 }
 
-::view-transition-old(root),
+/* The next page opens as a circle growing out of the header logo's O. The O sits 46px into the
+   bar's content box (19px-tall wordmark, O centre at 47.6% of its width), halfway down the header. */
+:root {
+  --o-x: calc(max(0px, (100vw - 1320px) / 2) + var(--gutter) + 46px);
+  --o-y: calc(var(--header-h) / 2);
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 ::view-transition-new(root) {
-  animation-duration: 0.28s;
+  animation: o-reveal 0.75s cubic-bezier(0.65, 0, 0.35, 1) both;
+  mix-blend-mode: normal;
+}
+
+@keyframes o-reveal {
+  from {
+    clip-path: circle(0 at var(--o-x) var(--o-y));
+  }
+  to {
+    clip-path: circle(150% at var(--o-x) var(--o-y));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -110,6 +134,18 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Film grain over the whole page, so the black reads as printed rather than flat. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 4 -2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 img,
@@ -180,11 +216,28 @@ ol {
 }
 
 .ruled {
-  border-top: 1px solid var(--line);
+  position: relative;
 }
 
-.alt {
-  background: var(--bg-alt);
+.ruled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  transform-origin: left;
+}
+
+/* Lines draw themselves once, left to right, as they come into view (site.js adds .draws). */
+.draws .ruled::before {
+  transform: scaleX(0);
+  transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.draws .ruled.drawn::before {
+  transform: none;
 }
 
 /* Rails at the content edges, so section rules form a grid. */
@@ -293,7 +346,8 @@ ol {
   cursor: pointer;
   transition:
     background-color 0.15s,
-    border-color 0.15s;
+    border-color 0.15s,
+    translate 0.35s var(--ease);
 }
 
 .btn:hover {
@@ -341,7 +395,7 @@ ol {
   z-index: 5;
   padding: 7px 10px;
   border: 1px solid var(--line);
-  background: var(--bg);
+  background: var(--raised);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -364,10 +418,16 @@ ol {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  background: var(--bg);
+  transition: background-color 0.3s ease;
+}
+
+/* Once the page scrolls under it, the header turns to smoked glass. */
+.site-header.scrolled {
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: saturate(1.3) blur(16px);
+  backdrop-filter: saturate(1.3) blur(16px);
 }
 
 .bar {
@@ -409,11 +469,13 @@ ol {
   cursor: pointer;
 }
 
+/* A sibling of the header, so the header's blur never becomes its containing block. */
 .menu {
   position: fixed;
   inset: var(--header-h) 0 0;
+  z-index: 39;
   padding: 32px var(--gutter);
-  background: var(--bg);
+  background: var(--raised);
 }
 
 .menu a {
@@ -439,7 +501,6 @@ ol {
 
 /* ---------- Footer ---------- */
 .site-footer {
-  border-top: 1px solid var(--line);
   font-size: 14px;
 }
 
@@ -485,12 +546,12 @@ ol {
   gap: 16px;
   padding-block: 20px 32px;
   border-top: 1px solid var(--line);
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .foot-mark {
   padding-block: 8px 28px;
-  color: #eceef1;
+  color: rgba(242, 239, 232, 0.05);
 }
 
 .foot-mark svg {
@@ -574,7 +635,7 @@ ol {
 .xh-h,
 .xh-v {
   position: absolute;
-  background: rgba(255, 79, 0, 0.5);
+  background: rgba(242, 239, 232, 0.28);
 }
 
 .xh-h {
@@ -598,8 +659,8 @@ ol {
   left: 0;
   top: 0;
   padding: 3px 6px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.82);
+  color: var(--text);
   font-family: var(--font-mono);
   font-size: 11.5px;
   line-height: 1.2;
@@ -607,12 +668,73 @@ ol {
   transform: translate(var(--lx, 0), var(--ly, 0));
 }
 
+/* The light from the O may spill past the drawing, but stops at the panel's rules. */
+.v-draft {
+  overflow: hidden;
+}
+
 .v-draft svg {
   width: 100%;
   max-height: 72vh;
+  overflow: visible;
+}
+
+/* Night colours for the construction: the O in ivory, the drawing in faint ivory, the time in orange. */
+.draft-guides {
+  stroke: rgba(242, 239, 232, 0.16);
+}
+
+.draft-ticks line {
+  stroke: rgba(242, 239, 232, 0.42);
+}
+
+.draft-ticks .minor {
+  stroke: rgba(242, 239, 232, 0.2);
+}
+
+.draft-hours,
+.draft-data,
+.draft-caption {
+  fill: var(--muted);
+}
+
+.draft-caption {
+  font-family: var(--font-body);
+}
+
+.draft-caption .draft-mono {
+  font-family: var(--font-mono);
+}
+
+.draft-marks {
+  stroke: rgba(242, 239, 232, 0.5);
+}
+
+.draft-hand {
+  stroke: var(--accent);
+}
+
+.draft-dot {
+  fill: var(--accent);
+}
+
+.draft-now {
+  fill: var(--text);
+}
+
+.glow-stop {
+  stop-color: var(--accent);
+}
+
+/* Light leaking from the opening, like a door left ajar. It comes on with the point. */
+.draft-light {
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: draft-fade 1.8s ease 2.3s forwards;
 }
 
 .draft-ring {
+  stroke: var(--text);
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation: draft-draw 1.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
@@ -753,7 +875,6 @@ ol {
   height: 24px;
   filter: var(--client-filter);
   opacity: var(--client-opacity);
-  mix-blend-mode: var(--client-blend);
 }
 
 .client .wordmark {
@@ -955,7 +1076,7 @@ ol {
 
 .row .small {
   font-size: 14px;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 @media (max-width: 900px) {
@@ -1013,7 +1134,7 @@ a.chip:hover {
   padding: 28px;
   border: 1px solid var(--card-line);
   border-radius: var(--radius-card);
-  background: var(--card-bg);
+  background: var(--depth), var(--card-bg);
   color: var(--card-text);
   transition: border-color 0.2s;
 }
@@ -1023,7 +1144,7 @@ a.chip:hover {
 }
 
 .card::before {
-  --bracket: var(--accent);
+  --bracket: var(--text);
   content: '';
   position: absolute;
   inset: -4px;
@@ -1057,16 +1178,14 @@ a.chip:hover {
 .card .client img {
   height: 22px;
   filter: var(--card-client-filter);
-  mix-blend-mode: var(--card-client-blend);
-  opacity: 1;
+  opacity: 0.86;
 }
 
 .sketch {
   display: grid;
   gap: 10px;
   margin-block: 6px 2px;
-  font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.2;
   color: var(--card-muted);
 }
@@ -1086,24 +1205,52 @@ a.chip:hover {
   width: 1px;
   height: 10px;
   background: var(--line-strong);
+  transform-origin: top;
 }
 
 .sketch .node {
   flex: none;
   width: 9px;
   height: 9px;
-  border: 1px solid var(--card-text);
-  border-radius: 50%;
-  background: var(--card-bg);
+  overflow: visible;
+}
+
+.sketch .node circle {
+  fill: var(--card-bg);
+  stroke: var(--card-text);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+}
+
+/* Drawn top to bottom: each node's ring, then the line down to the next. */
+.draws .sketch .node circle {
+  stroke-dashoffset: 1;
+  fill-opacity: 0;
+  transition:
+    stroke-dashoffset 0.45s ease calc(var(--i) * 0.2s),
+    fill-opacity 0.3s ease calc(var(--i) * 0.2s + 0.3s);
+}
+
+.draws .sketch li + li::before {
+  transform: scaleY(0);
+  transition: transform 0.2s ease calc(var(--i) * 0.2s - 0.12s);
+}
+
+.draws .sketch.drawn .node circle {
+  stroke-dashoffset: 0;
+  fill-opacity: 1;
+}
+
+.draws .sketch.drawn li + li::before {
+  transform: none;
 }
 
 .sketch .ai {
   color: var(--card-text);
 }
 
-.sketch .ai .node {
-  border-color: var(--accent);
-  background: var(--accent);
+.sketch .ai .node circle {
+  fill: var(--card-text);
 }
 
 .card .meta {
@@ -1142,8 +1289,8 @@ a.chip:hover {
 }
 
 .card.invert {
-  border-color: var(--card-invert-bg);
   background: var(--card-invert-bg);
+  background-image: none;
   color: var(--card-invert-text);
 }
 
@@ -1170,6 +1317,94 @@ a.chip:hover {
   .card {
     border-width: 0 1px 1px 0;
   }
+}
+
+/* ---------- EPOCH or nothing: the motto over a huge, live O ---------- */
+.moment {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: var(--space-section) var(--gutter);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.moment-o {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: min(94vh, 94vw);
+  height: min(94vh, 94vw);
+  overflow: visible;
+  transform: translate(-50%, -50%);
+}
+
+.moment-ring {
+  stroke: rgba(242, 239, 232, 0.075);
+}
+
+.moment-dot {
+  fill: var(--accent);
+  opacity: 0.6;
+}
+
+.moment-light {
+  mix-blend-mode: screen;
+}
+
+.moment-title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(56px, 11.5vw, 208px);
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+  text-align: center;
+}
+
+/* The two halves wrap as wholes: "EPOCH" over "or nothing." when the line is too long. */
+.moment-title span {
+  display: inline-block;
+}
+
+/* ---------- Reading clock: the O keeps reading time on long pages ---------- */
+.reading-clock {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(13, 13, 12, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s,
+    border-color 0.15s;
+}
+
+.reading-clock.shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reading-clock:hover {
+  border-color: var(--line-strong);
+}
+
+.reading-clock svg {
+  width: 28px;
+  height: 28px;
+  overflow: visible;
 }
 
 /* ---------- Closing ---------- */
@@ -1217,9 +1452,9 @@ a.chip:hover {
 
 .steps .num {
   grid-row: span 2;
-  padding-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 13px;
+  padding-top: 3px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 
@@ -1299,7 +1534,6 @@ a.chip:hover {
 
 .faq summary::after {
   content: '+';
-  font-family: var(--font-mono);
   color: var(--muted);
 }
 
@@ -1394,7 +1628,7 @@ a.chip:hover {
 
   .outcomes td[data-label]::before {
     content: attr(data-label) ': ';
-    color: var(--faint);
+    color: var(--muted);
   }
 }
 
@@ -1516,6 +1750,7 @@ a.chip:hover {
   border: 1px solid var(--field-border);
   border-radius: var(--radius-field);
   background: var(--field-bg);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
   outline: none;
   transition: border-color 0.15s;
 }
@@ -1529,20 +1764,17 @@ a.chip:hover {
 .field select:focus,
 .field textarea:focus {
   border-color: var(--text);
+  box-shadow: 0 0 0 1px var(--text);
 }
 
 .field [aria-invalid='true'] {
-  border-color: #ff5c5c;
+  border-color: var(--error);
 }
 
 .field .error {
   margin-top: 6px;
   font-size: 14px;
-  color: #ff6b6b;
-}
-
-.field .error {
-  color: #c4320a;
+  color: var(--error);
 }
 
 .form-status {

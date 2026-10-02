@@ -51,7 +51,8 @@ Read this first in a new session. It records everything decided, built, rejected
 | `main` | Original site. Untouched by this session apart from branching off it. |
 | `draft/content-updates` | Exists in the repo; **not created or touched by this session**. Ask the founder what it is before using it. |
 | `feat/ai-first-upgrade` | **Round 1: the Next.js site rebuilt AI-first.** 11 commits, tests green. Superseded visually, but its architecture and content are the base for the eventual port. |
-| `feat/epoch-identity` | **Round 2 (current): static HTML/CSS/JS prototype** in `prototype/`. Branched from `feat/ai-first-upgrade`, so it also contains all of round 1. |
+| `feat/epoch-identity` | **Round 2: static HTML/CSS/JS prototype** in `prototype/`, light Draftsman look. Branched from `feat/ai-first-upgrade`, so it also contains all of round 1. Tagged `light-site-2026-10-02`. |
+| `feat/night` | **Current: the Night redesign** of the prototype, branched from `feat/epoch-identity`. |
 
 Commits (newest first):
 ```
@@ -119,7 +120,17 @@ The prototype work after `c6a3e70` and this handoff are committed at the end of 
    - The home hero is redrawn as the logo's O ("Construction, rev B"): a live 24-hour clock with an orange hand, a "now" label, a 24-hour dial and two plain notes. It draws itself, winds to now, then runs live.
    - Live office clocks: the footer reads "Charlotte 11:35 AM · Ahmedabad 9:05 PM" and each office card shows its local time.
    - A shorter menu: Work, Services, How we work, About and Start a project. Industries and Insights stay in the footer.
-   - Not built, needs founder content: real case-study numbers, quotes, the OneSix story and logo, a founder photo and bio, and a Calendly link (`BOOKING_URL`). Also suggested and not built: a sticky "Book a call" bar on phones and scroll-drawn sketches.
+   - Not built, needs founder content: real case-study numbers, quotes, the OneSix story and logo, a founder photo and bio, and a Calendly link (`BOOKING_URL`). Also suggested and not built: a sticky "Book a call" bar on phones.
+13. **Night (2026-10-02, branch `feat/night`).** The founder said the light site "feels like whiteboard" and chose Night from three looks. The light site is tagged `light-site-2026-10-02`, and all work branches are pushed to GitHub as a backup.
+   - Tokens: canvas `#000000`, raised surface `#0d0d0c`, ivory `#f2efe8`, muted `#8f8a80`, faint `#5c5850`, lines at 12% and 24% ivory. Orange `#ff4f00` means "now" only (the logo's point, the live hand, the light); buttons are ivory with black text.
+   - The memorable element: orange light leaks from the hero O's opening and turns with it.
+   - Fine film grain over every page, and soft light on raised surfaces.
+   - A full-screen "EPOCH or nothing." section before the closing invitation, with a huge live O behind it.
+   - Lines and case-card sketches draw themselves once as they scroll into view (text never animates).
+   - A reading clock: a small O at the bottom right whose point travels round as you scroll; click it to go back to the top.
+   - Page changes reveal as a circle growing from the logo's O (cross-document view transitions).
+   - Primary buttons drift slightly toward the cursor.
+   - Judgement calls the founder may revisit: the AI step in case sketches and the card corner brackets are now ivory, not orange; the header blur needed the mobile menu moved outside the header.
 
 ---
 

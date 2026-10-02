@@ -1,4 +1,4 @@
-// Pure time and geometry helpers for the living marks in marks.html (08 onwards) and the site's moon logo.
+// Pure time and geometry helpers for the living marks in marks.html (08 onwards) and the site's living O.
 // Loads as window.KeptTime in the browser and as a CommonJS module in the tests.
 // Angles are in degrees, measured clockwise from twelve o'clock.
 (function (root, factory) {
@@ -214,6 +214,26 @@
       'A' + num(Math.abs(bulge) * r) + ' ' + num(r) + ' 0 0 ' + terminatorSweep + ' ' + top + 'Z';
   }
 
+  function clamp(value, low, high) {
+    return Math.min(Math.max(value, low), high);
+  }
+
+  // How far down the page the reader is: 0 at the top, 1 at the bottom, 0 when the page cannot scroll.
+  function readingProgress(scrollTop, pageHeight, viewportHeight) {
+    var travel = pageHeight - viewportHeight;
+    if (travel <= 0) return 0;
+    return clamp(scrollTop / travel, 0, 1);
+  }
+
+  // How far a magnetic button drifts toward the pointer, given the pointer's offset from its centre:
+  // in proportion across each half of the button, never further than `limit` in any direction.
+  function magnet(dx, dy, halfWidth, halfHeight, limit) {
+    var x = clamp(dx / halfWidth, -1, 1) * limit;
+    var y = clamp(dy / halfHeight, -1, 1) * limit;
+    var scale = Math.min(1, limit / (Math.hypot(x, y) || 1));
+    return { x: x * scale, y: y * scale };
+  }
+
   function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
     var points = [];
     for (var step = 0; step <= steps; step++) {
@@ -244,5 +264,7 @@
     lunarPhase: lunarPhase,
     phaseName: phaseName,
     moonPath: moonPath,
+    readingProgress: readingProgress,
+    magnet: magnet,
   };
 });

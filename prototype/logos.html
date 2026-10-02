@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
     <link rel="stylesheet" href="assets/css/site.css" />
     <style>
-      .lg-letter { color: var(--accent); }
+      .lg-letter { color: var(--muted); }
       .lg-tag { margin-top: 10px; font-weight: 550; }
       .lg-stage { display: grid; gap: 20px; padding: 48px 40px; border: 1px solid var(--line);
         background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
@@ -19,8 +19,8 @@
       .lg-lockup .lg-mk { width: 64px; height: 64px; flex: none; }
       .lg-lockup .lg-wm { height: 40px; width: auto; }
       .lg-sizes { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-      .lg-chip { display: grid; place-items: center; width: 64px; height: 64px; border: 1px solid var(--line); background: #fff; color: var(--text); }
-      .lg-chip.ink { background: var(--text); color: #fff; border-color: var(--text); }
+      .lg-chip { display: grid; place-items: center; width: 64px; height: 64px; border: 1px solid var(--line); background: var(--text); color: var(--bg); }
+      .lg-chip.ink { background: var(--raised); color: var(--text); border-color: var(--line-strong); }
       .lg-note { font-size: 13px; color: var(--muted); margin-left: 6px; }
       @media (max-width: 640px) { .lg-stage { padding: 28px 16px; } .lg-lockup .lg-mk { width: 44px; height: 44px; } .lg-lockup .lg-wm { height: 26px; } }
     </style>
