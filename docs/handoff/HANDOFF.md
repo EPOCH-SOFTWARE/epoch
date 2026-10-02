@@ -106,6 +106,7 @@ d1dda73 feat(prototype): footer-lab page comparing four treatments of the giant 
 ---
 
 ## 3. Timeline of decisions (and what was rejected)
+This is the short version. `HISTORY.md` has the full story, the founder's exact words, and a complete "Rejected, do not repeat" list.
 
 1. **Round 1 (Next.js, `feat/ai-first-upgrade`).**
    - Positioning set to AI-first.
@@ -132,18 +133,18 @@ d1dda73 feat(prototype): footer-lab page comparing four treatments of the giant 
    - Insights articles.
 7. **Logo exploration (in progress).**
    - `logos.html`: 5 concepts within the site style. Founder: "it doesnt have to match the website… think out of the box… create something that passes time itself."
-   - `marks.html` v1 had Now, Long exposure, Harmonograph and Growth rings. Founder: "**only the first one is good** all others are same shit just different thing in front." Lesson: an illustration placed beside the name is not a logo idea.
+   - `marks.html` v1 had Now, Long exposure, Harmonograph and Growth rings. Founder: "**only the first one is good**"; the others felt like the same idea with a different picture in front. Lesson: an illustration placed beside the name is not a logo idea.
    - Researched dynamic identities (Nordkyn, MIT Media Lab, Casa da Música, Whitney, the WPP variable-font logo). Rule learned: **keep one thing fixed and let one real signal change the logo itself.**
    - v2 had 01 Now, 02 Daylight, 03 Weight of the day and 04 Timestamp. Founder: "not that much interesting, **try something else keep these 4 tho**."
-   - Added 05 Sundial, 06 Tonight's moon and 07 Twenty-four hours. **No feedback yet.**
+   - Added 05 Sundial, 06 Tonight's moon and 07 Twenty-four hours. No verdict on 05 and 07; 06 later went on the site for a short time.
 8. **Logo round 3 (2026-10-02), same page.**
    - Founder: "I only liked 01 Now so far. Show me more ideas in that spirit, where the logo itself keeps time, not a picture next to the name… really out-of-the-box and professional."
    - After five proposals in chat: "i like some of em, now you are cooking… still not that much interesting, try something else, keep all of the current work intact, EPOCH or nothing!!!"
-   - Added 08–15 in a new "EPOCH or nothing." section below 07; 01–07 are untouched apart from a "New: 08–15" jump link.
+   - Added 08–15 in a new "EPOCH or nothing." section below 07; 01–07 are untouched apart from a jump link, now labelled "08 to 15 ↓".
 9. **Logo round 4 (2026-10-02).**
-   - Founder on 08–15: "i only liked 08 and 11, everything else is just ugly same shit!!!!! KEEP ADDING DO NOT REMOVE", and asked for research into designers who make logos that stand out.
-   - Two research briefs found that no brand mark shows the real live time (open ground), and that the great marks put one idea into how the mark is built rather than adding effects.
-   - Added 16–22 in an "All in." section below 15. **No feedback yet.**
+   - Founder on 08–15: "i only liked 08 and 11"; the rest were rejected as ugly and repetitive. "KEEP ADDING DO NOT REMOVE". They asked for research into designers who make logos that stand out.
+   - Two research briefs found no brand mark that shows the real live time (likely open ground, though that can't be proven), and that the great marks put one idea into how the mark is built rather than adding effects.
+   - Added 16–22 in an "All in." section below 15. No verdict yet.
 10. **"put Tonight's moon in the website" (2026-10-02).** The prototype site's logo is now concept 06: the plain wordmark with tonight's real moon phase lit in orange inside the O (header and footer lockups, plus a live favicon). The giant faint footer wordmark stays plain, as the founder chose earlier. The homepage hero drawing still shows the old ring-and-dot mark.
 11. **"put 08 on the website let me see how it goes" (2026-10-02).** The site logo switched from the moon (06) to 08: the wordmark's O is a clock whose opening and orange point turn once a day with the visitor's local time (midnight at the top), updated every minute, with a matching live favicon and a hover title giving the time. The moon version is commit 2567b4f.
 12. **UI/UX pass, "do it your way" (2026-10-02).** From a list of eight ideas Claude built the four that need no founder content:
@@ -157,7 +158,7 @@ d1dda73 feat(prototype): footer-lab page comparing four treatments of the giant 
    - The memorable element: orange light leaks from the hero O's opening and turns with it.
    - Fine film grain over every page, and soft light on raised surfaces.
    - A full-screen "EPOCH or nothing." section was tried and removed the same day (founder: "it looks ugly").
-   - The giant footer wordmark is option 6 of `prototype/footer-lab.html` (which compares eight treatments), "dusk behind, letters clear": quiet ivory letters at 20% with a low orange glow (`.foot-glow`) rising from the bottom edge of the footer. The glow rises like a sunrise as you scroll: `initScroll` sets `--rise` on the footer from 0 (footer just entering) to 1 (very end of the page) via the tested `KeptTime.rangeProgress`. Option 5 (sunset-lit letters) was tried first, in commit ff861ad. The footer's bottom row shows only the copyright.
+   - The giant footer wordmark is option 6 of `prototype/footer-lab.html` (which compares eight treatments), "dusk behind, letters clear": quiet ivory letters at 20% with a low orange glow (`.foot-glow`) rising from the bottom edge of the footer. The glow rises like a sunrise as you scroll: `initScroll` sets `--rise` on the footer from 0 (footer just entering) to 1 (very end of the page) via the tested `KeptTime.rangeProgress`. Option 5 (sunset-lit letters) was tried first, in commit ff861ad. The founder found the scroll rise "not that effective" but kept it ("lets move on"). The footer's bottom row shows only the copyright.
    - Lines and case-card sketches draw themselves once as they scroll into view (text never animates).
    - A reading clock: a small O at the bottom right whose point travels round as you scroll; click it to go back to the top.
    - Page changes reveal as a circle growing from the logo's O (cross-document view transitions).
@@ -180,7 +181,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 ### Pages
 | File | Notes |
 | --- | --- |
-| `index.html` | Home. Hero: copy on the left; on the right, the mark drawn as a technical construction. The ring draws in, the orange dot pops, then the notes fade in. Notes include `t₀ 1970-01-01 00:00 UTC` and a live `t = <unix seconds> s`. On desktop the cursor becomes a measuring crosshair showing SVG coordinates. Then: "Trusted by" marquee, Why EPOCH (epoch in computing and in ML), commitments, AI services rows plus engineering chips, case cards with system sketches, closing CTA. |
+| `index.html` | Home. Hero: copy on the left; on the right, the logo's O drawn as a technical construction ("rev B"): a 24-hour dial whose ring, hand and orange point turn to the visitor's time of day, with light from the opening and a label showing the time. The ring draws in and winds to now once per visit. Notes include `t₀ 1970-01-01 00:00 UTC` and the live Unix time. On desktop the cursor becomes a measuring crosshair. Then: "Trusted by" marquee, Why EPOCH (epoch in computing and in ML), commitments, AI services rows plus engineering chips, case cards with system sketches, closing CTA. |
 | `services.html`, `service.html?id=` | Two tiers. The detail page is rendered from `data.js`. |
 | `work.html`, `case.html?id=` | Case cards plus a logo grid. Case detail is rendered from `data.js`. |
 | `industries.html`, `industry.html?id=` | insurance, financial-services, healthcare, retail. Data in `assets/js/industries.js`. |
@@ -207,20 +208,21 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   - adds the live clock (`[data-unix-label]`), the measuring crosshair (`.v-draft`, fine pointers only) and booking.
   - `SYSTEM_SKETCH` holds the case-card system diagrams, built from each case study's deliverables.
   - **`BOOKING_URL = ''`**. Set it to the founder's Calendly or Cal.com link; until then "Choose a time" opens an email.
-- **`assets/css/site.css`** holds the Draftsman tokens on `:root`:
-  - `--bg #fff`, `--text #0c0d0f`, `--muted #5d636b`, `--line #e2e5e8`, `--accent #ff4f00`, `--grid #eef0f2`;
+- **`assets/css/site.css`** holds the Night tokens on `:root`:
+  - colours: `--bg #000000`, `--raised #0d0d0c`, `--text #f2efe8`, `--muted #8f8a80`, `--faint #5c5850`, `--line` and `--line-strong` (ivory at 12% and 24%), `--accent #ff4f00` ("now" only), `--error #ff6b6b`; buttons are ivory with black text;
+  - a type scale (`--text-xs` to `--text-display`) and one twelve-column grid (`--col-gap`): section titles in columns 1 to 5, content from column 6;
   - fonts: Host Grotesk + IBM Plex Mono;
-  - rails on `.wrap`, square buttons;
-  - view transitions (`@view-transition`), CAD-style corner brackets on `.card:hover`, `.sketch`, `.marquee`, `.foot-mark`;
+  - rails on `.wrap`, square buttons, film grain;
+  - view transitions (the reveal grows from the logo's O), corner brackets on `.card:hover` (ivory), `.sketch`, `.marquee`, `.foot-mark`, `.foot-glow`;
   - nav collapses to a menu below 1060px.
   - `pages.css` (prefix `pg-`) and `insights.css` (prefix `ins-`) are page-specific.
-- **`assets/js/kept-time.js`** holds the pure time and geometry math for marks 08–15: rings with openings, watch angles, seven-segment letters, the engraving text and the eclipse geometry. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (22 tests). Jest only looks in `src/`, so these never mix with the app's tests.
+- **`assets/js/kept-time.js`** holds the pure time and geometry helpers: rings with openings, watch angles, seven-segment letters, the engraving text and eclipse geometry (marks 08 onwards), the moon phase (mark 06), the living O's time of day, reading and range progress (the reading clock and the footer rise), the magnetic buttons, and the craft-pass helpers `stepAt`, `ringStop` and `monthsIn`. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (41 tests). Jest only looks in `src/`, so these never mix with the app's tests.
 - **`assets/js/marks-live.js`** draws marks 08 onwards as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.
   - Cardinal, iDrive and Rural King are cropped PNGs.
-  - On the white theme, client logos render as solid black silhouettes (`filter: brightness(0)`).
-  - `assets/favicon.svg`: ring and orange dot on ink.
+  - On the dark theme, client logos render as ivory silhouettes (`--client-filter: brightness(0) invert(1)`).
+  - `assets/favicon.svg`: ivory ring and orange dot on black. `site.js` redraws the favicon every minute to match the live logo.
 
 ### Logo geometry (keep exact)
 Bold monoline wordmark, viewBox `-0.5 -1 208 42`, stroke `6.6`, no fill:
@@ -251,8 +253,8 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
 ## 6. The logo: 08 is on the site, and every concept stays in marks.html
 - **Status (2026-10-03):** 06 Tonight's moon was the site logo briefly (`2567b4f`). Then 08 replaced it (`fa5cb0c`, "ok put 08 on the website let me see how it goes"). The founder has kept building on 08 since then but has not formally called it final, and gave no verdict on 16 to 22. Never remove a concept from `marks.html` ("KEEP ADDING DO NOT REMOVE").
 - `marks.html` shows 01 Now (liked), 02 Daylight, 03 Weight of the day, 04 Timestamp, 05 Sundial, 06 Tonight's moon, 07 Twenty-four hours.
-- 02–04: "not that much interesting." 05–07: no feedback yet.
-- Round 3, no feedback yet:
+- 02–04: "not that much interesting." 05 and 07: no verdict. 06 Tonight's moon was the site logo briefly (`2567b4f`).
+- Round 3:
   - 08 In the name: the wordmark's O is 01's clock.
   - 09 Display: EPOCH on seven-segment clock digits; every minute it flips to the time, and the orange point becomes the colon.
   - 10 Overrun: a spiral one full turn plus 40°, tip on the time of day.
@@ -261,8 +263,8 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
   - 13 Full circle: the opening is what is left of today; the logo at noon, closed at midnight.
   - 14 Totality: an eclipse "diamond ring" whose bright side turns with the day.
   - 15 On the minute: the point laps the ring every minute and rests in the opening, like the Swiss railway clock.
-- Founder verdict on 08–15: **liked 08 and 11 only**; the rest "ugly same shit".
-- Round 4, no feedback yet (each names the design it borrows from):
+- Founder verdict on 08–15: **liked 08 and 11 only**; the rest were rejected as ugly and repetitive.
+- Round 4, no verdict yet (each names the design it borrows from):
   - 16 In the name, to the minute: 08 + 11, the wordmark's O shows the hour opening with the point and a minute cut.
   - 17 Parallel lines: the wordmark in Mexico 68 lines (Lance Wyman); two slots through the O are the hands.
   - 18 Slashed zero: the O is a programmer's Ø whose slash is the hour hand (after Stankowski's Deutsche Bank slash).
