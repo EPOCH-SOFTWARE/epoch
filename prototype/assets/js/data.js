@@ -135,7 +135,7 @@ window.EPOCH_DATA = {
    "metaTitle": "AI & Machine Learning Development - EPOCH",
    "metaDescription": "Custom AI and machine learning solutions for enterprise applications. Development, implementation, and optimization across industries.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Most enterprises have data but lack the systems to act on it consistently and at scale.",
     "painPoints": [
      "Your team spends more time cleaning and preparing data than extracting value from it",
@@ -145,7 +145,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Practical AI for Enterprise",
+    "title": "Practical AI for enterprise",
     "description": "EPOCH Software Services delivers AI and Machine Learning solutions that help US enterprises integrate intelligent systems into their operations, whether that means building predictive models, deploying algorithms at scale, or improving existing data workflows.",
     "keyPoints": [
      "We help you move from experimentation to production with ML systems designed for reliability, scalability, and measurable business impact.",
@@ -153,51 +153,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in AI and ML",
+    "title": "Our expertise in AI and ML",
     "description": "Our team brings deep experience in machine learning engineering, NLP, and computer vision, with a focus on building production-ready systems for US enterprises.",
     "skills": [
      {
-      "name": "Production ML Pipelines",
+      "name": "Production ML pipelines",
       "description": "End-to-end pipeline design from data ingestion through model serving, using tools like MLflow, Kubeflow, and Airflow"
      },
      {
-      "name": "NLP & Language Model Fine-Tuning",
+      "name": "NLP & language model fine-tuning",
       "description": "Custom NLP models for entity extraction, classification, summarization, and domain-specific language understanding"
      },
      {
-      "name": "Computer Vision Systems",
+      "name": "Computer vision systems",
       "description": "Object detection, image classification, and video analytics using PyTorch, TensorFlow, and OpenCV for real-world applications"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Data Assessment & Feasibility",
+      "title": "Data assessment & feasibility",
       "description": "We evaluate your data quality, volume, and infrastructure to determine which ML approaches will deliver results."
      },
      {
       "step": "02",
-      "title": "Model Development & Validation",
+      "title": "Model development & validation",
       "description": "We build and rigorously test models using your data, iterating on performance metrics that matter to your business."
      },
      {
       "step": "03",
-      "title": "Production Deployment",
+      "title": "Production deployment",
       "description": "We deploy models into your infrastructure with proper monitoring, versioning, and rollback capabilities."
      },
      {
       "step": "04",
-      "title": "Monitoring & Retraining",
+      "title": "Monitoring & retraining",
       "description": "We set up drift detection and automated retraining pipelines so models stay accurate as your data evolves."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Predictive Analytics",
+     "title": "Predictive analytics",
      "description": "Leverage historical data to forecast trends, risks, and opportunities. Our predictive models use advanced algorithms to drive proactive decision-making.",
      "features": [
       "Sales forecasting",
@@ -211,7 +211,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Natural Language Processing",
+     "title": "Natural language processing",
      "description": "Build systems that understand and generate human language for sentiment analysis, chatbots, and document summarization.",
      "features": [
       "Customer service automation",
@@ -225,7 +225,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Model Training & Deployment",
+     "title": "Model training & deployment",
      "description": "Full lifecycle management from data preparation to cloud deployment using TensorFlow and PyTorch for custom models.",
      "features": [
       "Image recognition",
@@ -239,7 +239,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Computer Vision",
+     "title": "Computer vision",
      "description": "Develop vision-based AI for object detection, facial recognition, and video analytics ideal for visual data processing.",
      "features": [
       "Quality control",
@@ -253,7 +253,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "AI Ethics & Governance",
+     "title": "AI ethics & governance",
      "description": "Ensure bias-free, transparent, and compliant AI implementations with GDPR and emerging US AI standards.",
      "features": [
       "Ethical AI deployment",
@@ -369,7 +369,7 @@ window.EPOCH_DATA = {
     "We set up monitoring and retraining pipelines so your models improve over time, not decay",
     "We integrate with your existing data stack rather than requiring you to adopt new platforms"
    ],
-   "ctaTitle": "Discuss Your AI & ML Needs",
+   "ctaTitle": "Discuss your AI & ML needs",
    "ctaDescription": "Tell us about your data challenges and goals. We'll outline how AI and machine learning can fit into your operations.",
    "ctaButtonText": "Get in Touch",
    "stats": [
@@ -409,7 +409,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Generative AI Implementation - EPOCH",
    "metaDescription": "Generative AI solutions for enterprise. Custom LLMs, content generation, AI agents, and responsible implementation.",
    "problemStatement": {
-    "title": "Why This Matters",
+    "title": "Why this matters",
     "description": "Generative AI is moving fast, but most enterprises struggle to move beyond experimentation into real production use.",
     "painPoints": [
      "Your team is experimenting with ChatGPT but has no clear path to enterprise-grade deployment",
@@ -419,7 +419,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Generative AI Implementation",
+    "title": "Generative AI implementation",
     "description": "EPOCH Software Services implements generative AI solutions that help US enterprises automate content creation, streamline workflows, and build intelligent agent systems.",
     "keyPoints": [
      "We help you move from pilot projects to production-ready GenAI systems with proper governance, security, and integration into your existing workflows.",
@@ -427,51 +427,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Generative AI",
+    "title": "Our expertise in generative AI",
     "description": "Our team delivers GenAI solutions grounded in practical enterprise needs, with a focus on governance, bias mitigation, and seamless integration with existing systems.",
     "skills": [
      {
-      "name": "LLM Fine-Tuning & RAG Architectures",
+      "name": "LLM fine-tuning & RAG architectures",
       "description": "Custom fine-tuning of foundation models and retrieval-augmented generation for domain-specific accuracy"
      },
      {
-      "name": "AI Agent Development",
+      "name": "AI agent development",
       "description": "Multi-step autonomous agents for workflow orchestration, data analysis, and decision support"
      },
      {
-      "name": "GenAI Governance & Safety",
+      "name": "GenAI governance & safety",
       "description": "Guardrails, content filtering, bias audits, and compliance frameworks for responsible enterprise deployment"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Use Case Identification",
+      "title": "Use case identification",
       "description": "We map your workflows to identify high-impact GenAI opportunities and estimate ROI for each."
      },
      {
       "step": "02",
-      "title": "Model Selection & Customization",
+      "title": "Model selection & customization",
       "description": "We select the right foundation model and fine-tune or configure RAG pipelines with your proprietary data."
      },
      {
       "step": "03",
-      "title": "Integration & Governance Setup",
+      "title": "Integration & governance setup",
       "description": "We embed GenAI into your systems with proper guardrails, access controls, and output monitoring."
      },
      {
       "step": "04",
-      "title": "Optimization & Scaling",
+      "title": "Optimization & scaling",
       "description": "We measure performance against business KPIs and expand successful implementations across the organization."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Chatbots and Conversational AI",
+     "title": "Chatbots and conversational AI",
      "description": "Develop intelligent chatbots that handle customer queries, support tickets, and internal communications with natural, context-aware responses. We customize models for your domain to ensure accuracy and personalization.",
      "features": [
       "Customer service",
@@ -485,7 +485,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Automated Design and Content Creation",
+     "title": "Automated design and content creation",
      "description": "Generate high-quality images, videos, text, and designs automatically. Our solutions integrate with creative workflows for marketing materials, product prototypes, and reports.",
      "features": [
       "Marketing campaigns",
@@ -499,7 +499,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "AI Agents for Workflow Automation",
+     "title": "AI agents for workflow automation",
      "description": "Build autonomous AI agents that perform complex tasks like data analysis, process orchestration, and decision support. We focus on agentic AI for multi-step workflows.",
      "features": [
       "Supply chain optimization",
@@ -513,7 +513,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Code Generation and Software Assistance",
+     "title": "Code generation and software assistance",
      "description": "Utilize GenAI to automate coding, debugging, and documentation, speeding up development cycles while maintaining quality.",
      "features": [
       "Software engineering",
@@ -527,7 +527,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "GenAI Governance and Ethical Implementation",
+     "title": "GenAI governance and ethical implementation",
      "description": "Provide frameworks for ethical AI use, including bias audits, compliance checks, and transparency tools to align with regulations.",
      "features": [
       "Risk management",
@@ -565,14 +565,14 @@ window.EPOCH_DATA = {
    ],
    "industries": [
     {
-     "name": "Marketing and Sales",
+     "name": "Marketing and sales",
      "applications": [
       "Personalized campaigns",
       "Lead generation"
      ]
     },
     {
-     "name": "Customer Service",
+     "name": "Customer service",
      "applications": [
       "AI-driven interactions",
       "Ticket resolution",
@@ -630,7 +630,7 @@ window.EPOCH_DATA = {
     "Our governance frameworks address compliance requirements before they become problems",
     "We focus on measurable business outcomes, not impressive demos that never reach production"
    ],
-   "ctaTitle": "Explore Generative AI for Your Team",
+   "ctaTitle": "Explore generative AI for your team",
    "ctaDescription": "Let's talk about where generative AI fits into your workflows. We'll help you identify high-impact use cases and a practical path forward.",
    "ctaButtonText": "Start a Conversation",
    "stats": [
@@ -673,7 +673,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Cloud Computing Solutions - EPOCH",
    "metaDescription": "Enterprise cloud solutions including migration, optimization, and management across AWS, Azure, and Google Cloud.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Cloud adoption is no longer optional, but managing costs, security, and complexity across providers is harder than expected.",
     "painPoints": [
      "Your cloud spend is growing faster than your workloads, with no clear visibility into waste",
@@ -683,7 +683,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Cloud Computing Services",
+    "title": "Cloud computing services",
     "description": "EPOCH Software Services delivers cloud computing solutions that help US enterprises achieve agility, scalability, and operational efficiency across hybrid and multi-cloud environments.",
     "keyPoints": [
      "We help you optimize your cloud journey, whether that means migrating workloads, reducing spend, or architecting for scale across multiple providers.",
@@ -691,51 +691,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Cloud Computing",
+    "title": "Our expertise in cloud computing",
     "description": "Our team designs and manages cloud environments that support modern workloads including AI/ML, hybrid architectures, and multi-cloud setups, with a focus on cost optimization and security.",
     "skills": [
      {
-      "name": "Multi-Cloud Architecture (AWS, Azure, GCP)",
+      "name": "Multi-cloud architecture (AWS, Azure, GCP)",
       "description": "Design and manage environments across all major cloud providers with unified governance and cost controls"
      },
      {
-      "name": "Cloud-Native & Serverless Engineering",
+      "name": "Cloud-native & serverless engineering",
       "description": "Build applications using containers, Kubernetes, and serverless functions for automatic scaling and cost efficiency"
      },
      {
-      "name": "FinOps & Cost Optimization",
+      "name": "FinOps & cost optimization",
       "description": "Implement financial operations practices that give you visibility and control over cloud spending"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Infrastructure Assessment",
+      "title": "Infrastructure assessment",
       "description": "We audit your current environment, identify migration candidates, and map dependencies across your systems."
      },
      {
       "step": "02",
-      "title": "Architecture Design",
+      "title": "Architecture design",
       "description": "We design a target cloud architecture optimized for your workload patterns, compliance needs, and budget constraints."
      },
      {
       "step": "03",
-      "title": "Migration & Deployment",
+      "title": "Migration & deployment",
       "description": "We execute migrations in phases with rollback plans, automated testing, and zero-downtime cutover strategies."
      },
      {
       "step": "04",
-      "title": "Optimization & Management",
+      "title": "Optimization & management",
       "description": "We continuously monitor performance and costs, rightsizing resources and implementing automation to keep spend under control."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Cloud Migration",
+     "title": "Cloud migration",
      "description": "Seamlessly transition your on-premises systems to the cloud with minimal disruption. We handle data transfer, application refactoring, and testing to ensure a smooth shift.",
      "features": [
       "Legacy modernization",
@@ -749,7 +749,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Multi-Cloud Management",
+     "title": "Multi-cloud management",
      "description": "Orchestrate operations across multiple providers like AWS, Azure, and Google Cloud for redundancy and optimization. Our tools provide unified monitoring, governance, and automation.",
      "features": [
       "Vendor diversification",
@@ -763,7 +763,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Serverless Architecture",
+     "title": "Serverless architecture",
      "description": "Build and deploy applications without managing servers, using services like AWS Lambda or Azure Functions for auto-scaling and pay-per-use models.",
      "features": [
       "Event-driven apps",
@@ -777,7 +777,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Cloud Cost Optimization and FinOps",
+     "title": "Cloud cost optimization and FinOps",
      "description": "Implement strategies to monitor and reduce cloud spend through rightsizing, reserved instances, and automated scaling. We integrate FinOps practices for ongoing efficiency.",
      "features": [
       "Budget forecasting",
@@ -791,7 +791,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Hybrid Cloud Solutions",
+     "title": "Hybrid cloud solutions",
      "description": "Combine public, private, and on-premises clouds for customized environments that balance security, performance, and compliance.",
      "features": [
       "Sensitive data handling",
@@ -893,7 +893,7 @@ window.EPOCH_DATA = {
     "Migration methodology with built-in rollback plans and zero-downtime strategies",
     "We manage the complexity of multi-cloud so your team focuses on building products, not infrastructure"
    ],
-   "ctaTitle": "Discuss Your Cloud Strategy",
+   "ctaTitle": "Discuss your cloud strategy",
    "ctaDescription": "Whether you're planning a migration or optimizing an existing setup, we can help you map out the right cloud approach for your organization.",
    "ctaButtonText": "Talk to Our Team",
    "stats": [
@@ -933,7 +933,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Cybersecurity Solutions - EPOCH",
    "metaDescription": "Enterprise cybersecurity services including threat detection, incident response, zero-trust architecture, and compliance management.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Cyber threats are more sophisticated and frequent than ever, and most enterprises are not keeping pace with their security posture.",
     "painPoints": [
      "Your security team is overwhelmed by alerts but lacks the tools to prioritize real threats",
@@ -943,7 +943,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Cybersecurity Solutions",
+    "title": "Cybersecurity solutions",
     "description": "EPOCH Software Services provides cybersecurity solutions designed to protect US enterprises from escalating threats in an increasingly digital landscape.",
     "keyPoints": [
      "We deliver proactive defense, compliance readiness, and resilience across your digital infrastructure, from endpoints to cloud environments.",
@@ -951,51 +951,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Cybersecurity",
+    "title": "Our expertise in cybersecurity",
     "description": "Our team specializes in comprehensive cybersecurity frameworks that integrate AI-powered detection, cloud security, and regulatory compliance for US enterprises.",
     "skills": [
      {
-      "name": "Zero-Trust Architecture Design",
+      "name": "Zero-trust architecture design",
       "description": "Implement identity-centric security models that verify every access request regardless of network location"
      },
      {
-      "name": "Threat Detection & Incident Response",
+      "name": "Threat detection & incident response",
       "description": "AI-powered SIEM, endpoint detection, and 24/7 monitoring with rapid containment and forensic capabilities"
      },
      {
-      "name": "Compliance & Risk Management (NIST, SOC 2, HIPAA)",
+      "name": "Compliance & risk management (NIST, SOC 2, HIPAA)",
       "description": "Audit preparation, gap analysis, and policy development aligned with major regulatory frameworks"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Security Assessment & Gap Analysis",
+      "title": "Security assessment & gap analysis",
       "description": "We evaluate your current security posture, identify vulnerabilities, and benchmark against industry frameworks."
      },
      {
       "step": "02",
-      "title": "Architecture & Policy Design",
+      "title": "Architecture & policy design",
       "description": "We design security architectures and policies tailored to your risk profile, compliance needs, and infrastructure."
      },
      {
       "step": "03",
-      "title": "Implementation & Hardening",
+      "title": "Implementation & hardening",
       "description": "We deploy security controls, configure monitoring systems, and harden your environment against known attack vectors."
      },
      {
       "step": "04",
-      "title": "Continuous Monitoring & Response",
+      "title": "Continuous monitoring & response",
       "description": "We provide ongoing threat monitoring, regular penetration testing, and incident response support to keep defenses current."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Penetration Testing",
+     "title": "Penetration testing",
      "description": "Conduct simulated attacks to identify vulnerabilities in your systems, networks, and applications. We use ethical hacking techniques to uncover weaknesses before adversaries do.",
      "features": [
       "Web app security",
@@ -1009,7 +1009,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Zero-Trust Architecture",
+     "title": "Zero-trust architecture",
      "description": "Implement a security model that verifies every access request, regardless of origin, to minimize insider threats and lateral movement.",
      "features": [
       "Remote work environments",
@@ -1023,7 +1023,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Post-Quantum Cryptography",
+     "title": "Post-quantum cryptography",
      "description": "Upgrade encryption methods to withstand quantum computing threats, ensuring long-term data protection.",
      "features": [
       "Secure communications",
@@ -1037,7 +1037,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Managed Detection and Response (MDR)",
+     "title": "Managed detection and response (MDR)",
      "description": "Provide 24/7 monitoring, threat hunting, and rapid incident response using AI-powered tools for real-time defense.",
      "features": [
       "Endpoint protection",
@@ -1051,7 +1051,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Compliance and Risk Management",
+     "title": "Compliance and risk management",
      "description": "Assist with regulatory adherence (e.g., GDPR, NIST) through audits, policy development, and risk assessments.",
      "features": [
       "Data privacy frameworks",
@@ -1157,7 +1157,7 @@ window.EPOCH_DATA = {
     "We build security programs, not just run scans, so your posture improves systematically over time",
     "We provide plain-language risk reporting that executives and boards can actually act on"
    ],
-   "ctaTitle": "Assess Your Security Posture",
+   "ctaTitle": "Assess your security posture",
    "ctaDescription": "Talk to our cybersecurity team about your threat landscape, compliance requirements, and security priorities.",
    "ctaButtonText": "Schedule a Discussion",
    "stats": [
@@ -1200,7 +1200,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Custom Software Development - EPOCH",
    "metaDescription": "Bespoke software solutions tailored to your business. Full-stack development, legacy modernization, and enterprise systems.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Off-the-shelf software rarely fits complex enterprise workflows, but building custom solutions in-house is resource-intensive.",
     "painPoints": [
      "Your team wastes hours on workarounds because existing software does not match your actual business processes",
@@ -1210,7 +1210,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Custom Software Development",
+    "title": "Custom software development",
     "description": "EPOCH Software Services builds bespoke software solutions that address the unique challenges and opportunities of US enterprises, from internal tools to customer-facing platforms.",
     "keyPoints": [
      "We build software that fits your workflows, not the other way around, from internal tools and customer portals to complex integrations.",
@@ -1218,51 +1218,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Custom Software Development",
+    "title": "Our expertise in custom software development",
     "description": "Our team delivers agile, end-to-end custom software development using modern frameworks, with expertise spanning full-stack engineering, modernization, and AI-integrated applications.",
     "skills": [
      {
-      "name": "Full-Stack Engineering (React, Node.js, Python, .NET)",
+      "name": "Full-stack engineering (React, Node.js, Python, .NET)",
       "description": "End-to-end application development using modern frameworks with TypeScript, robust APIs, and cloud-native backends"
      },
      {
-      "name": "Legacy Modernization & Migration",
+      "name": "Legacy modernization & migration",
       "description": "Refactoring monolithic applications to microservices, migrating databases, and modernizing tech stacks without disrupting operations"
      },
      {
-      "name": "API Design & System Integration",
+      "name": "API design & system integration",
       "description": "RESTful and GraphQL API development connecting CRM, ERP, payment, and third-party systems into unified workflows"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Discovery & Requirements",
+      "title": "Discovery & requirements",
       "description": "We map your business processes, identify pain points, and define requirements with measurable success criteria."
      },
      {
       "step": "02",
-      "title": "Architecture & Prototyping",
+      "title": "Architecture & prototyping",
       "description": "We design the system architecture, create interactive prototypes, and validate the approach with your stakeholders."
      },
      {
       "step": "03",
-      "title": "Iterative Development",
+      "title": "Iterative development",
       "description": "We build in 2-week sprints with regular demos, incorporating feedback and shipping working software continuously."
      },
      {
       "step": "04",
-      "title": "Launch & Support",
+      "title": "Launch & support",
       "description": "We handle production deployment, monitoring setup, and provide ongoing maintenance and feature development."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Full-Stack Development",
+     "title": "Full-stack development",
      "description": "Build comprehensive applications from front-end to back-end using technologies like React, Node.js, and databases such as PostgreSQL. We create robust, user-centric software tailored to your operations.",
      "features": [
       "E-commerce platforms",
@@ -1276,7 +1276,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Legacy System Modernization",
+     "title": "Legacy system modernization",
      "description": "Update outdated systems to modern architectures, migrating to cloud-native environments while preserving core functionality and data integrity.",
      "features": [
       "Monolith to microservices refactoring",
@@ -1290,7 +1290,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "API Development and Integration",
+     "title": "API development and integration",
      "description": "Design secure, scalable APIs to connect disparate systems, enabling data flow and third-party integrations for enhanced interoperability.",
      "features": [
       "CRM-ERP syncing",
@@ -1304,7 +1304,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Low-Code/No-Code Solutions",
+     "title": "Low-code/no-code solutions",
      "description": "Leverage platforms like Microsoft Power Apps to enable rapid application development with minimal coding, empowering non-technical teams.",
      "features": [
       "Custom workflows",
@@ -1318,7 +1318,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "AI-Integrated Custom Development",
+     "title": "AI-integrated custom development",
      "description": "Embed AI and ML into bespoke software for predictive features, automation, and intelligent insights.",
      "features": [
       "Personalized recommendations",
@@ -1420,7 +1420,7 @@ window.EPOCH_DATA = {
     "We write clean, documented code with comprehensive test coverage, built for the next team and not just the current sprint",
     "Full IP ownership and source code access from day one of every engagement"
    ],
-   "ctaTitle": "Get Started with Custom Software",
+   "ctaTitle": "Get started with custom software",
    "ctaDescription": "Tell us about your requirements and we'll scope out a solution that fits your business, timeline, and budget.",
    "ctaButtonText": "Discuss Your Project",
    "stats": [
@@ -1463,7 +1463,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Data Analytics & Business Intelligence - EPOCH",
    "metaDescription": "Enterprise data analytics solutions including real-time dashboards, predictive analytics, and data engineering.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "You have more data than ever, but turning it into timely, trustworthy decisions remains a struggle.",
     "painPoints": [
      "Your data lives in silos across departments, making it impossible to get a unified view of the business",
@@ -1473,7 +1473,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Data Analytics and Big Data Services",
+    "title": "Data analytics and big data services",
     "description": "EPOCH Software Services delivers data analytics and big data solutions that enable US enterprises to extract actionable insights from large datasets, supporting informed decision-making across the organization.",
     "keyPoints": [
      "We build analytics platforms that consolidate your data, automate pipeline orchestration, and deliver real-time insights to decision-makers.",
@@ -1481,51 +1481,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Data Analytics and Big Data",
+    "title": "Our expertise in data analytics and big data",
     "description": "Our team builds scalable analytics frameworks that incorporate AI, edge computing, and cloud integrations, with hands-on experience in data visualization, predictive modeling, and governance.",
     "skills": [
      {
-      "name": "Data Pipeline Engineering (Spark, Kafka, Airflow)",
+      "name": "Data pipeline engineering (Spark, Kafka, Airflow)",
       "description": "Build reliable, scalable data pipelines for batch and real-time processing across cloud and hybrid environments"
      },
      {
-      "name": "BI & Visualization (Tableau, Power BI, Looker)",
+      "name": "BI & visualization (Tableau, Power BI, Looker)",
       "description": "Design interactive dashboards and self-service reporting platforms that make data accessible to non-technical users"
      },
      {
-      "name": "Data Governance & Quality Frameworks",
+      "name": "Data governance & quality frameworks",
       "description": "Implement data cataloging, lineage tracking, quality monitoring, and access controls for trustworthy analytics"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Data Landscape Assessment",
+      "title": "Data landscape assessment",
       "description": "We audit your data sources, quality, and infrastructure to identify gaps and opportunities for consolidation."
      },
      {
       "step": "02",
-      "title": "Platform Architecture & Pipeline Design",
+      "title": "Platform architecture & pipeline design",
       "description": "We design your data platform, defining schemas, pipelines, and governance rules tailored to your analytics needs."
      },
      {
       "step": "03",
-      "title": "Implementation & Dashboard Development",
+      "title": "Implementation & dashboard development",
       "description": "We build data pipelines, deploy governance tooling, and create dashboards that deliver insights to the right stakeholders."
      },
      {
       "step": "04",
-      "title": "Enablement & Optimization",
+      "title": "Enablement & optimization",
       "description": "We train your team on self-service tools and continuously optimize pipeline performance and data quality."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Big Data Platforms",
+     "title": "Big data platforms",
      "description": "Design and implement robust platforms using tools like Hadoop, Spark, and cloud-based solutions for storing and processing massive datasets.",
      "features": [
       "Scalable storage for IoT data",
@@ -1539,7 +1539,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Real-Time Analytics",
+     "title": "Real-time analytics",
      "description": "Enable instant data processing and visualization for immediate insights, using streaming technologies like Kafka and Flink.",
      "features": [
       "Fraud detection",
@@ -1553,7 +1553,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Data Governance Frameworks",
+     "title": "Data governance frameworks",
      "description": "Establish policies, standards, and tools for data quality, privacy, and compliance, including GDPR and CCPA adherence.",
      "features": [
       "Data lineage tracking",
@@ -1567,7 +1567,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Predictive Analytics and Modeling",
+     "title": "Predictive analytics and modeling",
      "description": "Develop models using machine learning to forecast trends, risks, and opportunities from historical and real-time data.",
      "features": [
       "Demand forecasting",
@@ -1581,7 +1581,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Data Visualization and BI Tools",
+     "title": "Data visualization and BI tools",
      "description": "Create intuitive dashboards and reports with tools like Tableau and Power BI for easy interpretation of complex data.",
      "features": [
       "Executive reporting",
@@ -1683,7 +1683,7 @@ window.EPOCH_DATA = {
     "We prioritize data governance from day one so your analytics are trustworthy and audit-ready",
     "We train your team on self-service tools so you are not dependent on us for every new report"
    ],
-   "ctaTitle": "Explore Data Analytics for Your Organization",
+   "ctaTitle": "Explore data analytics for your organization",
    "ctaDescription": "Let's discuss your data challenges and how analytics can support better decision-making across your enterprise.",
    "ctaButtonText": "Talk to Our Team",
    "stats": [
@@ -1726,7 +1726,7 @@ window.EPOCH_DATA = {
    "metaTitle": "DevOps and Automation Services - EPOCH",
    "metaDescription": "DevOps automation services including CI/CD pipelines, monitoring, DevSecOps, and AIOps solutions for enterprise.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Shipping software quickly and reliably requires more than just tools. It requires the right practices, pipelines, and culture.",
     "painPoints": [
      "Deployments are manual, error-prone, and take hours instead of minutes",
@@ -1736,7 +1736,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "DevOps and Automation Services",
+    "title": "DevOps and automation services",
     "description": "EPOCH Software Services provides DevOps and automation services that accelerate software delivery, improve collaboration, and strengthen operational resilience for US enterprises.",
     "keyPoints": [
      "We implement CI/CD pipelines, infrastructure-as-code, and observability systems that let your team ship faster with confidence.",
@@ -1744,51 +1744,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in DevOps and Automation",
+    "title": "Our expertise in DevOps and automation",
     "description": "Our team builds scalable DevOps ecosystems using modern tools like GitLab, Kubernetes, and Terraform, with a focus on security, observability, and Infrastructure as Code.",
     "skills": [
      {
-      "name": "CI/CD Pipeline Engineering (GitHub Actions, GitLab CI, Jenkins)",
+      "name": "CI/CD pipeline engineering (GitHub Actions, GitLab CI, Jenkins)",
       "description": "Design and implement automated build, test, and deployment pipelines with proper gating and rollback strategies"
      },
      {
-      "name": "Infrastructure as Code (Terraform, Pulumi, Ansible)",
+      "name": "Infrastructure as code (Terraform, Pulumi, Ansible)",
       "description": "Define and manage infrastructure declaratively for consistent, reproducible environments across all stages"
      },
      {
-      "name": "Container Orchestration (Kubernetes, Docker, ECS)",
+      "name": "Container orchestration (Kubernetes, Docker, ECS)",
       "description": "Deploy and manage containerized applications with auto-scaling, health checks, and zero-downtime deployments"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Pipeline & Infrastructure Audit",
+      "title": "Pipeline & infrastructure audit",
       "description": "We assess your current deployment process, infrastructure management, and monitoring to identify bottlenecks and risks."
      },
      {
       "step": "02",
-      "title": "Pipeline Design & IaC Setup",
+      "title": "Pipeline design & IaC setup",
       "description": "We design CI/CD pipelines and codify your infrastructure, establishing version-controlled, repeatable processes."
      },
      {
       "step": "03",
-      "title": "Implementation & Security Integration",
+      "title": "Implementation & security integration",
       "description": "We build pipelines, deploy monitoring, and embed security scanning at every stage of the delivery process."
      },
      {
       "step": "04",
-      "title": "Optimization & Team Enablement",
+      "title": "Optimization & team enablement",
       "description": "We tune performance, reduce pipeline times, and train your team to own and extend the DevOps platform independently."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Pipeline Setup (CI/CD)",
+     "title": "Pipeline setup (CI/CD)",
      "description": "Design and implement continuous integration and deployment pipelines using tools like GitHub Actions or GitLab CI for automated testing and releases.",
      "features": [
       "Software build automation",
@@ -1802,7 +1802,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Monitoring and Observability Tools",
+     "title": "Monitoring and observability tools",
      "description": "Deploy advanced monitoring solutions like Prometheus and Grafana for real-time insights, alerting, and performance optimization.",
      "features": [
       "System health tracking",
@@ -1816,7 +1816,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Process Automation",
+     "title": "Process automation",
      "description": "Automate workflows with IaC tools like Terraform and Ansible, including orchestration for infrastructure provisioning and configuration management.",
      "features": [
       "Cloud resource automation",
@@ -1830,7 +1830,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "DevSecOps Implementation",
+     "title": "DevSecOps implementation",
      "description": "Integrate security into DevOps pipelines with automated scans, zero-trust models, and compliance tools for secure code-to-production flows.",
      "features": [
       "Vulnerability management",
@@ -1844,7 +1844,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "AIOps and GitOps Services",
+     "title": "AIOps and GitOps services",
      "description": "Leverage AI for predictive operations and GitOps for declarative infrastructure management, enhancing automation and self-healing systems.",
      "features": [
       "Intelligent pipelines",
@@ -1946,7 +1946,7 @@ window.EPOCH_DATA = {
     "We integrate security into pipelines from day one, not as an afterthought",
     "We focus on developer experience: fast feedback loops, clear documentation, and self-service capabilities"
    ],
-   "ctaTitle": "Improve Your DevOps Pipeline",
+   "ctaTitle": "Improve your DevOps pipeline",
    "ctaDescription": "Whether you're starting from scratch or optimizing an existing setup, we can help you build a more reliable delivery process.",
    "ctaButtonText": "Talk to Our Engineers",
    "stats": [
@@ -1989,7 +1989,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Mobile Application Development - EPOCH",
    "metaDescription": "Mobile app development for enterprise. Native iOS/Android, hybrid development, PWAs, and AI-enhanced mobile solutions.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Mobile is often the primary channel for customer and employee interaction, but building reliable, performant apps across platforms is harder than it looks.",
     "painPoints": [
      "Your mobile app is slow, buggy, or outdated and users are abandoning it for competitor alternatives",
@@ -1999,7 +1999,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Mobile Application Development",
+    "title": "Mobile application development",
     "description": "EPOCH Software Services builds high-performance mobile applications that serve enterprise needs in a mobile-first world, from customer-facing platforms to internal workforce tools.",
     "keyPoints": [
      "We build mobile apps that perform well, look great, and integrate seamlessly with your backend systems and business logic.",
@@ -2007,11 +2007,11 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Mobile Application Development",
+    "title": "Our expertise in mobile application development",
     "description": "Our team delivers end-to-end mobile app development using frameworks like React Native, Flutter, and Swift, with a focus on user-centric design, security, and seamless cloud connectivity.",
     "skills": [
      {
-      "name": "Cross-Platform Development (React Native, Flutter)",
+      "name": "Cross-platform development (React Native, Flutter)",
       "description": "Build high-performance apps for iOS and Android from a single codebase, reducing cost and time to market"
      },
      {
@@ -2019,39 +2019,39 @@ window.EPOCH_DATA = {
       "description": "Platform-specific development for apps requiring maximum performance, deep OS integration, or hardware access"
      },
      {
-      "name": "Mobile UX Design & Prototyping",
+      "name": "Mobile UX design & prototyping",
       "description": "Research-driven interface design with interactive prototyping, accessibility compliance, and user testing"
      }
     ]
    },
    "process": {
-    "title": "How We Work",
+    "title": "How we work",
     "steps": [
      {
       "step": "01",
-      "title": "Requirements & Platform Strategy",
+      "title": "Requirements & platform strategy",
       "description": "We define your mobile requirements and recommend native, cross-platform, or PWA based on your audience, budget, and performance needs."
      },
      {
       "step": "02",
-      "title": "UX Design & Prototyping",
+      "title": "UX design & prototyping",
       "description": "We create wireframes and interactive prototypes, validate with real users, and iterate before writing production code."
      },
      {
       "step": "03",
-      "title": "Development & Testing",
+      "title": "Development & testing",
       "description": "We build in sprints with automated testing on real devices, continuous integration, and regular stakeholder reviews."
      },
      {
       "step": "04",
-      "title": "Launch & Iteration",
+      "title": "Launch & iteration",
       "description": "We handle app store submission, analytics setup, and post-launch monitoring, then iterate based on real user behavior."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Native and Hybrid App Development",
+     "title": "Native and hybrid app development",
      "description": "Create platform-specific native apps for iOS/Android or efficient hybrid solutions using cross-platform tools for broader reach and faster deployment.",
      "features": [
       "Enterprise mobility tools",
@@ -2065,7 +2065,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "App Security Implementation",
+     "title": "App security implementation",
      "description": "Embed robust security features like encryption, biometric authentication, and compliance with standards such as GDPR and CCPA.",
      "features": [
       "Secure data handling",
@@ -2079,7 +2079,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "UX/UI Design",
+     "title": "UX/UI design",
      "description": "Design intuitive interfaces with user research, wireframing, and prototyping for engaging, accessible experiences across devices.",
      "features": [
       "Custom dashboards",
@@ -2093,7 +2093,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Progressive Web Apps (PWAs)",
+     "title": "Progressive web apps (PWAs)",
      "description": "Develop web-based apps that function like native ones, offering offline access, push notifications, and fast loading.",
      "features": [
       "Cost-effective e-commerce",
@@ -2107,7 +2107,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "AI-Enhanced Mobile Apps",
+     "title": "AI-enhanced mobile apps",
      "description": "Integrate AI for features like chatbots, predictive analytics, and personalized recommendations within mobile environments.",
      "features": [
       "Smart assistants",
@@ -2209,7 +2209,7 @@ window.EPOCH_DATA = {
     "We design mobile-first, not responsive web shrunk to fit a phone screen",
     "We set up analytics and crash reporting from day one so you understand how users actually use the app"
    ],
-   "ctaTitle": "Plan Your Mobile App",
+   "ctaTitle": "Plan your mobile app",
    "ctaDescription": "Share your requirements and target platforms. We'll help you choose the right approach and build an app that works for your users.",
    "ctaButtonText": "Discuss Your App",
    "stats": [
@@ -2252,7 +2252,7 @@ window.EPOCH_DATA = {
    "metaTitle": "Digital Transformation Consulting - EPOCH",
    "metaDescription": "Strategic digital transformation consulting for enterprises. Assessments, roadmaps, change management, and implementation support.",
    "problemStatement": {
-    "title": "Challenges You May Be Facing",
+    "title": "Challenges you may be facing",
     "description": "Technology decisions are becoming more complex and consequential, and the wrong strategy can waste years of investment.",
     "painPoints": [
      "Your organization has invested in technology initiatives that delivered tools but not outcomes",
@@ -2262,7 +2262,7 @@ window.EPOCH_DATA = {
     ]
    },
    "overview": {
-    "title": "Digital Transformation Consulting",
+    "title": "Digital transformation consulting",
     "description": "EPOCH Software Services provides strategic digital transformation consulting to help US enterprises plan and execute comprehensive technology initiatives with clarity and confidence.",
     "keyPoints": [
      "We help you build a clear, phased technology roadmap aligned with your business objectives, competitive landscape, and organizational readiness.",
@@ -2270,51 +2270,51 @@ window.EPOCH_DATA = {
     ]
    },
    "expertise": {
-    "title": "Our Expertise in Digital Transformation Consulting",
+    "title": "Our expertise in digital transformation consulting",
     "description": "Our consulting practice encompasses strategy formulation, technology assessments, and change management, with a focus on aligning technology decisions with business objectives.",
     "skills": [
      {
-      "name": "Technology Assessment & Roadmapping",
+      "name": "Technology assessment & roadmapping",
       "description": "Evaluate current maturity, identify gaps, and build phased transformation roadmaps with clear milestones and success metrics"
      },
      {
-      "name": "Change Management & Organizational Readiness",
+      "name": "Change management & organizational readiness",
       "description": "Guide stakeholder alignment, employee reskilling, and cultural adaptation to ensure technology investments deliver adoption"
      },
      {
-      "name": "AI, Cloud & Data Strategy",
+      "name": "AI, cloud & data strategy",
       "description": "Advisory services for enterprise AI adoption, cloud migration planning, and data architecture modernization"
      }
     ]
    },
    "process": {
-    "title": "Our Process",
+    "title": "Our process",
     "steps": [
      {
       "step": "01",
-      "title": "Current State Assessment",
+      "title": "Current state assessment",
       "description": "We audit your technology landscape, organizational capabilities, and competitive position to establish a clear baseline."
      },
      {
       "step": "02",
-      "title": "Strategy & Roadmap Development",
+      "title": "Strategy & roadmap development",
       "description": "We build a prioritized, phased roadmap with business case justification, resource requirements, and measurable milestones."
      },
      {
       "step": "03",
-      "title": "Implementation Oversight",
+      "title": "Implementation oversight",
       "description": "We provide hands-on guidance during execution including vendor selection, architecture review, and progress tracking."
      },
      {
       "step": "04",
-      "title": "Optimization & Continuous Improvement",
+      "title": "Optimization & continuous improvement",
       "description": "We measure outcomes against defined KPIs and adjust the roadmap based on what the data shows."
      }
     ]
    },
    "keyServices": [
     {
-     "title": "Assessments and Audits",
+     "title": "Assessments and audits",
      "description": "Conduct thorough evaluations of your current tech stack, processes, and readiness for digital initiatives, identifying gaps and opportunities.",
      "features": [
       "AI readiness assessments",
@@ -2328,7 +2328,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Transformation Roadmaps",
+     "title": "Transformation roadmaps",
      "description": "Develop customized, phased roadmaps outlining technology adoption, integration strategies, and milestones for AI, cloud, and data-driven initiatives.",
      "features": [
       "Multi-year technology plans",
@@ -2342,7 +2342,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Change Management Support",
+     "title": "Change management support",
      "description": "Guide organizational shifts through training, stakeholder engagement, and cultural adaptation to ensure smooth adoption of new technologies.",
      "features": [
       "Employee reskilling programs",
@@ -2356,7 +2356,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Implementation Consulting",
+     "title": "Implementation consulting",
      "description": "Provide hands-on advice during rollout, including vendor selection, integration oversight, and performance metrics setup.",
      "features": [
       "Vendor evaluation and selection",
@@ -2370,7 +2370,7 @@ window.EPOCH_DATA = {
      }
     },
     {
-     "title": "Optimization and Sustainability Advisory",
+     "title": "Optimization and sustainability advisory",
      "description": "Optimize post-implementation performance with ongoing audits, focusing on cost efficiency, scalability, and eco-friendly practices.",
      "features": [
       "Sustainable supply chain digitization",
@@ -2472,7 +2472,7 @@ window.EPOCH_DATA = {
     "We stay involved through implementation to ensure strategy translates into actual results",
     "We focus on adoption and change management because the best technology fails without organizational buy-in"
    ],
-   "ctaTitle": "Discuss Your Digital Strategy",
+   "ctaTitle": "Discuss your digital strategy",
    "ctaDescription": "Whether you're starting a new initiative or reassessing an existing one, we can help you build a clear, practical roadmap.",
    "ctaButtonText": "Schedule a Discussion",
    "stats": [
