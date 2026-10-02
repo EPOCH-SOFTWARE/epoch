@@ -28,3 +28,7 @@ Desktop shots are 1440 × 900 and phone shots are 390 × 844 at 2x.
 | `desktop-16-logo-concepts.jpg` | `marks.html`, the logo concepts page |
 | `desktop-17-footer-lab.jpg` | `footer-lab.html`, the footer options the founder chose from |
 | `mobile-01-home.jpg` to `mobile-06-contact.jpg` | Home, Services, the 30-day ring, a case page, an article and Contact on a phone |
+
+### Footer letter colour update
+
+`desktop-18-footer-soft-ivory.png` and `mobile-07-footer-soft-ivory.png` show the giant wordmark using footer-lab option 8's ivory at 12% opacity, with the existing dusk glow and scroll rise. Earlier screenshots above retain the previous 20% letter opacity.

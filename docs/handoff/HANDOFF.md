@@ -12,7 +12,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
    - If port 3460 is busy: `kill $(lsof -ti tcp:3460)`.
-3. Current state (2026-10-03): the prototype is the **Night** design (ivory on black, with one orange point that always means "now"). Mark **08** is the site logo: the O of the wordmark is a live 24-hour clock. The inner-page craft pass (section 3, item 14) is done and pushed, and the founder is reviewing it. Screenshots of every page are in `screens/2026-10-03/`.
+3. Current state (2026-10-03): the prototype is the **Night** design (ivory on black, with one orange point that always means "now"). Mark **08** is the site logo: the O of the wordmark is a live 24-hour clock. The inner-page craft pass (section 3, item 14) is done and pushed, and the founder is reviewing it. Screenshots of every page are in `screens/2026-10-03/`. The giant footer wordmark now uses option 8's softer ivory at 12% opacity; the existing dusk glow and scroll rise remain.
 4. **Do NOT port the prototype to Next.js until the founder says so.** They explicitly said "dont port it into next js tho".
 5. The GitHub repo `EPOCH-SOFTWARE/epoch` is **public**. Never commit private material such as chat transcripts, the founder's messages word for word, or credentials. Those stay in the local archive (section 12).
 6. Before showing the founder anything, run the full check in `docs/handoff/tools/README.md`, then look at the screenshots yourself.

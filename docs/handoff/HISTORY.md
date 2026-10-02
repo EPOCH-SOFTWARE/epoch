@@ -298,6 +298,15 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 
 ---
 
+## Session 3: footer letter colour (2026-10-03)
+
+- **Asked:** match the big footer EPOCH letter colour to footer-lab option 8, "One warm line".
+- **Changed:** shared `.foot-mark` colour from ivory at 20% opacity to option 8's exact 12%. The existing dusk glow and scroll rise remain; this request changes the letter colour only.
+- **Preserved:** the wordmark geometry and every footer-lab concept.
+- Desktop and phone captures: `screens/2026-10-03/desktop-18-footer-soft-ivory.png` and `screens/2026-10-03/mobile-07-footer-soft-ivory.png`.
+
+---
+
 ## Logo concepts at a glance
 
 | Concept | Where it lives | The idea | Founder's verdict |
