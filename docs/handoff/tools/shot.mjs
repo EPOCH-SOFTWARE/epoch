@@ -1,12 +1,13 @@
-// Usage: node shot.mjs <url> <out.png> [width=1440] [height=900] [waitMs=3000] [scrollY=0|selector] [scale=1]
+// Usage: node shot.mjs <url> <out.png> [width=1440] [height=900] [waitMs=3000] [scrollY=0|selector] [scale=1] [beforeJs]
 // Headless Chrome screenshot of one viewport. Never touches the user's own browser.
+// beforeJs runs just before the shot (e.g. to open a menu); REDUCED=1 emulates prefers-reduced-motion.
 import { spawn } from 'node:child_process';
 import { writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const [, , url, out, w = '1440', h = '900', waitMs = '3000', scroll = '0', scale = '1'] = process.argv;
+const [, , url, out, w = '1440', h = '900', waitMs = '3000', scroll = '0', scale = '1', beforeJs = ''] = process.argv;
 const here = dirname(fileURLToPath(import.meta.url));
 const port = 9300 + Math.floor(Math.random() * 600);
 const profile = mkdtempSync(join(here, 'chrome-profile-'));
@@ -61,6 +62,10 @@ try {
     deviceScaleFactor: Number(scale),
     mobile: Number(w) < 700,
   });
+  await send('Emulation.setFocusEmulationEnabled', { enabled: true });
+  if (process.env.REDUCED) {
+    await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+  }
   await send('Page.enable');
   await send('Page.navigate', { url });
   await sleep(Number(waitMs));
@@ -68,6 +73,7 @@ try {
     ? `window.scrollTo(0, ${scroll})`
     : `document.querySelector(${JSON.stringify(scroll)})?.scrollIntoView({ block: 'start' })`;
   await send('Runtime.evaluate', { expression: target });
+  if (beforeJs) await send('Runtime.evaluate', { expression: beforeJs, awaitPromise: true });
   await sleep(900);
   const { data } = await send('Page.captureScreenshot', { format: 'png' });
   writeFileSync(out, Buffer.from(data, 'base64'));
