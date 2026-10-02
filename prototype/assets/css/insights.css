@@ -39,27 +39,28 @@
   color: var(--text);
 }
 
-/* Article layout: contents on the left, the text in a readable measure on the right. */
+/* Article layout on the site grid: contents in columns 1-4, the text from column 6 in a reading measure. */
 .ins-layout {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: 32px 64px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px var(--col-gap);
   align-items: start;
 }
 
 /* The aside spans the full row so the contents list can stay pinned while the text scrolls. */
 .ins-aside {
+  grid-column: 1 / span 4;
   align-self: stretch;
 }
 
 .ins-toc {
   position: sticky;
-  top: calc(var(--header-h) + 32px);
+  top: var(--pin-top);
 }
 
 .ins-toc-title {
   margin-bottom: 12px;
-  font-size: 13px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 
@@ -72,22 +73,53 @@
 }
 
 .ins-toc a {
+  position: relative;
   display: block;
-  padding-block: 10px;
+  padding-block: 11px;
   font-size: 15px;
   line-height: 1.35;
   color: var(--muted);
-  transition: color 0.15s;
+  transition: color 0.2s;
 }
 
-.ins-toc a:hover {
+.ins-toc a:hover,
+.ins-toc a.current {
   color: var(--text);
 }
 
+/* The section being read now is marked by the logo's orange point in the margin; the words never move. */
+.ins-toc a::before {
+  content: '';
+  position: absolute;
+  left: -19px;
+  top: calc(11px + 0.675em - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform 0.35s var(--ease);
+}
+
+.ins-toc a.current::before {
+  transform: none;
+}
+
+/* The text: about 70 characters a line, set a touch softer than ivory for long reading. */
 .ins-body {
-  max-width: 68ch;
+  grid-column: 6 / -1;
+  max-width: 32em;
   font-size: 19px;
   line-height: 1.65;
+  color: rgba(242, 239, 232, 0.86);
+}
+
+.ins-body > p:first-child {
+  margin-bottom: 1.5em;
+  font-size: 1.16em;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  color: var(--text);
 }
 
 .ins-body p + p {
@@ -95,32 +127,33 @@
 }
 
 .ins-body h2 {
-  margin: 2.1em 0 0.6em;
+  margin: 2.2em 0 0.65em;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 28px;
+  font-size: clamp(25px, 0.8vw + 17px, 30px);
   letter-spacing: -0.02em;
   line-height: 1.2;
+  color: var(--text);
 }
 
 .ins-body > h2:first-child {
   margin-top: 0;
 }
 
-.ins-body ul {
-  margin-block: 1.1em;
+.ins-body > ul {
+  margin-block: 1.2em;
   border-top: 1px solid var(--line);
 }
 
-.ins-body li {
+.ins-body > ul > li {
   position: relative;
-  padding: 12px 0 12px 24px;
+  padding: 12px 0 12px 26px;
   border-bottom: 1px solid var(--line);
   font-size: 17px;
   line-height: 1.55;
 }
 
-.ins-body li::before {
+.ins-body > ul > li::before {
   content: '';
   position: absolute;
   left: 2px;
@@ -130,29 +163,44 @@
   background: var(--text);
 }
 
+/* A pull quote hangs its rule in the margin so the words keep the column's left edge. */
 .ins-quote {
-  margin-block: 1.8em;
-  padding: 4px 0 4px 24px;
-  border-left: 2px solid var(--text);
+  margin: 1.9em 0 1.9em -29px;
+  padding: 2px 0 2px 28px;
+  border-left: 1px solid var(--text);
   font-family: var(--font-display);
-  font-size: clamp(24px, 1.1vw + 16px, 32px);
+  font-size: clamp(25px, 1.3vw + 16px, 34px);
   font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  letter-spacing: -0.022em;
+  line-height: 1.22;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* The last paragraph ends on the O, the way a printed feature ends on its mark. */
+.ins-end {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-left: 0.4em;
+  border: 0.14em solid var(--text);
+  border-radius: 50%;
+  vertical-align: -0.02em;
 }
 
 .ins-closing {
-  margin-top: 2.4em;
+  margin-top: 3em;
   padding-top: 28px;
   border-top: 1px solid var(--line);
+  color: var(--text);
 }
 
 .ins-closing .actions {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .ins-body .ins-related-title {
-  margin: 40px 0 14px;
+  margin: 48px 0 14px;
   font-size: 15px;
   font-weight: 550;
   letter-spacing: 0;
@@ -170,14 +218,28 @@
 
 @media (max-width: 900px) {
   .ins-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ins-aside,
+  .ins-body {
+    grid-column: 1 / -1;
   }
 
   .ins-toc {
     position: static;
   }
 
+  .ins-toc a::before {
+    display: none;
+  }
+
   .ins-body {
     font-size: 18px;
+  }
+
+  .ins-quote {
+    margin-left: 0;
+    padding-left: 20px;
   }
 }

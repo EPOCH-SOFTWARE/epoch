@@ -233,7 +233,8 @@
 
   // ---------- Article ----------
 
-  function block(item) {
+  // The article's last paragraph ends on a small O, its end mark.
+  function block(item, index, items) {
     if (item.h2) return '<h2 id="' + slugify(item.h2) + '">' + esc(item.h2) + '</h2>';
     if (item.ul) {
       return '<ul>' + list(item.ul, function (entry) {
@@ -241,7 +242,8 @@
       }) + '</ul>';
     }
     if (item.quote) return '<blockquote class="ins-quote"><p>' + esc(item.quote) + '</p></blockquote>';
-    return '<p>' + esc(item.p) + '</p>';
+    var last = index === items.length - 1;
+    return '<p>' + esc(item.p) + (last ? '<span class="ins-end" aria-hidden="true"></span>' : '') + '</p>';
   }
 
   function contents(article) {
@@ -296,6 +298,42 @@
     );
   }
 
+  // The contents list marks the section being read: the last heading above the top third of the window.
+  function followContents() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.ins-toc a'));
+    if (!links.length) return;
+    var headings = links.map(function (link) {
+      var heading = document.getElementById(link.hash.slice(1));
+      if (!heading) throw new Error('The contents link "' + link.hash + '" has no heading to point to');
+      return heading;
+    });
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var tops = headings.map(function (heading) {
+        return heading.getBoundingClientRect().top;
+      });
+      var current = window.KeptTime.stepAt(tops, window.innerHeight * 0.3);
+      links.forEach(function (link, index) {
+        link.classList.toggle('current', index === current);
+        if (index === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (queued) return;
+        queued = true;
+        window.requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+    update();
+  }
+
   function renderArticle() {
     var target = document.querySelector('[data-article]');
     if (!target) return;
@@ -310,6 +348,7 @@
     }
     document.title = article.title + ' | EPOCH';
     target.innerHTML = articleMarkup(article);
+    followContents();
   }
 
   renderIndex();

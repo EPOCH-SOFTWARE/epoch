@@ -240,12 +240,16 @@
     '<h3>One team, from the first model to long after launch.</h3>' +
     '<a class="btn sm" href="contact.html">Start a project</a></article>';
 
+  // The two ways in, offered the same way on every page.
+  var CALLS =
+    '<div class="actions"><a class="btn" href="contact.html">Start a project</a>' +
+    '<a class="btn secondary" href="contact.html#book">Book a 30-minute call</a></div>';
+
   var CLOSING =
     '<section class="section ruled closing" aria-labelledby="closing-title"><div class="wrap">' +
     '<h2 id="closing-title" class="display">Bring us the project that matters most.</h2>' +
     '<div class="closing-foot"><p class="lede">Tell us what you’re building and what’s in the way. You’ll hear back within 24 hours.</p>' +
-    '<div class="actions"><a class="btn" href="contact.html">Start a project</a>' +
-    '<a class="btn secondary" href="contact.html#book">Book a 30-minute call</a></div></div>' +
+    CALLS + '</div>' +
     '</div></section>';
 
   function office(item) {
@@ -267,6 +271,14 @@
     return (
       '<section class="section ruled"' + (id ? ' id="' + id + '"' : '') + '><div class="wrap split">' +
       '<h2 class="h2">' + esc(title) + '</h2><div>' + content + '</div></div></section>'
+    );
+  }
+
+  // A section whose content runs the full width under its title, for tables and long rows.
+  function wideSection(title, content) {
+    return (
+      '<section class="section ruled"><div class="wrap">' +
+      '<div class="head split"><h2 class="h2">' + esc(title) + '</h2></div>' + content + '</div></section>'
     );
   }
 
@@ -351,14 +363,14 @@
       '<p class="crumbs"><a href="services.html">Services</a><span aria-hidden="true">/</span><a href="services.html#tier-' + tier.id + '">' + esc(tier.title) + '</a></p>' +
       '<h1 class="display">' + esc(summary.title) + '</h1>' +
       '<p class="lede">' + esc(detail.heroDescription) + '</p>' +
-      '<div class="actions"><a class="btn" href="contact.html">' + esc(detail.ctaButtonText) + '</a><a class="btn secondary" href="services.html">All services</a></div>' +
+      CALLS +
       '</div></section>' +
       section(detail.problemStatement.title, '<p class="lede strong">' + esc(detail.problemStatement.description) + '</p>' + bulletList(detail.problemStatement.painPoints, 'list mt-m')) +
       section(detail.overview.title, '<p class="lede strong">' + esc(detail.overview.description) + '</p>' +
         list(detail.overview.keyPoints, function (point) {
           return '<p class="body mt-s">' + esc(point) + '</p>';
         }) + '<h3 class="sub-h mt-l">' + esc(detail.expertise.title) + '</h3>' + skills) +
-      '<section class="section ruled"><div class="wrap"><div class="head split"><h2 class="h2">What we deliver</h2></div>' + deliver + '</div></section>' +
+      wideSection('What we deliver', deliver) +
       section(detail.process.title, steps) +
       section('Industries', industries) +
       section('Why EPOCH', bulletList(detail.whyEpoch)) +
@@ -366,11 +378,55 @@
       '<section class="section ruled closing"><div class="wrap">' +
       '<h2 class="display">' + esc(detail.ctaTitle) + '</h2>' +
       '<div class="closing-foot"><p class="lede">' + esc(detail.ctaDescription) + '</p>' +
-      '<div class="actions"><a class="btn" href="contact.html">' + esc(detail.ctaButtonText) + '</a><a class="btn secondary" href="services.html">All services</a></div></div>' +
+      CALLS + '</div>' +
       '</div></section>';
   }
 
   // ---------- Case study ----------
+
+  // The engagement drawn on the O: one turn is a year, and the arc runs for the real timeline.
+  // Nothing is drawn for a timeline that is not written in months or runs past a year.
+  var DIAL = { cx: 220, cy: 200, r: 130 };
+
+  function dialTicks() {
+    var ticks = '';
+    for (var month = 0; month < 12; month++) {
+      var major = month % 3 === 0;
+      var inner = KEPT.polar(DIAL.cx, DIAL.cy, DIAL.r + 10, month * 30);
+      var outer = KEPT.polar(DIAL.cx, DIAL.cy, DIAL.r + (major ? 22 : 16), month * 30);
+      ticks += '<line' + (major ? ' class="major"' : '') + ' x1="' + KEPT.num(inner.x) + '" y1="' + KEPT.num(inner.y) +
+        '" x2="' + KEPT.num(outer.x) + '" y2="' + KEPT.num(outer.y) + '"/>';
+    }
+    return '<g class="dial-ticks">' + ticks + '</g>';
+  }
+
+  // The label sits just outside the end of the arc, reading away from the ring.
+  function dialLabel(text, angle) {
+    var spot = KEPT.polar(DIAL.cx, DIAL.cy, DIAL.r + 40, angle);
+    var side = Math.sin((angle * Math.PI) / 180);
+    var anchor = side > 0.3 ? 'start' : side < -0.3 ? 'end' : 'middle';
+    return '<text class="dial-label" x="' + KEPT.num(spot.x) + '" y="' + KEPT.num(spot.y + 5) + '" text-anchor="' + anchor + '">' +
+      esc(text) + '</text>';
+  }
+
+  function engagementDial(study) {
+    var months = KEPT.monthsIn(study.timeline);
+    if (!months || months > 12) return '';
+    var sweep = months * 30;
+    var end = KEPT.polar(DIAL.cx, DIAL.cy, DIAL.r, sweep);
+    return (
+      // A picture of the Timeline fact below it, so assistive technology reads the fact instead.
+      '<figure class="case-dial" aria-hidden="true">' +
+      '<svg viewBox="0 0 440 400">' +
+      '<circle class="dial-year" cx="' + DIAL.cx + '" cy="' + DIAL.cy + '" r="' + DIAL.r + '"/>' + dialTicks() +
+      '<path class="dial-arc" pathLength="1" d="' + KEPT.arcPath(DIAL.cx, DIAL.cy, DIAL.r, 0, sweep) + '"/>' +
+      '<g class="dial-end"><circle cx="' + KEPT.num(end.x) + '" cy="' + KEPT.num(end.y) + '" r="6"/>' +
+      dialLabel(study.timeline, sweep) + '</g>' +
+      '</svg>' +
+      '<figcaption>One turn of the dial is a year.</figcaption>' +
+      '</figure>'
+    );
+  }
 
   function renderCase() {
     var main = document.getElementById('main');
@@ -389,7 +445,7 @@
       '<div><dt>Industry</dt><dd>' + esc(study.industry) + '</dd></div>' +
       '<div><dt>Company size</dt><dd>' + esc(study.companySize) + '</dd></div>' +
       '<div><dt>Timeline</dt><dd>' + esc(study.timeline) + '</dd></div>' +
-      '<div><dt>Team</dt><dd>' + study.teamSize.epoch + ' from EPOCH, ' + study.teamSize.client + ' from ' + esc(study.name) + '</dd></div>' +
+      '<div><dt>Team</dt><dd>' + study.teamSize.epoch + ' from EPOCH<br />' + study.teamSize.client + ' from ' + esc(study.name) + '</dd></div>' +
       '</dl>';
     var process = study.workingProcess;
     var worked =
@@ -404,7 +460,8 @@
       '<thead><tr><th scope="col">Area</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Result</th></tr></thead><tbody>' +
       list(study.quantifiableResults, function (result) {
         return '<tr><td>' + esc(result.metric) + '</td><td data-label="Before">' + esc(result.before) + '</td><td data-label="After">' + esc(result.after) + '</td><td data-label="Result">' + esc(result.improvement) + '</td></tr>';
-      }) + '</tbody></table>' + bulletList(study.qualitativeResults, 'list mt-l');
+      }) + '</tbody></table>' +
+      '<div class="split on-baseline mt-l"><h3 class="sub-h">What else changed</h3>' + bulletList(study.qualitativeResults) + '</div>';
     var related = study.relatedServices.map(findService).filter(Boolean);
     var testimonial = study.testimonial
       ? '<section class="section ruled"><div class="wrap"><figure><blockquote class="display quote">' + esc(study.testimonial.quote) +
@@ -414,9 +471,10 @@
     main.innerHTML =
       '<section class="page-hero"><div class="wrap">' +
       '<p class="crumbs"><a href="work.html">Work</a><span aria-hidden="true">/</span><span>' + esc(study.name) + '</span></p>' +
+      '<div class="case-intro"><div>' +
       '<ul class="clients"><li class="client" data-client="' + study.id + '"><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '"></li></ul>' +
       '<h1 class="display mt-m">' + esc(study.headline) + '</h1>' +
-      '<p class="lede">' + esc(study.summary) + '</p>' + facts +
+      '<p class="lede">' + esc(study.summary) + '</p></div>' + engagementDial(study) + '</div>' + facts +
       '</div></section>' +
       section('The problem', bulletList(study.generalChallenges) + '<h3 class="sub-h mt-l">Why EPOCH</h3><p class="body">' + esc(study.whyChoseEpoch) + '</p>') +
       section('What we built', '<p class="lede strong">' + esc(study.projectScope) + '</p>' + bulletList(study.deliverables, 'list mt-m')) +
@@ -428,7 +486,7 @@
         '<h3 class="sub-h mt-l">Technologies</h3><ul class="chips">' + list(study.technologies, function (name) {
           return '<li class="chip">' + esc(name) + '</li>';
         }) + '</ul>') +
-      section('Outcomes', outcomes) +
+      wideSection('Outcomes', outcomes) +
       testimonial +
       section('Related services', '<ul class="chips">' + list(related, function (service) {
         return '<li><a class="chip" href="service.html?id=' + service.id + '">' + esc(service.title) + '</a></li>';
@@ -609,6 +667,98 @@
     });
   }
 
+  // ---------- How we work: the first 30 days on the O ----------
+
+  // Four equal week arcs run round the logo's O, from the start of the ring to its end, and day 30
+  // sits in the opening at the top, where the logo keeps its point. Reading the steps carries the
+  // point round, so the plan finishes as the mark. Proportions follow the logo: stroke 0.386 r, point 0.246 r.
+  // `weeks` are the ticks between the week arcs; `stops` are where each step leaves the point.
+  var MONTH = {
+    cx: 240,
+    cy: 200,
+    r: 118,
+    start: 28,
+    sweep: 304,
+    weeks: [28, 104, 180, 256, 332],
+    stops: [104, 180, 332, 360],
+  };
+  var MONTH_LABELS = [
+    { text: 'Week 1', angle: 66, anchor: 'start' },
+    { text: 'Week 2', angle: 142, anchor: 'start' },
+    { text: 'Weeks 3–4', angle: 240, anchor: 'end' },
+    { text: 'Day 30', angle: 0, anchor: 'middle' },
+  ];
+
+  function monthRing() {
+    var ring = KEPT.arcPath(MONTH.cx, MONTH.cy, MONTH.r, MONTH.start, MONTH.sweep);
+    var ticks = list(MONTH.weeks, function (angle) {
+      var inner = KEPT.polar(MONTH.cx, MONTH.cy, MONTH.r + 30, angle);
+      var outer = KEPT.polar(MONTH.cx, MONTH.cy, MONTH.r + 40, angle);
+      return '<line x1="' + KEPT.num(inner.x) + '" y1="' + KEPT.num(inner.y) + '" x2="' + KEPT.num(outer.x) + '" y2="' + KEPT.num(outer.y) + '"/>';
+    });
+    var labels = list(MONTH_LABELS, function (label) {
+      var spot = KEPT.polar(MONTH.cx, MONTH.cy, MONTH.r + 57, label.angle);
+      return '<text class="mr-label" x="' + KEPT.num(spot.x) + '" y="' + KEPT.num(spot.y + 6) + '" text-anchor="' + label.anchor + '">' +
+        label.text + '</text>';
+    });
+    return (
+      '<svg viewBox="0 0 480 400" aria-hidden="true">' +
+      '<g class="mr-ticks">' + ticks + '</g>' + labels +
+      '<path class="mr-track" d="' + ring + '"/>' +
+      '<path class="mr-lit" pathLength="1" d="' + ring + '"/>' +
+      '<g class="mr-point"><circle cx="' + MONTH.cx + '" cy="' + (MONTH.cy - MONTH.r) + '" r="29"/></g>' +
+      '</svg>'
+    );
+  }
+
+  function initMonthRing() {
+    var holder = document.querySelector('[data-month-ring]');
+    var steps = all('[data-ring-steps] > li');
+    if (!holder || !steps.length) return;
+    holder.innerHTML = monthRing();
+    var svg = holder.querySelector('svg');
+    var labels = all('[data-month-ring] .mr-label');
+    var beside = window.matchMedia('(min-width: 901px)');
+    var queued = false;
+
+    // `current` is the step being read, or -1 when the ring simply shows the whole month.
+    function show(index, current) {
+      var stop = KEPT.ringStop(MONTH.start, MONTH.sweep, MONTH.stops, index);
+      svg.style.setProperty('--angle', stop.angle + 'deg');
+      svg.style.setProperty('--lit', KEPT.num(stop.lit));
+      steps.forEach(function (step, i) {
+        step.classList.toggle('current', i === current);
+      });
+      labels.forEach(function (label, i) {
+        label.classList.toggle('current', i === current);
+      });
+    }
+
+    // Beside the steps the ring follows the reader; stacked above them, or without motion, it rests complete.
+    function update() {
+      queued = false;
+      if (REDUCED || !beside.matches) {
+        show(MONTH.stops.length - 1, -1);
+        return;
+      }
+      var tops = steps.map(function (step) {
+        return step.getBoundingClientRect().top;
+      });
+      var index = KEPT.stepAt(tops, window.innerHeight * 0.55);
+      show(index, index);
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', queue, { passive: true });
+    beside.addEventListener('change', update);
+    update();
+  }
+
   // ---------- Scrolling: the header's blur and the reading clock ----------
 
   // The logo's O again, keeping reading time: the point goes once round as the page is read.
@@ -713,30 +863,69 @@
     },
   };
 
+  // Shows or clears one field's message and returns the field when it needs fixing.
+  function checkField(form, name) {
+    var input = form.elements.namedItem(name);
+    var error = form.querySelector('[data-error-for="' + name + '"]');
+    var message = RULES[name](input.value);
+    input.setAttribute('aria-invalid', String(Boolean(message)));
+    error.textContent = message;
+    error.hidden = !message;
+    return message ? input : null;
+  }
+
+  // A field explains a problem once you leave it with something typed, then clears the message the
+  // moment it is fixed. Sending checks every field and takes you to the first one that needs fixing.
+  function watchField(form, name) {
+    var input = form.elements.namedItem(name);
+    input.addEventListener('blur', function () {
+      if (input.value.trim() || input.getAttribute('aria-invalid') === 'true') checkField(form, name);
+    });
+    input.addEventListener('input', function () {
+      if (input.getAttribute('aria-invalid') === 'true') checkField(form, name);
+    });
+  }
+
+  // The form gives way to a confirmation in the same place, addressed to the sender.
+  function showSent(form, done) {
+    var firstName = form.elements.namedItem('name').value.trim().split(/\s+/)[0];
+    var title = done.querySelector('[data-done-title]');
+    title.textContent = 'Thanks, ' + firstName + '. Your message is in.';
+    done.querySelector('[data-done-text]').textContent =
+      'We’ll reply to ' + form.elements.namedItem('email').value.trim() + ' within 24 hours.';
+    form.hidden = true;
+    done.hidden = false;
+    title.focus();
+  }
+
   function initForm() {
     var form = document.querySelector('[data-contact-form]');
-    var status = document.querySelector('[data-form-status]');
-    if (!form || !status) return;
+    var done = document.querySelector('[data-form-done]');
+    if (!form || !done) return;
+    var names = Object.keys(RULES);
+    names.forEach(function (name) {
+      watchField(form, name);
+    });
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      var firstInvalid = null;
-      Object.keys(RULES).forEach(function (name) {
-        var input = form.elements.namedItem(name);
-        var error = form.querySelector('[data-error-for="' + name + '"]');
-        var message = RULES[name](input.value);
-        input.setAttribute('aria-invalid', String(Boolean(message)));
-        error.textContent = message;
-        error.hidden = !message;
-        if (message && !firstInvalid) firstInvalid = input;
-      });
-      if (firstInvalid) {
-        status.hidden = true;
-        firstInvalid.focus();
+      var needsFixing = names
+        .map(function (name) {
+          return checkField(form, name);
+        })
+        .filter(Boolean);
+      if (needsFixing.length) {
+        needsFixing[0].focus();
         return;
       }
-      status.hidden = false;
-      status.textContent = 'Prototype: on the live site this sends your message to operator@epoch.sh and confirms it here.';
+      showSent(form, done);
+    });
+
+    done.querySelector('[data-form-again]').addEventListener('click', function () {
+      form.reset();
+      done.hidden = true;
+      form.hidden = false;
+      form.elements.namedItem('name').focus();
     });
   }
 
@@ -755,6 +944,7 @@
   bindMenu();
   initLivingO();
   initDrawing();
+  initMonthRing();
   initScroll();
   initMagnets();
 })();

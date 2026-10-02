@@ -207,14 +207,21 @@
     removeClosing();
   }
 
+  function logoList(label, clients) {
+    return '<p class="pg-label">' + esc(label) + '</p><ul class="clients">' + list(clients, clientLogo) + '</ul>';
+  }
+
+  // The case study leads; the other clients in the industry follow without repeating its logo.
   function proof(industry) {
     var clients = resolve(DATA.clients, industry.clientIds);
     var study = industry.caseStudyId ? byId(DATA.caseStudies, industry.caseStudyId) : null;
-    var logos =
-      '<p class="pg-label">Teams we’ve worked with in ' + esc(industry.name.toLowerCase()) + '</p>' +
-      '<ul class="clients">' + list(clients, clientLogo) + '</ul>';
-    if (!study) return section('Who we’ve worked with', logos);
-    return section('Proof', '<div class="pg-proof">' + caseCard(study) + '<div>' + logos + '</div></div>');
+    var place = industry.name.toLowerCase();
+    if (!study) return section('Who we’ve worked with', logoList('Teams we’ve worked with in ' + place, clients));
+    var others = clients.filter(function (client) {
+      return client.id !== study.id;
+    });
+    var also = others.length ? '<div>' + logoList('Also in ' + place, others) + '</div>' : '';
+    return section('Proof', '<div class="pg-proof">' + caseCard(study) + also + '</div>');
   }
 
   function renderIndustry(target) {

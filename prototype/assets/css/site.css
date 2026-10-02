@@ -5,6 +5,7 @@
 
 /* ---------- Shared scale ---------- */
 :root {
+  --text-xs: 13px;
   --text-sm: 14px;
   --text-base: 17px;
   --text-md: 20px;
@@ -13,7 +14,12 @@
   --text-2xl: clamp(34px, 3.2vw + 12px, 60px);
   --text-display: clamp(44px, 5.9vw + 4px, 96px);
   --gutter: clamp(16px, 4vw, 48px);
+  /* Every multi-column layout sits on one twelve-column grid with this gap, so columns line up
+     from section to section: titles in columns 1-5, content from column 6. */
+  --col-gap: clamp(24px, 4.4vw, 64px);
   --space-section: clamp(72px, 9vw, 136px);
+  /* Where a sticky column comes to rest under the header. */
+  --pin-top: calc(var(--header-h) + 40px);
   --header-h: 64px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -37,7 +43,6 @@
   --faint: #5c5850;
   --line: rgba(242, 239, 232, 0.12);
   --line-strong: rgba(242, 239, 232, 0.24);
-  --row-hover: rgba(242, 239, 232, 0.03);
   --accent: #ff4f00;
   --grid: rgba(242, 239, 232, 0.045);
   --error: #ff6b6b;
@@ -215,6 +220,11 @@ ol {
   padding-block: var(--space-section);
 }
 
+/* A list that follows straight on from the page hero, its own first rule opening it. */
+.section.flush {
+  padding-top: 0;
+}
+
 .ruled {
   position: relative;
 }
@@ -275,6 +285,31 @@ ol {
   line-height: 1.2;
 }
 
+/* Headings break into even lines, and running text never ends on a single stranded word. */
+h1,
+h2,
+h3,
+h4,
+summary,
+figcaption,
+th {
+  text-wrap: balance;
+}
+
+p,
+li,
+dd,
+dt,
+td,
+label {
+  text-wrap: pretty;
+}
+
+/* Keeps a phrase such as "30-minute call" on one line. */
+.nowrap {
+  white-space: nowrap;
+}
+
 .lede {
   max-width: 40rem;
   font-size: var(--text-md);
@@ -282,8 +317,9 @@ ol {
   color: var(--muted);
 }
 
+/* 54ch keeps running text near 70 characters a line in Host Grotesk. */
 .body {
-  max-width: 62ch;
+  max-width: 54ch;
   color: var(--muted);
 }
 
@@ -835,6 +871,97 @@ ol {
   margin-top: 32px;
 }
 
+/* ---------- Case study: the engagement on a one-year dial ---------- */
+.case-intro {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 40px var(--col-gap);
+  align-items: center;
+}
+
+.case-intro > :first-child {
+  grid-column: 1 / span 7;
+}
+
+.case-dial {
+  grid-column: 9 / -1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.case-dial svg {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  overflow: visible;
+}
+
+.case-dial figcaption {
+  max-width: 30ch;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted);
+}
+
+.dial-year {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+
+.dial-ticks line {
+  stroke: rgba(242, 239, 232, 0.2);
+  stroke-width: 1;
+}
+
+.dial-ticks .major {
+  stroke: rgba(242, 239, 232, 0.42);
+}
+
+/* The arc draws itself once, from the top, for as long as the engagement ran. */
+.dial-arc {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draft-draw 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
+}
+
+.dial-end {
+  fill: var(--text);
+  opacity: 0;
+  animation: draft-fade 0.6s ease 2.1s forwards;
+}
+
+.dial-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .case-intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-intro > :nth-child(n) {
+    grid-column: 1 / -1;
+  }
+
+  .case-dial svg {
+    max-width: 240px;
+  }
+
+  /* The dial draws at about half size here, so its label is set larger to read at 13px. */
+  .dial-label {
+    font-size: 24px;
+  }
+
+}
+
 .crumbs {
   display: flex;
   flex-wrap: wrap;
@@ -851,22 +978,46 @@ ol {
 /* ---------- Section heads ---------- */
 .split {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 24px 64px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px var(--col-gap);
   align-items: start;
+}
+
+.split > :first-child {
+  grid-column: 1 / span 5;
+}
+
+.split > :nth-child(n + 2) {
+  grid-column: 6 / -1;
 }
 
 .head {
   margin-bottom: 48px;
 }
 
-.head .body {
-  margin-top: 16px;
+/* A head's note sits on the baseline of the title's first line, and a small label on the first
+   line of the list beside it. */
+.head.split,
+.split.on-baseline {
+  align-items: baseline;
+}
+
+/* On inner pages a section's title stays in view while its long column of content scrolls past. */
+@media (min-width: 901px) {
+  body:not([data-page='home']) .wrap.split > .h2:first-child,
+  .pin {
+    position: sticky;
+    top: var(--pin-top);
+  }
 }
 
 @media (max-width: 900px) {
   .split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .split > :nth-child(n) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1050,25 +1201,63 @@ ol {
   }
 }
 
+/* ---------- Beliefs (About): each given the room of a headline ---------- */
+.beliefs {
+  border-top: 1px solid var(--line);
+}
+
+.beliefs li {
+  padding-block: clamp(36px, 4vw, 56px);
+  border-bottom: 1px solid var(--line);
+}
+
+.beliefs li:first-child {
+  padding-top: clamp(28px, 3vw, 40px);
+}
+
+.beliefs h3 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(30px, 2.4vw + 12px, 48px);
+  letter-spacing: calc(var(--display-tracking) * 0.85);
+  line-height: 1.06;
+}
+
+.beliefs p {
+  max-width: 36ch;
+  margin-top: 20px;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 /* ---------- Service rows ---------- */
 .rows {
   border-bottom: 1px solid var(--line);
 }
 
+/* Title in columns 1-5, description from column 6 (under a section head's note), detail in 10-12. */
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) minmax(0, 3fr);
-  gap: 12px 40px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px var(--col-gap);
   align-items: baseline;
-  padding: 32px 12px;
-  margin-inline: -12px;
+  padding-block: 32px;
   border-top: 1px solid var(--line);
-  transition: background-color 0.2s;
 }
 
-.row:hover {
-  background: var(--row-hover);
+.row > :nth-child(1) {
+  grid-column: 1 / span 5;
+}
+
+.row > :nth-child(2) {
+  grid-column: 6 / span 4;
+}
+
+.row > :nth-child(3) {
+  grid-column: 10 / -1;
 }
 
 .row h3 {
@@ -1088,16 +1277,46 @@ ol {
 
 .row p {
   color: var(--muted);
+  transition: color 0.3s ease;
 }
 
 .row .small {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* A linked row answers the pointer the way the site draws: its rule lights up, left to right,
+   and its words come up to full strength. */
+.row:has(a)::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+
+.row:has(a):hover::before,
+.row:has(a:focus-visible)::before {
+  transform: none;
+}
+
+.row:has(a):hover p,
+.row:has(a:focus-visible) p {
+  color: var(--text);
 }
 
 @media (max-width: 900px) {
   .row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .row > :nth-child(n) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1413,23 +1632,26 @@ a.chip:hover {
 .steps li {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr);
-  gap: 4px 16px;
-  padding-block: 22px;
+  gap: 6px 16px;
+  align-items: baseline;
+  padding-block: 24px;
   border-bottom: 1px solid var(--line);
 }
 
 .steps .num {
   grid-row: span 2;
-  padding-top: 3px;
-  font-size: 14px;
+  font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
   color: var(--muted);
+  transition: color 0.3s ease;
 }
 
 .steps h3 {
-  font-size: 19px;
-  font-weight: 550;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--heading-weight);
+  letter-spacing: -0.015em;
+  line-height: 1.3;
 }
 
 .steps p {
@@ -1486,12 +1708,12 @@ a.chip:hover {
 }
 
 .faq summary {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding-block: 20px;
-  font-size: 18px;
+  position: relative;
+  padding: 22px 48px 22px 0;
+  font-size: var(--text-md);
   font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
   cursor: pointer;
   list-style: none;
 }
@@ -1500,37 +1722,59 @@ a.chip:hover {
   display: none;
 }
 
+/* A drawn plus that turns into a minus: the vertical stroke folds flat when the answer opens. */
+.faq summary::before,
 .faq summary::after {
-  content: '+';
-  color: var(--muted);
+  content: '';
+  position: absolute;
+  right: 4px;
+  top: calc(22px + 0.675em - 0.75px);
+  width: 13px;
+  height: 1.5px;
+  background: var(--muted);
+  transition:
+    transform 0.35s var(--ease),
+    background-color 0.15s;
+}
+
+.faq summary::after {
+  transform: rotate(90deg);
 }
 
 .faq details[open] summary::after {
-  content: '−';
+  transform: rotate(0deg);
+}
+
+.faq summary:hover::before,
+.faq summary:hover::after,
+.faq details[open] summary::before,
+.faq details[open] summary::after {
+  background: var(--text);
 }
 
 .faq details p {
-  max-width: 62ch;
-  padding-bottom: 22px;
+  max-width: 54ch;
+  padding: 0 48px 26px 0;
   color: var(--muted);
 }
 
 .facts-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 48px;
+  gap: 24px var(--col-gap);
+  margin-top: 56px;
   padding-top: 24px;
   border-top: 1px solid var(--line);
 }
 
 .facts-row dt {
-  font-size: 13px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 
 .facts-row dd {
-  margin-top: 4px;
+  margin-top: 6px;
+  text-wrap: balance;
 }
 
 .facts-row.single {
@@ -1540,9 +1784,30 @@ a.chip:hover {
   border-top: 0;
 }
 
+/* On a phone the facts read as a short table: label on the left, the fact beside it. */
 @media (max-width: 760px) {
   .facts-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-top: 0;
+  }
+
+  .facts-row > div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .facts-row dd {
+    margin-top: 0;
+    text-wrap: pretty;
+  }
+
+  .facts-row.single > div:first-child {
+    border-top: 1px solid var(--line);
   }
 }
 
@@ -1662,9 +1927,15 @@ a.chip:hover {
 .office a {
   display: inline-block;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: var(--text-sm);
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.15s;
+}
+
+.office a:hover {
+  text-decoration-color: currentColor;
 }
 
 @media (max-width: 640px) {
@@ -1676,31 +1947,53 @@ a.chip:hover {
 /* ---------- Contact ---------- */
 .contact-grid {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 64px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 64px var(--col-gap);
+  align-items: start;
+}
+
+.contact-grid > .form,
+.contact-grid > .form-done {
+  grid-column: 1 / span 7;
+}
+
+.contact-grid > .direct {
+  grid-column: 9 / -1;
+}
+
+.btn.lg {
+  height: 54px;
+  padding: 0 30px;
+  font-size: 16px;
 }
 
 .form {
   display: grid;
-  gap: 22px;
+  gap: 24px;
+}
+
+.form[hidden] {
+  display: none;
+}
+
+.form .pair,
+.form .triple {
+  display: grid;
+  gap: 16px;
 }
 
 .form .pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .form .triple {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .field label {
   display: block;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: var(--text-sm);
   font-weight: 550;
 }
 
@@ -1720,12 +2013,41 @@ a.chip:hover {
   background: var(--field-bg);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
   outline: none;
-  transition: border-color 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .field textarea {
-  min-height: 150px;
+  min-height: 160px;
   resize: vertical;
+}
+
+/* The browser's own select arrow differs everywhere; this one is drawn in the field's hairline. */
+.field select {
+  appearance: none;
+  padding-right: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M.7.7 5 5 9.3.7' fill='none' stroke='%238f8a80' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 10px 6px;
+  cursor: pointer;
+}
+
+/* Until a choice is made, "Choose one" reads as a hint, not an answer. */
+.field select:has(option[value='']:checked) {
+  color: var(--muted);
+}
+
+.field select option {
+  background: var(--raised);
+  color: var(--text);
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: rgba(242, 239, 232, 0.4);
 }
 
 .field input:focus,
@@ -1735,20 +2057,57 @@ a.chip:hover {
   box-shadow: 0 0 0 1px var(--text);
 }
 
-.field [aria-invalid='true'] {
+.field [aria-invalid='true'],
+.field [aria-invalid='true']:hover {
   border-color: var(--error);
 }
 
+.field [aria-invalid='true']:focus {
+  box-shadow: 0 0 0 1px var(--error);
+}
+
 .field .error {
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: 8px;
+  font-size: var(--text-sm);
   color: var(--error);
 }
 
-.form-status {
-  padding: 16px;
+.form-foot {
+  padding-top: 4px;
+}
+
+/* After sending, the form gives way to a plain confirmation in the same place. */
+.form-done {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  padding: clamp(28px, 4vw, 48px);
   border: 1px solid var(--line-strong);
-  border-radius: var(--radius-field);
+  background: var(--depth), var(--raised);
+}
+
+.form-done[hidden] {
+  display: none;
+}
+
+/* Focus moves to the heading so screen readers announce the confirmation; it is not a control. */
+.form-done h2:focus {
+  outline: none;
+}
+
+.form-done .body {
+  max-width: 46ch;
+}
+
+.form-done .btn {
+  margin-top: 12px;
+}
+
+.form-note {
+  max-width: 52ch;
+  margin-top: 8px;
+  font-size: var(--text-xs);
+  color: var(--muted);
 }
 
 .direct dl {
@@ -1757,34 +2116,67 @@ a.chip:hover {
 }
 
 .direct dt {
-  font-size: 13px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 
 .direct dd a {
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.15s;
+}
+
+.direct dd a:hover {
+  text-decoration-color: currentColor;
 }
 
 .direct .offices {
   grid-template-columns: 1fr;
   margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+/* Stacked under the booking button on a phone, the next steps need clear air above them. */
+@media (max-width: 900px) {
+  .book-next {
+    margin-top: 32px;
+  }
+}
+
+/* Stacked fields keep the form's own spacing. */
+@media (max-width: 1180px) {
+  .form .triple {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
 }
 
 @media (max-width: 900px) {
   .contact-grid,
-  .form .pair,
-  .form .triple {
-    grid-template-columns: 1fr;
+  .form .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form .pair {
+    gap: 24px;
+  }
+
+  .contact-grid > :nth-child(n) {
+    grid-column: 1 / -1;
   }
 }
 
+/* Without motion, everything arrives in its finished state at once: no movement and no waiting. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 }

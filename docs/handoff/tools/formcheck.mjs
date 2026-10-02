@@ -35,9 +35,10 @@ for (const path of ['index.html', 'services.html', 'service.html?id=generative-a
 await send('Page.navigate', { url: base + 'contact.html' }); await sleep(1200);
 const empty = await evaluate(`(() => { document.querySelector('[data-contact-form] [type=submit]').click(); return [...document.querySelectorAll('.error:not([hidden])')].map(e => e.textContent).concat(document.activeElement.id); })()`);
 console.log('empty submit ->', JSON.stringify(empty));
-const bad = await evaluate(`(() => { const f = document.querySelector('[data-contact-form]'); f.name.value = 'Ada'; f.email.value = 'ada@'; f.message.value = 'Hi'; f.querySelector('[type=submit]').click(); return [...document.querySelectorAll('.error:not([hidden])')].map(e => e.textContent); })()`);
+// form.elements, because form.name is the form's own name attribute, not the "name" field.
+const bad = await evaluate(`(() => { const f = document.querySelector('[data-contact-form]').elements; f.namedItem('name').value = 'Ada'; f.namedItem('email').value = 'ada@'; f.namedItem('message').value = 'Hi'; document.querySelector('[data-contact-form] [type=submit]').click(); return [...document.querySelectorAll('.error:not([hidden])')].map(e => e.textContent); })()`);
 console.log('bad email ->', JSON.stringify(bad));
-const ok = await evaluate(`(() => { const f = document.querySelector('[data-contact-form]'); f.email.value = 'ada@company.com'; f.querySelector('[type=submit]').click(); const s = document.querySelector('[data-form-status]'); return { errors: document.querySelectorAll('.error:not([hidden])').length, status: s.hidden ? null : s.textContent }; })()`);
+const ok = await evaluate(`(() => { document.querySelector('[data-contact-form]').elements.namedItem('email').value = 'ada@company.com'; document.querySelector('[data-contact-form] [type=submit]').click(); const done = document.querySelector('[data-form-done]'); return { errors: document.querySelectorAll('.error:not([hidden])').length, confirmation: done.hidden ? null : done.querySelector('[data-done-title]').textContent }; })()`);
 console.log('valid ->', JSON.stringify(ok));
 console.log('problems:', problems.length ? problems : 'none');
 ws.close(); chrome.kill(); await sleep(300); rmSync(profile, { recursive: true, force: true });

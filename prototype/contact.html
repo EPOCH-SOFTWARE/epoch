@@ -22,13 +22,13 @@
       <section class="section ruled" id="book" aria-labelledby="book-title">
         <div class="wrap split">
           <div>
-            <h2 id="book-title" class="h2">Book a 30-minute call</h2>
+            <h2 id="book-title" class="h2">Book a <span class="nowrap">30-minute</span> call</h2>
             <p class="body mt-s">Pick a time that suits you and we’ll talk through what you’re building and what’s in the way.</p>
             <div class="actions mt-m">
-              <a class="btn" data-booking href="mailto:operator@epoch.sh?subject=Book%20a%2030-minute%20call">Choose a time</a>
+              <a class="btn lg" data-booking href="mailto:operator@epoch.sh?subject=Book%20a%2030-minute%20call">Choose a time</a>
             </div>
           </div>
-          <div>
+          <div class="book-next">
             <h3 class="sub-h">What happens next</h3>
             <ol class="steps">
               <li><span class="num" aria-hidden="true">01</span><h3>We reply within 24 hours</h3><p>To confirm the time, or with a few questions if we need them.</p></li>
@@ -98,9 +98,15 @@
               <textarea id="message" name="message" aria-describedby="message-error"></textarea>
               <p class="error" id="message-error" data-error-for="message" hidden></p>
             </div>
-            <div><button class="btn" type="submit">Send message</button></div>
-            <p class="form-status" data-form-status role="status" hidden></p>
+            <div class="form-foot"><button class="btn" type="submit">Send message</button></div>
           </form>
+
+          <div class="form-done" data-form-done hidden>
+            <h2 class="h3" tabindex="-1" data-done-title>Thanks. Your message is in.</h2>
+            <p class="body" data-done-text>We’ll reply within 24 hours.</p>
+            <button class="btn secondary sm" type="button" data-form-again>Send another message</button>
+            <p class="form-note">This prototype doesn’t send anything yet. On the live site the message goes straight to operator@epoch.sh.</p>
+          </div>
 
           <aside class="direct" aria-labelledby="direct-title">
             <h2 id="direct-title" class="h3">Or reach us directly</h2>

@@ -20,6 +20,7 @@
 .pg-two-list li {
   padding-block: 14px;
   border-bottom: 1px solid var(--line);
+  text-wrap: balance;
 }
 
 /* ---------- Industry: case study card beside the client logos ---------- */
@@ -83,9 +84,68 @@
   font-size: 15px;
 }
 
-/* ---------- How we work: first 30 days ---------- */
+/* ---------- How we work: first 30 days, told on the O ---------- */
 .pg-steps li {
   grid-template-columns: 104px minmax(0, 1fr);
+  padding-block: 32px;
+}
+
+.pg-steps li.current .num {
+  color: var(--text);
+}
+
+.month {
+  display: grid;
+  gap: 48px;
+  align-content: start;
+}
+
+.month-ring svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  overflow: visible;
+}
+
+.mr-track,
+.mr-lit {
+  fill: none;
+  stroke-width: 46;
+}
+
+.mr-track {
+  stroke: var(--line);
+}
+
+/* The ring lights behind the point as it travels; both move on the same curve and clock. */
+.mr-lit {
+  stroke: var(--text);
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--lit, 1));
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.mr-point {
+  fill: var(--accent);
+  transform-box: view-box;
+  transform-origin: 240px 200px;
+  transform: rotate(var(--angle, 360deg));
+  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.mr-ticks {
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+}
+
+.mr-label {
+  fill: var(--muted);
+  font-size: 16px;
+  transition: fill 0.3s ease;
+}
+
+.mr-label.current {
+  fill: var(--text);
 }
 
 /* ---------- How we work: pricing ---------- */
@@ -93,13 +153,26 @@
   border-top: 1px solid var(--line);
 }
 
+/* On the site grid: name in columns 1-5, what it covers from 6, how it is billed in 10-12. */
 .pg-price {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 3fr);
-  gap: 12px 40px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px var(--col-gap);
   align-items: baseline;
   padding-block: 28px;
   border-bottom: 1px solid var(--line);
+}
+
+.pg-price > :nth-child(1) {
+  grid-column: 1 / span 5;
+}
+
+.pg-price > :nth-child(2) {
+  grid-column: 6 / span 4;
+}
+
+.pg-price > :nth-child(3) {
+  grid-column: 10 / -1;
 }
 
 .pg-price h3 {
@@ -131,7 +204,7 @@
 }
 
 .pg-note {
-  margin-top: 32px;
+  margin-top: 48px;
   font-family: var(--font-display);
   font-weight: var(--heading-weight);
   font-size: var(--text-xl);
@@ -148,7 +221,19 @@
 @media (max-width: 900px) {
   .pg-proof,
   .pg-price {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pg-price > :nth-child(n) {
+    grid-column: 1 / -1;
+  }
+
+  .month {
+    gap: 32px;
+  }
+
+  .month-ring svg {
+    max-width: 360px;
   }
 }
 
