@@ -1,0 +1,54 @@
+.list {
+  border-bottom: 1px solid var(--moss-line);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--moss-line);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  font-stretch: 122%;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+/* The whole row is the link's hit area; the title stays its accessible name. */
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.link {
+  transition: color 160ms var(--ease-out);
+}
+
+.row:hover .link,
+.link:focus-visible {
+  color: var(--signal);
+}
+
+.description {
+  max-width: 48ch;
+  color: var(--bone);
+}
+
+.highlights {
+  font-size: var(--text-sm);
+  color: var(--reseda);
+}
+
+@media (min-width: 60rem) {
+  .row {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) minmax(0, 3fr);
+    gap: 2.5rem;
+    align-items: baseline;
+    padding-block: 2.5rem;
+  }
+}

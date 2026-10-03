@@ -1,54 +1,27 @@
-/**
- * @fileoverview Dynamic service detail page
- * @author Epoch Development Team
- */
-
-import { notFound } from 'next/navigation';
-import { ServiceDetailPage } from '@/src/components/pages/services/detail';
-import { SERVICE_DETAIL_DATA } from '@/src/shared/constants/serviceData';
 import type { Metadata } from 'next';
-
-interface ServicePageProps {
-  params: {
-    id: string;
-  };
+import { notFound } from 'next/navigation';
+import { SitePage } from '@/src/night/Chrome';
+import { ServiceDetail } from '@/src/night/pages/ServiceDetail';
+import { DATA } from '@/src/night/data';
+type Props = { params: Promise<{ id: string }> };
+export function generateStaticParams() {
+  return DATA.services.map(item => ({ id: item.id }));
 }
-
-export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const serviceData = SERVICE_DETAIL_DATA[params.id as keyof typeof SERVICE_DETAIL_DATA];
-  
-  if (!serviceData) {
-    return {
-      title: 'Service Not Found - EPOCH',
-      description: 'The requested service page was not found.',
-    };
-  }
-
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const item = DATA.services.find(item => item.id === id);
   return {
-    title: serviceData.metaTitle,
-    description: serviceData.metaDescription,
-    openGraph: {
-      title: serviceData.metaTitle,
-      description: serviceData.metaDescription,
-      type: 'article',
-      images: serviceData.heroImage ? [serviceData.heroImage] : [],
-    },
+    title: item?.title ?? 'Service not found',
+    description: DATA.serviceDetails[id]?.metaDescription,
+    alternates: { canonical: '/services/' + id },
   };
 }
-
-export async function generateStaticParams() {
-  // Generate static params for all available services
-  return Object.keys(SERVICE_DETAIL_DATA).map((id) => ({
-    id,
-  }));
-}
-
-export default function ServicePage({ params }: ServicePageProps) {
-  const serviceData = SERVICE_DETAIL_DATA[params.id as keyof typeof SERVICE_DETAIL_DATA];
-  
-  if (!serviceData) {
-    notFound();
-  }
-
-  return <ServiceDetailPage serviceData={serviceData} />;
+export default async function Page({ params }: Props) {
+  const { id } = await params;
+  if (!DATA.services.some(item => item.id === id)) notFound();
+  return (
+    <SitePage page="service">
+      <ServiceDetail id={id} />
+    </SitePage>
+  );
 }

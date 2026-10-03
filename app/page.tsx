@@ -1,26 +1,12 @@
-/**
- * @fileoverview Home page component
- * @author Epoch Development Team
- */
-
-import dynamic from 'next/dynamic';
-import type { Metadata } from 'next';
-
-// Lazy load the homepage component
-const HomePage = dynamic(() => import('@/src/components/pages/home'), {
-  ssr: true,
-  loading: () => (
-    <div className="loading-container">
-      <div className="loading-spinner" />
-    </div>
-  ),
-});
-
-export const metadata: Metadata = {
-  title: 'Epoch - Crafting Software with Swiss Precision',
-  description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
+import { Home } from '@/src/night/pages/Home';
+import { SitePage } from '@/src/night/Chrome';
+export const metadata = {
+  title: { absolute: 'EPOCH | AI, engineered all the way to production.' },
 };
-
-export default function Home() {
-  return <HomePage />;
+export default function Page() {
+  return (
+    <SitePage page="home">
+      <Home />
+    </SitePage>
+  );
 }

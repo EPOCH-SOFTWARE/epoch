@@ -1,0 +1,22 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 366 80"
+  fill="currentColor"
+  role="img"
+  aria-labelledby="title"
+>
+  <title id="title">EPOCH Cut wordmark concept</title>
+  <path d="M0 0H54V14H16V33H49V47H16V66H54V80H0Z" />
+  <path
+    fill-rule="evenodd"
+    d="M71 0H101C120 0 130 10 130 27S120 54 101 54H87V80H71ZM87 14V40H100C109 40 114 36 114 27S109 14 100 14Z"
+  />
+  <path
+    fill-rule="evenodd"
+    d="M177 0C154 0 143 14 143 40S154 80 177 80S211 66 211 40S200 0 177 0ZM177 14C165 14 159 22 159 40S165 66 177 66S195 58 195 40S189 14 177 14Z"
+  />
+  <path
+    d="M290 21L276 28C272 18 267 14 258 14C246 14 240 23 240 40S246 66 258 66C267 66 273 62 277 52L291 59C285 74 274 80 258 80C235 80 224 65 224 40S235 0 258 0C274 0 285 7 290 21Z"
+  />
+  <path d="M306 0H322V32H350V0H366V80H350V47H322V80H306Z" />
+</svg>

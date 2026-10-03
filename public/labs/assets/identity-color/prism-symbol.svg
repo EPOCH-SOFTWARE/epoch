@@ -1,0 +1,29 @@
+<svg
+  class=""
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 140 140"
+  fill="currentColor"
+  role="img"
+  aria-label="EPOCH prism symbol"
+>
+  <defs>
+    <linearGradient id="a6face" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd0b4" />
+      <stop offset="60%" stop-color="#ff887d" />
+      <stop offset="100%" stop-color="#ff517a" />
+    </linearGradient>
+    <linearGradient id="a6fold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cdb9ff" />
+      <stop offset="65%" stop-color="#8c67ff" />
+      <stop offset="100%" stop-color="#6040bc" />
+    </linearGradient>
+    <linearGradient id="a6edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffbac1" />
+      <stop offset="100%" stop-color="#9167f6" />
+    </linearGradient>
+  </defs>
+  <path d="M70 7L127 40L70 73L13 40Z" fill="url(#a6face)" />
+  <path d="M13 40L70 73V133L13 100Z" fill="url(#a6fold)" />
+  <path d="M127 40V66L94 85V119L70 133V73Z" fill="url(#a6edge)" />
+  <path d="M37 54L70 73V101L37 82Z" fill="#1a1228" />
+</svg>

@@ -1,0 +1,81 @@
+/*
+ * Shared layout and type primitives. Pages compose these instead of
+ * re-declaring heroes, titles and containers in every module.
+ */
+
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.sectionRuled {
+  border-top: 1px solid var(--moss-line);
+}
+
+/* Statements: extra-wide, heavy, tight. The voice of the brand. */
+.display {
+  font-size: var(--text-display);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.heading {
+  font-size: var(--text-2xl);
+  font-weight: 750;
+  font-stretch: 118%;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.subheading {
+  font-size: var(--text-lg);
+  font-weight: 650;
+  font-stretch: 108%;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.lede {
+  max-width: 38ch;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--bone);
+}
+
+.body {
+  max-width: 62ch;
+  color: var(--reseda);
+}
+
+.body + .body {
+  margin-top: 1em;
+}
+
+.muted {
+  color: var(--reseda);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

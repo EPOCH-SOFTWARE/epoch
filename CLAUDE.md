@@ -1,110 +1,33 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Read `AGENTS.md`, `docs/handoff/HANDOFF.md`, `docs/handoff/HISTORY.md` and `docs/handoff/tools/README.md` first.
 
-## Project Overview
+## Current work
 
-Epoch is a Next.js 15 application showcasing a software development company's portfolio. The project features a sophisticated homepage with advanced animations, custom Canvas-based wormhole effects, and a modern component architecture.
+The founder authorized porting the accepted Night prototype into Next.js on a separate branch. The approved release is on `main`; continue development on feature branches. The port was built on `feat/next-night` from the mobile-compatible prototype at `b0c08b6`. The prototype remains the visual and behavioral reference. Further logo, illustration, photography and AI model work are parked.
 
-## Development Commands
+## Architecture
 
-```bash
-# Development server
-npm run dev
+- Next.js 15 App Router, React 19, strict TypeScript.
+- `app/`: routes, metadata, fonts and API boundaries.
+- `src/night/pages/`: server-rendered Night pages.
+- `src/night/Chrome.tsx`, `Blocks.tsx`: shared content and exact wordmark geometry.
+- `src/night/Explorers.tsx`, `ReadingGuide.tsx`: interactive React tabs and reading navigation.
+- `src/shared/constants/`: original service and case-study content.
+- `src/night/content.ts`: existing goals, industries and articles.
+- `styles/night/`: accepted global CSS. Next serves Host Grotesk and IBM Plex Mono locally.
+- `public/night/`: tested browser motion and demo enhancements, loaded after hydration by `Runtime.tsx`.
+- `public/labs/`: every static logo and footer concept, preserved in full.
+- `prototype/`: frozen static reference, served at port 3460.
 
-# Production build
-npm run build
+Native anchors preserve the cross-document O reveal and browser history. Do not replace them with client navigation without equivalent lifecycle and animation checks. Keep orange meaningful, reduced motion respected, keyboard focus visible and phones free from sideways scroll.
 
-# Start production server
-npm start
+Contact remains an honest enquiry preview. The old Resend endpoint is retained but the Night form does not send to it. The document demo retains its optional local-only review, now served by Next at `/api/document-review`. Live provider verification is still pending; no model changes are authorized.
 
-# Lint code
-npm run lint
-```
+## Run and verify
 
-## Architecture & Structure
+`npm run dev` uses port 3000 and `.next-dev`. `npm run build && npm start` serves the production build from `.next`. `python3 prototype/serve.py` starts the reference on port 3460.
 
-### Core Technologies
-- **Next.js 15** with App Router
-- **React 19** with TypeScript
-- **Tailwind CSS 4** for styling
-- **CSS Modules** for component-specific styles
-- **Canvas API** for complex animations
+Run Jest, lint, TypeScript, production build, prototype helper tests and the browser checks in the QA guide. `next-parity.mjs` compares both sites across all routes. `next-motion-check.mjs` exercises clocks, scroll behavior, native transitions, history and reduced motion. Use isolated headless Chrome only.
 
-### Key Directories
-- `app/` - Next.js App Router pages and layouts
-- `components/` - React components
-- `constants/` - Application constants and configuration
-- `types/` - TypeScript type definitions
-- `hooks/` - Custom React hooks
-- `styles/` - CSS modules and global styles
-
-### Component Architecture
-
-**EpochHomepage (`components/EpochHomepage.tsx`)**
-- Main homepage component with complex animation logic
-- Features custom Canvas-based wormhole animation with performance optimizations
-- Implements scroll-based section tracking and mouse parallax effects
-- Uses CSS modules for styling (`styles/EpochHomepage.module.css`)
-
-**Key Features:**
-- Performance-optimized Canvas animations (reduced FPS and particle count on mobile)
-- Responsive design with mobile-specific optimizations
-- Complex gradient mesh backgrounds and particle systems
-- Scroll-triggered animations and section visibility
-
-### State Management
-- Uses React's built-in `useState` and `useEffect` for local component state
-- Custom hooks for reusable logic (e.g., `useCursor` for cursor effects)
-- No external state management library
-
-### Animation System
-- Canvas-based animations for complex visual effects
-- CSS-based animations with custom properties for timing
-- Performance optimizations including frame throttling and reduced complexity on mobile
-- Mouse tracking for parallax and interactive effects
-
-### TypeScript Configuration
-- Strict TypeScript setup with path aliases (`@/*` maps to root)
-- Custom interfaces for component props and animation configurations
-- Type definitions centralized in `types/index.ts`
-
-## Design Philosophy
-
-### Core Design Principles
-**Evoke Curiosity and Wonder**: The design should feel like discovering a new scientific principle - mysterious yet comprehensible, complex yet elegant. Every interaction should spark curiosity about what lies beneath the surface.
-
-**Scientific Discovery Aesthetic**: Design as if documenting a groundbreaking physical phenomenon. Think particle physics visualizations, quantum field interactions, and the moment of scientific breakthrough rather than conventional web patterns.
-
-**Pure Creativity Over Conventions**: Abandon traditional website conventions entirely. Design from first principles as if the web interface is a new medium for scientific exploration. Avoid referencing existing websites or following established patterns.
-
-**Aesthetic Beauty**: Prioritize visual harmony that pleases the senses. Every element should contribute to an overall sense of beauty - from the mathematics of spacing to the physics of motion to the chemistry of color interactions.
-
-**Intuitive Wonder**: While breaking conventions, maintain intuitive usability. Users should feel guided by natural curiosity rather than confused by complexity.
-
-## Development Guidelines
-
-### Performance Considerations
-- Canvas animations are optimized for mobile devices (reduced particle counts, lower FPS)
-- Animation frame throttling implemented for smooth performance
-- Component memoization used where appropriate
-
-### Creative Implementation Approach
-- Use scientific metaphors in animations (quantum fields, particle interactions, gravitational effects)
-- Implement unconventional but intuitive navigation patterns
-- Create visual hierarchies based on scientific principles rather than web conventions
-- Design interactions that feel like controlling natural phenomena
-
-### Styling Approach
-- CSS Modules for component-specific styles
-- Tailwind CSS for utility classes and global styles
-- Custom CSS properties for theme consistency
-- Responsive design with mobile-first approach
-- Mathematical precision in spacing and proportions
-- Color palettes inspired by scientific phenomena
-
-### Component Patterns
-- Functional components with hooks
-- Proper TypeScript typing for all props and state
-- Memoization for expensive calculations and renders
-- Clean separation of concerns between logic and presentation
+Never commit to main. Commit and push completed work on the feature branch. Update the handoff and history. No em dashes, invented client claims, private notes or credentials in this public repository.

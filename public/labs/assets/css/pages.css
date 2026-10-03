@@ -1,0 +1,257 @@
+/*
+ * Page-specific styles for Industries and How we work.
+ * Everything is prefixed pg- and reads the Night tokens from site.css.
+ */
+
+.pg-label {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Industry: what we build, in two columns ---------- */
+.pg-two-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.pg-two-list li {
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+  text-wrap: balance;
+}
+
+/* ---------- Industry: case study card beside the client logos ---------- */
+.pg-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px 40px;
+  align-items: start;
+}
+
+.pg-proof .card {
+  min-height: 320px;
+  border-width: 1px;
+}
+
+/* ---------- How we work: engagement models ---------- */
+.pg-models {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.pg-model {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 360px;
+  padding: 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pg-model h3 {
+  font-family: var(--font-display);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-lg);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.pg-model p {
+  color: var(--muted);
+}
+
+.pg-meta {
+  display: grid;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.pg-meta dt {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pg-meta dd {
+  margin-top: 2px;
+  font-size: 15px;
+}
+
+/* ---------- How we work: first 30 days, told on the O ---------- */
+.pg-steps li {
+  grid-template-columns: 104px minmax(0, 1fr);
+  padding-block: 32px;
+}
+
+.pg-steps li.current .num {
+  color: var(--text);
+}
+
+.month {
+  display: grid;
+  gap: 48px;
+  align-content: start;
+}
+
+.month-ring svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  overflow: visible;
+}
+
+.mr-track,
+.mr-lit {
+  fill: none;
+  stroke-width: 46;
+}
+
+.mr-track {
+  stroke: var(--line);
+}
+
+/* The ring lights behind the point as it travels; both move on the same curve and clock. */
+.mr-lit {
+  stroke: var(--text);
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--lit, 1));
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.mr-point {
+  fill: var(--accent);
+  transform-box: view-box;
+  transform-origin: 240px 200px;
+  transform: rotate(var(--angle, 360deg));
+  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.mr-ticks {
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+}
+
+.mr-label {
+  fill: var(--muted);
+  font-size: 16px;
+  transition: fill 0.3s ease;
+}
+
+.mr-label.current {
+  fill: var(--text);
+}
+
+/* ---------- How we work: pricing ---------- */
+.pg-pricing {
+  border-top: 1px solid var(--line);
+}
+
+/* On the site grid: name in columns 1-5, what it covers from 6, how it is billed in 10-12. */
+.pg-price {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px var(--col-gap);
+  align-items: baseline;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pg-price > :nth-child(1) {
+  grid-column: 1 / span 5;
+}
+
+.pg-price > :nth-child(2) {
+  grid-column: 6 / span 4;
+}
+
+.pg-price > :nth-child(3) {
+  grid-column: 10 / -1;
+}
+
+.pg-price h3 {
+  font-family: var(--font-display);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-lg);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.pg-price p {
+  color: var(--muted);
+}
+
+.pg-price .pg-billing {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* A small ivory square marks how each engagement is billed. */
+.pg-billing::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  background: var(--text);
+  vertical-align: 1px;
+}
+
+.pg-note {
+  margin-top: 48px;
+  font-family: var(--font-display);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-xl);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+@media (max-width: 1100px) {
+  .pg-models {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .pg-proof,
+  .pg-price {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pg-price > :nth-child(n) {
+    grid-column: 1 / -1;
+  }
+
+  .month {
+    gap: 32px;
+  }
+
+  .month-ring svg {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pg-models,
+  .pg-two-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-model {
+    min-height: 0;
+  }
+
+  .pg-steps li {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-steps .num {
+    grid-row: auto;
+  }
+}

@@ -1,81 +1,33 @@
-/**
- * @fileoverview Root layout component
- * @author Epoch Development Team
- */
-
-import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
-import { ErrorBoundary } from '@/src/components/common/ErrorBoundary';
+import type { Metadata, Viewport } from 'next';
+import { Host_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const host = Host_Grotesk({ variable: '--font-host', subsets: ['latin'], display: 'swap' });
+const mono = IBM_Plex_Mono({
+  variable: '--font-plex',
   subsets: ['latin'],
+  weight: ['400', '500'],
   display: 'swap',
-  preload: true,
-  weight: ['300', '400', '500', '600', '700'],
 });
-
-
 export const metadata: Metadata = {
-  title: 'Epoch - Crafting Software with Swiss Precision',
-  description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
-  keywords: ['software development', 'AI', 'machine learning', 'cloud architecture', 'digital transformation'],
-  authors: [{ name: 'Epoch Development Team' }],
-  creator: 'Epoch',
-  openGraph: {
-    title: 'Epoch - Crafting Software with Swiss Precision',
-    description: 'We build intelligent systems that transform complexity into elegance, where every line of code serves a purpose.',
-    url: 'https://epoch.dev',
-    siteName: 'Epoch',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Epoch - Crafting Software with Swiss Precision',
-    description: 'We build intelligent systems that transform complexity into elegance.',
-    creator: '@epoch_dev',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+  metadataBase: new URL('https://epoch.sh'),
+  title: { default: 'EPOCH | AI, engineered all the way to production.', template: '%s | EPOCH' },
+  description:
+    'EPOCH designs, builds and supports AI systems, from the first model to long after launch.',
+  icons: { icon: '/night/favicon.svg' },
+  openGraph: { siteName: 'EPOCH', type: 'website', locale: 'en_US' },
+  twitter: { card: 'summary_large_image' },
 };
-
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-      </head>
-      <body
-        className={`${geistSans.className} antialiased`}
-        suppressHydrationWarning
-      >
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
-      </body>
+    <html lang="en" className={`${host.variable} ${mono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

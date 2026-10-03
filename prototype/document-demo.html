@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Document review demo | EPOCH</title>
+    <meta name="description" content="Explore a document review example: inspect sources, spot missing details and resolve conflicting information." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/document-demo.css" />
+  </head>
+  <body data-page="demo">
+    <main id="main">
+      <section class="demo-hero wrap" aria-labelledby="demo-title">
+        <a class="demo-back" href="work.html">Back to our work</a>
+        <h1 id="demo-title">An answer should<br>come with evidence.</h1>
+        <p class="lede">Find the source. Catch what’s missing. Keep the human in the decision.</p>
+        <p class="demo-caption">Explore the sample, then review your own text with AI.</p>
+      </section>
+
+      <section class="wrap demo-stage" aria-label="Interactive document review">
+        <div class="demo-scenarios" role="group" aria-label="Choose a sample document">
+          <button type="button" data-sample="complete" aria-pressed="true">Complete brief</button>
+          <button type="button" data-sample="missing" aria-pressed="false">Missing detail</button>
+          <button type="button" data-sample="conflict" aria-pressed="false">Conflicting dates</button>
+        </div>
+        <div class="demo-workspace">
+          <form class="demo-document" id="review-form">
+            <div class="document-heading"><label for="source-document">Source document</label><span>handover.txt</span></div>
+            <p id="document-help">Edit the brief or paste your own notes. AI review reads prose and labelled fields, and sends your text to OpenAI.</p>
+            <textarea id="source-document" name="document" maxlength="10000" spellcheck="false" aria-describedby="document-help demo-method" aria-label="Source document, editable project brief"></textarea>
+            <div class="document-actions"><button type="submit" class="btn">Review with AI</button><button type="button" class="demo-preview" data-preview>Preview labelled fields</button><button type="button" class="demo-reset">Reset sample</button></div>
+          <p class="demo-connection" data-ai-connection role="status">Checking AI connection…</p>
+          </form>
+          <section class="demo-results" aria-labelledby="results-title">
+            <div class="results-heading"><h2 id="results-title">What the document says</h2><span class="review-state" data-review-state>Sample preview</span></div>
+            <div data-review-results></div>
+            <p class="review-summary" role="status" aria-live="polite" data-review-summary></p>
+            <p class="demo-error" role="alert" data-review-error hidden></p>
+          </section>
+        </div>
+        <p class="demo-method" id="demo-method">The samples are fictional. Sample preview reads labelled fields in your browser. Review with AI sends this document to OpenAI. Source quotes are checked against your text, but AI can still misread it. Check the evidence before using an answer.</p>
+        <noscript><p class="demo-error">Enable JavaScript to try the document review.</p></noscript>
+      </section>
+
+      <section class="section ruled" aria-labelledby="principle-title">
+        <div class="wrap split">
+          <h2 class="h2" id="principle-title">Make uncertainty visible.</h2>
+          <div class="demo-principles">
+            <div><h3>Trace the answer</h3><p>Select a source beneath any result. The exact line is highlighted in the document.</p></div>
+            <div><h3>Leave a gap when the source does</h3><p>Remove the owner. The review flags the missing detail so a person can resolve it.</p></div>
+            <div><h3>Keep conflicting evidence</h3><p>Two different dates stay visible. The review asks for a decision instead of choosing one silently.</p></div>
+          </div>
+        </div>
+      </section>
+      <section class="section ruled closing" aria-labelledby="demo-close">
+        <div class="wrap"><h2 class="h2" id="demo-close">What do your teams spend hours reading?</h2><p class="lede mt-m">Bring us the workflow, the documents and the decisions that matter.</p><div class="actions"><a class="btn" href="contact.html">Talk through your workflow</a></div></div>
+      </section>
+    </main>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/kept-time.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script src="assets/js/document-demo.js"></script>
+  </body>
+</html>

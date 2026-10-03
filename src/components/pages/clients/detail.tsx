@@ -1,417 +1,252 @@
 /**
- * @fileoverview Client detail page template component
+ * @fileoverview Case study page: the problem, what we built, how we worked,
+ * where it got hard, and what changed.
  * @author Epoch Development Team
  */
 
-'use client';
-
-import React from 'react';
-import Image from 'next/image';
-import { Header } from '../../layout/Header';
-import { Footer } from '../../layout/Footer';
-import { Button } from '../../ui/Button';
-import { useCursor } from '../../../hooks/useCursor';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import { ClientMark } from '../../ui/ClientMark';
+import { ClosingSection } from '../../sections/ClosingSection';
+import { findService } from '../../../shared/constants/services';
+import type { CaseStudy, ServiceSummary } from '../../../shared/types';
+import ui from '../../../../styles/Primitives.module.css';
 import styles from '../../../../styles/ClientDetailPage.module.css';
 
-export interface ClientDetailData {
-  id: string;
-  name: string;
-  logo: string;
-  heroTitle: string;
-  heroSubtitle: string;
-  heroImage?: string;
-  heroVideo?: string;
-  
-  // Client Introduction
-  industry: string;
-  companySize: string;
-  generalChallenges: string[];
-  whyChoseEpoch: string;
-  
-  // Project Overview
-  projectScope: string;
-  timeline: string;
-  teamSize: {
-    epoch: number;
-    client: number;
-  };
-  
-  // Collaboration Details
-  workingProcess: {
-    communicationTools: string[];
-    meetingFrequency: string;
-    methodology: string;
-  };
-  teamRoles: {
-    epochRoles: string[];
-    clientRoles: string[];
-  };
-  challengesOvercome: string[];
-  
-  // Solutions and Innovations
-  deliverables: string[];
-  technicalHighlights: string[];
-  technologies: string[];
-  innovativeFeatures: string[];
-  
-  // Results and Impact
-  quantifiableResults: {
-    metric: string;
-    before: string;
-    after: string;
-    improvement: string;
-  }[];
-  qualitativeResults: string[];
-  
-  // Testimonial
-  testimonial: {
-    quote: string;
-    author: string;
-    position: string;
-    avatar?: string;
-    linkedinUrl?: string;
-    videoUrl?: string;
-  };
-  
-  // Additional Media
-  screenshots: string[];
-  diagrams: string[];
-  beforeAfterImages: string[];
-  
-  // Related Content
-  relatedServices: string[];
-  relatedCaseStudies: string[];
-  
-  // SEO
-  metaTitle: string;
-  metaDescription: string;
-}
-
 interface ClientDetailPageProps {
-  clientData: ClientDetailData;
+  readonly study: CaseStudy;
 }
 
-export function ClientDetailPage({ clientData }: ClientDetailPageProps) {
-  useCursor();
+interface DetailSectionProps {
+  readonly id: string;
+  readonly title: string;
+  readonly children: ReactNode;
+}
+
+function DetailSection({ id, title, children }: DetailSectionProps) {
+  return (
+    <section aria-labelledby={id} className={`${ui.section} ${ui.sectionRuled}`}>
+      <div className={`${ui.container} ${styles.split}`}>
+        <h2 id={id} className={ui.heading}>
+          {title}
+        </h2>
+        <div className={styles.content}>{children}</div>
+      </div>
+    </section>
+  );
+}
+
+interface ListProps {
+  readonly items: readonly string[];
+  /** CSS module lookups are typed as possibly undefined, so accept that explicitly. */
+  readonly className?: string | undefined;
+}
+
+function List({ items, className }: ListProps) {
+  return (
+    <ul className={className ?? styles.list}>
+      {items.map(item => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+function Hero({ study }: ClientDetailPageProps) {
+  return (
+    <section aria-labelledby="study-title" className={styles.hero}>
+      <div className={ui.container}>
+        <Link href="/clients" className={styles.back}>
+          All work
+        </Link>
+        <div className={styles.mark}>
+          <ClientMark client={study} />
+        </div>
+        <p className={styles.client}>
+          {study.name}, {study.industry.toLowerCase()}
+        </p>
+        <h1 id="study-title" className={`${ui.heading} ${styles.title}`}>
+          {study.headline}
+        </h1>
+        <p className={`${ui.lede} ${styles.lede}`}>{study.summary}</p>
+        <dl className={styles.facts}>
+          <div>
+            <dt>Industry</dt>
+            <dd>{study.industry}</dd>
+          </div>
+          <div>
+            <dt>Company size</dt>
+            <dd>{study.companySize}</dd>
+          </div>
+          <div>
+            <dt>Timeline</dt>
+            <dd>{study.timeline}</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>
+              {study.teamSize.epoch} from EPOCH, {study.teamSize.client} from {study.name}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+function Problem({ study }: ClientDetailPageProps) {
+  return (
+    <DetailSection id="problem-title" title="The problem">
+      <List items={study.generalChallenges} />
+      <h3 className={`${ui.subheading} ${styles.subTitle}`}>Why EPOCH</h3>
+      <p className={ui.body}>{study.whyChoseEpoch}</p>
+    </DetailSection>
+  );
+}
+
+function Built({ study }: ClientDetailPageProps) {
+  return (
+    <DetailSection id="built-title" title="What we built">
+      <p className={`${ui.lede} ${styles.scope}`}>{study.projectScope}</p>
+      <List items={study.deliverables} />
+    </DetailSection>
+  );
+}
+
+function Collaboration({ study }: ClientDetailPageProps) {
+  const { workingProcess, teamRoles } = study;
+  return (
+    <DetailSection id="collaboration-title" title="How we worked">
+      <dl className={styles.process}>
+        <div>
+          <dt>Method</dt>
+          <dd>{workingProcess.methodology}</dd>
+        </div>
+        <div>
+          <dt>Cadence</dt>
+          <dd>{workingProcess.meetingFrequency}</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>{workingProcess.communicationTools.join(', ')}</dd>
+        </div>
+      </dl>
+      <div className={styles.teams}>
+        <div>
+          <h3 className={`${ui.subheading} ${styles.subTitle}`}>EPOCH team</h3>
+          <List items={teamRoles.epochRoles} />
+        </div>
+        <div>
+          <h3 className={`${ui.subheading} ${styles.subTitle}`}>{study.name} team</h3>
+          <List items={teamRoles.clientRoles} />
+        </div>
+      </div>
+    </DetailSection>
+  );
+}
+
+function Hard({ study }: ClientDetailPageProps) {
+  return (
+    <DetailSection id="hard-title" title="Where it got hard">
+      <List items={study.challengesOvercome} className={styles.hardList} />
+    </DetailSection>
+  );
+}
+
+function UnderTheHood({ study }: ClientDetailPageProps) {
+  return (
+    <DetailSection id="hood-title" title="Under the hood">
+      <h3 className={`${ui.subheading} ${styles.subTitleFirst}`}>Technical highlights</h3>
+      <List items={study.technicalHighlights} />
+      <h3 className={`${ui.subheading} ${styles.subTitle}`}>What made it different</h3>
+      <List items={study.innovativeFeatures} />
+      <h3 className={`${ui.subheading} ${styles.subTitle}`}>Technologies</h3>
+      <List items={study.technologies} className={styles.chips} />
+    </DetailSection>
+  );
+}
+
+function Outcomes({ study }: ClientDetailPageProps) {
+  return (
+    <DetailSection id="outcomes-title" title="Outcomes">
+      <table className={styles.table}>
+        <caption className={ui.visuallyHidden}>Outcomes for {study.name}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Area</th>
+            <th scope="col">Before</th>
+            <th scope="col">After</th>
+            <th scope="col">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {study.quantifiableResults.map(result => (
+            <tr key={result.metric}>
+              <th scope="row">{result.metric}</th>
+              <td data-label="Before">{result.before}</td>
+              <td data-label="After">{result.after}</td>
+              <td data-label="Result">{result.improvement}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <List items={study.qualitativeResults} />
+    </DetailSection>
+  );
+}
+
+function Testimonial({ study }: ClientDetailPageProps) {
+  if (!study.testimonial) return null;
+  const { quote, author, position } = study.testimonial;
+  return (
+    <section aria-label={`What ${study.name} says`} className={`${ui.section} ${ui.sectionRuled}`}>
+      <div className={ui.container}>
+        <figure className={styles.testimonial}>
+          <blockquote className={styles.quote}>
+            <p>{quote}</p>
+          </blockquote>
+          <figcaption className={styles.attribution}>
+            {author}, {position}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function RelatedServices({ study }: ClientDetailPageProps) {
+  const services = study.relatedServices
+    .map(id => findService(id))
+    .filter((service): service is ServiceSummary => service !== undefined);
 
   return (
+    <DetailSection id="related-title" title="Related services">
+      <ul className={styles.related}>
+        {services.map(service => (
+          <li key={service.id}>
+            <Link href={`/services/${service.id}`} className={styles.relatedLink}>
+              {service.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </DetailSection>
+  );
+}
+
+export function ClientDetailPage({ study }: ClientDetailPageProps) {
+  return (
     <>
-      <Header />
-      <main className={styles.clientDetailPage}>
-        <div className={styles.backgroundEffect}></div>
-        
-        {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroContent}>
-            <div className={styles.clientLogo}>
-              <Image src={clientData.logo} alt={`${clientData.name} logo`} width={180} height={60} priority />
-            </div>
-            <h1 className={styles.heroTitle}>{clientData.heroTitle}</h1>
-            <p className={styles.heroSubtitle}>{clientData.heroSubtitle}</p>
-            <div className={styles.heroCta}>
-              <Button 
-                href="#contact" 
-                variant="primary"
-                size="large"
-                icon={
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                }
-              >
-                Get in Touch
-              </Button>
-              <Button 
-                href="#results" 
-                variant="outline"
-                size="large"
-              >
-                See Results
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Client Introduction */}
-      <section className={styles.clientIntroduction}>
-        <div className={styles.sectionInner}>
-          <div className={styles.introContent}>
-            <h2 className={styles.sectionTitle}>About {clientData.name}</h2>
-            <div className={styles.clientMeta}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Industry</span>
-                <span className={styles.metaValue}>{clientData.industry}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Company Size</span>
-                <span className={styles.metaValue}>{clientData.companySize}</span>
-              </div>
-            </div>
-            
-            <div className={styles.challengesSection}>
-              <h3 className={styles.subsectionTitle}>Industry Challenges</h3>
-              <ul className={styles.challengesList}>
-                {clientData.generalChallenges.map((challenge, index) => (
-                  <li key={index} className={styles.challengeItem}>{challenge}</li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className={styles.whyEpoch}>
-              <h3 className={styles.subsectionTitle}>Why EPOCH?</h3>
-              <p className={styles.whyEpochText}>{clientData.whyChoseEpoch}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Project Overview */}
-      <section className={styles.projectOverview}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Project Overview</h2>
-          <div className={styles.overviewGrid}>
-            <div className={styles.overviewContent}>
-              <h3 className={styles.subsectionTitle}>What We Built</h3>
-              <p className={styles.projectScope}>{clientData.projectScope}</p>
-            </div>
-            <div className={styles.overviewStats}>
-              <div className={styles.statItem}>
-                <div className={styles.statNumber}>{clientData.timeline}</div>
-                <div className={styles.statLabel}>Project Duration</div>
-              </div>
-              <div className={styles.statItem}>
-                <div className={styles.statNumber}>{clientData.teamSize.epoch}</div>
-                <div className={styles.statLabel}>EPOCH Experts</div>
-              </div>
-              <div className={styles.statItem}>
-                <div className={styles.statNumber}>{clientData.teamSize.client}</div>
-                <div className={styles.statLabel}>Client Team Members</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Collaboration Details */}
-      <section className={styles.collaborationDetails}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>How We Collaborated</h2>
-          <div className={styles.collaborationGrid}>
-            <div className={styles.processSection}>
-              <h3 className={styles.subsectionTitle}>Working Process</h3>
-              <div className={styles.processItem}>
-                <strong>Communication:</strong> {clientData.workingProcess.communicationTools.join(', ')}
-              </div>
-              <div className={styles.processItem}>
-                <strong>Meetings:</strong> {clientData.workingProcess.meetingFrequency}
-              </div>
-              <div className={styles.processItem}>
-                <strong>Methodology:</strong> {clientData.workingProcess.methodology}
-              </div>
-            </div>
-            
-            <div className={styles.rolesSection}>
-              <h3 className={styles.subsectionTitle}>Team Roles</h3>
-              <div className={styles.roleGroup}>
-                <h4>EPOCH Team</h4>
-                <ul>
-                  {clientData.teamRoles.epochRoles.map((role, index) => (
-                    <li key={index}>{role}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className={styles.roleGroup}>
-                <h4>Client Team</h4>
-                <ul>
-                  {clientData.teamRoles.clientRoles.map((role, index) => (
-                    <li key={index}>{role}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div className={styles.challengesOvercome}>
-            <h3 className={styles.subsectionTitle}>Challenges We Overcame Together</h3>
-            <div className={styles.challengesGrid}>
-              {clientData.challengesOvercome.map((challenge, index) => (
-                <div key={index} className={styles.challengeCard}>
-                  <div className={styles.challengeIcon}>🚀</div>
-                  <p>{challenge}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions and Innovations */}
-      <section className={styles.solutionsSection}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Solutions & Innovations</h2>
-          
-          <div className={styles.deliverablesSection}>
-            <h3 className={styles.subsectionTitle}>Key Deliverables</h3>
-            <div className={styles.deliverablesList}>
-              {clientData.deliverables.map((deliverable, index) => (
-                <div key={index} className={styles.deliverableItem}>
-                  <div className={styles.deliverableIcon}>✨</div>
-                  <span>{deliverable}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className={styles.technicalHighlights}>
-            <h3 className={styles.subsectionTitle}>Technical Highlights</h3>
-            <div className={styles.highlightsList}>
-              {clientData.technicalHighlights.map((highlight, index) => (
-                <div key={index} className={styles.highlightItem}>{highlight}</div>
-              ))}
-            </div>
-          </div>
-          
-          <div className={styles.technologiesUsed}>
-            <h3 className={styles.subsectionTitle}>Technologies Used</h3>
-            <div className={styles.techStack}>
-              {clientData.technologies.map((tech, index) => (
-                <span key={index} className={styles.techTag}>{tech}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Results and Impact */}
-      <section className={styles.resultsSection} id="results">
-        <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Results & Impact</h2>
-          
-          <div className={styles.metricsTable}>
-            <div className={styles.tableHeader}>
-              <div>Metric</div>
-              <div>Before</div>
-              <div>After</div>
-              <div>Improvement</div>
-            </div>
-            {clientData.quantifiableResults.map((result, index) => (
-              <div key={index} className={styles.tableRow}>
-                <div className={styles.metricName}>{result.metric}</div>
-                <div className={styles.beforeValue}>{result.before}</div>
-                <div className={styles.afterValue}>{result.after}</div>
-                <div className={styles.improvement}>{result.improvement}</div>
-              </div>
-            ))}
-          </div>
-          
-          <div className={styles.qualitativeResults}>
-            <h3 className={styles.subsectionTitle}>Additional Benefits</h3>
-            <ul className={styles.benefitsList}>
-              {clientData.qualitativeResults.map((result, index) => (
-                <li key={index}>{result}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className={styles.testimonialSection}>
-        <div className={styles.sectionInner}>
-          <div className={styles.testimonialCard}>
-            <div className={styles.testimonialContent}>
-              <blockquote className={styles.testimonialQuote}>
-                &ldquo;{clientData.testimonial.quote}&rdquo;
-              </blockquote>
-              <div className={styles.testimonialAuthor}>
-                {clientData.testimonial.avatar && (
-                  <Image 
-                    src={clientData.testimonial.avatar} 
-                    alt={clientData.testimonial.author}
-                    className={styles.authorAvatar}
-                    width={60}
-                    height={60}
-                  />
-                )}
-                <div className={styles.authorInfo}>
-                  <div className={styles.authorName}>{clientData.testimonial.author}</div>
-                  <div className={styles.authorPosition}>{clientData.testimonial.position}</div>
-                  {clientData.testimonial.linkedinUrl && (
-                    <a href={clientData.testimonial.linkedinUrl} className={styles.linkedinLink}>
-                      Connect on LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-            {clientData.testimonial.videoUrl && (
-              <div className={styles.testimonialVideo}>
-                <video controls>
-                  <source src={clientData.testimonial.videoUrl} type="video/mp4" />
-                </video>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={styles.ctaSection} id="contact">
-        <div className={styles.sectionInner}>
-          <h2 className={styles.ctaTitle}>Ready to Collaborate?</h2>
-          <p className={styles.ctaDescription}>
-            Let{`'`}s discuss how our team can help transform your next project into a success story.
-          </p>
-          <div className={styles.ctaButtons}>
-            <Button 
-              href="/contact" 
-              variant="primary"
-              size="large"
-              icon={
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              }
-            >
-              Contact EPOCH Today
-            </Button>
-            <Button 
-              href="/services" 
-              variant="secondary"
-              size="large"
-            >
-              Explore Our Services
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Related Content */}
-      <section className={styles.relatedContent}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Related Services</h2>
-          <div className={styles.relatedGrid}>
-            <div className={styles.relatedServices}>
-              <h3>Our Services</h3>
-              <ul>
-                {clientData.relatedServices.map((service, index) => (
-                  <li key={index}>
-                    <a href={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}>
-                      {service}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      </main>
-      <Footer />
+      <Hero study={study} />
+      <Problem study={study} />
+      <Built study={study} />
+      <Collaboration study={study} />
+      <Hard study={study} />
+      <UnderTheHood study={study} />
+      <Outcomes study={study} />
+      <Testimonial study={study} />
+      <RelatedServices study={study} />
+      <ClosingSection />
     </>
   );
 }

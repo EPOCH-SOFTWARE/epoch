@@ -1,0 +1,11 @@
+# Kept Time: an algorithmic philosophy for the EPOCH mark
+
+Most logos are photographs of a decision: fixed, finished and slowly ageing. Kept Time treats the mark as an instrument instead. An epoch is the reference point that time is measured from, so the EPOCH mark should not merely represent time; it should keep it. Every rendering is seeded by the Unix timestamp of the moment it is drawn, which makes each one a unique, reproducible record of a single second. The identity is the system, not the frame.
+
+The movement works with motions that only exist because time passes. Uniform rotation, as in the sky over a long exposure, where every star sweeps exactly the same angle whatever its distance from the pole. Damped oscillation, as in a harmonograph, where two pendulums trade energy until the trace spirals to rest. Accretion, as in growth rings, where good years and lean years leave rings of different widths that can never cross. And the clock itself, where the opening in the mark always points to now. Each process is simulated faithfully, because the honesty of the physics is what makes the result feel inevitable rather than decorative.
+
+Variation comes from seeded randomness held inside strict law. The seed chooses star magnitudes, pendulum phases and the rhythm of growth, but never the rules: arcs share one exposure angle, oscillations decay exponentially, rings stay nested. This is a meticulously crafted algorithm. Every ratio, damping constant and alpha value was tuned with painstaking care until order and chance sat in balance, the way a master instrument maker tunes a movement until it simply runs.
+
+There is always one fixed point: a single orange mark. The pole the sky turns around, the pendulum at rest, the ring where everything changed, the opening that points at the present. Everything else moves relative to it. That is the brand's belief expressed as geometry: the standard does not move, and the work goes all the way around it.
+
+Craftsmanship decides whether this reads as art or as noise. Lines are hairline, colour is restrained to ivory on black with one signal orange, motion is slow enough to be felt rather than watched, and every system pauses when nobody is looking. The final algorithms should look like the product of deep computational expertise and countless refinements: quiet, exact and impossible to fake by hand.

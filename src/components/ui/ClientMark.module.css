@@ -1,0 +1,28 @@
+.plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 5 / 2;
+  padding: 0.75rem 1.25rem;
+  background: var(--bone);
+  border-radius: 2px;
+}
+
+.logo {
+  width: auto;
+  max-width: 78%;
+  height: auto;
+  max-height: 2.4rem;
+  object-fit: contain;
+  /* Folds white logo backgrounds into the plate. */
+  mix-blend-mode: multiply;
+}
+
+.wordmark {
+  color: var(--night);
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-stretch: 120%;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
