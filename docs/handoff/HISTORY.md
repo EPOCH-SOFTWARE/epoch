@@ -448,6 +448,13 @@ Contact retains the accepted draft-preview behavior. The existing Resend endpoin
 Compared 36 routes against the prototype at desktop and phone widths. Fixed the regressions this caught: escaped noscript markup causing hydration errors, missing article closing sections, and a lab navigation link changed by route conversion. Confirmed responsive layout at 320, 390, 430, 768 and 1024px, keyboard and touch flows, form validation, demo states, clock winding, scrolling effects, page transitions, history and reduced motion. Headless screenshots are saved with the `next-` prefix. This is a framework port; no new visual direction or business claims were introduced.
 
 
+## Session 7: production release (2026-10-03)
+
+The founder approved merging the Night port into `main` so live visitors can use it. Release checks found that Vercel had rejected earlier preview builds and the installed Next.js version had known security issues. Updated Next.js and its matching lint/analyzer packages to 15.5.27 within the existing major version, then reran build and regression checks. The exact deployment failure still requires the hosting log or a successful replacement deployment to resolve.
+
+The release uses the existing Vercel integration and domain, https://epoch.sh. No separate hosting provider or new design is introduced. The Contact preview and parked AI scope remain as accepted.
+
+
 ## Rejected, do not repeat
 
 1. **The Epoch Field neural-network hero, and acid green on near-black** (2026-10-01). "cringe", not professional, and below the ambition. It read as a stock "AI network" look.
