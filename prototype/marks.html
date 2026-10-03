@@ -45,6 +45,9 @@
       .jumps { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 22px; font-size: 13px; }
       .jump { color: var(--signal); text-decoration: none; }
       .jump:hover { text-decoration: underline; }
+      @media (max-width: 1060px), (any-pointer: coarse) {
+        .back, .jump { display: inline-flex; align-items: center; min-height: 44px; }
+      }
       .round { border-top: 1px solid var(--line); }
       .round .top { padding-top: 88px; }
       .round-title { font-weight: 500; font-size: clamp(44px, 7vw, 112px); letter-spacing: -0.05em; line-height: 0.95; }

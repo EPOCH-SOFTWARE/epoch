@@ -7,7 +7,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 
 ## 0. Quick start (what to do first)
 
-1. `git switch feat/visual-stories` for the latest checkout. The illustration pass from `4ce5c01` was rejected and reverted. Prototype files match `7ceda36` on `feat/logo-studies`, including the About overlap fix and all logo labs. Logo work and photography remain parked.
+1. `git switch fix/mobile-compatibility` for the latest checkout. It descends from `feat/visual-stories` after the rejected illustration pass was reverted. The current work improves phone and tablet compatibility. Logo work, illustrations, photography and AI integration remain parked.
 2. Start the prototype server, which disables caching so edits show on refresh:
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
@@ -25,6 +25,8 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 12. Colour logo round (2026-10-03): the founder rejected all four concepts from item 10 and explicitly asked for new shapes, dual colour and gradients. This permits broader palettes within the new exploration; the site's Night palette remains intact. `identity-color-lab.html` adds Afterlight (gradient O within custom lettering), Prism (coral/violet folded form), Current (mint/violet ribbons and rounded lettering), and Voltage (slanted ice/pink wordmark). Colour and one-colour SVGs, website compositions and actual 16/24/32px icons are included. All earlier labs and concepts remain available. No replacement is selected.
 
 13. Illustration rollback (2026-10-03): the founder rejected the entire editorial illustration pass. Removed all seven illustrations and their presentation changes, restoring the previous Home, Services, Work, case and About pages. Do not revive this visual direction. Mark 08, the warm ivory footer, the About headline and the heading overlap fix remain. Photography and logo exploration remain parked.
+
+14. Mobile compatibility (2026-10-03): standalone navigation, footer links, breadcrumbs, project links and demo controls have at least 44px touch height on phones and touch devices. Closing the menu preserves the reading position. Landscape menus use smaller type and spacing. Touch devices navigate immediately to avoid cross-document transition errors during quick navigation. Shared pages account for safe-area insets. Buttons can wrap long labels. The document editor uses 16px text on phones and tablets, and the reading clock hides while a field is focused. All existing page content and the accepted Night design remain. `responsive-check.mjs` covers all 36 routes at 320, 390, 430, 768 and 1024px, plus touch navigation, orientation changes and reduced motion. Testing uses headless Chrome emulation, not physical iOS or Android devices.
 
 ---
 
@@ -67,6 +69,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 | `feat/night` | **Current: the Night redesign** of the prototype, branched from `feat/epoch-identity`. |
 | `feat/logo-studies` | Logo studies, branched from `feat/night` at `97e2bdb`. Adds `identity-lab.html`, then `identity-color-lab.html`, plus the About heading fix. Does not replace the site logo. |
 | `feat/visual-stories` | Illustration experiment and its rollback. Current prototype matches `7ceda36`; the seven-illustration direction was rejected. |
+| `fix/mobile-compatibility` | Current phone and tablet compatibility fixes, branched after the illustration rollback. |
 
 Commits (newest first):
 ```

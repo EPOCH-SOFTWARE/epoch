@@ -16,6 +16,16 @@ How to read it:
 
 ---
 
+## Mobile compatibility (2026-10-03)
+
+The founder requested a full mobile compatibility pass. Work continued on `fix/mobile-compatibility` from rollback commit `aaeb410`. The existing layouts already fit phone widths. The audit found undersized standalone touch targets, a 13px phone document editor and a menu close action that could move the page.
+
+Expanded touch targets, raised the editor text to 16px for phone and tablet use, preserved scroll position when menu focus returns, made the landscape menu more compact, disabled the circle page transition on touch devices after reproducing transition errors during quick navigation, allowed long button labels to wrap and added safe-area spacing. The floating reading clock hides while a form field is focused. All copy, logo concepts and the accepted design remain. No illustration or identity direction was revived.
+
+A failing headless browser check was added before the fixes. It covers all 36 routes at five widths, real emulated touch events, menu focus and scroll restoration, orientation changes, field sizing and reduced motion. Physical-device Safari and Android testing remains unperformed.
+
+---
+
 ## Illustration pass and rollback (2026-10-03)
 
 Commit `4ce5c01` added seven SVG illustrations across Home, Services, Work, case pages and About on `feat/visual-stories`. The founder rejected the entire result and requested a full revert. The prototype was restored exactly to `7ceda36`, retaining the existing logo, footer treatment, About headline and overlap fix. Do not reuse the exploded system, goal diagrams, case illustrations or folded-paper direction without a new request. Photography and logo exploration remain parked. The rejected assets and screenshots are recoverable from `4ce5c01`.

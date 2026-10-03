@@ -90,3 +90,18 @@ The founder rejected the earlier monochrome round and explicitly asked for colou
 ## Illustration rollback, 2026-10-03
 
 `desktop-43-illustration-rollback.png` shows the restored Home page after the founder rejected the illustration pass. The rejected screenshots remain recoverable from commit `4ce5c01`.
+
+## Mobile compatibility, 2026-10-03
+
+Headless Chrome captures after the mobile pass. These use emulated viewports, not physical devices.
+
+- `mobile-24-home.png`: Home at 390px.
+- `mobile-25-services.png`: the goal explorer at 390px.
+- `mobile-26-work-320.png`: project tabs and delivery content at 320px.
+- `mobile-27-contact.png`: required fields and optional details at 390px.
+- `mobile-28-document-editor.png`: readable 16px editing text and touch controls.
+- `mobile-29-about.png`: stacked belief headings and copy.
+- `mobile-30-footer.png`: expanded footer touch targets.
+- `mobile-31-landscape-menu.png`: the complete menu at 844 by 390px.
+- `tablet-01-services.png`: Services at 768px.
+- `desktop-44-mobile-compatibility.png`: the desktop Home after the mobile pass.

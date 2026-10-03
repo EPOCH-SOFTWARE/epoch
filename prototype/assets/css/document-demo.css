@@ -120,6 +120,18 @@
   overflow-wrap: anywhere;
 }
 
+@media (max-width: 1060px), (any-pointer: coarse) {
+  .demo-document textarea {
+    font-size: 16px;
+  }
+
+  .demo-back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
 .demo-document textarea::selection {
   background: #24221e;
   color: var(--text);
@@ -283,7 +295,7 @@
 
   .demo-document textarea {
     min-height: 320px;
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .results-heading {

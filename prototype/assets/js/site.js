@@ -174,8 +174,8 @@
       menu.hidden = !open;
       document.body.style.overflow = open ? 'hidden' : '';
       background.forEach(function (element) { element.inert = open; });
-      if (open) links[0].focus();
-      else if (restoreFocus) toggle.focus();
+      if (open) links[0].focus({ preventScroll: true });
+      else if (restoreFocus) toggle.focus({ preventScroll: true });
     }
 
     toggle.addEventListener('click', function () { setOpen(menu.hidden, true); });

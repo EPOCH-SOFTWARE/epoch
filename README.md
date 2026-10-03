@@ -4,13 +4,15 @@ The marketing site for EPOCH Software Services: an AI-first engineering company.
 
 ## Redesign in progress
 
-The next version of the site is being designed as a static prototype in `prototype/` originally on `feat/night`. The latest checkout is `feat/visual-stories`, where the rejected illustration experiment has been reverted to the previous design. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
+The next version of the site is being designed as a static prototype in `prototype/` originally on `feat/night`. The latest checkout is `fix/mobile-compatibility`, with phone and tablet fixes applied after reverting the rejected illustration experiment. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
 
 The home and Work pages feature the existing HUB and Inspira case studies. `prototype/document-demo.html` has an instant browser preview and an optional AI review through the local Python server. AI review sends the document to OpenAI only on submission; the key stays on the server. See [local AI setup](docs/handoff/tools/AI-REVIEW.md). Run `node --test 'prototype/tests/*.test.js'` for pure helpers and `node docs/handoff/tools/demo-check.mjs` for the demo's browser checks.
 
 The UI pass adds a goal-based Services explorer, project walkthroughs, section navigation on long pages, and a shorter Contact flow that carries the selected service or goal into the enquiry. The prototype previews enquiries without sending them. Run `node docs/handoff/tools/journey-check.mjs` for desktop, phone, keyboard and context checks. The AI demo is parked pending the ML engineer's input.
 
 Fresh logo exploration lives on `feat/logo-studies`, branched from `feat/night`. The latest [colour lab](http://localhost:3460/identity-color-lab.html) compares Afterlight, Prism, Current and Voltage, with gradients, two-colour treatments, website compositions, small icons and downloadable SVGs. The first [identity lab](http://localhost:3460/identity-lab.html) retains Cut, Phase, Threshold and Common, which were not selected. The current site identity and every earlier concept remain available.
+
+Mobile checks cover 36 routes at 320, 390, 430, 768 and 1024px, with touch navigation, menu scroll restoration and field sizing. Run `node docs/handoff/tools/responsive-check.mjs` in headless Chrome.
 
 ## Getting started
 

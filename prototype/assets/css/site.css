@@ -13,14 +13,14 @@
   --text-xl: clamp(26px, 1.4vw + 16px, 38px);
   --text-2xl: clamp(34px, 3.2vw + 12px, 60px);
   --text-display: clamp(44px, 5.9vw + 4px, 96px);
-  --gutter: clamp(16px, 4vw, 48px);
+  --gutter: max(clamp(16px, 4vw, 48px), env(safe-area-inset-left), env(safe-area-inset-right));
   /* Every multi-column layout sits on one twelve-column grid with this gap, so columns line up
      from section to section: titles in columns 1-5, content from column 6. */
   --col-gap: clamp(24px, 4.4vw, 64px);
   --space-section: clamp(72px, 9vw, 136px);
   /* Where a sticky column comes to rest under the header. */
   --pin-top: calc(var(--header-h) + 40px);
-  --header-h: 64px;
+  --header-h: calc(64px + env(safe-area-inset-top));
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -110,7 +110,8 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Touch navigation stays immediate, including when the phone changes orientation. */
+@media (prefers-reduced-motion: reduce), (any-pointer: coarse) {
   @view-transition {
     navigation: none;
   }
@@ -471,6 +472,7 @@ label {
   align-items: center;
   gap: 32px;
   height: var(--header-h);
+  padding-top: env(safe-area-inset-top);
 }
 
 .brand {
@@ -511,6 +513,7 @@ label {
   inset: var(--header-h) 0 0;
   z-index: 39;
   padding: 32px var(--gutter);
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
   background: var(--raised);
 }
 
@@ -602,7 +605,7 @@ label {
 }
 
 .foot-mark {
-  padding-block: 8px 28px;
+  padding-block: 8px max(28px, env(safe-area-inset-bottom));
   color: rgba(242, 239, 232, 0.12);
 }
 
@@ -2198,6 +2201,79 @@ h1, h2, h3 { text-wrap: balance; }
   .bar { gap: 10px; }
   .menu-toggle { padding-inline: 12px; }
 }
-@media (pointer: coarse) {
-  .text-link, .chip, .source-link, .scope-case-link, .scope-choices button, .goal-links a { min-height: 44px; }
+@media (max-width: 1060px), (any-pointer: coarse) {
+  .brand,
+  .foot-col a,
+  .crumbs a,
+  .office a,
+  .direct a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .foot-col a {
+    display: flex;
+    overflow-wrap: anywhere;
+  }
+
+  .crumbs {
+    align-items: center;
+  }
+
+  .text-link,
+  .chip,
+  .source-link,
+  .scope-case-link,
+  .scope-choices button,
+  .goal-links a,
+  .goal-proof,
+  .home-paths a,
+  .reading-guide a,
+  .ins-toc a,
+  .demo-preview,
+  .demo-reset {
+    min-height: 44px;
+  }
+
+  .btn {
+    max-width: 100%;
+    min-height: 46px;
+    height: auto;
+    padding-block: 12px;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .btn.sm {
+    min-height: 44px;
+  }
+
+  .btn.lg {
+    min-height: 54px;
+    height: auto;
+  }
+
+  .bar > .header-contact {
+    white-space: nowrap;
+  }
+
+  /* Keep the floating reading control clear of the keyboard and active fields. */
+  body:has(input:focus, textarea:focus, select:focus) .reading-clock {
+    visibility: hidden;
+    opacity: 0;
+    transition: none;
+  }
+}
+
+@media (max-height: 500px) {
+  .menu {
+    padding-top: 12px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .menu a {
+    font-size: 28px;
+    line-height: 1.35;
+  }
 }
