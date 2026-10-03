@@ -24,8 +24,8 @@ export const COMMITMENTS: ReadonlyArray<{ title: string; detail: string }> = [
 ];
 
 export const CLIENT_LOGOS: ReadonlyArray<ClientLogo> = [
-  { id: 'hub-international', name: 'HUB International', logo: '/logos/HUB-international.png' },
-  { id: 'onesix-ai', name: 'OneSix AI' },
+  { id: 'hub-international', name: 'HUB International', logo: '/logos/hub-logo.png' },
+  { id: 'onesix-ai', name: 'OneSix AI', logo: '/logos/onesix.avif' },
   { id: 'inspira-financial', name: 'Inspira Financial', logo: '/logos/inspira-financial.svg' },
   { id: 'cardinal-health', name: 'Cardinal Health', logo: '/logos/cardinal-health.png' },
   { id: 'shift4', name: 'Shift4', logo: '/logos/shift-4.svg' },

@@ -18,14 +18,18 @@ describe('client logos', () => {
       if (client.logo) expect(existsSync(join(PUBLIC_DIR, client.logo))).toBe(true);
     }
   });
+
+  it('uses sourced image assets for HUB and OneSix in every shared placement', () => {
+    const hub = CLIENT_LOGOS.find(client => client.id === 'hub-international');
+    expect(hub?.logo).toBe('/logos/hub-logo.png');
+    expect(CASE_STUDIES.find(study => study.id === hub?.id)?.logo).toBe(hub?.logo);
+    expect(CLIENT_LOGOS.find(client => client.id === 'onesix-ai')?.logo).toBe('/logos/onesix.avif');
+  });
 });
 
 describe('case studies', () => {
   it('covers HUB International and Inspira Financial', () => {
-    expect(CASE_STUDIES.map(study => study.id)).toEqual([
-      'hub-international',
-      'inspira-financial',
-    ]);
+    expect(CASE_STUDIES.map(study => study.id)).toEqual(['hub-international', 'inspira-financial']);
   });
 
   it('never ships placeholder testimonials', () => {

@@ -34,6 +34,8 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 
 17. Release approval (2026-10-03): the founder authorized merging `feat/next-night` into `main` and publishing the accepted Night site. Vercel deploys `main` to https://epoch.sh. Release preparation updates Next.js and its matching lint/analyzer packages to 15.5.27, following the current security fixes. The hosting log identified `npm install --production` as the failure: TypeScript was omitted. `vercel.json` now overrides installation with `npm ci --include=dev`; Node is pinned to 22.x to match the project setting. A fresh Node 22 install in production mode and its full build passed. Vercel preview `CfzY8Zu7EJJ8yVLY5suwbKpAfHAi` also passed before the approved merge. Verify the production deployment and live routes after the push. Contact remains the approved enquiry preview, and further AI model work stays parked.
 
+18. Client logo repair (2026-10-03): HUB’s old PNG had an opaque white background, so the Night monochrome filter made it a blank rectangle. Shared client and case-study data now use the transparent logo from [HUB’s official careers site](https://careers.hubinternational.com/). OneSix now uses the real symbol and wordmark from [its official homepage](https://www.onesix.ai/). Both are hosted locally, with the existing monochrome treatment. Sources and asset links are recorded in HISTORY session 8. The frozen prototype and concept labs remain unchanged. The OneSix project story is still needed.
+
 ---
 
 ## 1. Who you're working with (founder preferences, important)
@@ -322,7 +324,7 @@ The site logo (header and footer) is now **mark 08, In the name**: the `wm-clock
 7. **Missing real proof:**
    - real metrics for HUB and Inspira (case studies currently say "significantly faster" etc.);
    - real testimonials (hidden until provided);
-   - a OneSix AI logo file and what EPOCH built for them;
+   - what EPOCH built for OneSix AI; its official logo is now sourced;
    - founder photo, bio and team;
    - certifications or partnerships, only if true;
    - the Calendly link.

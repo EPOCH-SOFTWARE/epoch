@@ -37,7 +37,7 @@ Prototype `.html` URLs redirect to the corresponding Next routes, preserving enq
 - `src/night/pages/`: server-rendered page content.
 - `src/night/Chrome.tsx` and `Blocks.tsx`: shared header, footer, logo geometry and content blocks.
 - `src/night/Explorers.tsx` and `ReadingGuide.tsx`: React tabs and section navigation.
-- `src/shared/constants/`: services, case studies, client logos and contact information.
+- `src/shared/constants/`: services, case studies, client logos and contact information. HUB and OneSix use locally hosted official transparent assets; sources are in [HISTORY session 8](docs/handoff/HISTORY.md#session-8-official-client-logos-2026-10-03).
 - `src/night/content.ts`: existing goals, industry content and articles, carried over from the prototype.
 - `styles/night/`: the accepted CSS, imported by `app/globals.css`. Host Grotesk and IBM Plex Mono are self-hosted through Next's font loader.
 - `public/night/`: the tested time helpers, motion enhancements and document-demo browser code.

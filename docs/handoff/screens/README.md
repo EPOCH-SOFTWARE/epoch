@@ -122,3 +122,12 @@ The eight `next-` PNGs show the production build on port 3000 at 1440 × 900 and
 | `next-08-document-demo-mobile.png` | Sample evidence review on a phone |
 
 The separate parity check compares both builds across all 36 routes at 1440px and 390px, with reports and paired screenshots under `/tmp/epoch-next-parity`.
+
+## Client logo repair (2026-10-03)
+
+- `client-logos-desktop.png`: the Work client grid with official HUB and OneSix assets.
+- `client-logos-mobile.png`: the same grid at 390px.
+- `client-logos-hub-feature.png`: HUB visible in the featured project mast.
+- `client-logos-hub-case-desktop.png` and `client-logos-hub-case-mobile.png`: the HUB case-study hero.
+
+These approved asset changes intentionally differ from the frozen prototype’s HUB rectangle and OneSix text fallback.
