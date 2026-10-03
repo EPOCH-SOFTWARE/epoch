@@ -7,8 +7,8 @@ This is the brief for any AI coding agent working in this repo, such as Codex or
 - **EPOCH Software Services** is an AI-first software and AI engineering company with offices in Charlotte, NC and Ahmedabad, India. This repo is its marketing website.
 - You work for the founder. They will tell you what they want next.
 - Two things live here:
-  1. **The live site:** a Next.js 15 app in `app/` and `src/`, described in `README.md` and `CLAUDE.md`. Leave it alone unless the founder asks.
-  2. **The redesign:** a static HTML, CSS and JS prototype in `prototype/` on the branch **`feat/night`**. All current work happens here.
+  1. **The Next.js port:** the founder authorized the Night redesign in `app/` and `src/night/` on **`feat/next-night`**, branched from the mobile-compatible prototype at `b0c08b6`. See `README.md` and `CLAUDE.md`.
+  2. **The reference:** the accepted static HTML, CSS and JS prototype in `prototype/`, descended from **`feat/night`**. Keep it as the comparison baseline during the port.
 
 ## 2. Read these first, in this order
 
@@ -22,12 +22,13 @@ Then run the prototype and look at the pages yourself before you suggest anythin
 ## 3. Run it
 
 ```bash
-git switch feat/night
+git switch feat/next-night
+npm run dev                            # Next.js on http://localhost:3000
 python3 prototype/serve.py              # http://localhost:3460, caching off
 node --test 'prototype/tests/*.test.js' # unit tests for the pure helpers
 ```
 
-- There is no build step. Edit the files and refresh the page.
+- The prototype has no build step. Next uses `npm run build` and `npm start` for production checks. Development uses `.next-dev`; production uses `.next`.
 - If port 3460 is busy, run `kill $(lsof -ti tcp:3460)`.
 
 ## 4. How the prototype is built
@@ -68,7 +69,7 @@ node --test 'prototype/tests/*.test.js' # unit tests for the pure helpers
 
 - **No em dashes anywhere:** not in copy, titles, docs or commit messages. They "feel like AI". Use commas, colons or full stops. Page titles use " | ".
 - **Never invent** client metrics, quotes, testimonials, logos or facts. HANDOFF section 7 lists the real content still missing. Leave a gap rather than make something up.
-- **Don't port the prototype to Next.js** until the founder says so.
+- **The founder has authorized the Next.js port** on a separate feature branch. Preserve the accepted design, mobile behavior and animations. Further visual exploration remains parked.
 - **Never delete a logo or footer concept** from the lab pages. The founder said "KEEP ADDING DO NOT REMOVE".
 - **Show, don't describe.** Build it, screenshot it and show the result. When there's a choice, show 2 to 4 options with pictures.
 - **Talk in short, plain language** with no jargon. The founder often says "explain that to me in short".
@@ -131,7 +132,7 @@ node --test 'prototype/tests/*.test.js' # unit tests for the pure helpers
 ## 10. Where things stand (2026-10-03)
 
 - The Night design and logo 08 are on every page.
-- The inner-page craft pass is done and pushed.
+- The inner-page craft pass and mobile compatibility work are complete. The authorized Next.js port is on `feat/next-night`.
 - The founder is reviewing it.
 - Two calls they may undo: the one-year dial on case pages, and the small O that ends each article.
 - Still waiting on the founder for:
@@ -140,4 +141,4 @@ node --test 'prototype/tests/*.test.js' # unit tests for the pure helpers
   - a founder photo and bio;
   - the booking (Calendly) link.
 
-When you start, reply with a summary of five lines or fewer covering what you understood. Then wait for the founder's wishes.
+When starting a new session without a task, reply with a summary of five lines or fewer and wait. If the founder has already asked for work, continue that authorized task.

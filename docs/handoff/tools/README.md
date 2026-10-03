@@ -1,4 +1,4 @@
-# QA tools for the prototype
+# QA tools for Night
 
 Small Node scripts that check the prototype in headless Chrome. They never open or drive anyone's own browser. That is a founder rule.
 
@@ -45,3 +45,27 @@ From the repo root:
    For changes to the document demo, also run `node docs/handoff/tools/demo-check.mjs`.
 5. Search the prototype for em dashes. There must be none.
 6. Look at the screenshots yourself before you show anything.
+
+## Next.js port checks
+
+The four journey, responsive, demo and form checks accept `BASE_URL=http://localhost:3000`. Without that setting they continue checking the prototype on port 3460. Their original `.html` URLs also exercise the Next redirects. The CDP helper waits for the Next motion runtime before interacting with a page.
+
+Start both servers, using `npm run build` and `npm start` for the Next production build, then run:
+
+```sh
+npm test -- --runInBand
+BASE_URL=http://localhost:3000 node docs/handoff/tools/journey-check.mjs
+BASE_URL=http://localhost:3000 node docs/handoff/tools/responsive-check.mjs
+BASE_URL=http://localhost:3000 node docs/handoff/tools/demo-check.mjs
+BASE_URL=http://localhost:3000 node docs/handoff/tools/formcheck.mjs
+node docs/handoff/tools/next-motion-check.mjs
+node docs/handoff/tools/next-parity.mjs
+```
+
+`next-motion-check.mjs` checks first-visit logo winding, the hero draw, live favicon, magnetic buttons, reading progress and back-to-top focus, section rules, dusk, desktop circle reveal, history, the month ring, case dial, article contents and reduced/touch motion.
+
+`next-parity.mjs` compares 36 routes at 1440px and 390px. It compares visible text, heading geometry and page height, checks images and fragments, follows internal page/download links, and rejects console errors. It saves comparison screenshots and a JSON report under `/tmp/epoch-next-parity`. Override `OUT_DIR`, `PROTOTYPE_URL` or `BASE_URL` if needed. Time and reduced motion are fixed only within this comparison browser; real animation behavior is tested separately.
+
+Next-specific pure server validation tests live in `prototype/tests/next-document-review.test.ts` and run through Jest. They cover the existing evidence contract, Unicode browser offsets, malformed requests, local access, missing credentials, sanitized provider errors and concurrency. No tests send documents to a real provider.
+
+Also run lint, TypeScript, production build and both original prototype test suites. Search `app/`, `src/night/`, `styles/night/`, `public/night/`, the lab archives and changed docs for em dashes. Look at the saved screenshots. Phone checks emulate Chrome devices; they do not establish physical Safari or Android results.

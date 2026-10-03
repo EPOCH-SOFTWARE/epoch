@@ -16,7 +16,7 @@ describe('service detail route', () => {
 
   it('titles the page without repeating the brand the root template adds', async () => {
     const metadata = await generateMetadata(paramsFor('ai-ml'));
-    expect(metadata.title).toBe('AI & Machine Learning Development');
+    expect(metadata.title).toBe(SERVICES.find(service => service.id === 'ai-ml')!.title);
     expect(metadata.description).toBe(SERVICE_DETAIL_DATA['ai-ml'].metaDescription);
   });
 

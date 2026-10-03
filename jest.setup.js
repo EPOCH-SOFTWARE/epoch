@@ -56,9 +56,10 @@ const mockCanvas = {
   height: 500,
 };
 
-Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
-  value: () => mockCanvas.getContext(),
-});
+if (typeof HTMLCanvasElement !== 'undefined')
+  Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+    value: () => mockCanvas.getContext(),
+  });
 
 // Mock requestAnimationFrame
 global.requestAnimationFrame = callback => {
@@ -69,13 +70,14 @@ global.cancelAnimationFrame = id => {
   clearTimeout(id);
 };
 // jsdom has no matchMedia; default to "no preference" for every query.
-Object.defineProperty(window, 'matchMedia', {
-  configurable: true,
-  writable: true,
-  value: query => ({
-    matches: false,
-    media: query,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-  }),
-});
+if (typeof window !== 'undefined')
+  Object.defineProperty(window, 'matchMedia', {
+    configurable: true,
+    writable: true,
+    value: query => ({
+      matches: false,
+      media: query,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }),
+  });

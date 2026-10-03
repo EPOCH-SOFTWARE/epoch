@@ -1,0 +1,25 @@
+<svg
+  class=""
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 140 140"
+  fill="currentColor"
+  role="img"
+  aria-label="EPOCH voltage symbol in one colour"
+>
+  <defs>
+    <linearGradient id="a15top" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bcf7ff" />
+      <stop offset="100%" stop-color="#65a4ff" />
+    </linearGradient>
+    <linearGradient id="a15bottom" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffa69e" />
+      <stop offset="100%" stop-color="#ff4c8b" />
+    </linearGradient>
+    <clipPath id="a15t"><rect x="0" y="0" width="470" height="48" /></clipPath>
+    <clipPath id="a15b"><rect x="0" y="53" width="470" height="48" /></clipPath>
+  </defs>
+  <g transform="translate(39 18) skewX(-12) scale(1.1)">
+    <path d="M0 0H68V17H20V31H60V42H0Z" fill="currentColor" />
+    <path d="M0 47H60V55H20V70H68V88H0Z" fill="currentColor" />
+  </g>
+</svg>

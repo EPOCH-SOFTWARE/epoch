@@ -1,17 +1,10 @@
-/**
- * @fileoverview About page route
- * @author Epoch Development Team
- */
-
-import type { Metadata } from 'next';
-import AboutPage from '@/src/components/pages/about';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'EPOCH is an AI and software engineering company with teams in the US and India. What we believe, how an engagement runs, and what we build with.',
-};
-
-export default function About() {
-  return <AboutPage />;
+import { About } from '@/src/night/pages/About';
+import { SitePage } from '@/src/night/Chrome';
+export const metadata = { title: 'About', alternates: { canonical: '/about' } };
+export default function Page() {
+  return (
+    <SitePage page="about">
+      <About />
+    </SitePage>
+  );
 }

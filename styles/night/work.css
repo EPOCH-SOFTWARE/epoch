@@ -1,0 +1,197 @@
+/* Work is given room to be read: one lead project, then a quieter companion. */
+.project-feature {
+  border-top: 1px solid var(--line-strong);
+}
+
+.project-mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 32px 48px;
+  color: var(--muted);
+}
+
+.project-mast img, .project-companion img {
+  width: auto;
+  max-width: 190px;
+  height: 32px;
+  object-fit: contain;
+  object-position: left;
+  filter: var(--client-filter);
+}
+
+.project-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+  align-items: stretch;
+}
+
+.project-story h3 {
+  max-width: 18ch;
+  font-size: clamp(32px, 3.2vw, 48px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.project-story > p {
+  margin-top: 28px;
+  max-width: 45ch;
+  color: var(--muted);
+}
+
+.text-link {
+  display: inline-block;
+  padding-block: 6px;
+  margin-top: 24px;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 15px;
+}
+
+.text-link:hover {
+  border-color: var(--text);
+}
+
+.project-scope {
+  background: var(--raised);
+  border: 1px solid var(--line);
+  padding: clamp(24px, 3.4vw, 48px);
+}
+
+.scope-caption {
+  margin-bottom: 32px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.project-scope li {
+  position: relative;
+  padding: 0 0 32px 30px;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.4;
+}
+
+.project-scope li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 4px;
+  height: 100%;
+  border-left: 1px solid var(--line-strong);
+}
+
+.scope-node {
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--text);
+  background: var(--raised);
+  border-radius: 50%;
+}
+
+.scope-foot {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.project-context {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+  padding-block: 44px;
+  margin-top: 44px;
+  border-top: 1px solid var(--line);
+}
+
+.project-context h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.project-context p {
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.project-companion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+  padding-top: 48px;
+  margin-top: 64px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.project-companion > div > p {
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+.project-companion h3 {
+  max-width: 24ch;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.demo-invite {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+  align-items: center;
+}
+
+.demo-invite h2 {
+  max-width: 17ch;
+}
+
+.demo-invite p {
+  color: var(--muted);
+  max-width: 45ch;
+}
+
+.demo-invite .actions {
+  margin-top: 28px;
+}
+
+.demo-invite .demo-note {
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+@media (max-width: 760px) {
+  .project-layout, .project-context, .project-companion, .demo-invite {
+    grid-template-columns: 1fr;
+  }
+
+  .project-mast {
+    padding-block: 28px;
+  }
+
+  .project-mast img {
+    max-width: 160px;
+    height: 28px;
+  }
+
+  .project-mast span {
+    font-size: 14px;
+  }
+
+  .project-context {
+    margin-top: 32px;
+    padding-block: 32px 0;
+  }
+
+  .project-companion {
+    margin-top: 48px;
+  }
+
+}

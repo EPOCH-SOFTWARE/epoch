@@ -2,6 +2,14 @@
 
 The prototype has two explicit actions. Sample preview extracts labelled fields in the browser. Review with AI sends the current document through the local Python server to OpenAI. The API key never enters the page.
 
+## Next.js port
+
+On `feat/next-night`, `/document-demo` uses the same two actions. `app/api/document-review/route.ts` and `src/night/server/document-review.ts` provide the existing review through Node's server-side fetch. No Python dependency is needed for Next. The default model, instructions, structured response and verified source offsets are preserved. The route retains local Host/Origin checks and is not enabled as a public AI service.
+
+Set `OPENAI_API_KEY` in the server environment, then run `npm run dev`, or restart `npm start` for a built production preview. Next also reads ignored `.env.local` files. Keep credentials out of chat and version control. Open http://localhost:3000/document-demo. The connection indicator checks whether a key is configured; only a completed provider request verifies it. Live provider testing remains pending.
+
+For the port, use `BASE_URL=http://localhost:3000 node docs/handoff/tools/demo-check.mjs` and `npm test -- --runInBand prototype/tests/next-document-review.test.ts`. These use controlled responses and require no credentials.
+
 ## Connect it locally
 
 From the repository root, install the Python dependency:

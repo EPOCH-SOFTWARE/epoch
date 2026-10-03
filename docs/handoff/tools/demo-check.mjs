@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { launch, setViewport, open, sleep } from './cdp.mjs';
 
+const base = (process.env.BASE_URL || 'http://localhost:3460').replace(/\/$/, '');
 const cdp = await launch();
 const problems = [];
 cdp.on(message => {
@@ -29,7 +30,7 @@ try {
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true });
   for (const width of [1440, 390]) {
     await setViewport(cdp, width, 900);
-    await open(cdp, 'http://localhost:3460/document-demo.html', 500);
+    await open(cdp, base + '/document-demo.html', 500);
     assert.equal(await cdp.evaluate('document.documentElement.scrollWidth'), width);
     assert.equal(await cdp.evaluate("document.querySelectorAll('.review-field').length"), 3);
 
@@ -107,7 +108,7 @@ try {
     console.log(width + 'px: sample switching, keyboard, citations, edits, conflicts, reset, safe rendering, AI loading, success, failure and stale responses passed');
   }
   await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
-  await open(cdp, 'http://localhost:3460/document-demo.html', 500);
+  await open(cdp, base + '/document-demo.html', 500);
   assert.equal(await cdp.evaluate("document.querySelectorAll('.review-field').length"), 3);
   assert.deepEqual(problems, []);
   console.log('Reduced motion and console checks passed');

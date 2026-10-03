@@ -26,7 +26,7 @@ ws.addEventListener('message', e => {
 const send = (method, params = {}) => new Promise(r => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
 const evaluate = async expr => (await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true })).result.value;
 await send('Runtime.enable');
-const base = 'http://127.0.0.1:3460/';
+const base = (process.env.BASE_URL || 'http://127.0.0.1:3460').replace(/\/$/, '') + '/';
 for (const path of ['index.html', 'services.html', 'service.html?id=generative-ai', 'service.html?id=nope', 'work.html', 'case.html?id=inspira-financial', 'case.html?id=nope', 'about.html', 'contact.html']) {
   await send('Page.navigate', { url: base + path }); await sleep(1500);
   const h1 = await evaluate("document.querySelector('h1')?.textContent.trim()");

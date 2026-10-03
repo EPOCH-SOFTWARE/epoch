@@ -1,24 +1,10 @@
-/**
- * @fileoverview Services index route
- * @author Epoch Development Team
- */
-
-import type { Metadata } from 'next';
-import ServicesPage from '@/src/components/pages/services';
-
-const DESCRIPTION =
-  'AI first: machine learning, generative AI and data systems, backed by the software, cloud, DevOps and security engineering that keeps them running in production.';
-
-export const metadata: Metadata = {
-  title: 'Services',
-  description: DESCRIPTION,
-  openGraph: {
-    title: 'Services',
-    description: DESCRIPTION,
-    type: 'website',
-  },
-};
-
-export default function Services() {
-  return <ServicesPage />;
+import { Services } from '@/src/night/pages/Services';
+import { SitePage } from '@/src/night/Chrome';
+export const metadata = { title: 'Services', alternates: { canonical: '/services' } };
+export default function Page() {
+  return (
+    <SitePage page="services">
+      <Services />
+    </SitePage>
+  );
 }

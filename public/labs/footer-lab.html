@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Footer wordmark | EPOCH options</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..600&family=IBM+Plex+Mono:wght@400&display=swap" />
+    <style>
+      :root { --ink: #f2efe8; --muted: #8f8a80; --line: rgba(242, 239, 232, 0.12); --signal: #ff4f00; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: #000; color: var(--ink); font-family: 'Host Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      .intro { max-width: 1240px; margin: 0 auto; padding: 56px 32px 24px; }
+      .intro h1 { font-weight: 500; font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.04em; }
+      .intro p { margin-top: 12px; color: var(--muted); font-size: 18px; }
+      .option { position: relative; border-top: 1px solid var(--line); overflow: hidden; isolation: isolate; }
+      .option header { position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: 28px 32px 0; display: flex; gap: 16px; align-items: baseline; }
+      .option h2 { font-weight: 500; font-size: 28px; letter-spacing: -0.03em; }
+      .option header p { color: var(--muted); font-size: 15px; }
+      .option .mark { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 48px 32px 56px; }
+      .option svg.word { display: block; width: 100%; height: auto; overflow: visible; }
+      .readout { position: absolute; right: 32px; bottom: 16px; z-index: 2; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); }
+      /* 2: the sky glows behind the letters like dusk. */
+      .horizon::before { content: ''; position: absolute; inset: 0; z-index: 0; background:
+        radial-gradient(78% 88% at 50% 108%, rgba(255, 79, 0, 0.7), rgba(196, 44, 4, 0.38) 40%, rgba(70, 12, 2, 0.18) 64%, transparent 84%); }
+      /* 3: a light that follows the pointer reveals the letters. */
+      .spot .mark { cursor: crosshair; }
+      .round { max-width: 1240px; margin: 0 auto; padding: 40px 32px 8px; color: var(--muted); font-size: 15px; }
+      .round h2 { color: var(--ink); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; }
+      /* Shared dusk: a low glow just under the letters, softer than 2. */
+      .dusk::before { content: ''; position: absolute; inset: 0; z-index: 0; background:
+        radial-gradient(64% 70% at 50% 100%, rgba(255, 79, 0, 0.5), rgba(170, 38, 4, 0.26) 42%, rgba(60, 10, 2, 0.12) 66%, transparent 86%); }
+      .ember-line { position: absolute; left: 50%; bottom: 44px; z-index: 0; width: min(1176px, calc(100% - 64px)); height: 1px; transform: translateX(-50%);
+        background: linear-gradient(90deg, transparent, rgba(255, 79, 0, 0.9) 30%, rgba(255, 140, 70, 1) 50%, rgba(255, 79, 0, 0.9) 70%, transparent);
+        box-shadow: 0 0 18px 2px rgba(255, 79, 0, 0.45), 0 0 60px 12px rgba(255, 79, 0, 0.12); }
+      @media (prefers-reduced-motion: reduce) { .ember-drift { display: none; } }
+    </style>
+  </head>
+  <body>
+    <header class="intro">
+      <h1>Four ways to light the big EPOCH.</h1>
+      <p>Each one is the footer wordmark as it would sit at the bottom of every page.</p>
+    </header>
+
+    <h2 class="round">Round 2, built from 2: the letters stay readable.</h2>
+
+    <section class="option" aria-labelledby="o5">
+      <header><h2 id="o5">5. Sunset-lit</h2><p>Ivory letters whose bases warm to orange, as if the sun just set below them.</p></header>
+      <div class="mark"><svg class="word" data-sunset viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <section class="option dusk" aria-labelledby="o6">
+      <header><h2 id="o6">6. Dusk behind, letters clear</h2><p>The glow from 2, with quiet ivory letters in front of it.</p></header>
+      <div class="mark"><svg class="word" data-clear viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <section class="option dusk" aria-labelledby="o7">
+      <header><h2 id="o7">7. Rising out of the glow</h2><p>Bright at the top, the letters dissolve into the glow at their base.</p></header>
+      <div class="mark"><svg class="word" data-rising viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <section class="option" aria-labelledby="o8">
+      <header><h2 id="o8">8. One warm line</h2><p>Quiet ivory letters standing on a single glowing horizon line.</p></header>
+      <div class="mark"><svg class="word" data-line viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+      <span class="ember-line" aria-hidden="true"></span>
+    </section>
+
+    <h2 class="round">Round 1</h2>
+
+    <section class="option" aria-labelledby="o1">
+      <header><h2 id="o1">1. Lit by the O</h2><p>The O is the live clock; its light warms the letters nearest the opening.</p></header>
+      <div class="mark"><svg class="word" data-lit viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+      <span class="readout" data-lit-label></span>
+    </section>
+
+    <section class="option horizon" aria-labelledby="o2">
+      <header><h2 id="o2">2. Horizon glow</h2><p>Dark silhouettes against a glow rising behind them, like just after sunset.</p></header>
+      <div class="mark"><svg class="word" data-horizon viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <section class="option spot" aria-labelledby="o3">
+      <header><h2 id="o3">3. Cursor light</h2><p>Move your mouse over the letters. On phones the light drifts by itself.</p></header>
+      <div class="mark" data-spot-area><svg class="word" data-spot viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <section class="option" aria-labelledby="o4">
+      <header><h2 id="o4">4. Slow embers</h2><p>The letters hold a slow, drifting fire of orange and deep red.</p></header>
+      <div class="mark"><svg class="word" data-embers viewBox="-0.5 -1 208 42" aria-hidden="true"></svg></div>
+    </section>
+
+    <script src="assets/js/kept-time.js"></script>
+    <script>
+      (function () {
+        'use strict';
+        var K = window.KeptTime;
+        var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var LETTERS =
+          '<path d="M26 3.3H3.3V36.7H26M3.3 20H23"/>' +
+          '<path transform="translate(39 0)" d="M3.3 40V3.3H14A9.2 9.2 0 0 1 14 21.7H3.3"/>' +
+          '<path transform="translate(131.3 0)" d="M32.71 8.56A17.1 17.1 0 1 0 32.71 31.44"/>' +
+          '<path transform="translate(176.5 0)" d="M3.3 0V40M26.7 0V40M3.3 20H26.7"/>';
+        var FULL_O = '<circle cx="98.5" cy="20" r="17.1"/>';
+        var OPEN_O = '<path d="' + K.arcPath(98.5, 20, 17.1, 28, 304) + '"/>';
+
+        function strokes(paint, inner, extra) {
+          return '<g fill="none" stroke="' + paint + '" stroke-width="6.6"' + (extra || '') + '>' + inner + '</g>';
+        }
+
+        // 1. Lit by the O: the letters are dark; a warm light centred on the O's opening paints the strokes it reaches.
+        var lit = document.querySelector('[data-lit]');
+        lit.innerHTML =
+          '<defs><radialGradient id="warm" gradientUnits="userSpaceOnUse" r="115" data-warm>' +
+          '<stop offset="0" stop-color="#ffd2b0" stop-opacity="0.95"/><stop offset="0.2" stop-color="#ff6a1a" stop-opacity="0.85"/>' +
+          '<stop offset="0.55" stop-color="#ff4f00" stop-opacity="0.4"/><stop offset="1" stop-color="#ff4f00" stop-opacity="0"/></radialGradient>' +
+          '<radialGradient id="halo" gradientUnits="userSpaceOnUse" r="52" data-halo>' +
+          '<stop offset="0" stop-color="#ff4f00" stop-opacity="0.34"/><stop offset="0.45" stop-color="#ff4f00" stop-opacity="0.1"/>' +
+          '<stop offset="1" stop-color="#ff4f00" stop-opacity="0"/></radialGradient></defs>' +
+          strokes('rgba(242,239,232,0.07)', LETTERS) +
+          '<circle data-halo-disc r="52" fill="url(#halo)"/>' +
+          strokes('url(#warm)', LETTERS) +
+          '<g data-lit-o>' + strokes('rgba(242,239,232,0.16)', OPEN_O) + strokes('url(#warm)', OPEN_O) +
+          '<circle cx="98.5" cy="2.9" r="4.2" fill="#ff4f00"/></g>';
+        var warm = lit.querySelector('[data-warm]');
+        var halo = lit.querySelector('[data-halo]');
+        var haloDisc = lit.querySelector('[data-halo-disc]');
+        var litO = lit.querySelector('[data-lit-o]');
+        var litLabel = document.querySelector('[data-lit-label]');
+        var start = K.localDayFraction(new Date());
+        var started = performance.now();
+
+        function showLit(fraction) {
+          var angle = fraction * 360;
+          var p = K.polar(98.5, 20, 17.1, angle);
+          litO.setAttribute('transform', 'rotate(' + K.num(angle) + ' 98.5 20)');
+          // The light's centre sits a little outside the opening, so it spills outward onto the neighbours.
+          var source = K.polar(98.5, 20, 26, angle);
+          [warm, halo].forEach(function (gradient) {
+            gradient.setAttribute('cx', K.num(source.x));
+            gradient.setAttribute('cy', K.num(source.y));
+          });
+          haloDisc.setAttribute('cx', K.num(p.x));
+          haloDisc.setAttribute('cy', K.num(p.y));
+          litLabel.textContent = 'time-lapse, one day in 20 s: ' + K.clockText(fraction);
+        }
+
+        // 2. Horizon glow: solid black letters cut out of the glow, with a faint lit rim.
+        document.querySelector('[data-horizon]').innerHTML =
+          strokes('#000', LETTERS + FULL_O) + strokes('rgba(255,170,120,0.18)', LETTERS + FULL_O, ' stroke-width="6.6" style="mix-blend-mode:screen" transform="translate(0 -0.35)"') +
+          strokes('#000', LETTERS + FULL_O);
+
+        // 3. Cursor light: a bright copy of the letters, masked to a soft circle around the pointer.
+        var spot = document.querySelector('[data-spot]');
+        spot.innerHTML =
+          '<defs><radialGradient id="beam"><stop offset="0" stop-color="#fff"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.55"/>' +
+          '<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>' +
+          '<mask id="spot-mask" maskUnits="userSpaceOnUse" x="-40" y="-40" width="290" height="120"><circle data-spot-circle r="40" fill="url(#beam)"/></mask></defs>' +
+          strokes('rgba(242,239,232,0.06)', LETTERS + FULL_O) +
+          '<g mask="url(#spot-mask)">' + strokes('rgba(242,239,232,0.92)', LETTERS + FULL_O) + '</g>';
+        var area = document.querySelector('[data-spot-area]');
+        var circle = spot.querySelector('[data-spot-circle]');
+        var pointer = spot.createSVGPoint();
+        var pointerSeen = false;
+        function setLight(x, y) {
+          circle.setAttribute('cx', K.num(x));
+          circle.setAttribute('cy', K.num(y));
+        }
+        area.addEventListener('pointermove', function (event) {
+          pointerSeen = true;
+          pointer.x = event.clientX;
+          pointer.y = event.clientY;
+          var local = pointer.matrixTransform(spot.getScreenCTM().inverse());
+          setLight(local.x, local.y);
+        });
+        area.addEventListener('pointerleave', function () {
+          pointerSeen = false;
+        });
+
+        // 4. Slow embers: a large radial fire drifting inside the letters.
+        document.querySelector('[data-embers]').innerHTML =
+          '<defs><radialGradient id="ember" gradientUnits="userSpaceOnUse" cx="60" cy="20" r="120">' +
+          '<stop offset="0" stop-color="#ffb070"/><stop offset="0.22" stop-color="#ff4f00"/><stop offset="0.5" stop-color="#a8200a"/>' +
+          '<stop offset="0.78" stop-color="#3d0b03"/><stop offset="1" stop-color="#1a0501"/>' +
+          (REDUCE ? '' : '<animate class="ember-drift" attributeName="cx" values="20;190;20" dur="26s" repeatCount="indefinite"/>' +
+          '<animate class="ember-drift" attributeName="cy" values="-10;50;-10" dur="17s" repeatCount="indefinite"/>') +
+          '</radialGradient></defs>' + strokes('url(#ember)', LETTERS + FULL_O);
+
+        // 5 to 8: vertical gradients in the wordmark's own units (0 at the cap line, 40 at the baseline).
+        function vertical(id, stops) {
+          return '<linearGradient id="' + id + '" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="40">' +
+            stops.map(function (stop) {
+              return '<stop offset="' + stop[0] + '" stop-color="' + stop[1] + '" stop-opacity="' + stop[2] + '"/>';
+            }).join('') + '</linearGradient>';
+        }
+        document.querySelector('[data-sunset]').innerHTML =
+          '<defs>' + vertical('sunset', [[0, '#f2efe8', 0.92], [0.55, '#efc9a8', 0.82], [1, '#ff4f00', 0.95]]) + '</defs>' +
+          strokes('url(#sunset)', LETTERS + FULL_O);
+        document.querySelector('[data-clear]').innerHTML = strokes('rgba(242,239,232,0.2)', LETTERS + FULL_O);
+        document.querySelector('[data-rising]').innerHTML =
+          '<defs>' + vertical('rising', [[0, '#f2efe8', 0.85], [0.6, '#f2efe8', 0.3], [1, '#f2efe8', 0]]) + '</defs>' +
+          strokes('url(#rising)', LETTERS + FULL_O);
+        document.querySelector('[data-line]').innerHTML = strokes('rgba(242,239,232,0.12)', LETTERS + FULL_O);
+
+        function frame(now) {
+          var seconds = (now - started) / 1000;
+          showLit(REDUCE ? start : K.lapse(start, seconds, 20));
+          if (!pointerSeen) {
+            setLight(104 + 92 * Math.sin(seconds / 2.2), 20 + 14 * Math.sin(seconds / 1.3));
+          }
+          if (!REDUCE) window.requestAnimationFrame(frame);
+        }
+        frame(started);
+      })();
+    </script>
+  </body>
+</html>

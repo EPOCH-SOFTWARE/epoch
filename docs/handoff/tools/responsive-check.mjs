@@ -39,6 +39,7 @@ for (const id of readFileSync('prototype/assets/js/insights.js', 'utf8').matchAl
   /slug: '([^']+)'/g
 ))
   routes.push('article.html?id=' + id[1]);
+const base = (process.env.BASE_URL || 'http://localhost:3460').replace(/\/$/, '');
 const cdp = await launch();
 const failures = [];
 const check = (condition, message) => {
@@ -71,7 +72,7 @@ try {
   for (const width of [320, 390, 430, 768, 1024]) {
     await setViewport(cdp, width, 844);
     for (const route of routes) {
-      await open(cdp, 'http://localhost:3460/' + route, 80);
+      await open(cdp, base + '/' + route, 80);
       const report = await cdp.evaluate(`(() => {
         const visible = e => e.checkVisibility() && !e.closest('[hidden],details:not([open]) .details-fields');
         const label = e => e.textContent.trim().slice(0, 45) || e.id;
@@ -104,7 +105,7 @@ try {
     [844, 390],
   ]) {
     await setViewport(cdp, width, height);
-    await open(cdp, 'http://localhost:3460/work.html', 1000);
+    await open(cdp, base + '/work.html', 1000);
     await cdp.evaluate('window.scrollTo(0, 1000)');
     await sleep(100);
     await tap('.menu-toggle');
@@ -123,10 +124,10 @@ try {
     await tap('#menu a:last-child');
     await sleep(1000);
     check(
-      await cdp.evaluate("location.pathname.endsWith('contact.html')"),
+      await cdp.evaluate("['/contact', '/contact.html'].includes(location.pathname)"),
       `${width}: last menu link reachable by touch`
     );
-    await open(cdp, 'http://localhost:3460/work.html', 1000);
+    await open(cdp, base + '/work.html', 1000);
     await tap('.menu-toggle');
     await setViewport(cdp, 1200, 844);
     await sleep(100);
@@ -138,7 +139,7 @@ try {
     );
   }
   await setViewport(cdp, 390, 844);
-  await open(cdp, 'http://localhost:3460/services.html', 1000);
+  await open(cdp, base + '/services.html', 1000);
   await tap('#goal-build');
   check(
     await cdp.evaluate(
@@ -146,7 +147,7 @@ try {
     ),
     'Goal switches by touch'
   );
-  await open(cdp, 'http://localhost:3460/contact.html', 1000);
+  await open(cdp, base + '/contact.html', 1000);
   await tap('.project-details summary');
   check(
     await cdp.evaluate("document.querySelector('.project-details').open"),
@@ -162,7 +163,7 @@ try {
   await cdp.send('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
-  await open(cdp, 'http://localhost:3460/', 1000);
+  await open(cdp, base + '/', 1000);
   check(
     await cdp.evaluate(
       "parseFloat(getComputedStyle(document.querySelector('.marquee-track')).animationDuration) < .1"

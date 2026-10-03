@@ -52,3 +52,6 @@ chrome-profile-*/
 
 # Local Python prototype caches
 __pycache__/
+
+# Isolated Next development output
+.next-dev/

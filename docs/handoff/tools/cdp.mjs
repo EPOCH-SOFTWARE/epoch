@@ -56,6 +56,16 @@ export async function open(cdp, url, waitMs = 1500) {
   await cdp.send('Page.navigate', { url });
   await Promise.race([loaded, sleep(8000)]);
   await cdp.evaluate('document.fonts.ready.then(() => true)');
+  // Next loads the preserved motion code after hydration. Wait for it before input checks.
+  if (await cdp.evaluate("!!document.querySelector('[data-next-night]')")) {
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt++) {
+      ready = await cdp.evaluate("document.documentElement.dataset.nightReady === 'true'");
+      if (ready) break;
+      await sleep(50);
+    }
+    if (!ready) throw new Error('Night runtime did not initialize: ' + url);
+  }
   await sleep(waitMs);
 }
 

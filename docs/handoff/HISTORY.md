@@ -437,6 +437,17 @@ Design rules Claude set in the Night and craft-pass briefs, which the founder ha
 
 ---
 
+## Session 6: Next.js port with regression checks (2026-10-03)
+
+The founder authorized porting everything to Next.js on a separate feature branch and asked for the animations and behavior to remain intact. `feat/next-night` starts from the accepted mobile baseline, `b0c08b6`. The static prototype remains frozen for comparison.
+
+Built server-rendered React pages for all page families, shared Night chrome, accessible React goal/project tabs and reading navigation. Preserved the original CSS, clock geometry and motion enhancements. Next serves the fonts locally. Native anchors retain the O page reveal and browser history. All five concept labs remain complete static archives. Old links redirect to the corresponding Next routes, including enquiry parameters; missing detail pages return 404.
+
+Contact retains the accepted draft-preview behavior. The existing Resend endpoint is retained. The optional document review moved from Python to a Next/Node route with the same provider contract and validation; model changes remain parked. Automated tests use controlled provider responses, with no live API calls.
+
+Compared 36 routes against the prototype at desktop and phone widths. Fixed the regressions this caught: escaped noscript markup causing hydration errors, missing article closing sections, and a lab navigation link changed by route conversion. Confirmed responsive layout at 320, 390, 430, 768 and 1024px, keyboard and touch flows, form validation, demo states, clock winding, scrolling effects, page transitions, history and reduced motion. Headless screenshots are saved with the `next-` prefix. This is a framework port; no new visual direction or business claims were introduced.
+
+
 ## Rejected, do not repeat
 
 1. **The Epoch Field neural-network hero, and acid green on near-black** (2026-10-01). "cringe", not professional, and below the ambition. It read as a stock "AI network" look.

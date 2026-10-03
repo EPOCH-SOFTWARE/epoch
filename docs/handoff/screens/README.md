@@ -105,3 +105,20 @@ Headless Chrome captures after the mobile pass. These use emulated viewports, no
 - `mobile-31-landscape-menu.png`: the complete menu at 844 by 390px.
 - `tablet-01-services.png`: Services at 768px.
 - `desktop-44-mobile-compatibility.png`: the desktop Home after the mobile pass.
+
+## 2026-10-03: Next.js port (`feat/next-night`)
+
+The eight `next-` PNGs show the production build on port 3000 at 1440 × 900 and 390 × 844. All were inspected in isolated headless Chrome.
+
+| File | What it shows |
+| --- | --- |
+| `next-01-home-desktop.png` | Home after the clock has wound |
+| `next-02-footer-desktop.png` | Warm ivory footer at full dusk rise |
+| `next-03-about-scroll.png` | Belief heading clear of its child titles after scrolling upward |
+| `next-04-month-ring.png` | The month ring following the current delivery step |
+| `next-05-home-mobile.png` | Phone home layout |
+| `next-06-mobile-menu.png` | Open phone navigation |
+| `next-07-contact-mobile.png` | Contextual enquiry on a phone |
+| `next-08-document-demo-mobile.png` | Sample evidence review on a phone |
+
+The separate parity check compares both builds across all 36 routes at 1440px and 390px, with reports and paired screenshots under `/tmp/epoch-next-parity`.

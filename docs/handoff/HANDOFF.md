@@ -7,13 +7,13 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 
 ## 0. Quick start (what to do first)
 
-1. `git switch fix/mobile-compatibility` for the latest checkout. It descends from `feat/visual-stories` after the rejected illustration pass was reverted. The current work improves phone and tablet compatibility. Logo work, illustrations, photography and AI integration remain parked.
-2. Start the prototype server, which disables caching so edits show on refresh:
+1. `git switch feat/next-night` for the authorized Next.js port. It branches from `fix/mobile-compatibility` at `b0c08b6`. Run `npm run dev` at http://localhost:3000, or `npm run build` and `npm start` for production checks. Logo work, illustrations, photography and further AI integration remain parked.
+2. Start the frozen prototype reference alongside Next for comparison:
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
    - If port 3460 is busy: `kill $(lsof -ti tcp:3460)`.
 3. Current state (2026-10-03): the prototype is the **Night** design (ivory on black, with one orange point that always means "now"). Mark **08** is the site logo: the O of the wordmark is a live 24-hour clock. The inner-page craft pass (section 3, item 14) is done and pushed, and the founder is reviewing it. Screenshots of every page are in `screens/2026-10-03/`. The giant footer wordmark now uses option 8's softer ivory at 12% opacity; the existing dusk glow and scroll rise remain.
-4. **Do NOT port the prototype to Next.js until the founder says so.** They explicitly said "dont port it into next js tho".
+4. **The founder authorized the Next.js port on a separate feature branch on 2026-10-03.** The earlier restriction is superseded for this work. Preserve the accepted design, animations, content and mobile behavior.
 5. The GitHub repo `EPOCH-SOFTWARE/epoch` is **public**. Never commit private material such as chat transcripts, the founder's messages word for word, or credentials. Those stay in the local archive (section 12).
 6. Before showing the founder anything, run the full check in `docs/handoff/tools/README.md`, then look at the screenshots yourself.
 7. Latest work (2026-10-03): the home page brings selected work directly after the client strip. Home and Work now give HUB a full-width showcase and Inspira its own editorial row, using existing case-study text only. `document-demo.html` demonstrates editable source review, missing fields and conflicting values with fictional briefs. It now includes a separate AI review through the local Python server, alongside the labelled-field preview. The integration is tested with controlled responses but still needs a local API key and a real model run. Approved project screenshots and confirmed outcomes remain outstanding.
@@ -27,6 +27,10 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 13. Illustration rollback (2026-10-03): the founder rejected the entire editorial illustration pass. Removed all seven illustrations and their presentation changes, restoring the previous Home, Services, Work, case and About pages. Do not revive this visual direction. Mark 08, the warm ivory footer, the About headline and the heading overlap fix remain. Photography and logo exploration remain parked.
 
 14. Mobile compatibility (2026-10-03): standalone navigation, footer links, breadcrumbs, project links and demo controls have at least 44px touch height on phones and touch devices. Closing the menu preserves the reading position. Landscape menus use smaller type and spacing. Touch devices navigate immediately to avoid cross-document transition errors during quick navigation. Shared pages account for safe-area insets. Buttons can wrap long labels. The document editor uses 16px text on phones and tablets, and the reading clock hides while a field is focused. All existing page content and the accepted Night design remain. `responsive-check.mjs` covers all 36 routes at 320, 390, 430, 768 and 1024px, plus touch navigation, orientation changes and reduced motion. Testing uses headless Chrome emulation, not physical iOS or Android devices.
+
+15. Next.js port (2026-10-03): all Night pages are server-rendered React components in `src/night/`, using the existing constants and extracted goals, industries and articles. The original CSS is in `styles/night/`; Next self-hosts the two fonts. `Runtime.tsx` loads the retained clock, scrolling and demo enhancements after hydration. Native anchors retain cross-document transitions and history. All five lab pages and assets live intact in `public/labs/`. Legacy `.html` and `/clients` links redirect to the new routes. Unknown detail IDs return HTTP 404.
+
+16. Port behavior and QA: Contact still previews without sending. The existing Resend API remains untouched. The optional document review now has a Next/Node endpoint with the same local Host/Origin boundary, schema, evidence checks, limits, timeout and default model. No live provider call was made. Browser checks cover all 36 routes at five responsive widths, exact text and layout comparison at 1440/390, enquiry/demo interactions, clock winding, hero timing, magnetic buttons, scroll rules, reading clock, footer rise, the month ring, article contents, desktop O transitions, history and reduced/touch motion. Screenshots use the `next-` prefix in `screens/2026-10-03/`. Validation passed: 128 Jest tests, 55 original JavaScript helper tests, 18 Python tests, lint, TypeScript and the production build with bundle analysis. Physical-device checks and live model quality remain outside this automated verification.
 
 ---
 
@@ -69,7 +73,8 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 | `feat/night` | **Current: the Night redesign** of the prototype, branched from `feat/epoch-identity`. |
 | `feat/logo-studies` | Logo studies, branched from `feat/night` at `97e2bdb`. Adds `identity-lab.html`, then `identity-color-lab.html`, plus the About heading fix. Does not replace the site logo. |
 | `feat/visual-stories` | Illustration experiment and its rollback. Current prototype matches `7ceda36`; the seven-illustration direction was rejected. |
-| `fix/mobile-compatibility` | Current phone and tablet compatibility fixes, branched after the illustration rollback. |
+| `fix/mobile-compatibility` | Accepted phone and tablet baseline at `b0c08b6`, branched after the illustration rollback. |
+| `feat/next-night` | Current authorized Next.js port, preserving the mobile-compatible Night prototype. |
 
 Commits (newest first):
 ```

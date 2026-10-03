@@ -29,7 +29,7 @@ export const CLIENT_LOGOS: ReadonlyArray<ClientLogo> = [
   { id: 'inspira-financial', name: 'Inspira Financial', logo: '/logos/inspira-financial.svg' },
   { id: 'cardinal-health', name: 'Cardinal Health', logo: '/logos/cardinal-health.png' },
   { id: 'shift4', name: 'Shift4', logo: '/logos/shift-4.svg' },
-  { id: 'rural-king', name: 'Rural King', logo: '/logos/ruralking.webp' },
+  { id: 'rural-king', name: 'Rural King', logo: '/logos/ruralking.png' },
   { id: 'destify', name: 'Destify', logo: '/logos/destify.svg' },
   { id: 'bluesky', name: 'BlueSky Commerce', logo: '/logos/bluesky-logo.svg' },
   { id: 'skeps', name: 'Skeps', logo: '/logos/skeps.svg' },

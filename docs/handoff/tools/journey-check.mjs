@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { launch, setViewport, open, sleep } from './cdp.mjs';
 
+const base = (process.env.BASE_URL || 'http://localhost:3460').replace(/\/$/, '');
 const cdp = await launch();
 const problems = [];
 cdp.on(message => {
@@ -34,7 +35,7 @@ try {
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true });
   for (const width of [1440, 390, 320]) {
     await setViewport(cdp, width, 900);
-    await open(cdp, 'http://localhost:3460/services.html?goal=build', 400);
+    await open(cdp, base + '/services.html?goal=build', 400);
     assert.equal(await value('document.documentElement.scrollWidth'), width);
     assert.equal(
       await value("document.querySelector('[role=tab][aria-selected=true]').id"),
@@ -91,7 +92,7 @@ try {
     assert.equal(await value('document.activeElement.id'), 'name');
     assert.match(await value("document.querySelector('[name=message]').value"), /project brief/);
 
-    await open(cdp, 'http://localhost:3460/work.html', 400);
+    await open(cdp, base + '/work.html', 400);
     assert.equal(await value('document.documentElement.scrollWidth'), width);
     assert.equal(await value("document.querySelectorAll('[data-scope-explorer]').length"), 2);
     await value("document.querySelector('.scope-choices [aria-selected=true]').focus()");
@@ -127,7 +128,7 @@ try {
     );
   }
   await setViewport(cdp, 1440, 900);
-  await open(cdp, 'http://localhost:3460/service.html?id=cloud-computing', 400);
+  await open(cdp, base + '/service.html?id=cloud-computing', 400);
   assert.match(
     await value("document.querySelector('main a[href*=contact]').href"),
     /service=cloud-computing/
@@ -140,17 +141,17 @@ try {
     await value("document.querySelector('.reading-guide [aria-current=location]').textContent"),
     'Deliverables'
   );
-  await open(cdp, 'http://localhost:3460/contact.html?service=cloud-computing', 300);
+  await open(cdp, base + '/contact.html?service=cloud-computing', 300);
   assert.equal(
     await value("document.querySelector('[name=projectType]').value"),
     'cloud-computing'
   );
-  await open(cdp, 'http://localhost:3460/contact.html?goal=%3Cscript%3E', 300);
+  await open(cdp, base + '/contact.html?goal=%3Cscript%3E', 300);
   assert.equal(await value("document.querySelector('[data-enquiry-context]').hidden"), true);
   await cdp.send('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
-  await open(cdp, 'http://localhost:3460/services.html?goal=automate', 300);
+  await open(cdp, base + '/services.html?goal=automate', 300);
   assert.equal(await value("document.querySelectorAll('.goal-panel:not([hidden])').length"), 1);
   assert.deepEqual(problems, []);
   console.log(
