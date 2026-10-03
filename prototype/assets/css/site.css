@@ -621,7 +621,7 @@ label {
   }
 }
 
-/* ---------- Home hero: copy beside the editorial illustration ---------- */
+/* ---------- Home hero: copy beside the mark, drawn as a technical construction ---------- */
 .hero {
   display: flex;
   flex-direction: column;
@@ -653,9 +653,180 @@ label {
   margin-top: 36px;
 }
 
+.v-draft {
+  display: grid;
+  place-items: center;
+  /* Run the drafting grid through the gutter, right up to the rail. */
+  margin-right: calc(var(--gutter) * -1);
+  padding: 24px var(--gutter) 24px clamp(16px, 3vw, 48px);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+.v-draft.measuring {
+  position: relative;
+  cursor: crosshair;
+}
+
+.xhair {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.v-draft.measuring:hover .xhair {
+  opacity: 1;
+}
+
+.xh-h,
+.xh-v {
+  position: absolute;
+  background: rgba(242, 239, 232, 0.28);
+}
+
+.xh-h {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  transform: translateY(var(--y, 0));
+}
+
+.xh-v {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  transform: translateX(var(--x, 0));
+}
+
+.xh-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.82);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: pre;
+  transform: translate(var(--lx, 0), var(--ly, 0));
+}
+
+/* The light from the O may spill past the drawing, but stops at the panel's rules. */
+.v-draft {
+  overflow: hidden;
+}
+
+.v-draft svg {
+  width: 100%;
+  max-height: 72vh;
+  overflow: visible;
+}
+
+/* Night colours for the construction: the O in ivory, the drawing in faint ivory, the time in orange. */
+.draft-guides {
+  stroke: rgba(242, 239, 232, 0.16);
+}
+
+.draft-ticks line {
+  stroke: rgba(242, 239, 232, 0.42);
+}
+
+.draft-ticks .minor {
+  stroke: rgba(242, 239, 232, 0.2);
+}
+
+.draft-hours,
+.draft-data,
+.draft-caption {
+  fill: var(--muted);
+}
+
+.draft-caption {
+  font-family: var(--font-body);
+}
+
+.draft-caption .draft-mono {
+  font-family: var(--font-mono);
+}
+
+.draft-marks {
+  stroke: rgba(242, 239, 232, 0.5);
+}
+
+.draft-hand {
+  stroke: var(--accent);
+}
+
+.draft-dot {
+  fill: var(--accent);
+}
+
+.draft-now {
+  fill: var(--text);
+}
+
+.glow-stop {
+  stop-color: var(--accent);
+}
+
+/* Light leaking from the opening, like a door left ajar. It comes on with the point. */
+.draft-light {
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: draft-fade 1.8s ease 2.3s forwards;
+}
+
+.draft-ring {
+  stroke: var(--text);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draft-draw 1.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+}
+
+.draft-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: draft-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.15s forwards;
+}
+
+.draft-notes {
+  opacity: 0;
+  animation: draft-fade 0.8s ease 2.5s forwards;
+}
+
+.draft-hand {
+  opacity: 0;
+  animation: draft-fade 0.6s ease 2.4s forwards;
+}
+
+.draft-now {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.draft-now.on {
+  opacity: 1;
+}
+
 @keyframes draft-draw {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draft-pop {
+  to {
+    transform: scale(1);
   }
 }
 
@@ -674,6 +845,11 @@ label {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding-right: 0;
+  }
+
+  .v-draft {
+    margin-left: calc(var(--gutter) * -1);
+    padding: 16px var(--gutter);
   }
 }
 

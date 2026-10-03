@@ -4,13 +4,11 @@ The marketing site for EPOCH Software Services: an AI-first engineering company.
 
 ## Redesign in progress
 
-The next version of the site is being designed as a static prototype in `prototype/`. The latest visual pass is on `feat/visual-stories`, descended from `feat/night` through `feat/logo-studies`. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
+The next version of the site is being designed as a static prototype in `prototype/` originally on `feat/night`. The latest checkout is `feat/visual-stories`, where the rejected illustration experiment has been reverted to the previous design. It hasn't been ported to Next.js yet. To run it, use `python3 prototype/serve.py` and open http://localhost:3460. The decisions, history, screenshots and QA tools are in `docs/handoff/`. Start with `HANDOFF.md`.
 
 The home and Work pages feature the existing HUB and Inspira case studies. `prototype/document-demo.html` has an instant browser preview and an optional AI review through the local Python server. AI review sends the document to OpenAI only on submission; the key stays on the server. See [local AI setup](docs/handoff/tools/AI-REVIEW.md). Run `node --test 'prototype/tests/*.test.js'` for pure helpers and `node docs/handoff/tools/demo-check.mjs` for the demo's browser checks.
 
 The UI pass adds a goal-based Services explorer, project walkthroughs, section navigation on long pages, and a shorter Contact flow that carries the selected service or goal into the enquiry. The prototype previews enquiries without sending them. Run `node docs/handoff/tools/journey-check.mjs` for desktop, phone, keyboard and context checks. The AI demo is parked pending the ML engineer's input.
-
-Seven original SVG illustrations now explain the work: an exploded software assembly on Home, one visual for each Services goal, scope illustrations for both case studies, and a continuous folded-paper story on About. Project delivery tabs sit inside an expandable section beneath each Work feature. The drawings represent concepts and existing project scope, not actual product screenshots. Photography is parked at the founder's request. Run `node docs/handoff/tools/visual-check.mjs` for artwork loading, goal switching and case-caption checks.
 
 Fresh logo exploration lives on `feat/logo-studies`, branched from `feat/night`. The latest [colour lab](http://localhost:3460/identity-color-lab.html) compares Afterlight, Prism, Current and Voltage, with gradients, two-colour treatments, website compositions, small icons and downloadable SVGs. The first [identity lab](http://localhost:3460/identity-lab.html) retains Cut, Phase, Threshold and Common, which were not selected. The current site identity and every earlier concept remain available.
 
