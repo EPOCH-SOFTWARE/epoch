@@ -73,3 +73,8 @@ The AI demo is parked. Project text uses the existing case-study content; no pro
 - `mobile-17-identity-common.png`: the custom lowercase wordmark and website composition at 390px.
 
 These are separate explorations in `identity-lab.html`. Mark 08 remains the site logo.
+
+### About heading scroll fix, `feat/logo-studies`
+
+- `desktop-33-about-beliefs-scroll.png`: after scrolling down through the beliefs and back up, the section heading no longer stays over the rows.
+- `mobile-18-about-beliefs-scroll.png`: the same scroll sequence at 390px, retaining the stacked layout.

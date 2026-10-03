@@ -349,6 +349,14 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 
 ---
 
+## About heading overlap fix (2026-10-03)
+
+- **Reported and reproduced:** "What we believe" crossed its child titles while scrolling back up on desktop. The UI pass changed this section to stacked rows, but the shared sticky-heading rule still applied above 900px.
+- **Fixed:** the beliefs heading uses static positioning, keeping it above its rows. This is a scoped CSS override on `feat/logo-studies`; other section headings and the logo studies are unchanged.
+- **Validation:** headless Chrome checked the heading and every row after scrolling down and back up at 1440px, 1024px, 901px, 900px and 390px. The heading remained above all rows at every offset. Desktop and phone screenshots were inspected. All 55 JavaScript and 18 Python tests, the contact form and the em-dash scan passed.
+
+---
+
 ## Logo concepts at a glance
 
 | Concept | Where it lives | The idea | Founder's verdict |

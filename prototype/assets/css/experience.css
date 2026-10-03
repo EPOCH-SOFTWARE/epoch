@@ -347,7 +347,9 @@ body[data-page='work'] #featured-inspira-financial .project-scope :focus-visible
 .about-beliefs .split {
   display: block;
 }
-.about-beliefs .h2 {
+.about-beliefs #beliefs-title {
+  /* This heading sits above the rows, so it must scroll with them. */
+  position: static;
   margin-bottom: 36px;
 }
 .about-beliefs .beliefs li {
