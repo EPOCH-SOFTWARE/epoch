@@ -78,3 +78,11 @@ These are separate explorations in `identity-lab.html`. Mark 08 remains the site
 
 - `desktop-33-about-beliefs-scroll.png`: after scrolling down through the beliefs and back up, the section heading no longer stays over the rows.
 - `mobile-18-about-beliefs-scroll.png`: the same scroll sequence at 390px, retaining the stacked layout.
+
+### Colour identity studies, `feat/logo-studies`
+
+- `desktop-34-colour-comparison.png`: Afterlight, Prism, Current and Voltage together.
+- `desktop-35-colour-afterlight.png`: the gradient O, website composition and icon sizes.
+- `mobile-19-colour-current.png`: the mint/violet ribbon concept at 390px with reduced motion enabled.
+
+The founder rejected the earlier monochrome round and explicitly asked for colour and gradient explorations. These are separate concepts in `identity-color-lab.html`; the site logo has not changed.

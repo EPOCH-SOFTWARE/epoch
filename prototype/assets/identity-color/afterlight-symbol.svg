@@ -1,0 +1,44 @@
+<svg
+  class=""
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 140 140"
+  fill="currentColor"
+  role="img"
+  aria-label="EPOCH afterlight symbol"
+>
+  <defs>
+    <linearGradient id="a2ring" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#fff1b8" />
+      <stop offset="24%" stop-color="#ffb166" />
+      <stop offset="49%" stop-color="#ff527b" />
+      <stop offset="72%" stop-color="#bc3bea" />
+      <stop offset="100%" stop-color="#693aff" />
+    </linearGradient>
+    <radialGradient id="a2shade" cx="24%" cy="12%" r="95%">
+      <stop stop-color="#fff6e8" stop-opacity=".65" />
+      <stop offset=".38" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset=".7" stop-color="#1f0039" stop-opacity=".05" />
+      <stop offset="1" stop-color="#160026" stop-opacity=".6" />
+    </radialGradient>
+  </defs>
+  <ellipse
+    cx="70"
+    cy="70"
+    rx="48"
+    ry="52"
+    fill="none"
+    stroke="url(#a2ring)"
+    stroke-width="30"
+    transform="rotate(24 70 70)"
+  />
+  <ellipse
+    cx="70"
+    cy="70"
+    rx="48"
+    ry="52"
+    fill="none"
+    stroke="url(#a2shade)"
+    stroke-width="30"
+    transform="rotate(24 70 70)"
+  />
+</svg>

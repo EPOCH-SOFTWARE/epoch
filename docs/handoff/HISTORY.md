@@ -344,7 +344,7 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 - **Branch:** `feat/logo-studies`, from `feat/night` at `97e2bdb`. The existing site and all earlier logo and footer concepts are retained.
 - **Research:** [Linear’s brand guidelines](https://linear.app/brand) for monochrome presentation and space; [IBM’s history of Paul Rand’s logo](https://www.ibm.com/history/logo) for a repeated visual rule; [Pentagram’s MIT Media Lab identity](https://www.pentagram.com/work/mit-media-lab/story), led by Michael Bierut, for shapes built on a consistent grid. These informed design principles. Reference brand assets were not imported.
 - **Built:** `identity-lab.html`, linked from both earlier logo labs. Cut is a solid E with diagonal terminals. Phase offsets two semicircles to suggest a change of era. Threshold opens a corner of an architectural block. Common is custom geometric lowercase lettering with an e symbol. Each has a large specimen, a website composition, reversed colour, actual 16/24/32px icons and downloadable SVGs. All exported artwork uses vector paths rather than external fonts. This page has no new JavaScript or motion.
-- **Review:** Phase is the proposed starting point for further refinement. No founder verdict yet. A direction still needs selection before any site integration.
+- **Review:** Phase was initially proposed as a starting point. The founder subsequently rejected all four concepts and requested the colour round below. Retain this round for the archive, not as the preferred direction.
 - **Validation:** all 55 JavaScript and 18 Python tests passed. All 32 routes passed console and 390px overflow checks, with only the intentionally clipped home marquee exempted. The contact form passed empty, bad-email and valid-input checks. The new lab was inspected at desktop, 390px and 320px, including visible keyboard focus and reduced motion. All 11 SVG downloads returned successfully and parsed as SVG; the em-dash scan passed. Screenshots are recorded in the dated screen catalogue.
 
 ---
@@ -354,6 +354,16 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 - **Reported and reproduced:** "What we believe" crossed its child titles while scrolling back up on desktop. The UI pass changed this section to stacked rows, but the shared sticky-heading rule still applied above 900px.
 - **Fixed:** the beliefs heading uses static positioning, keeping it above its rows. This is a scoped CSS override on `feat/logo-studies`; other section headings and the logo studies are unchanged.
 - **Validation:** headless Chrome checked the heading and every row after scrolling down and back up at 1440px, 1024px, 901px, 900px and 390px. The heading remained above all rows at every offset. Desktop and phone screenshots were inspected. All 55 JavaScript and 18 Python tests, the contact form and the em-dash scan passed.
+
+---
+
+## Colour identity studies (2026-10-03)
+
+- **Brief:** the founder rejected Cut, Phase, Threshold and Common, and asked for something different with dual colour or gradients. This explicitly opens up the earlier monochrome and orange-only restrictions for the exploration. The site identity is not being replaced.
+- **Research:** [Mozilla’s Firefox identity account](https://blog.mozilla.org/opendesign/firefox-the-evolution-of-a-brand/) for layered gradients and related shapes, and [Pentagram’s Cohere identity](https://www.pentagram.com/work/cohere) for a more expressive technology identity. These informed the exploration; source brand assets were not imported.
+- **Built:** `identity-color-lab.html`, linked from all three earlier logo labs. Afterlight puts a rose/amber/violet O within wide custom lettering. Prism is a folded coral/violet form. Current interlocks mint/violet ribbons beside rounded lettering. Voltage uses slanted letterforms split into ice blue and pink. Each includes a website composition, 16/24/32px specimens and a keyboard-accessible one-colour disclosure. The 16 downloadable SVGs cover colour and monochrome symbols and logos; lettering is drawn as paths with no external font dependency.
+- **Boundary:** all earlier concepts are retained. The site's living logo, Night palette and About overlap fix remain in place. There is no new animation or JavaScript. None of the new directions has a founder verdict yet.
+- **Validation:** all 55 JavaScript and 18 Python tests passed. All 33 routes passed console and 390px overflow checks, with the intentionally clipped home marquee exempted. The contact form passed. SVG IDs, gradient/clip references, section anchors, keyboard disclosure and expanded one-colour layouts were checked at 1440px, 390px and 320px. All 16 SVG files were fetched and parsed. Desktop and phone screenshots, including reduced motion, were inspected. The em-dash scan passed.
 
 ---
 

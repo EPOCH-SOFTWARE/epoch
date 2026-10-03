@@ -1,0 +1,29 @@
+<svg
+  class=""
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 580 140"
+  fill="currentColor"
+  role="img"
+  aria-label="EPOCH current logo in one colour"
+>
+  <defs></defs>
+  <path
+    d="M32 99C0 52 32 7 78 12C119 16 136 58 109 89L95 79C110 51 90 25 69 29C41 30 26 59 43 86ZM108 41C140 88 108 133 62 128C21 124 4 82 31 51L45 61C30 89 50 115 71 111C99 110 114 81 97 54Z"
+    fill="currentColor"
+  />
+  <g transform="translate(177 20)">
+    <g
+      fill="none"
+      stroke="currentColor"
+      stroke-width="13"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M8 8H61M8 8V88H61M8 48H50M85 88V8H116C151 8 151 48 116 48H85" />
+      <rect x="163" y="8" width="60" height="80" rx="29" />
+      <path
+        d="M304 22C297 10 289 8 278 8C240 8 240 88 278 88C289 88 297 84 304 73M331 8V88M391 8V88M331 48H391"
+      />
+    </g>
+  </g>
+</svg>

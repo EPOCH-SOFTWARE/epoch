@@ -7,7 +7,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 
 ## 0. Quick start (what to do first)
 
-1. `git switch feat/night` for the current site redesign. The fresh logo exploration is on `feat/logo-studies`, branched from `feat/night`; stay on that branch when reviewing `identity-lab.html`.
+1. `git switch feat/night` for the current site redesign. The fresh logo exploration is on `feat/logo-studies`, branched from `feat/night`; stay on that branch when reviewing `identity-color-lab.html` (latest) or `identity-lab.html` (previous round). This branch also has the About heading overlap fix.
 2. Start the prototype server, which disables caching so edits show on refresh:
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
@@ -22,6 +22,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 9. AI demo work is parked until the ML engineer provides details. The current integration remains available as built; no model work was included in the UI/UX pass.
 10. Fresh identity exploration (2026-10-03): `identity-lab.html` on `feat/logo-studies` adds four independent directions: Cut, Phase, Threshold and Common. The brief explicitly permits moving beyond the clock and earlier logo work. Each direction has a monochrome comparison, wordmark, website composition, inverse specimen, 16/24/32px symbol and SVG downloads. All shapes and letters are vector paths, with no font dependency in exported logos. The site still uses mark 08; no new direction has been selected. Earlier labs link to the new page and retain every concept. Research sources are linked in the lab and HISTORY.
 11. About scroll fix (2026-10-03, on `feat/logo-studies`): "What we believe" now scrolls normally above its full-width rows. The shared desktop sticky-heading rule previously made it cross the belief titles when scrolling. Only this heading is overridden; the side-by-side sections retain their sticky headings.
+12. Colour logo round (2026-10-03): the founder rejected all four concepts from item 10 and explicitly asked for new shapes, dual colour and gradients. This permits broader palettes within the new exploration; the site's Night palette remains intact. `identity-color-lab.html` adds Afterlight (gradient O within custom lettering), Prism (coral/violet folded form), Current (mint/violet ribbons and rounded lettering), and Voltage (slanted ice/pink wordmark). Colour and one-colour SVGs, website compositions and actual 16/24/32px icons are included. All earlier labs and concepts remain available. No replacement is selected.
 
 ---
 
@@ -62,7 +63,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 | `feat/ai-first-upgrade` | **Round 1: the Next.js site rebuilt AI-first.** 11 commits, tests green. Superseded visually, but its architecture and content are the base for the eventual port. |
 | `feat/epoch-identity` | **Round 2: static HTML/CSS/JS prototype** in `prototype/`, light Draftsman look. Branched from `feat/ai-first-upgrade`, so it also contains all of round 1. Tagged `light-site-2026-10-02`. |
 | `feat/night` | **Current: the Night redesign** of the prototype, branched from `feat/epoch-identity`. |
-| `feat/logo-studies` | Fresh logo studies, branched from `feat/night` at `97e2bdb`. Adds `identity-lab.html`; does not replace the site logo. |
+| `feat/logo-studies` | Logo studies, branched from `feat/night` at `97e2bdb`. Adds `identity-lab.html`, then `identity-color-lab.html`, plus the About heading fix. Does not replace the site logo. |
 
 Commits (newest first):
 ```
