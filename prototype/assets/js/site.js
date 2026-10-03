@@ -125,7 +125,7 @@
       '<header class="site-header"><div class="wrap bar">' +
       '<a class="brand" href="index.html" aria-label="EPOCH home">' + logo() + '</a>' +
       '<nav class="nav" aria-label="Main">' + navLinks() + '</nav>' +
-      '<a class="btn sm" href="contact.html">Start a project</a>' +
+      '<a class="btn sm header-contact" href="contact.html">Start a project</a>' +
       '<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>' +
       '</div></header>' +
       '<nav class="menu" id="menu" aria-label="Menu" hidden>' + navLinks() +
@@ -165,19 +165,43 @@
     var toggle = document.querySelector('.menu-toggle');
     var menu = document.getElementById('menu');
     if (!toggle || !menu) return;
+    var background = [document.getElementById('main'), document.querySelector('.site-footer')].filter(Boolean);
+    var links = Array.from(menu.querySelectorAll('a'));
 
-    function setOpen(open) {
+    function setOpen(open, restoreFocus) {
       toggle.setAttribute('aria-expanded', String(open));
       toggle.textContent = open ? 'Close' : 'Menu';
       menu.hidden = !open;
       document.body.style.overflow = open ? 'hidden' : '';
+      background.forEach(function (element) { element.inert = open; });
+      if (open) links[0].focus();
+      else if (restoreFocus) toggle.focus();
     }
 
-    toggle.addEventListener('click', function () {
-      setOpen(menu.hidden);
+    toggle.addEventListener('click', function () { setOpen(menu.hidden, true); });
+    links.forEach(function (anchor) {
+      anchor.addEventListener('click', function () { setOpen(false, false); });
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !menu.hidden) setOpen(false);
+      if (menu.hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false, true);
+      }
+      if (event.key === 'Tab') {
+        var stops = [toggle].concat(links);
+        var index = stops.indexOf(document.activeElement);
+        if (event.shiftKey && index <= 0) {
+          event.preventDefault();
+          stops[stops.length - 1].focus();
+        } else if (!event.shiftKey && (index === stops.length - 1 || index === -1)) {
+          event.preventDefault();
+          toggle.focus();
+        }
+      }
+    });
+    window.matchMedia('(min-width: 1061px)').addEventListener('change', function (event) {
+      if (event.matches && !menu.hidden) setOpen(false, false);
     });
   }
 
@@ -249,7 +273,7 @@
       '<h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) + '</a></h3>' +
       '<p>' + esc(study.summary) + '</p>' +
       '<a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div>' +
-      '<div class="project-scope"><p class="scope-caption">Selected deliverables</p>' +
+      '<div class="project-scope" data-scope-explorer="' + study.id + '"><p class="scope-caption">Selected deliverables</p>' +
       '<ul>' + list(study.deliverables.slice(0, 3), function (item) {
         return '<li><span class="scope-node" aria-hidden="true"></span>' + esc(item) + '</li>';
       }) + '</ul><p class="scope-foot">' + esc(study.deliverables[study.id === 'hub-international' ? 4 : 6]) + '</p></div></div>' +
@@ -259,7 +283,7 @@
   }
 
   function projectCompanion(study) {
-    return '<article class="project-companion"><div><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
+    return '<article class="project-companion" id="featured-' + study.id + '"><div><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
       '<p>' + esc(study.industry) + '</p></div><div><h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) +
       '</a></h3><p>' + esc(study.summary) + '</p><a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div></article>';
   }
@@ -267,7 +291,7 @@
   // The two ways in, offered the same way on every page.
   var CALLS =
     '<div class="actions"><a class="btn" href="contact.html">Start a project</a>' +
-    '<a class="btn secondary" href="contact.html#book">Book a 30-minute call</a></div>';
+    '<a class="btn secondary" href="contact.html#book">Arrange a call</a></div>';
 
   var CLOSING =
     '<section class="section ruled closing" aria-labelledby="closing-title"><div class="wrap">' +
@@ -331,7 +355,7 @@
     });
     all('[data-featured-work]').forEach(function (target) {
       target.innerHTML = featuredProject(DATA.caseStudies[0], target.dataset.featuredWork === 'full') +
-        projectCompanion(DATA.caseStudies[1]);
+        (target.dataset.featuredWork === 'full' ? featuredProject(DATA.caseStudies[1], true) : projectCompanion(DATA.caseStudies[1]));
     });
     all('[data-commitments]').forEach(function (target) {
       target.innerHTML = list(DATA.commitments, function (item) {
@@ -863,14 +887,16 @@
 
   // ---------- Booking ----------
 
-  // Set this to the scheduling link (Calendly, Cal.com, ...) to switch "Choose a time" over.
+  // Set a scheduling URL to replace the email fallback with "Choose a time".
   // Until then the button opens an email asking for a call.
   var BOOKING_URL = '';
 
   function initBooking() {
     if (!BOOKING_URL) return;
+    all('[data-booking-description]').forEach(function (node) { node.textContent = 'Choose a time for a 30-minute conversation about your project.'; });
     all('[data-booking]').forEach(function (link) {
       link.href = BOOKING_URL;
+      link.textContent = 'Choose a time';
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
     });
@@ -914,13 +940,27 @@
     });
   }
 
-  // The form gives way to a confirmation in the same place, addressed to the sender.
+  // The prototype previews an enquiry without implying it has been delivered.
   function showSent(form, done) {
     var firstName = form.elements.namedItem('name').value.trim().split(/\s+/)[0];
     var title = done.querySelector('[data-done-title]');
-    title.textContent = 'Thanks, ' + firstName + '. Your message is in.';
+    title.textContent = 'Your enquiry is ready, ' + firstName + '.';
     done.querySelector('[data-done-text]').textContent =
-      'We’ll reply to ' + form.elements.namedItem('email').value.trim() + ' within 24 hours.';
+      'You’ve added a project brief and the reply address ' + form.elements.namedItem('email').value.trim() + '.';
+    var preview = done.querySelector('[data-enquiry-preview]');
+    preview.replaceChildren();
+    ['company', 'projectType', 'budget', 'timeline'].forEach(function (name) {
+      var field = form.elements.namedItem(name);
+      if (!field.value) return;
+      var row = document.createElement('div');
+      var label = document.createElement('dt');
+      label.textContent = { company: 'Company', projectType: 'Project type', budget: 'Budget', timeline: 'Timeline' }[name];
+      var value = document.createElement('dd');
+      value.textContent = field.tagName === 'SELECT' ? field.selectedOptions[0].textContent : field.value;
+      row.append(label, value);
+      preview.append(row);
+    });
+    done.querySelector('[data-preview-message]').textContent = form.elements.namedItem('message').value;
     form.hidden = true;
     done.hidden = false;
     title.focus();
@@ -950,7 +990,6 @@
     });
 
     done.querySelector('[data-form-again]').addEventListener('click', function () {
-      form.reset();
       done.hidden = true;
       form.hidden = false;
       form.elements.namedItem('name').focus();

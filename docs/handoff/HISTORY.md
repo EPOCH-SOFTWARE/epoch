@@ -325,6 +325,19 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 
 ---
 
+## Session 4: discovery, project reading and contact (2026-10-03)
+
+- **Asked:** park the AI demo until the ML engineer supplies details, research stronger references, and complete the UI/UX improvements across the prototype.
+- **References reviewed:** [Linear](https://linear.app/) for showing the product alongside its explanation; [Work & Co](https://www.work.co/) for giving individual projects space; [Instrument](https://www.instrument.com/) for deliberate shifts in type and visual scale; [Anthropic](https://www.anthropic.com/) for separating a concise positioning statement from its supporting explanation. These are design observations from the rendered sites, not claims about their conversion performance. External assets and client facts were not imported.
+- **Built:** three service starting points: automate a workflow, build an AI product and modernise a platform. Each shows a route through the work, links to existing capabilities and an existing case study, and carries the chosen goal into Contact. Home links into these routes directly.
+- **Built:** both Work projects now receive full editorial features. Challenge/build/integration tabs use the existing case-study text. Inspira has an ivory scope panel, while HUB stays dark. No product screenshots, metrics or architecture diagrams were invented. About gets a distinct composition, larger working principles and a two-location section. The founder preferred the confidence of "We don’t do half-in.", so that headline was restored during review.
+- **Built:** a shorter Contact page with the brief first and optional details inside a disclosure. Service and goal selections arrive as editable context. The call action truthfully opens an email until a booking URL is configured. The form previews the supplied brief, explicitly says nothing was sent, and keeps all typed values when the visitor returns to edit.
+- **Polish:** visible phone contact action, menu focus containment and Escape, section navigation on long service and case pages, balanced headings, larger touch targets, and removal of three unused font families from site pages. Logo and footer geometry and all lab concepts are preserved.
+- **Validation:** five context tests were written failing first. The browser journey check covers direct goal links, keyboard tabs, context removal, optional fields, safe text rendering, retained drafts, scope tabs, menu focus, section links and reduced motion at desktop, 390px and 320px. All 55 JavaScript and 18 Python tests passed. All 31 routes passed console and 390px overflow checks; only the intentionally clipped home marquee extends beyond its container. Contact form, document demo, lint, type checking and the em-dash scan also passed.
+- **Still open:** approved project screens, confirmed client results, founder photo/bio and the booking URL. The ML demo is parked. These content gaps do not block the completed interface changes.
+
+---
+
 ## Logo concepts at a glance
 
 | Concept | Where it lives | The idea | Founder's verdict |

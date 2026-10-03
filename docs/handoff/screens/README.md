@@ -48,3 +48,19 @@ These show the first pass for review. No project product imagery or new client r
 - `desktop-24-demo-ai-unavailable.png`: the real server error state after requesting AI review without a key.
 
 These show the integration interface. No live model output is represented in these captures.
+
+### UI/UX pass: discovery, reading and contact
+
+- `desktop-25-services-goals.png`: Services begins with a selectable project goal.
+- `desktop-26-contact-brief.png`: the brief and direct contact routes together.
+- `desktop-27-work-inspira.png`: the second full project feature and its scope tabs.
+- `desktop-28-about-team.png`: the new About composition.
+- `desktop-29-home-paths.png`: the retained living O and new routes into Services.
+- `desktop-30-case-navigation.png`: section links on a long case study.
+- `mobile-11-services-goals.png`: goal selection and visible header contact action.
+- `mobile-12-contact-brief.png`: required fields arrive near the top of the page.
+- `mobile-13-work-scope.png`: project scope tabs at phone width.
+- `mobile-14-about-team.png`: About's mobile composition.
+- `mobile-15-contact-context.png`: a service selection carried into the editable brief.
+
+The AI demo is parked. Project text uses the existing case-study content; no product imagery was fabricated.

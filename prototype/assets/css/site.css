@@ -2180,3 +2180,24 @@ a.chip:hover {
     transition-delay: 0s !important;
   }
 }
+
+/* Reading and touch polish across the Night pages. */
+h1, h2, h3 { text-wrap: balance; }
+.lede, .body { text-wrap: pretty; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.menu-toggle { min-height: 44px; }
+.menu { overflow-y: auto; overscroll-behavior: contain; }
+.menu a { min-height: 48px; }
+.foot-col a { padding-block: 7px; }
+@media (max-width: 1060px) {
+  .bar { gap: 14px; }
+  .bar > .header-contact { display: inline-flex; min-height: 44px; }
+}
+@media (max-width: 480px) {
+  .bar > .header-contact { font-size: 12px; padding-inline: 12px; }
+  .bar { gap: 10px; }
+  .menu-toggle { padding-inline: 12px; }
+}
+@media (pointer: coarse) {
+  .text-link, .chip, .source-link, .scope-case-link, .scope-choices button, .goal-links a { min-height: 44px; }
+}

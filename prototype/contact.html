@@ -7,115 +7,172 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/experience.css" />
   </head>
   <body data-page="contact">
     <main id="main">
-      <section class="page-hero">
-        <div class="wrap">
-          <h1 class="display">Start a project.</h1>
-          <p class="lede">Tell us what you’re building and what’s in the way. You’ll hear back within 24 hours.</p>
-        </div>
-      </section>
-
-      <section class="section ruled" id="book" aria-labelledby="book-title">
-        <div class="wrap split">
+      <section class="page-hero contact-intro">
+        <div class="wrap intro-split">
+          <h1 class="display">
+            Let’s build<br />
+            what’s next.
+          </h1>
           <div>
-            <h2 id="book-title" class="h2">Book a <span class="nowrap">30-minute</span> call</h2>
-            <p class="body mt-s">Pick a time that suits you and we’ll talk through what you’re building and what’s in the way.</p>
-            <div class="actions mt-m">
-              <a class="btn lg" data-booking href="mailto:operator@epoch.sh?subject=Book%20a%2030-minute%20call">Choose a time</a>
-            </div>
-          </div>
-          <div class="book-next">
-            <h3 class="sub-h">What happens next</h3>
-            <ol class="steps">
-              <li><span class="num" aria-hidden="true">01</span><h3>We reply within 24 hours</h3><p>To confirm the time, or with a few questions if we need them.</p></li>
-              <li><span class="num" aria-hidden="true">02</span><h3>A 30-minute call</h3><p>We listen first: the goal, the constraints, the data and the deadline.</p></li>
-              <li><span class="num" aria-hidden="true">03</span><h3>A written plan</h3><p>Scope, timeline and cost, so you can decide with everything in front of you.</p></li>
-            </ol>
+            <p class="lede">
+              Tell us what you’re building and what’s in the way. We’ll take it from there.
+            </p>
+            <nav class="contact-ways" aria-label="Ways to get in touch">
+              <a href="#message">Write to us</a><a href="#book">Arrange a call</a>
+            </nav>
           </div>
         </div>
       </section>
 
-      <section class="section ruled" aria-labelledby="message-title">
+      <section class="section ruled contact-stage" id="message" aria-labelledby="message-title">
         <div class="wrap contact-grid">
           <form class="form" data-contact-form novalidate aria-labelledby="message-title">
-            <h2 id="message-title" class="h3">Or send us a message</h2>
+            <div class="form-heading">
+              <h2 id="message-title" class="h3">Tell us about the project.</h2>
+              <p>Start with what you know. The details can follow.</p>
+            </div>
+            <div class="enquiry-context" data-enquiry-context hidden>
+              <p></p>
+              <button type="button" data-clear-context>Clear selection</button>
+            </div>
             <div class="pair">
               <div class="field">
-                <label for="name">Your name <span>(required)</span></label>
-                <input id="name" name="name" autocomplete="name" aria-describedby="name-error" />
+                <label for="name">Your name <span>(required)</span></label
+                ><input
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  aria-describedby="name-error"
+                  required
+                />
                 <p class="error" id="name-error" data-error-for="name" hidden></p>
               </div>
               <div class="field">
-                <label for="email">Work email <span>(required)</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error" />
+                <label for="email">Work email <span>(required)</span></label
+                ><input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                  required
+                />
                 <p class="error" id="email-error" data-error-for="email" hidden></p>
               </div>
             </div>
             <div class="field">
-              <label for="company">Company</label>
-              <input id="company" name="company" autocomplete="organization" />
-            </div>
-            <div class="triple">
-              <div class="field">
-                <label for="projectType">Project type</label>
-                <select id="projectType" name="projectType">
-                  <option value="">Choose one</option>
-                  <option>AI &amp; machine learning</option>
-                  <option>Generative AI</option>
-                  <option>Data &amp; analytics</option>
-                  <option>Custom software</option>
-                  <option>Cloud &amp; DevOps</option>
-                  <option>Something else</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="budget">Budget</label>
-                <select id="budget" name="budget">
-                  <option value="">Choose one</option>
-                  <option>$25,000–$50,000</option>
-                  <option>$50,000–$100,000</option>
-                  <option>$100,000–$250,000</option>
-                  <option>$250,000+</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="timeline">Timeline</label>
-                <select id="timeline" name="timeline">
-                  <option value="">Choose one</option>
-                  <option>As soon as possible</option>
-                  <option>1–3 months</option>
-                  <option>3–6 months</option>
-                  <option>6+ months</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="message">What are you building, and what’s in the way? <span>(required)</span></label>
-              <textarea id="message" name="message" aria-describedby="message-error"></textarea>
+              <label for="message-body"
+                >What are you building, and what’s in the way? <span>(required)</span></label
+              ><textarea
+                id="message-body"
+                name="message"
+                aria-describedby="message-error message-hint"
+                required
+              ></textarea>
+              <p class="field-hint" id="message-hint">
+                The goal, the problem, or simply where you’re stuck.
+              </p>
               <p class="error" id="message-error" data-error-for="message" hidden></p>
             </div>
-            <div class="form-foot"><button class="btn" type="submit">Send message</button></div>
+            <details class="project-details">
+              <summary>Add project details <span>Optional</span></summary>
+              <div class="details-fields">
+                <div class="pair">
+                  <div class="field">
+                    <label for="company">Company</label
+                    ><input id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="field">
+                    <label for="projectType">Project type</label
+                    ><select id="projectType" name="projectType">
+                      <option value="">Not sure yet</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pair">
+                  <div class="field">
+                    <label for="budget">Budget</label
+                    ><select id="budget" name="budget">
+                      <option value="">Not sure yet</option>
+                      <option>$25,000–$50,000</option>
+                      <option>$50,000–$100,000</option>
+                      <option>$100,000–$250,000</option>
+                      <option>$250,000+</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="timeline">Timeline</label
+                    ><select id="timeline" name="timeline">
+                      <option value="">Not sure yet</option>
+                      <option>As soon as possible</option>
+                      <option>1–3 months</option>
+                      <option>3–6 months</option>
+                      <option>6+ months</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </details>
+            <div class="form-foot">
+              <button class="btn" type="submit">Preview enquiry</button>
+              <p class="form-note">
+                This prototype previews your enquiry. To reach us now, use email or phone.
+              </p>
+            </div>
           </form>
-
           <div class="form-done" data-form-done hidden>
-            <h2 class="h3" tabindex="-1" data-done-title>Thanks. Your message is in.</h2>
-            <p class="body" data-done-text>We’ll reply within 24 hours.</p>
-            <button class="btn secondary sm" type="button" data-form-again>Send another message</button>
-            <p class="form-note">This prototype doesn’t send anything yet. On the live site the message goes straight to operator@epoch.sh.</p>
+            <h2 class="h3" tabindex="-1" data-done-title>Your enquiry is ready.</h2>
+            <p class="body" data-done-text></p>
+            <dl class="enquiry-preview" data-enquiry-preview></dl>
+            <p class="preview-message" data-preview-message></p>
+            <p class="form-note">Nothing has been sent. This is a prototype preview.</p>
+            <a class="btn" href="mailto:operator@epoch.sh">Email EPOCH</a
+            ><button class="btn secondary sm" type="button" data-form-again>
+              Edit your enquiry
+            </button>
           </div>
-
-          <aside class="direct" aria-labelledby="direct-title">
-            <h2 id="direct-title" class="h3">Or reach us directly</h2>
-            <dl class="mt-m">
-              <div><dt>Email</dt><dd><a href="mailto:operator@epoch.sh">operator@epoch.sh</a></dd></div>
-              <div><dt>Phone</dt><dd><a href="tel:+17043145262">+1 (704) 314-5262</a></dd></div>
-              <div><dt>Response time</dt><dd>Within 24 hours</dd></div>
-            </dl>
-            <ul class="offices" data-offices></ul>
+          <aside class="direct contact-aside" aria-labelledby="direct-title">
+            <section id="book" class="call-note" aria-labelledby="book-title">
+              <p class="aside-label">Prefer a conversation?</p>
+              <h2 id="book-title">Let’s talk it through.</h2>
+              <p data-booking-description>Email us a few times that work for a 30-minute call.</p>
+              <a
+                class="text-link"
+                data-booking
+                href="mailto:operator@epoch.sh?subject=Arrange%20a%2030-minute%20call"
+                >Arrange a call by email</a
+              >
+            </section>
+            <div class="direct-details">
+              <h2 id="direct-title" class="sub-h">A direct line to EPOCH</h2>
+              <dl>
+                <div>
+                  <dt>Email</dt>
+                  <dd><a href="mailto:operator@epoch.sh">operator@epoch.sh</a></dd>
+                </div>
+                <div>
+                  <dt>Phone</dt>
+                  <dd><a href="tel:+17043145262">+1 (704) 314-5262</a></dd>
+                </div>
+              </dl>
+            </div>
+            <div class="contact-next">
+              <h3>What happens next</h3>
+              <p>
+                We read the brief, ask about the constraints and discuss the right next step with
+                you.
+              </p>
+              <a class="text-link" href="how-we-work.html">How we work</a>
+            </div>
           </aside>
         </div>
       </section>
@@ -123,5 +180,6 @@
     <script src="assets/js/data.js"></script>
     <script src="assets/js/kept-time.js"></script>
     <script src="assets/js/site.js"></script>
+    <script src="assets/js/experience.js"></script>
   </body>
 </html>

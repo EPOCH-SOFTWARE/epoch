@@ -18,6 +18,9 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 6. Before showing the founder anything, run the full check in `docs/handoff/tools/README.md`, then look at the screenshots yourself.
 7. Latest work (2026-10-03): the home page brings selected work directly after the client strip. Home and Work now give HUB a full-width showcase and Inspira its own editorial row, using existing case-study text only. `document-demo.html` demonstrates editable source review, missing fields and conflicting values with fictional briefs. It now includes a separate AI review through the local Python server, alongside the labelled-field preview. The integration is tested with controlled responses but still needs a local API key and a real model run. Approved project screenshots and confirmed outcomes remain outstanding.
 
+8. Latest UI/UX pass (2026-10-03): Home links directly into three project goals. Services has a keyboard-accessible goal explorer with capabilities, related projects and a contextual enquiry link. Work gives both case studies full features with challenge/build/integration tabs drawn from existing content. About has a new editorial composition and office section, with the founder’s preferred headline: "We don’t do half-in." Contact puts the required fields first, optional details in a disclosure, and call/email details alongside. It previews a draft without sending and preserves the draft when editing. The phone header keeps Start a project visible; the menu contains focus and supports Escape. Long service and case pages have section links. Site pages now request only the two Night font families; the labs retain their original fonts.
+9. AI demo work is parked until the ML engineer provides details. The current integration remains available as built; no model work was included in the UI/UX pass.
+
 ---
 
 ## 1. Who you're working with (founder preferences, important)
@@ -102,7 +105,7 @@ d1dda73 feat(prototype): footer-lab page comparing four treatments of the giant 
 4dafbf5 fix(prototype): footer shows only the copyright
 340ee64 feat(prototype): Night, the dark redesign with light from the O
 ```
-`feat/ai-first-upgrade`, `feat/epoch-identity`, `feat/night` and the tag are all pushed to origin. Later commits are documentation only; see `git log`.
+`feat/ai-first-upgrade`, `feat/epoch-identity`, `feat/night` and the tag are all pushed to origin. Later commits include the showcase, local AI integration and UI/UX pass; see `git log`.
 
 ---
 
@@ -182,14 +185,16 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 ### Pages
 | File | Notes |
 | --- | --- |
-| `index.html` | Home. Hero: copy on the left; on the right, the logo's O drawn as a technical construction ("rev B"): a 24-hour dial whose ring, hand and orange point turn to the visitor's time of day, with light from the opening and a label showing the time. The ring draws in and winds to now once per visit. Notes include `t₀ 1970-01-01 00:00 UTC` and the live Unix time. On desktop the cursor becomes a measuring crosshair. Then: "Trusted by" marquee, Why EPOCH (epoch in computing and in ML), commitments, AI services rows plus engineering chips, case cards with system sketches, closing CTA. |
-| `services.html`, `service.html?id=` | Two tiers. The detail page is rendered from `data.js`. |
-| `work.html`, `case.html?id=` | Work has a lead HUB showcase, an Inspira companion story, a document-demo invitation and the client logo grid. Case detail is rendered from `data.js`. |
+| `index.html` | Home. Hero: copy on the left; on the right, the logo's O drawn as a technical construction ("rev B"): a 24-hour dial whose ring, hand and orange point turn to the visitor's time of day, with light from the opening and a label showing the time. The ring draws in and winds to now once per visit. Notes include `t₀ 1970-01-01 00:00 UTC` and the live Unix time. On desktop the cursor becomes a measuring crosshair. Then: three project-goal links, "Trusted by" marquee, selected work with an interactive HUB scope panel, Why EPOCH, commitments, AI services rows plus engineering chips, closing CTA. |
+| `service.html?id=` | Rendered from `data.js`, with section navigation and service context carried into Contact. |
+| `work.html`, `case.html?id=` | Work has full HUB and Inspira features with challenge/build/integration tabs, a document-demo invitation and the client logo grid. Case detail is rendered from `data.js`, with section navigation. |
+| `services.html` | Three project-goal routes, with capabilities and related work, followed by the full service catalogue. |
+| `contact.html` | Required brief first, optional details, contextual selection, honest email booking fallback and editable enquiry preview. |
 | `document-demo.html` | Fictional briefs with browser sample preview and optional server-side AI review. Sources select the original text. Errors and uncertainty stay visible. AI setup: `tools/AI-REVIEW.md`. Linked from Work. |
 | `industries.html`, `industry.html?id=` | insurance, financial-services, healthcare, retail. Data in `assets/js/industries.js`. |
 | `how-we-work.html` | Engagement models, first 30 days, how pricing works, FAQs. **Contains claims to confirm** (section 7). |
 | `insights.html`, `article.html?id=` | 3 articles in `assets/js/insights.js`: `why-ai-pilots-stall`, `evaluating-llm-systems`, `first-30-days`. Byline "EPOCH"; dates picked by Claude. |
-| `about.html`, `contact.html` | Contact has `#book`, a "Book a 30-minute call" section with "What happens next", plus a form with inline validation. On a prototype submit it shows a note and sends nothing. |
+| `about.html` | An editorial introduction, working principles, engagement steps, two offices and the existing technology catalogue. |
 | `logos.html` | Logo directions A–E: zero point, overrun, extra mile, in focus, new era. |
 | `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts on a dark gallery page: 01–07, then 08–15 under "EPOCH or nothing.", then 16–22 under "All in.". `marks.md` is the written concept. |
 
@@ -220,6 +225,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
   - `pages.css` (prefix `pg-`) and `insights.css` (prefix `ins-`) are page-specific.
 - **`assets/js/kept-time.js`** holds the pure time and geometry helpers: rings with openings, watch angles, seven-segment letters, the engraving text and eclipse geometry (marks 08 onwards), the moon phase (mark 06), the living O's time of day, reading and range progress (the reading clock and the footer rise), the magnetic buttons, and the craft-pass helpers `stepAt`, `ringStop` and `monthsIn`. It is unit-tested with Node's built-in runner: `node --test 'prototype/tests/*.test.js'` (41 tests). Jest only looks in `src/`, so these never mix with the app's tests.
 - **`assets/js/marks-live.js`** draws marks 08 onwards as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
+- **Discovery and enquiries:** `assets/js/experience.js` owns the three goal routes, accessible tabs for service selection and case scope, validated query context for Contact, and section navigation on long pages. `assets/css/experience.css` gives Home, Services, Work, About and Contact their individual compositions. Pure query resolution lives in `KeptTime.contactContext`, with five tests written failing first. There are now 55 JavaScript and 18 Python tests. `docs/handoff/tools/journey-check.mjs` verifies the full interaction at 1440px, 390px and 320px. Contact previews no delivery and preserves typed values when edited. The scheduling button says Arrange a call by email until `BOOKING_URL` is set, then becomes Choose a time.
 - **Showcase and document demo:** `assets/css/work.css` styles the lead project and companion story rendered by `site.js` from existing case-study content. `assets/js/document-demo.js` owns sample selection, editing and citations; `assets/css/document-demo.css` styles the source and results panels. The pure `KeptTime.reviewBrief` helper has 9 tests in `tests/document-review.test.js`, making 50 pure tests in total. `docs/handoff/tools/demo-check.mjs` checks the actual browser flow. The sample text is fictional. Preview stays in the browser; Review with AI sends the document to OpenAI through `serve.py`. `document_api.py` checks exact quotes, cited values and source positions, including browser UTF-16 offsets. 18 Python tests cover the server boundary and provider responses. No document persistence is added, and API requests use `store=False`. This is a loopback-only development endpoint, not a public deployment. A live provider run is still unverified because no API key was configured.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.

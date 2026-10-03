@@ -37,7 +37,7 @@ try {
   await type('.com');
   await sleep(200);
   console.log(JSON.stringify(await cdp.evaluate(`({ emailInvalid: document.getElementById('email').getAttribute('aria-invalid'), emailErrorHidden: document.getElementById('email-error').hidden })`)));
-  await cdp.evaluate(`document.getElementById('message').focus()`);
+  await cdp.evaluate(`document.querySelector('[name=message]').focus()`);
   await type('We want to put an AI claims assistant into production.');
   await cdp.evaluate(`document.querySelector('[data-contact-form] button[type=submit]').click()`);
   await sleep(600);

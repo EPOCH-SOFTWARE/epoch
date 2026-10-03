@@ -307,6 +307,15 @@
     return result;
   }
 
+  // Resolve only known catalogue entries. Query text never becomes visitor copy.
+  function contactContext(search, services, goals) {
+    var params = new URLSearchParams(search);
+    var goal = goals.find(function (item) { return item.id === params.get('goal'); });
+    var service = services.find(function (item) { return item.id === (goal ? goal.service : params.get('service')); });
+    if (!service) return null;
+    return { label: goal ? goal.title : service.title, service: service.id, goal: goal ? goal.id : null };
+  }
+
   function spiralPath(cx, cy, r0, r1, start, sweep, steps) {
     var points = [];
     for (var step = 0; step <= steps; step++) {
@@ -344,5 +353,6 @@
     ringStop: ringStop,
     monthsIn: monthsIn,
     reviewBrief: reviewBrief,
+    contactContext: contactContext,
   };
 });

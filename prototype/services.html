@@ -7,26 +7,56 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/experience.css" />
   </head>
   <body data-page="services">
     <main id="main">
-      <section class="page-hero">
-        <div class="wrap">
-          <h1 class="display">AI, and everything it stands on.</h1>
-          <p class="lede">
-            We lead with AI: models, generative systems and the data that feeds them. Behind it sits
-            the engineering that keeps it running in production.
-          </p>
+      <section class="page-hero services-intro">
+        <div class="wrap intro-split">
+          <h1 class="display">
+            Start with<br />
+            the hard part.
+          </h1>
+          <div>
+            <p class="lede">
+              The workflow that takes too long. The product ready to be built. The platform holding
+              you back.
+            </p>
+            <a class="text-link" href="#capabilities">See every capability</a>
+          </div>
         </div>
       </section>
+
+      <section class="wrap goal-explorer" aria-labelledby="goals-title">
+        <div class="explorer-heading">
+          <h2 id="goals-title">What do you want to change?</h2>
+          <span>Choose a starting point</span>
+        </div>
+        <div data-goal-explorer></div>
+        <noscript
+          ><p>
+            Explore our AI and engineering services below, or
+            <a href="contact.html">tell us about your project</a>.
+          </p></noscript
+        >
+      </section>
+      <div class="wrap catalogue-heading" id="capabilities">
+        <h2>The capabilities behind it.</h2>
+        <p>One team across the model, the product and the infrastructure.</p>
+      </div>
 
       <section class="section ruled" id="tier-ai" aria-labelledby="tier-ai-title">
         <div class="wrap">
           <div class="head split">
             <h2 id="tier-ai-title" class="h2">AI</h2>
-            <p class="body">Models, agents and data systems that run in production, not in a slide deck.</p>
+            <p class="body">
+              Models, agents and data systems that run in production, not in a slide deck.
+            </p>
           </div>
           <ul class="rows" data-service-rows="ai"></ul>
         </div>
@@ -36,7 +66,9 @@
         <div class="wrap">
           <div class="head split">
             <h2 id="tier-eng-title" class="h2">Engineering that makes AI real</h2>
-            <p class="body">The software, infrastructure and security every AI system depends on.</p>
+            <p class="body">
+              The software, infrastructure and security every AI system depends on.
+            </p>
           </div>
           <ul class="rows" data-service-rows="engineering"></ul>
         </div>
@@ -47,5 +79,6 @@
     <script src="assets/js/data.js"></script>
     <script src="assets/js/kept-time.js"></script>
     <script src="assets/js/site.js"></script>
+    <script src="assets/js/experience.js"></script>
   </body>
 </html>

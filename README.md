@@ -8,6 +8,8 @@ The next version of the site is being designed as a static prototype in `prototy
 
 The home and Work pages feature the existing HUB and Inspira case studies. `prototype/document-demo.html` has an instant browser preview and an optional AI review through the local Python server. AI review sends the document to OpenAI only on submission; the key stays on the server. See [local AI setup](docs/handoff/tools/AI-REVIEW.md). Run `node --test 'prototype/tests/*.test.js'` for pure helpers and `node docs/handoff/tools/demo-check.mjs` for the demo's browser checks.
 
+The UI pass adds a goal-based Services explorer, project walkthroughs, section navigation on long pages, and a shorter Contact flow that carries the selected service or goal into the enquiry. The prototype previews enquiries without sending them. Run `node docs/handoff/tools/journey-check.mjs` for desktop, phone, keyboard and context checks. The AI demo is parked pending the ML engineer's input.
+
 ## Getting started
 
 ```bash
