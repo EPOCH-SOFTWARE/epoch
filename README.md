@@ -10,6 +10,8 @@ The home and Work pages feature the existing HUB and Inspira case studies. `prot
 
 The UI pass adds a goal-based Services explorer, project walkthroughs, section navigation on long pages, and a shorter Contact flow that carries the selected service or goal into the enquiry. The prototype previews enquiries without sending them. Run `node docs/handoff/tools/journey-check.mjs` for desktop, phone, keyboard and context checks. The AI demo is parked pending the ML engineer's input.
 
+Fresh logo exploration lives on `feat/logo-studies`, branched from `feat/night`. Open [the identity lab](http://localhost:3460/identity-lab.html) to compare Cut, Phase, Threshold and Common, with website compositions, small-size specimens and downloadable SVGs. The current site identity and every earlier concept remain available.
+
 ## Getting started
 
 ```bash

@@ -338,6 +338,17 @@ Session `229b15c3-ad9c-4bcd-95e4-1ef6c28ea854`, from 2026-10-02 04:41 to 2026-10
 
 ---
 
+## Session 5: fresh identity studies (2026-10-03)
+
+- **Brief:** explore a different identity from the existing clock work, with Linear among the references. The founder still likes the current site logo. This authorises independent symbols and lettering in a separate lab; no replacement has been selected.
+- **Branch:** `feat/logo-studies`, from `feat/night` at `97e2bdb`. The existing site and all earlier logo and footer concepts are retained.
+- **Research:** [Linear’s brand guidelines](https://linear.app/brand) for monochrome presentation and space; [IBM’s history of Paul Rand’s logo](https://www.ibm.com/history/logo) for a repeated visual rule; [Pentagram’s MIT Media Lab identity](https://www.pentagram.com/work/mit-media-lab/story), led by Michael Bierut, for shapes built on a consistent grid. These informed design principles. Reference brand assets were not imported.
+- **Built:** `identity-lab.html`, linked from both earlier logo labs. Cut is a solid E with diagonal terminals. Phase offsets two semicircles to suggest a change of era. Threshold opens a corner of an architectural block. Common is custom geometric lowercase lettering with an e symbol. Each has a large specimen, a website composition, reversed colour, actual 16/24/32px icons and downloadable SVGs. All exported artwork uses vector paths rather than external fonts. This page has no new JavaScript or motion.
+- **Review:** Phase is the proposed starting point for further refinement. No founder verdict yet. A direction still needs selection before any site integration.
+- **Validation:** all 55 JavaScript and 18 Python tests passed. All 32 routes passed console and 390px overflow checks, with only the intentionally clipped home marquee exempted. The contact form passed empty, bad-email and valid-input checks. The new lab was inspected at desktop, 390px and 320px, including visible keyboard focus and reduced motion. All 11 SVG downloads returned successfully and parsed as SVG; the em-dash scan passed. Screenshots are recorded in the dated screen catalogue.
+
+---
+
 ## Logo concepts at a glance
 
 | Concept | Where it lives | The idea | Founder's verdict |

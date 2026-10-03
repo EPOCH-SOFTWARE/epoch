@@ -1,0 +1,17 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 -8 405 122"
+  fill="currentColor"
+  role="img"
+  aria-labelledby="title"
+>
+  <title id="title">EPOCH Common wordmark concept</title>
+  <g fill="none" stroke="currentColor" stroke-width="15">
+    <path d="M65 67C59 74 52 77 41 77C23 77 12 66 12 48S23 19 41 19S70 30 70 48H12" />
+    <path d="M95 106V20M95 48C95 30 104 19 122 19S151 30 151 48S140 77 122 77S95 66 95 48Z" />
+    <rect x="176" y="19" width="58" height="58" rx="29" />
+    <path
+      d="M311 28C305 22 298 19 288 19C270 19 259 30 259 48S270 77 288 77C298 77 305 74 311 68M338 0V77M338 47C338 29 348 19 363 19S389 29 389 47V77"
+    />
+  </g>
+</svg>

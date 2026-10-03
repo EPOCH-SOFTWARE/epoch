@@ -1,6 +1,6 @@
 # Screens
 
-Dated snapshots of the prototype, so anyone can see what the site looked like at each point without running it. Each folder is one date. The newest folder is the current state of `feat/night`.
+Dated snapshots of the prototype, so anyone can see what the site looked like at each point without running it. Each folder is one date. Screens show `feat/night` unless an exploratory branch is named below.
 
 To see an older state live instead, check out its commit or tag (for example `light-site-2026-10-02`) and run `python3 prototype/serve.py`.
 
@@ -64,3 +64,12 @@ These show the integration interface. No live model output is represented in the
 - `mobile-15-contact-context.png`: a service selection carried into the editable brief.
 
 The AI demo is parked. Project text uses the existing case-study content; no product imagery was fabricated.
+
+### Fresh identity studies, `feat/logo-studies`
+
+- `desktop-31-identity-comparison.png`: Cut, Phase, Threshold and Common together.
+- `desktop-32-identity-phase.png`: Phase at large size, in a website composition, reversed and at icon sizes.
+- `mobile-16-identity-lab.png`: the introduction and first concept at 390px.
+- `mobile-17-identity-common.png`: the custom lowercase wordmark and website composition at 390px.
+
+These are separate explorations in `identity-lab.html`. Mark 08 remains the site logo.
