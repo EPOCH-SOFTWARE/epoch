@@ -455,6 +455,18 @@ The founder approved merging the Night port into `main` so live visitors can use
 A fresh Node 22 production-mode install and build passed with the corrected command. Vercel preview `CfzY8Zu7EJJ8yVLY5suwbKpAfHAi` then succeeded, clearing the approved merge into `main`. The release uses the existing Vercel integration and domain, https://epoch.sh. No separate hosting provider or new design is introduced. The Contact preview and parked AI scope remain as accepted.
 
 
+## Session 8: official client logos (2026-10-03)
+
+The founder reported HUB missing across the site and requested the real OneSix logo. The old HUB PNG had no alpha channel: the white-logo filter flattened its white background and lettering into a solid rectangle. Replaced the shared HUB references with a transparent official asset and replaced OneSix’s text fallback with its official logo. No logo was redrawn. Both keep the accepted monochrome client treatment, and the source files are stored locally without hotlinking.
+
+Official sources, retrieved 2026-10-03:
+
+- `public/logos/hub-logo.png`: [HUB careers](https://careers.hubinternational.com/), [original PNG](https://cdn.phenompeople.com/CareerConnectResources/HULHICUS/images/HUBLogo_H_FullColor_RGB-1789143138996.png).
+- `public/logos/onesix.avif`: [OneSix homepage](https://www.onesix.ai/), [original AVIF](https://cdn.prod.website-files.com/69d725709c508aa57a7f5224/69d7861d3ec010cda98b4472_onesix-logo.avif).
+
+The frozen prototype retains its old assets. The catalogue test allows only these approved logo substitutions. Verified desktop and phone appearances across Home, Work, the HUB case study and insurance proof. Saved screenshots use the `client-logos-` prefix. All 202 unit tests, lint, TypeScript, the production build, contact form and 36-route responsive checks pass. Browser checks also verify logo loading, transparent pixels and readable dimensions, since a successful image request alone did not catch the original opaque rectangle.
+
+
 ## Rejected, do not repeat
 
 1. **The Epoch Field neural-network hero, and acid green on near-black** (2026-10-01). "cringe", not professional, and below the ambition. It read as a stock "AI network" look.
@@ -479,7 +491,7 @@ A fresh Node 22 production-mode install and build passed with the corrected comm
 - **The logo.** 08 is on the site on trial ("let me see how it goes"). There is no verdict on 16 to 22, and the research ideas in HANDOFF section 6 are unbuilt.
 - **Judgement calls the founder may undo:** the ivory (not orange) AI step in case sketches and card brackets, the one-year case dial, the small O ending articles, and the footer glow's scroll rise, which the founder found not very effective.
 - **Claims to confirm** (HANDOFF section 7): "Most projects start at $25,000"; the pricing structure; 3 to 4 weeks to a prototype and 8 to 16 weeks to production; the 30-day plan and "one accountable lead"; the industry mapping (Destify, IDrive and OneSix are not mapped); the three Insights drafts, their dates and the "EPOCH" byline.
-- **Real proof the founder owes:** numbers for the HUB and Inspira case studies; client quotes; the OneSix AI logo and what EPOCH built for them; a founder photo, bio and team; certifications or partnerships, only if true; a Calendly or Cal.com link for `BOOKING_URL`.
+- **Real proof the founder owes:** numbers for the HUB and Inspira case studies; client quotes; what EPOCH built for OneSix AI (official logo sourced in session 8); a founder photo, bio and team; certifications or partnerships, only if true; a Calendly or Cal.com link for `BOOKING_URL`.
 - **The Next.js port,** only when the founder says so (HANDOFF section 10). It must carry the sentence-case headings into `serviceData.ts` and drop the office hours.
 - **Known issues** (HANDOFF section 8): the contact API puts visitor input into the email without escaping it; the `.husky/commit-msg` check never runs; `@svgr/webpack` is referenced but not installed; Tailwind is installed but unused.
 - **A question for the founder:** what `draft/content-updates` is for.

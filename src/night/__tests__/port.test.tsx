@@ -9,11 +9,17 @@ import { ARTICLES } from '../content';
 
 jest.mock('../Runtime', () => ({ Runtime: () => null }));
 
-test('the port preserves the complete approved content catalogue', () => {
+test('the port preserves the approved catalogue with the sourced client logos', () => {
   const source = readFileSync('prototype/assets/js/data.js', 'utf8');
-  expect(DATA).toEqual(
-    JSON.parse(source.split('window.EPOCH_DATA = ')[1]!.trim().replace(/;$/, ''))
-  );
+  const baseline = JSON.parse(source.split('window.EPOCH_DATA = ')[1]!.trim().replace(/;$/, ''));
+  // The prototype stays frozen; these two official assets were approved after the port.
+  baseline.clients.find((client: { id: string }) => client.id === 'hub-international').logo =
+    '/logos/hub-logo.png';
+  baseline.clients.find((client: { id: string }) => client.id === 'onesix-ai').logo =
+    '/logos/onesix.avif';
+  baseline.caseStudies.find((study: { id: string }) => study.id === 'hub-international').logo =
+    '/logos/hub-logo.png';
+  expect(DATA).toEqual(baseline);
 });
 test('the shared navigation preserves the current section and a visible project link', () => {
   render(<Header page="case" />);

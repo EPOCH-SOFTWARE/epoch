@@ -8,7 +8,7 @@ import type { CaseStudy } from '../types';
 const HUB_INTERNATIONAL_DATA: CaseStudy = {
   id: 'hub-international',
   name: 'HUB International',
-  logo: '/logos/HUB-international.png',
+  logo: '/logos/hub-logo.png',
   headline: 'AI-driven automation for insurance claims and risk assessment',
   summary: 'How our team collaborated to modernize insurance workflows through AI-driven automation and system integration.',
 

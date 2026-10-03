@@ -137,7 +137,7 @@ node --test 'prototype/tests/*.test.js' # unit tests for the pure helpers
 - Two calls they may undo: the one-year dial on case pages, and the small O that ends each article.
 - Still waiting on the founder for:
   - real case-study numbers and quotes;
-  - the OneSix story and logo;
+  - the OneSix story (official logo now sourced);
   - a founder photo and bio;
   - the booking (Calendly) link.
 
