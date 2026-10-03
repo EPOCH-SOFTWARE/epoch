@@ -450,7 +450,7 @@ Compared 36 routes against the prototype at desktop and phone widths. Fixed the 
 
 ## Session 7: production release (2026-10-03)
 
-The founder approved merging the Night port into `main` so live visitors can use it. Release checks found that Vercel had rejected earlier preview builds and the installed Next.js version had known security issues. Updated Next.js and its matching lint/analyzer packages to 15.5.27 within the existing major version, then reran build and regression checks. The exact deployment failure still requires the hosting log or a successful replacement deployment to resolve.
+The founder approved merging the Night port into `main` so live visitors can use it. Release checks found that Vercel had rejected earlier preview builds and the installed Next.js version had known security issues. Updated Next.js and its matching lint/analyzer packages to 15.5.27 within the existing major version, then reran build and regression checks. The hosting log then identified the actual failure: the dashboard install command used `npm install --production`, omitting TypeScript and other build tools. Added `vercel.json` with `npm ci --include=dev` to override that command, and pinned Node to 22.x to match the project setting. The security update remains, but was not the cause of this build failure.
 
 The release uses the existing Vercel integration and domain, https://epoch.sh. No separate hosting provider or new design is introduced. The Contact preview and parked AI scope remain as accepted.
 

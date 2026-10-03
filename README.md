@@ -6,6 +6,8 @@ Read [AGENTS.md](AGENTS.md), then [the handoff](docs/handoff/HANDOFF.md) and [hi
 
 ## Run
 
+Use Node.js 22. Vercel installs with `npm ci --include=dev` from `vercel.json`, so TypeScript and the other build tools are available even in the production build environment.
+
 ```sh
 npm ci
 npm run dev       # http://localhost:3000
