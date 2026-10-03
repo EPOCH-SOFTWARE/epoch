@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" fill="none">
+  <title>commitment-thread</title>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f2efe8" />
+      <stop offset="1" stop-color="#bdb8ac" />
+    </linearGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0.8" y2="1">
+      <stop stop-color="#343632" />
+      <stop offset="1" stop-color="#131512" />
+    </linearGradient>
+    <filter id="shadow" x="-60%" y="-40%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".3" />
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#9a9986" stroke-opacity=".08" />
+    </pattern>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round" stroke="#aaa79d" stroke-width="1.5">
+    <path
+      d="M80 315L280 350L480 315L680 350L880 315V133L680 168L480 133L280 168L80 133Z"
+      fill="url(#paper)"
+      stroke="#b9b4a8"
+    />
+    <path d="M280 168V350L480 315V133Z M680 168V350L880 315V133Z" fill="#b9b6aa" stroke="none" />
+    <path d="M280 168V350M480 133V315M680 168V350" stroke="#a49f93" />
+    <g stroke="#666c5b" stroke-width="2">
+      <path d="M136 190H221V229H189L168 245V229H136Z" />
+      <path d="M330 193H426V266H330Z M345 211H411M345 226H381M345 248H397" />
+      <path d="M561 193L609 219L561 246L513 219Z M513 219V263L561 290L609 263V219M561 246V290" />
+      <path d="M727 238H750L763 216L779 256L795 208L807 238H838" />
+    </g>
+    <path
+      d="M20 290H156L178 280L280 299L480 264L680 299L880 264H940"
+      stroke="#353e2a"
+      stroke-width="3"
+    />
+    <circle cx="850" cy="269" r="6" fill="#ff4f00" stroke="#e2dccc" stroke-width="3" />
+  </g>
+</svg>

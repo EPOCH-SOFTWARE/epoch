@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" fill="none">
+  <title>case-inspira-financial</title>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f2efe8" />
+      <stop offset="1" stop-color="#bdb8ac" />
+    </linearGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0.8" y2="1">
+      <stop stop-color="#343632" />
+      <stop offset="1" stop-color="#131512" />
+    </linearGradient>
+    <filter id="shadow" x="-60%" y="-40%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".3" />
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#9a9986" stroke-opacity=".08" />
+    </pattern>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round" stroke="#383832" stroke-width="1.5">
+    <path d="M69 366H899M69 394H899" opacity=".12" />
+    <g transform="translate(91 110)" filter="url(#shadow)">
+      <rect width="219" height="270" rx="10" fill="#f2efe8" stroke="#b1ada3" />
+      <path d="M0 44H219" stroke="#727568" />
+      <circle cx="22" cy="22" r="5" fill="#8e9184" stroke="none" />
+      <path d="M40 22H195" stroke="#858779" />
+      <rect x="20" y="70" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 77H195M62 90H174" stroke="#9da18d" stroke-width="3" />
+      <rect x="20" y="119" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 126H195M62 139H174" stroke="#9da18d" stroke-width="3" />
+      <rect x="20" y="168" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 175H195M62 188H174" stroke="#9da18d" stroke-width="3" />
+      <path d="M25 180L31 186L42 171" stroke="#d1d5c0" stroke-width="2" />
+    </g>
+    <path
+      d="M310 245H433M530 245H603V127H716M603 245H716M603 245V363H716"
+      stroke="#8b8a7e"
+      stroke-width="2"
+    />
+    <g transform="translate(433 199)">
+      <rect width="92" height="92" rx="12" fill="url(#slab)" stroke="#c5c1b5" />
+      <rect x="14" y="14" width="64" height="64" rx="4" stroke="#c5c1b5" opacity=".4" />
+      <path d="M46.0 27V65M27 46.0H65" stroke="#c5c1b5" />
+      <circle cx="46.0" cy="46.0" r="8" fill="#c5c1b5" stroke="none" />
+    </g>
+    <g transform="translate(716 82)">
+      <rect width="130" height="90" rx="9" fill="#d8d4c8" stroke="#9f9c8f" />
+      <path d="M28 65L35 49L76 17L87 29L45 61Z M54 67H107" stroke="#5c6250" stroke-width="3" />
+    </g>
+    <g transform="translate(716 200)">
+      <rect width="130" height="90" rx="9" fill="#d8d4c8" stroke="#9f9c8f" />
+      <path
+        d="M65 16L90 26V42Q89 62 65 76Q41 62 40 42V26Z M52 43L62 53L78 35"
+        stroke="#5c6250"
+        stroke-width="3"
+      />
+    </g>
+    <g transform="translate(716 318)">
+      <rect width="130" height="90" rx="9" fill="#d8d4c8" stroke="#9f9c8f" />
+      <path d="M26 65V22M26 65H105M40 54H99M40 40H84M40 26H94" stroke="#5c6250" stroke-width="3" />
+    </g>
+  </g>
+</svg>

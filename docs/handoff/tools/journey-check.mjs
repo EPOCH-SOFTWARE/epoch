@@ -94,6 +94,8 @@ try {
     await open(cdp, 'http://localhost:3460/work.html', 400);
     assert.equal(await value('document.documentElement.scrollWidth'), width);
     assert.equal(await value("document.querySelectorAll('[data-scope-explorer]').length"), 2);
+    await value("document.querySelector('.project-delivery summary').click()");
+    assert.equal(await value("document.querySelector('.project-delivery').open"), true);
     await value("document.querySelector('.scope-choices [aria-selected=true]').focus()");
     await key('ArrowRight');
     assert.equal(await value('document.activeElement.textContent'), 'Integration');

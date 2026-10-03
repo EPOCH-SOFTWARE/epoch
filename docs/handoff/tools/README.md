@@ -21,6 +21,7 @@ Small Node scripts that check the prototype in headless Chrome. They never open 
 | `formcheck.mjs` | Loads the main pages, reports errors, and checks the contact form with empty, bad and valid input. | `node formcheck.mjs` (always checks http://127.0.0.1:3460/) |
 | `demo-check.mjs` | Checks sample switching, keyboard access, source selection, document edits, conflicting values, reset, safe rendering, AI loading, success, errors, stale responses and reduced motion at desktop and phone widths. Provider replies are controlled fixtures; this does not verify a live model. | `node docs/handoff/tools/demo-check.mjs` from the repo root |
 | `journey-check.mjs` | Checks goal selection, enquiry context, retained drafts, project tabs, section links, mobile menu focus and reduced motion at 1440px, 390px and 320px. | `node docs/handoff/tools/journey-check.mjs` from the repo root |
+| `visual-check.mjs` | Checks artwork loading and alt text, all three goal illustrations, keyboard switching, case-scope captions, page width and reduced motion at 1440px, 390px and 320px. | `node docs/handoff/tools/visual-check.mjs` from the repo root |
 | `form.mjs` | Types into the contact form like a person and screenshots the error state and the confirmation. | `node form.mjs <outPrefix> [width] [height] [scale]` |
 | `audit.mjs` | Type audit: single words stranded on a last line, line lengths, overflow and console errors. | `node audit.mjs <width> <url> [url...]` |
 | `tiles.mjs` | Saves the page as a column of screenshots, as a reader sees it while scrolling. | `node tiles.mjs <outPrefix> <width> <viewportH> <scale> <url> [fromY] [toY]` |
@@ -40,6 +41,7 @@ From the repo root:
 3. Run `node docs/handoff/tools/mobile-check.mjs <url> <prefix> 390` for every page. The only allowed offender is the logo marquee on the home page, which is clipped on purpose.
 4. Run `node docs/handoff/tools/formcheck.mjs`.
    Run `node docs/handoff/tools/journey-check.mjs` for discovery, contact or shared navigation changes.
+   Run `node docs/handoff/tools/visual-check.mjs` for illustration or project-presentation changes.
    For changes to the document demo, also run `node docs/handoff/tools/demo-check.mjs`.
 5. Search the prototype for em dashes. There must be none.
 6. Look at the screenshots yourself before you show anything.

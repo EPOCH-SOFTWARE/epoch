@@ -7,7 +7,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 
 ## 0. Quick start (what to do first)
 
-1. `git switch feat/night` for the current site redesign. The fresh logo exploration is on `feat/logo-studies`, branched from `feat/night`; stay on that branch when reviewing `identity-color-lab.html` (latest) or `identity-lab.html` (previous round). This branch also has the About heading overlap fix.
+1. `git switch feat/visual-stories` for the latest prototype. It is based on `feat/logo-studies` at `7ceda36`, which descends from `feat/night`. It includes the About overlap fix and preserves all logo labs. Logo work and photography are parked; the active work is editorial illustration across the site.
 2. Start the prototype server, which disables caching so edits show on refresh:
    `python3 prototype/serve.py` → http://localhost:3460
    - It sends `Cache-Control: no-store`. The plain `python3 -m http.server` doesn't, which once made the founder think changes were missing.
@@ -23,6 +23,8 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 10. Fresh identity exploration (2026-10-03): `identity-lab.html` on `feat/logo-studies` adds four independent directions: Cut, Phase, Threshold and Common. The brief explicitly permits moving beyond the clock and earlier logo work. Each direction has a monochrome comparison, wordmark, website composition, inverse specimen, 16/24/32px symbol and SVG downloads. All shapes and letters are vector paths, with no font dependency in exported logos. The site still uses mark 08; no new direction has been selected. Earlier labs link to the new page and retain every concept. Research sources are linked in the lab and HISTORY.
 11. About scroll fix (2026-10-03, on `feat/logo-studies`): "What we believe" now scrolls normally above its full-width rows. The shared desktop sticky-heading rule previously made it cross the belief titles when scrolling. Only this heading is overridden; the side-by-side sections retain their sticky headings.
 12. Colour logo round (2026-10-03): the founder rejected all four concepts from item 10 and explicitly asked for new shapes, dual colour and gradients. This permits broader palettes within the new exploration; the site's Night palette remains intact. `identity-color-lab.html` adds Afterlight (gradient O within custom lettering), Prism (coral/violet folded form), Current (mint/violet ribbons and rounded lettering), and Voltage (slanted ice/pink wordmark). Colour and one-colour SVGs, website compositions and actual 16/24/32px icons are included. All earlier labs and concepts remain available. No replacement is selected.
+13. Editorial illustration pass (2026-10-03, `feat/visual-stories`): Home's large clock construction is replaced by an exploded software assembly. The living mark 08 in the header, footer and favicon is unchanged. Services shows a different illustration for each project goal. Home, Work and both case pages show scope illustrations grounded in existing deliverables, with visible disclosure. Work's delivery tabs remain available inside an expandable section beneath the visual. About adds a folded-paper illustration of continuing commitment beneath its existing headline. Seven static SVGs live in `prototype/assets/illustrations/`, with responsive styles in `assets/css/illustrations.css`. No new animation or backend work was introduced. Removed the obsolete home-clock drawing handlers and styles; shared logo behaviour and case-dial keyframes remain.
+14. The founder explicitly parked real founder, team and office photography for later. Do not fabricate people or offices, and do not treat the conceptual illustrations as real product screenshots. Approved client imagery remains an outstanding content item. Logo exploration is also parked after the colour round; no alternative was adopted.
 
 ---
 
@@ -64,6 +66,7 @@ For the full story of how we got here, read `HISTORY.md` next to this file. Sect
 | `feat/epoch-identity` | **Round 2: static HTML/CSS/JS prototype** in `prototype/`, light Draftsman look. Branched from `feat/ai-first-upgrade`, so it also contains all of round 1. Tagged `light-site-2026-10-02`. |
 | `feat/night` | **Current: the Night redesign** of the prototype, branched from `feat/epoch-identity`. |
 | `feat/logo-studies` | Logo studies, branched from `feat/night` at `97e2bdb`. Adds `identity-lab.html`, then `identity-color-lab.html`, plus the About heading fix. Does not replace the site logo. |
+| `feat/visual-stories` | Latest site work, branched from `feat/logo-studies` at `7ceda36`. Seven editorial illustrations across Home, Services, Work, case pages and About. |
 
 Commits (newest first):
 ```
@@ -189,16 +192,16 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 ### Pages
 | File | Notes |
 | --- | --- |
-| `index.html` | Home. Hero: copy on the left; on the right, the logo's O drawn as a technical construction ("rev B"): a 24-hour dial whose ring, hand and orange point turn to the visitor's time of day, with light from the opening and a label showing the time. The ring draws in and winds to now once per visit. Notes include `t₀ 1970-01-01 00:00 UTC` and the live Unix time. On desktop the cursor becomes a measuring crosshair. Then: three project-goal links, "Trusted by" marquee, selected work with an interactive HUB scope panel, Why EPOCH, commitments, AI services rows plus engineering chips, closing CTA. |
+| `index.html` | Home. Copy beside an exploded software assembly, then three project-goal links, the client marquee and illustrated HUB/Inspira features. Delivery details are expandable. Why EPOCH, commitments, AI services and the closing CTA follow. The earlier home clock construction remains in the preceding branches and screenshots. |
 | `service.html?id=` | Rendered from `data.js`, with section navigation and service context carried into Contact. |
-| `work.html`, `case.html?id=` | Work has full HUB and Inspira features with challenge/build/integration tabs, a document-demo invitation and the client logo grid. Case detail is rendered from `data.js`, with section navigation. |
-| `services.html` | Three project-goal routes, with capabilities and related work, followed by the full service catalogue. |
+| `work.html`, `case.html?id=` | Work has full HUB and Inspira features with scope illustrations and expandable challenge/build/integration tabs, plus the document-demo invitation and client logo grid. Each case detail has its scope illustration, existing engagement dial and section navigation. |
+| `services.html` | Three project-goal routes, each with its own illustration, capabilities and related work, followed by the full service catalogue. |
 | `contact.html` | Required brief first, optional details, contextual selection, honest email booking fallback and editable enquiry preview. |
 | `document-demo.html` | Fictional briefs with browser sample preview and optional server-side AI review. Sources select the original text. Errors and uncertainty stay visible. AI setup: `tools/AI-REVIEW.md`. Linked from Work. |
 | `industries.html`, `industry.html?id=` | insurance, financial-services, healthcare, retail. Data in `assets/js/industries.js`. |
 | `how-we-work.html` | Engagement models, first 30 days, how pricing works, FAQs. **Contains claims to confirm** (section 7). |
 | `insights.html`, `article.html?id=` | 3 articles in `assets/js/insights.js`: `why-ai-pilots-stall`, `evaluating-llm-systems`, `first-30-days`. Byline "EPOCH"; dates picked by Claude. |
-| `about.html` | An editorial introduction, working principles, engagement steps, two offices and the existing technology catalogue. |
+| `about.html` | Editorial introduction, a folded-paper illustration of continuing commitment, working principles, engagement steps, two offices and the technology catalogue. Photography is parked. |
 | `logos.html` | Logo directions A–E: zero point, overrun, extra mile, in focus, new era. |
 | `marks.html` + `marks.md` | "Kept time" gallery of living logo concepts on a dark gallery page: 01–07, then 08–15 under "EPOCH or nothing.", then 16–22 under "All in.". `marks.md` is the written concept. |
 
@@ -216,7 +219,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 - **`assets/js/site.js`** is an IIFE that:
   - injects the SVG sprite (symbols `wm-plain` and `wm-clock`), the header (nav: Work, Services, How we work, About + "Start a project") and the footer (giant wordmark over a dusk glow that rises as the page ends, copyright);
   - renders blocks into `[data-clients]`, `[data-service-rows=tier]`, `[data-service-chips=tier]`, `[data-case-cards]` (`with-cta` adds the dark "Your project" card), `[data-commitments]`, `[data-offices]`, `[data-tech]`, `[data-closing]`, and the service and case pages;
-  - adds the live clock (`[data-unix-label]`), the measuring crosshair (`.v-draft`, fine pointers only) and booking.
+  - runs the shared living logo, favicon and office clocks, plus booking. The old home Unix-time label and measuring crosshair were removed with the clock construction.
   - `SYSTEM_SKETCH` holds the case-card system diagrams, built from each case study's deliverables.
   - **`BOOKING_URL = ''`**. Set it to the founder's Calendly or Cal.com link; until then "Choose a time" opens an email.
 - **`assets/css/site.css`** holds the Night tokens on `:root`:
@@ -231,6 +234,7 @@ Plain HTML + CSS + vanilla JS with no build step. Served by `prototype/serve.py`
 - **`assets/js/marks-live.js`** draws marks 08 onwards as SVG (stage, strip of states, lockup with the wordmark) from one animation loop. Its lockups use `data-lockup-mark`, because 01's inline script already owns `data-lockup`.
 - **Discovery and enquiries:** `assets/js/experience.js` owns the three goal routes, accessible tabs for service selection and case scope, validated query context for Contact, and section navigation on long pages. `assets/css/experience.css` gives Home, Services, Work, About and Contact their individual compositions. Pure query resolution lives in `KeptTime.contactContext`, with five tests written failing first. There are now 55 JavaScript and 18 Python tests. `docs/handoff/tools/journey-check.mjs` verifies the full interaction at 1440px, 390px and 320px. Contact previews no delivery and preserves typed values when edited. The scheduling button says Arrange a call by email until `BOOKING_URL` is set, then becomes Choose a time.
 - **Showcase and document demo:** `assets/css/work.css` styles the lead project and companion story rendered by `site.js` from existing case-study content. `assets/js/document-demo.js` owns sample selection, editing and citations; `assets/css/document-demo.css` styles the source and results panels. The pure `KeptTime.reviewBrief` helper has 9 tests in `tests/document-review.test.js`, making 50 pure tests in total. `docs/handoff/tools/demo-check.mjs` checks the actual browser flow. The sample text is fictional. Preview stays in the browser; Review with AI sends the document to OpenAI through `serve.py`. `document_api.py` checks exact quotes, cited values and source positions, including browser UTF-16 offsets. 18 Python tests cover the server boundary and provider responses. No document persistence is added, and API requests use `store=False`. This is a loopback-only development endpoint, not a public deployment. A live provider run is still unverified because no API key was configured.
+- **Editorial illustrations:** `assets/illustrations/` holds seven static SVGs. `assets/css/illustrations.css` sets the responsive placements and project disclosure. `PROJECT_ILLUSTRATIONS` in `site.js` binds project drawings to their descriptions; goal artwork and alt text are defined in `experience.js`. `docs/handoff/tools/visual-check.mjs` covers loading, accessibility, goal selection, disclosure captions and widths.
 - **Assets:** `assets/logos/` holds client logos.
   - `HUB-international.png` was **made transparent and cropped**; the original has a solid white box.
   - Cardinal, iDrive and Rural King are cropped PNGs.

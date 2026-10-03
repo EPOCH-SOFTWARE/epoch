@@ -12,7 +12,7 @@
   color: var(--muted);
 }
 
-.project-mast img, .project-companion img {
+.project-mast img, .project-companion > div > img {
   width: auto;
   max-width: 190px;
   height: 32px;

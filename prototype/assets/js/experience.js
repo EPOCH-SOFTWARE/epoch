@@ -15,6 +15,9 @@
         'Connect AI to your systems',
         'Review, measure and improve',
       ],
+      illustrationAlt:
+        'Paper documents connect through a review step to one structured record, with a person included in the workflow.',
+      illustrationCaption: 'Documents, decisions and a person in the loop.',
       capabilities: ['generative-ai', 'ai-ml', 'data-analytics'],
       question: 'Which task takes more time than it should?',
     },
@@ -26,6 +29,9 @@
       description:
         'Bring the model, the interface and the engineering together. Build around the people who will use it, from the first interaction to production.',
       stages: ['Define the product', 'Build and evaluate', 'Launch and support'],
+      illustrationAlt:
+        'A question connects to source documents and an answer, with a highlighted line tying the answer back to its evidence.',
+      illustrationCaption: 'An answer is only as useful as the evidence behind it.',
       capabilities: ['ai-ml', 'generative-ai', 'custom-software'],
       question: 'What should someone be able to do with your product?',
     },
@@ -37,6 +43,9 @@
       description:
         'Connect existing infrastructure to modern software, data and AI capabilities. Work through the dependencies and the path to production.',
       stages: ['Map the existing systems', 'Build the next capability', 'Integrate and operate'],
+      illustrationAlt:
+        'An existing platform connects to four separate components, with one path highlighted as the capability being modernised.',
+      illustrationCaption: 'A new capability, connected to what already works.',
       capabilities: ['custom-software', 'cloud-computing', 'devops'],
       question: 'Where is your current platform holding you back?',
     },
@@ -110,6 +119,14 @@
       panel.setAttribute('aria-labelledby', button.id);
       panel.tabIndex = 0;
       panel.append(node('h3', '', goal.headline), node('p', 'goal-description', goal.description));
+      var figure = node('figure', 'goal-illustration');
+      var illustration = node('img', 'editorial-image');
+      illustration.src = 'assets/illustrations/goal-' + goal.id + '.svg';
+      illustration.alt = goal.illustrationAlt;
+      illustration.width = 960;
+      illustration.height = 520;
+      figure.append(illustration, node('figcaption', '', goal.illustrationCaption));
+      panel.append(figure);
       var stages = node('ol', 'goal-stages');
       goal.stages.forEach(function (stage) {
         stages.append(node('li', '', stage));

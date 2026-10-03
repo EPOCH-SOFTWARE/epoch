@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" fill="none">
+  <title>case-hub-international</title>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f2efe8" />
+      <stop offset="1" stop-color="#bdb8ac" />
+    </linearGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0.8" y2="1">
+      <stop stop-color="#343632" />
+      <stop offset="1" stop-color="#131512" />
+    </linearGradient>
+    <filter id="shadow" x="-60%" y="-40%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".3" />
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#9a9986" stroke-opacity=".08" />
+    </pattern>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round" stroke="#aaa79d" stroke-width="1.5">
+    <g transform="translate(114 150) rotate(-8) scale(0.94)" filter="url(#shadow)">
+      <path d="M0 0H119L157 38V212H0Z" fill="url(#paper)" stroke="#d5d0c6" />
+      <path d="M119 0V38H157" fill="#a9a59b" stroke="#bab6ad" />
+      <path
+        d="M24 39H74M24 65H124M24 82H112M24 122H126M24 140H126M24 158H96M24 180H66"
+        stroke="#65675d"
+        stroke-width="3"
+      />
+      <path d="M22 97H125" stroke="#929184" stroke-width="12" opacity=".6" />
+    </g>
+    <g transform="translate(182 116) rotate(4) scale(0.94)" filter="url(#shadow)">
+      <path d="M0 0H119L157 38V212H0Z" fill="url(#paper)" stroke="#d5d0c6" />
+      <path d="M119 0V38H157" fill="#a9a59b" stroke="#bab6ad" />
+      <path
+        d="M24 39H74M24 65H124M24 82H112M24 122H126M24 140H126M24 158H96M24 180H66"
+        stroke="#65675d"
+        stroke-width="3"
+      />
+      <path d="M22 97H125" stroke="#929184" stroke-width="12" opacity=".6" />
+    </g>
+    <path
+      d="M366 246H432V155H511M432 246V360H511M611 155H670V252H720M611 360H670V252"
+      stroke="#898e7b"
+      stroke-width="2"
+    />
+    <g transform="translate(511 105)">
+      <rect width="100" height="100" rx="12" fill="#23281e" stroke="#9aa188" />
+      <path d="M50 20L77 30V49Q77 70 50 83Q23 70 23 49V30Z" stroke="#c6ccb8" stroke-width="3" />
+      <path d="M37 49L47 60L65 40" stroke="#c6ccb8" stroke-width="3" />
+    </g>
+    <g transform="translate(511 310)">
+      <rect width="100" height="100" rx="12" fill="url(#slab)" stroke="#c5c1b5" />
+      <rect x="14" y="14" width="72" height="72" rx="4" stroke="#c5c1b5" opacity=".4" />
+      <path d="M50.0 27V73M27 50.0H73" stroke="#c5c1b5" />
+      <circle cx="50.0" cy="50.0" r="8" fill="#c5c1b5" stroke="none" />
+    </g>
+    <g transform="translate(720 135)" filter="url(#shadow)">
+      <rect width="190" height="240" rx="10" fill="#191c18" stroke="#6e7165" />
+      <path d="M0 44H190" stroke="#727568" />
+      <circle cx="22" cy="22" r="5" fill="#8e9184" stroke="none" />
+      <path d="M40 22H166" stroke="#858779" />
+      <rect x="20" y="70" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 77H166M62 90H145" stroke="#9da18d" stroke-width="3" />
+      <rect x="20" y="119" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 126H166M62 139H145" stroke="#9da18d" stroke-width="3" />
+      <rect x="20" y="168" width="26" height="26" rx="4" stroke="#777b6a" />
+      <path d="M62 175H166M62 188H145" stroke="#9da18d" stroke-width="3" />
+      <path d="M25 180L31 186L42 171" stroke="#d1d5c0" stroke-width="2" />
+    </g>
+    <path d="M670 252H720" stroke="#ff4f00" stroke-width="2" />
+    <circle cx="670" cy="252" r="6" fill="#ff4f00" stroke="#111" stroke-width="2" />
+  </g>
+</svg>

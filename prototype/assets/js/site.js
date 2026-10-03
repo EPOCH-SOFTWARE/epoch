@@ -265,6 +265,27 @@
     '<a class="btn sm" href="contact.html">Start a project</a></article>';
 
   // A larger editorial view of the existing case study, using its published scope verbatim.
+  var PROJECT_ILLUSTRATIONS = {
+    'hub-international': {
+      alt: 'Documents connect to risk assessment and an automated workflow, alongside a reporting view.',
+      labels: ['Claims workflows', 'Risk assessment', 'Connected reporting'],
+    },
+    'inspira-financial': {
+      alt: 'A participant portal connects to plan administration, with document signing, compliance and reporting shown alongside.',
+      labels: ['Participant experience', 'Plan administration', 'Compliance and reporting'],
+    },
+  };
+
+  function projectIllustration(studyId, className) {
+    var illustration = PROJECT_ILLUSTRATIONS[studyId];
+    if (!illustration) return '';
+    return '<figure class="project-illustration ' + className + '" data-illustration="' + studyId + '">' +
+      '<img class="editorial-image" src="assets/illustrations/case-' + studyId + '.svg" width="960" height="520" loading="lazy" alt="' + esc(illustration.alt) + '">' +
+      '<figcaption><span class="illustration-labels">' + list(illustration.labels, function (label) {
+        return '<span>' + esc(label) + '</span>';
+      }) + '</span><span class="illustration-disclosure">Scope illustration, based on the published case study.</span></figcaption></figure>';
+  }
+
   function featuredProject(study, full) {
     return '<article class="project-feature" id="featured-' + study.id + '">' +
       '<div class="project-mast"><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
@@ -273,10 +294,12 @@
       '<h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) + '</a></h3>' +
       '<p>' + esc(study.summary) + '</p>' +
       '<a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div>' +
+      projectIllustration(study.id, 'feature-illustration') + '</div>' +
+      '<details class="project-delivery"><summary>Explore the delivery<span aria-hidden="true">+</span></summary>' +
       '<div class="project-scope" data-scope-explorer="' + study.id + '"><p class="scope-caption">Selected deliverables</p>' +
       '<ul>' + list(study.deliverables.slice(0, 3), function (item) {
         return '<li><span class="scope-node" aria-hidden="true"></span>' + esc(item) + '</li>';
-      }) + '</ul><p class="scope-foot">' + esc(study.deliverables[study.id === 'hub-international' ? 4 : 6]) + '</p></div></div>' +
+      }) + '</ul><p class="scope-foot">' + esc(study.deliverables[study.id === 'hub-international' ? 4 : 6]) + '</p></div></details>' +
       (full ? '<div class="project-context"><div><h4>The challenge</h4><p>' + esc(study.generalChallenges[0]) +
         '.</p></div><div><h4>EPOCH’s scope</h4><p>' + esc(study.projectScope) + '</p></div></div>' : '') +
       '</article>';
@@ -284,8 +307,9 @@
 
   function projectCompanion(study) {
     return '<article class="project-companion" id="featured-' + study.id + '"><div><img src="' + asset(study.logo) + '" alt="' + esc(study.name) + '">' +
-      '<p>' + esc(study.industry) + '</p></div><div><h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) +
-      '</a></h3><p>' + esc(study.summary) + '</p><a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div></article>';
+      '<p>' + esc(study.industry) + '</p><h3><a href="case.html?id=' + study.id + '">' + esc(study.headline) +
+      '</a></h3><p>' + esc(study.summary) + '</p><a class="text-link" href="case.html?id=' + study.id + '">Inside the project</a></div>' +
+      projectIllustration(study.id, 'companion-illustration') + '</article>';
   }
 
   // The two ways in, offered the same way on every page.
@@ -528,6 +552,7 @@
       '<h1 class="display mt-m">' + esc(study.headline) + '</h1>' +
       '<p class="lede">' + esc(study.summary) + '</p></div>' + engagementDial(study) + '</div>' + facts +
       '</div></section>' +
+      '<div class="wrap">' + projectIllustration(study.id, 'case-illustration') + '</div>' +
       section('The problem', bulletList(study.generalChallenges) + '<h3 class="sub-h mt-l">Why EPOCH</h3><p class="body">' + esc(study.whyChoseEpoch) + '</p>') +
       section('What we built', '<p class="lede strong">' + esc(study.projectScope) + '</p>' + bulletList(study.deliverables, 'list mt-m')) +
       section('How we worked', worked) +
@@ -546,64 +571,10 @@
       CLOSING;
   }
 
-  // ---------- Home hero: live time since t0 ----------
-
-  function initClock() {
-    var labels = all('[data-unix-label]');
-    if (!labels.length) return;
-
-    function show() {
-      var seconds = Math.floor(Date.now() / 1000);
-      labels.forEach(function (label) {
-        label.textContent = 't = ' + seconds + ' s';
-      });
-    }
-
-    show();
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    function step() {
-      show();
-      window.setTimeout(step, 1000 - (Date.now() % 1000) + 10);
-    }
-    window.setTimeout(step, 1000 - (Date.now() % 1000) + 10);
-  }
-
-  // ---------- Home hero: measuring crosshair ----------
-
-  function initMeasure() {
-    var panel = document.querySelector('.v-draft');
-    var svg = panel && panel.querySelector('svg');
-    if (!panel || !svg || !window.matchMedia('(pointer: fine)').matches) return;
-
-    panel.classList.add('measuring');
-    panel.insertAdjacentHTML('beforeend', '<div class="xhair" aria-hidden="true"><span class="xh-h"></span><span class="xh-v"></span><span class="xh-label"></span></div>');
-    var guide = panel.querySelector('.xhair');
-    var label = panel.querySelector('.xh-label');
-    var point = svg.createSVGPoint();
-
-    panel.addEventListener('pointermove', function (event) {
-      var box = panel.getBoundingClientRect();
-      var x = event.clientX - box.left;
-      var y = event.clientY - box.top;
-      point.x = event.clientX;
-      point.y = event.clientY;
-      var local = point.matrixTransform(svg.getScreenCTM().inverse());
-      label.textContent = 'x ' + local.x.toFixed(1) + '   y ' + local.y.toFixed(1);
-      // Keep the readout inside the panel near the right and bottom edges.
-      var flipX = x > box.width - 170;
-      var flipY = y > box.height - 40;
-      guide.style.setProperty('--x', x + 'px');
-      guide.style.setProperty('--y', y + 'px');
-      guide.style.setProperty('--lx', (flipX ? x - label.offsetWidth - 10 : x + 10) + 'px');
-      guide.style.setProperty('--ly', (flipY ? y - label.offsetHeight - 10 : y + 10) + 'px');
-    });
-  }
-
   // ---------- The living O ----------
 
-  // Every O on the page is a 24-hour clock: the logo (one shared symbol), the favicon and the home drawing.
+  // The shared logo and favicon are 24-hour clocks.
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var HERO_PIVOT = '320 340';
 
   function nowAngle() {
     return KEPT.localDayFraction(new Date()) * 360;
@@ -641,14 +612,6 @@
     }
   }
 
-  // The label sits a little clockwise of the hand so the line never runs through the text.
-  function placeNowLabel(label) {
-    var spot = KEPT.polar(320, 340, 96, nowAngle() + 24);
-    label.setAttribute('x', KEPT.num(spot.x));
-    label.setAttribute('y', KEPT.num(spot.y + 5));
-    label.textContent = 'now ' + KEPT.zoneTime(new Date());
-  }
-
   // Everything that reads the clock as text: the logo's note, the favicon and the office clocks.
   function showTime() {
     var now = new Date();
@@ -664,8 +627,6 @@
 
   function initLivingO() {
     var logoO = document.querySelector('[data-clock-o]');
-    var heroO = document.querySelector('[data-hero-o]');
-    var heroNow = document.querySelector('[data-hero-now]');
     showTime();
 
     if (REDUCED || !firstPageThisVisit()) {
@@ -674,28 +635,8 @@
       windToNow(logoO, O_CENTER, 1400, function () {});
     }
 
-    if (heroO) {
-      var showNow = function () {
-        placeNowLabel(heroNow);
-        heroNow.classList.add('on');
-      };
-      if (REDUCED) {
-        turn(heroO, nowAngle(), HERO_PIVOT);
-        showNow();
-      } else {
-        // Wait for the ring to finish drawing itself, then wind it round to now.
-        window.setTimeout(function () {
-          windToNow(heroO, HERO_PIVOT, 1600, showNow);
-        }, 2400);
-      }
-    }
-
     window.setInterval(function () {
       turn(logoO, nowAngle(), O_CENTER);
-      if (heroO) {
-        turn(heroO, nowAngle(), HERO_PIVOT);
-        placeNowLabel(heroNow);
-      }
       showTime();
     }, 60000);
   }
@@ -1004,8 +945,6 @@
   if (page === 'service') renderService();
   if (page === 'case') renderCase();
   renderBlocks();
-  initClock();
-  initMeasure();
   initBooking();
   initForm();
   bindMenu();

@@ -86,3 +86,19 @@ These are separate explorations in `identity-lab.html`. Mark 08 remains the site
 - `mobile-19-colour-current.png`: the mint/violet ribbon concept at 390px with reduced motion enabled.
 
 The founder rejected the earlier monochrome round and explicitly asked for colour and gradient explorations. These are separate concepts in `identity-color-lab.html`; the site logo has not changed.
+
+### Editorial illustrations, `feat/visual-stories`
+
+- `desktop-36-home-assembly.png`: the exploded software assembly beside the opening headline.
+- `desktop-37-services-documents.png`: document review with a person in the loop.
+- `desktop-38-services-evidence.png`: a question and answer connected to source material.
+- `desktop-39-services-modernisation.png`: a platform connected to separate capabilities.
+- `desktop-40-work-scope.png`: the light Inspira scope illustration and collapsed delivery details.
+- `desktop-41-about-continuity.png`: the folded-paper story beneath the retained About headline.
+- `desktop-42-case-scope.png`: HUB's illustration on its case page, with the reading guide.
+- `mobile-20-home-assembly.png`: Home artwork at 390px.
+- `mobile-21-services-illustration.png`: the document-review drawing and its supporting content at 390px.
+- `mobile-22-case-scope.png`: Inspira's case illustration at 390px.
+- `mobile-23-about-continuity.png`: About's illustration with reduced motion enabled at 390px.
+
+The project drawings describe the existing scope; they are not product screenshots. Founder, team and office photography is parked. The living site logo remains mark 08.
